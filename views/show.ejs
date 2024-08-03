@@ -1,0 +1,119 @@
+<% layout("/layouts/boilerplate")%> 
+<body class="mt-10">
+    <br>
+     <div class="row ">
+        <div class="col-8 offset-4">
+            <h1> <%=list.title%></h1>
+        </div>
+            <div class="card offset-6 offset-3 listing-card" >
+                <img src="<%=list.image.url%>" class="card-img-top show-img" alt="...">
+                <div class="card-body">
+                  <br>
+                  <h3>Owned by :<%=list.owner.username%></h3>
+                  <h4><%=list.description%></h4>
+                  <h4>Price: &#8377;<%=list.price.toLocaleString("en-IN")%> /night </h4>
+               <h4>Location: <%=list.location%></h4>
+               <h4>Country: <%=list.country%></h4>
+            </div>
+            <br>
+            <% if(currUser && currUser._id.equals(list.owner._id)) { %>
+                <div class="buttons">
+                    <form method="post" action="/listing/<%=list.id%>?_method=DELETE" class="button-form">
+                        <button class="btn">Delete</button>
+                    </form>
+                
+                    <form method="get" action="/listing/<%=list.id%>/edit" class="button-form">
+                        <button class="btn">Edit</button>
+                    </form>
+                <% }%>
+                 <form method="get" action="/listing" class="button-form">
+                        <button class="btn">Back</button>
+                </form>
+        </div>
+    </div>
+<hr>
+<div class="col-6 offset-2">
+    <h3>Where you will be</h3>
+    
+    <div id="map"></div>
+</div>
+
+<div class="row">
+    <div class="col-8 offset-2">
+        <% if(currUser) { %>
+    <form  method="POST" action="/listing/<%= list.id %>/review">
+        <h4 style="text-align: center;"><b>Leave a review</b></h4>
+        <br>
+    <fieldset class="starability-slot">
+    <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
+   <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+  <label for="first-rate1" title="Terrible">1 star</label>
+  <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+  <label for="first-rate2" title="Not good">2 stars</label>
+  <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+  <label for="first-rate3" title="Average">3 stars</label>
+  <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+  <label for="first-rate4" title="Very good">4 stars</label>
+  <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+  <label for="first-rate5" title="Amazing">5 stars</label>
+</fieldset>
+        <div>
+            <label for="Comments" class="form-label" >Comments<label>
+            <textarea class="form-control" id="Comments" name="review[Comments]" type="text" cols="100" rows="5" placeholder="Please leave a review" required></textarea>
+        </div>
+        <button class="btn">Submit</button>
+        <% }%>     
+     </form> 
+     <hr>
+     <div>
+       <h4 style="text-align: center;"><b>All reviews</b></h4>
+        <br>
+       <div class="row">
+        <%for(review of list.reviews) { %>
+            <div class="card col-8 mb-2" style="width: 22rem;">
+                <div class="card-body">
+                  <h4 class="card-title">@<%=review.author.username%></h4>
+                  <p class="starability-result card-text" data-rating="<%=review.rating%>"> 
+                </p>
+                  <p class="card-text">Review :<%=" "%><%=review.Comments%></p>
+                
+                </div>
+                <br>
+                <form method="post" action="/listing/<%=list.id%>/review/<%=review.id%>?_method=DELETE" >
+                    <button class="btn">Delete</button>
+                </form>
+                
+              </div>
+        <% } %>
+       </div>
+       
+     </div>
+</div>
+</div>
+</div>
+<script>
+    
+    let accessToken = "<%= process.env.MAP_TOKEN %>";
+        let place = <%- JSON.stringify(list.geometry.coordinates) %>;
+        mapboxgl.accessToken = accessToken;
+        console.log(accessToken);
+
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: "mapbox://styles/mapbox/streets-v12", // Map style URL
+            center: place,
+            zoom: 12 //set according to precise
+        });
+
+        const marker2 = new mapboxgl.Marker({ color: 'red', rotation: 45 })
+    .setLngLat(place)
+    .setPopup(
+        new mapboxgl.Popup({ offset: 25 }).setHTML(
+            "<h5><%=list.title%></h5><p>Exact location provided after booking</p>"
+        )
+    )
+    .addTo(map);
+
+</script>  
+
+</body>

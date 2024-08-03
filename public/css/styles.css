@@ -1,0 +1,143 @@
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    max-width: 100%;
+    overflow-x: hidden;
+    background-color: rgb(242, 242, 242);
+}
+.navbar{
+    height: 5rem;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif !important;
+    background-color: rgb(2, 46, 106);
+}
+.fa-plane{
+    color: rgb(255, 87, 34);
+    font-size: 2rem;
+}
+.nav-link{
+    color: rgb(255, 255, 255) !important; /*overwrite bootstrap style*/
+    font-size: 1.3rem !important;
+    margin-left: 10px;
+}
+.name{
+    margin-top: 8px;
+    font-size: 1.3rem !important;
+    color: rgb(255, 87, 34)!important;
+    font-weight: 800 !important;
+    margin-left: 10px;
+    text-decoration: none !important;
+}
+
+.footer-info{
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: space-evenly;
+}
+.f-name{
+    width: 100%;
+    padding-top: 20px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    
+}
+.fa-brands{
+    padding-left: 25px;
+}
+.f-social{
+    width: 100%;
+    font-size: x-large;  
+    padding-top: 20px;   
+}
+footer{
+    height: 9rem;
+    background-color: rgb(240, 240, 240);
+}
+.form-label{
+    font-size: larger !important;
+}
+.listing-card{
+    border: none !important;
+    margin-bottom: 2.5rem !important;
+    margin-left: 2rem !important;
+    
+}
+.card{
+    
+    margin-left: 15px;
+    margin-bottom: 40px !important;
+    padding: 25px !important;
+    border-color:rgb(255, 87, 34)!important;
+}
+.card-img-overlay{
+    opacity: 0;
+}
+.card-img-overlay:hover{
+    opacity: 0.19;
+    background-color: rgb(255, 255, 255);
+    border-radius: 1.2rem!important;
+}
+.show{
+    text-decoration: none;
+}
+.show-img{
+    height: 60vh;
+    width: 100%;
+}
+.card-body{
+    padding: 0 !important;
+   
+}
+.card-img-top{
+    border-radius: 1rem!important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+.card-text{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
+    font-weight: 200 !important;
+    color: black;
+}
+.btn{
+    background-color: rgb(255, 87, 34)!important;
+    color: rgb(255, 255, 255) !important;
+    margin-bottom: 1rem;
+}
+.btn:hover{
+    background-color: rgb(131, 239, 155) !important;
+    color:black !important;
+}
+.buttons{
+    display: flex;
+    
+}
+.button-form {
+    margin-right: 5px; /* Adjust margin between buttons */
+}
+.alert {
+    position: relative;
+  }
+  .alert .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.75rem 1.25rem;
+    background: transparent;
+    border: none;
+  }
+  .alert .close span {
+    font-size: 1.5rem;
+  }
+  .alert{
+    text-align: center;
+    font-size: large;
+  }
+  #map {
+     height: 400px;
+     width: 100vh;
+    }
+
+ 
