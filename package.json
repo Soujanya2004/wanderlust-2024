@@ -1,11 +1,11 @@
 {
-  "engines":{
+  "engines": {
     "node": "20.12.2"
   },
   "name": "airbnb",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@mapbox/mapbox-sdk": "^0.16.0",
+    "@mapbox/mapbox-sdk": "^0.16.1",
     "bootstrap-icons": "^1.11.3",
     "cloudinary": "^1.21.0",
     "connect-flash": "^0.1.1",
@@ -22,11 +22,11 @@
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "ejs-mate": "^4.0.0",
-    "express": "^4.19.2",
+    "express": "^4.21.0",
     "express-session": "^1.18.0",
     "joi": "^17.13.3",
     "method-override": "^3.0.0",
-    "mongoose": "^8.5.1",
+    "mongoose": "^8.7.0",
     "multer": "^1.4.5-lts.1",
     "multer-storage-cloudinary": "^4.0.0",
     "override": "^0.0.1",

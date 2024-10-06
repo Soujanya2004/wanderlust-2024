@@ -151,13 +151,13 @@ app.get("/new",isLoggedIn, asyncwrap(newpost));
 app.get("/listing",asyncwrap(index));
 
 //create post
-app.post("/listing",upload.single('listing[image]'),isLoggedIn,asyncwrap(createpost));
+app.post("/listing", upload.array('listing[image]', 10), isLoggedIn, asyncwrap(createpost));
 
 //edit the listings
 app.get("/listing/:id/edit",isLoggedIn,isOwner,asyncwrap(editpost));
 
 //save the updated listing
-app.put('/listing/:id', isLoggedIn,isOwner,upload.single('listing[image]'), asyncwrap(saveEditpost));
+app.put('/listing/:id', isLoggedIn,isOwner,upload.array('listing[image]'), asyncwrap(saveEditpost));
 
 //delete listing
 app.delete("/listing/:id",isLoggedIn,isOwner,asyncwrap(deletepost));
