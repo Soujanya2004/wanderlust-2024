@@ -1,6 +1,6 @@
-# Wanderlust-cp
+# Wanderlust-2024
 
-## Welcome to the Wanderlust-cp Repository!
+## Welcome to the Wanderlust-2024 Repository!
 
 Wanderlust
 Wanderlust is a full-stack travel website built using the MERN (MongoDB, Express, React, Node.js) stack. The platform allows users to explore, create, and review travel listings, helping travelers discover unique destinations. The application features an intuitive UI, user authentication, real-time map integration, and a robust review system, making it a comprehensive solution for travel enthusiasts.
