@@ -2,6 +2,27 @@
 
 ## Welcome to the Wanderlust-cp Repository!
 
+Wanderlust
+Wanderlust is a full-stack travel website built using the MERN (MongoDB, Express, React, Node.js) stack. The platform allows users to explore, create, and review travel listings, helping travelers discover unique destinations. The application features an intuitive UI, user authentication, real-time map integration, and a robust review system, making it a comprehensive solution for travel enthusiasts.
+
+Features
+User Authentication: Secure login and registration using Passport.js.
+Create and Manage Listings: Users can create new travel listings, add descriptions, upload images, and specify locations.
+Review and Rating System: Users can add reviews to listings and provide ratings.
+Real-time Map Integration: Mapbox is integrated to display the location of each listing, offering users an interactive visual experience.
+Responsive Design: Fully responsive UI to provide a seamless experience on both mobile and desktop devices.
+Cloud-based Image Uploads: Cloudinary is used for image storage and retrieval, ensuring high-quality images for listings.
+Protected Routes and Authorization: Access to certain routes is restricted based on user roles and authentication status.
+
+Tech Stack
+Frontend: React, HTML, CSS
+Backend: Node.js, Express
+Database: MongoDB (with Mongoose for data modeling)
+Authentication: Passport.js for user authentication
+Cloud Storage: Cloudinary for storing and retrieving images
+Map Integration: Mapbox for displaying maps with location markers
+Deployment: Render for backend deployment
+
 This project allows users to explore and create listings for travel destinations, add reviews, book listings and more, powered by the MERN stack.
 
 ### How to Contribute
