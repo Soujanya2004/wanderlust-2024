@@ -78,11 +78,11 @@
                         </button>
                     </div>
                     <div class="card-body text-center">
-                        <h3>Owned by: <%= list.owner.username %></h3>
-                        <h4><%= list.description %></h4>
-                        <h4>Price: &#8377;<%= list.price.toLocaleString("en-IN") %> /night</h4>
-                        <h4>Location: <%= list.location %></h4>
-                        <h4>Country: <%= list.country %></h4>
+                        <h2  style=" color: #022e6a;">Owned by: <%= list.owner.username %></h3>
+                        <h5><%= list.description %></h4>
+                        <h5>Price: &#8377;<%= list.price.toLocaleString("en-IN") %> /night</h4>
+                        <h5>Location: <%= list.location %></h4>
+                        <h5>Country: <%= list.country %></h4>
                     </div>
                     <div class="card-footer text-center">
                         <% if (currUser && currUser._id.equals(list.owner._id)) { %>

@@ -138,6 +138,7 @@ footer{
   #map {
      height: 400px;
      width: 100vh;
+     margin: 0 auto;
     }
 
  
