@@ -47,11 +47,6 @@
 #allReview{
     margin-left: 13%;
 }
-#delBtn{
-    position: relative;
-    margin-right: 0px;
-
-}
 @media (max-width: 768px) {
     .show-img {
         height: 250px;
@@ -160,7 +155,7 @@
                                     <p class="card-text">Review: <%= review.Comments %></p>
                                 </div>
                                 <form method="post" action="/listing/<%= list._id %>/review/<%= review._id %>?_method=DELETE" class="text-end">
-                                    <button id="delBtn" class="btn btn-danger">Delete</button>
+                                    <button class="btn btn-danger">Delete</button>
                                 </form>
                             </div>
                         <% } %>
