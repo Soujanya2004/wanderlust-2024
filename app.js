@@ -27,6 +27,14 @@ const {saveRedirectUrl}=require("./middlewares/middleware.js");
 const {isOwner,isAuthor}=require("./middlewares/middleware.js");
 const {index, newpost, createpost, editpost, saveEditpost, deletepost, showPost, signup}=require("./controllers/listing.js");
 const { deleteReview, reviewPost } = require("./controllers/reviews.js");
+const cors = require('cors'); // CORS added
+
+// Use CORS for all routes
+app.use(cors({
+  origin: 'http://your-frontend-domain.com', // Replace with your frontend domain
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
 
 app.use(flash());
 app.use(cookieparser());
