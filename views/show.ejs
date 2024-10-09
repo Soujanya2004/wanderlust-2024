@@ -96,7 +96,7 @@
                             </div>
                         <% } %>
                         <form method="get" action="/listing" class="d-inline">
-                            <button class="btn btn-secondary">Back</button>
+                            <button class="btn btn-secondary"> <i class="bi bi-arrow-left"></i> Back</button>
                         </form>
                     </div>
                 </div>
@@ -142,7 +142,7 @@
                                     <p class="card-text">Review: <%= review.Comments %></p>
                                 </div>
                                 <form method="post" action="/listing/<%= list._id %>/review/<%= review._id %>?_method=DELETE" class="text-center">
-                                    <button class="btn btn-danger">Delete</button>
+                                   <div style="display: flex;justify-content: flex-end; align-items: flex-start;"> <button class="btn btn-danger">Delete</button></div>
                                 </form>
                             </div>
                         <% } %>
