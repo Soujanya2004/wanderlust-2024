@@ -1,0 +1,22 @@
+{
+  "name": "override",
+  "keywords": [],
+  "description": "General purpose middleware framework for Node.js that lets you override and extend built in functionality",
+  "version": "0.0.1",
+  "author": "Oleg Podsechin <oleg@ionsquare.com>",
+  "directories" : {
+    "lib" : "."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/olegp/override.git"
+  },
+  "main": "./lib/run.js",
+  "bin": { "node-override": "./bin/node-override" },
+  "engines": {
+    "node": "*"
+  },
+  "dependencies": {
+  },
+  "licenses": [ { "type": "MIT" } ]
+}

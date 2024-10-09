@@ -183,6 +183,7 @@ next(new expressError(404,"page not found"));
   res.render("error.ejs",{msg,status});
 })
 
-app.listen(8080, () =>{
-    console.log("server is listening");
+const port = process.env.PORT;
+app.listen(port || 8080, () =>{
+    console.log(`Server listening on ${port}`);
 });
