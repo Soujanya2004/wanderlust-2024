@@ -20,6 +20,13 @@ body{
     font-size: 1.3rem !important;
     margin-left: 10px;
 }
+.nav-link:hover {
+    color: rgb(2, 46, 106) !important; /* blue color same as navbar */
+    background-color: white !important; /* white background */
+    border-radius: 25px; /* optional: gives a little rounded effect */
+    padding: 5px 10px; /* optional: to make the hover area more noticeable */
+}
+
 .name{
     margin-top: 8px;
     font-size: 1.3rem !important;
