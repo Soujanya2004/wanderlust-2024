@@ -95,6 +95,16 @@ app.use((req, res, next) => {
   next();
 });
 
+//About us page
+app.get('/about',asyncwrap ( async (req, res) => {
+  try {
+      res.render('about');
+  } catch (err) {
+      console.error(err);
+      res.status(500).send('Internal Server Error');
+  }
+}));
+
 
   //API
   //signup
