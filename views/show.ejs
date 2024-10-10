@@ -38,7 +38,15 @@
 .btn {
     margin: 5px;
 }
-
+#review{
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 20px;
+    margin-left: 18%;
+}
+#allReview{
+    margin-left: 13%;
+}
 @media (max-width: 768px) {
     .show-img {
         height: 250px;
@@ -102,14 +110,17 @@
                 </div>
             </div>
             <hr>
-            <div class="col-12">
+            <div class="col-12 mb-4">
                 <h3 class="text-center">Where you will be</h3>
                 <div id="map" class="map"></div>
             </div>
             <div class="col-12">
                 <% if (currUser) { %>
-                    <form method="POST" action="/listing/<%= list._id %>/review" class="mb-4">
+                    <hr class="mb-4 col-15">
+                    <div id="review" class="col-8 mb-5 mt-5">
+                    <form method="POST" action="/listing/<%= list._id %>/review">
                         <h4 class="text-center"><b>Leave a review</b></h4>
+                        <label for="rating" class="form-label">Rating</label>
                         <fieldset class="starability-slot">
                             <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
                             <input type="radio" id="first-rate1" name="review[rating]" value="1" />
@@ -127,22 +138,24 @@
                             <label for="Comments" class="form-label">Comments</label>
                             <textarea class="form-control" id="Comments" name="review[Comments]" rows="5" placeholder="Please leave a review" required></textarea>
                         </div>
+                        <br>
                         <button class="btn btn-primary">Submit</button>
                     </form>
+                </div>
                 <% } %>
                 <hr>
                 <div>
                     <h4 class="text-center"><b>All reviews</b></h4>
-                    <div class="row">
+                    <div class="row" id="allReview">
                         <% for (let review of list.reviews) { %>
-                            <div class="card col-12 col-md-6 col-lg-4 mb-3">
+                            <div class="card col-12 col-md-6 col-lg-5 ms-4 mb-3">
                                 <div class="card-body">
                                     <h4 class="card-title">@<%= review.author.username %></h4>
                                     <p class="starability-result card-text" data-rating="<%= review.rating %>"></p>
                                     <p class="card-text">Review: <%= review.Comments %></p>
                                 </div>
                               <% if (currUser && currUser._id.equals(review.author._id)) { %>
-                                <form method="post" action="/listing/<%= list._id %>/review/<%= review._id %>?_method=DELETE" class="text-center">
+                                <form method="post" action="/listing/<%= list._id %>/review/<%= review._id %>?_method=DELETE" class="text-end">
                                     <button class="btn btn-danger">Delete</button>
                                 </form>
                               <% } %>

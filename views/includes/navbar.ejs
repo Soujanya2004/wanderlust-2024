@@ -21,9 +21,9 @@
         <a class="nav-link" href="/listing">Explore</a>
        </div>
        <div class="search-btn ms-auto">
-        <form class="d-flex search-inp" role="search">
-          <input class="form-control me-2 form" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success form" type="submit">Search</button>
+        <form class="d-flex search-input" role="search" action="/listing/search" method="post">
+          <input class="form-control me-2 form" type="search" name="query" placeholder="Search" aria-label="Search" style="width: 300px; height: 40px;">
+          <button class="btn btn-outline-success form" type="submit"><i class="fa-solid fa-magnifying-glass"></i>&nbsp Search</button>
         </form>
        </div>
        <div class="navbar-nav ms-auto">
