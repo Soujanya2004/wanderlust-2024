@@ -1,6 +1,6 @@
+
 <% layout("/layouts/boilerplate") %>
-<br>
-<br>
+<br><br>
 
 <div class="row">
     <div class="col-6 offset-3">
@@ -9,24 +9,41 @@
                 <label for="username" class="form-label">Username</label>
                 <br>
                 <input type="text" name="username" placeholder="Username" class="form-control" required>
-                
                 <div class="invalid-feedback">
                     Username not found
-               </div>
+                </div>
             </div>
+            
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
                 <br>
-                <input type="password" name="password" placeholder="Password"  class="form-control" required>
-                
-               <div class="invalid-feedback">
-                   Password not found
-              </div>
-              <br>
-              
-                <button class="btn offset-6" name="saveButton" type="submit">LOGIN</button>
+                <div class="input-group">
+                    <input type="password" id="password" name="password" placeholder="Password" class="form-control" required>
+                    <span class="input-group-text">
+                        <i id="togglePassword" class="fa fa-eye" style="cursor: pointer;"></i>
+                    </span>
+                </div>
+                <div class="invalid-feedback">
+                    Password not found
+                </div>
             </div>
+
+            <br>
+            <button class="btn offset-6" name="saveButton" type="submit">LOGIN</button>
         </form>
-        
     </div>
 </div>
+
+<script>
+    const togglePassword = document.querySelector('#togglePassword');
+    const password = document.querySelector('#password');
+
+    togglePassword.addEventListener('click', function () {
+        // Toggle the type attribute
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        
+        // Toggle the icon class between eye and eye-slash
+        this.classList.toggle('fa-eye-slash');
+    });
+</script>

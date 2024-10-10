@@ -34,6 +34,19 @@
                <div class="invalid-feedback">
                    Please enter valid password
               </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <br>
+                <div class="input-group">
+                    <input type="password" id="password" name="password" placeholder="Password" class="form-control" required>
+                    <span class="input-group-text">
+                        <i id="togglePassword" class="fa fa-eye" style="cursor: pointer;"></i>
+                    </span>
+                </div>
+                <div class="valid-feedback">Looks great!</div>
+                <div class="invalid-feedback">Please enter a valid password</div>
+            </div>
+
               <br>
               
                 <button class="btn offset-6" name="saveButton" type="submit">Signup</button>
@@ -41,4 +54,18 @@
         </form>
         
     </div>
-</div>
+    <script>
+    const togglePassword = document.querySelector('#togglePassword');
+    const password = document.querySelector('#password');
+
+    togglePassword.addEventListener('click', function () {
+        // Toggle the type attribute
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+
+        // Toggle the icon class between fa-eye and fa-eye-slash
+        this.classList.toggle('fa-eye-slash');
+    });
+</script>
+
+
