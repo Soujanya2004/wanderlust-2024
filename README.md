@@ -130,3 +130,78 @@ if (process.env.NODE_ENV !== 'production') {
 ---
 Feel free to raise issues and contribute to the repository
 
+Steps to setup the project after forking the repo into your **Github** account.
+
+---
+
+## How to Set Up the Project Locally
+
+### 1. Clone the Repository  
+Clone the repository to your local machine:
+```bash
+git clone https://github.com/your-username/Wanderlust-2024.git
+```
+
+### 2. Navigate to the Project Directory  
+Change to the directory where the project is located:
+```bash
+cd Wanderlust-2024
+```
+
+### 3. Set Up Your Mapbox Account  
+- Go to [Mapbox](https://www.mapbox.com/) and sign up for a free account.
+- After logging in, navigate to the **Tokens** section under your account settings.
+- Create a new **Access Token** and copy it. You will need this for the `.env` file.
+
+### 4. Set Up Your Cloudinary Account  
+- Go to [Cloudinary](https://cloudinary.com/) and sign up for a free account.
+- After logging in, navigate to your **Dashboard**.
+- Copy your **Cloud Name**, **API Key**, and **API Secret**. You will need these for the `.env` file.
+
+### 5. Ensure `.env` and `node_modules/` Are in `.gitignore`  
+Before proceeding, ensure that both `.env` and `node_modules/` are added to your `.gitignore` file to prevent sensitive information and large files from being uploaded to GitHub.
+
+If they are not already there, add them:
+```bash
+echo .env >> .gitignore
+echo node_modules/ >> .gitignore
+```
+
+### 6. Create a `.env` File  
+In the root directory of the project, create a `.env` file and add the following variables:
+```bash
+MAP_TOKEN=your-mapbox-access-token
+ATLAS_DB_TOKEN=your-mongodb-connection-uri # mongodb://127.0.0.1:27017/wanderlust for running mongodb server locally
+SECRET=your-secret-key
+CLOUD_NAME=your-cloudinary-cloud-name
+CLOUD_API_KEY=your-cloudinary-api-key
+CLOUD_API_SECRET=your-cloudinary-api-secret
+PORT=8080 # Default port for the server
+```
+
+### 7. Install Dependencies  
+Install the required Node.js dependencies:
+```bash
+npm install
+```
+
+### 8. Start the Server  
+You have two options to start the server:
+- Using `npx nodemon` for auto-restarting:
+  ```bash
+  npx nodemon
+  ```
+- Or using `node app.js` to start the server manually:
+  ```bash
+  node app.js
+  ```
+
+### 9. Environment Setup  
+Ensure that the `.env` file is not uploaded to GitHub by checking that `.gitignore` includes `.env`. The following code snippet prevents `.env` from being deployed if you're running in development mode:
+```javascript
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
+
+---
+Feel free to raise issues and contribute to the repository
