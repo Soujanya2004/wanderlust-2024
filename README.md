@@ -25,6 +25,10 @@ Deployment: Render for backend deployment
 
 This project allows users to explore and create listings for travel destinations, add reviews, book listings and more, powered by the MERN stack.
 
+## Live URL
+
+https://wanderlust-2024-owqy.onrender.com
+
 ### How to Contribute
 
 We welcome contributions to help improve Wanderlust-cp! Here's how you can get involved:
