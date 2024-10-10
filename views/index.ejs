@@ -3,10 +3,14 @@
   #filters {
     display: flex;
     flex-wrap: wrap;
+    align-items: center; 
+    justify-content: center;
   }
   .filter {
     text-align: center;
-    margin-right: 3.5rem;
+    align-items: center;
+    margin-right: 2rem;
+    margin-left: 2rem;
     margin-top: 2rem;
     opacity: 0.7;
   }
@@ -14,6 +18,66 @@
     opacity: 1;
     cursor: pointer;
   }
+/* Card Container Styles */
+.listing-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border: none;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #ffffff; /* Card background color */
+  margin: 15px; /* Spacing between cards */
+  position: relative; /* For absolute positioning of pseudo-elements */
+}
+
+/* Card Hover Effects */
+.listing-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Card Image Styles */
+.card-img-top {
+  width: 100%; /* Full width of card */
+  height: auto; /* Maintain aspect ratio */
+  object-fit: cover; /* Crop image to cover the space */
+}
+
+/* Card Body Styles */
+.card-body {
+  padding: 20px; /* Padding inside the card */
+}
+
+/* Card Title Styles */
+.card-title {
+  font-size: 1.5rem; /* Title font size */
+  font-weight: bold; /* Bold title */
+  margin-bottom: 10px; /* Space below the title */
+  color: #333; /* Title color */
+}
+
+/* Card Text Styles */
+.card-text {
+  font-size: 1rem; /* Text font size */
+  color: #666; /* Text color */
+  margin-bottom: 15px; /* Space below the text */
+}
+
+
+.card-text i {
+  color: #000; /* Price color */
+}
+
+
+.detail-btn{
+  display: flex;
+  justify-content: right;
+  margin-top: 10px;
+}
+
+
+
+
 </style>
 
 <body>
@@ -71,7 +135,7 @@
             <p class="card-text"><i><%= listing.description %></i> 
               <br>&#8377;<%= listing.price.toLocaleString("en-IN") %> / night</p>
             <p class="card-text">Location: <%= listing.location %>, <%= listing.country %></p>
-            <a href="/listing/<%= listing._id %>" class="btn btn-dark">Show in Detail</a>
+          <div class="detail-btn">  <a href="/listing/<%= listing._id %>" class="btn btn-dark">Show in Detail</a></div>
           </div>
         </a>
       </div>
