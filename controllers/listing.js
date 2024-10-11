@@ -3,17 +3,30 @@ const mbxgeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const maptoken = process.env.MAP_TOKEN;
 const geocodingClient = mbxgeocoding({ accessToken: maptoken });
 const cloudinary = require('cloudinary').v2;
+const {
+    ERROR_FETCH_LISTINGS,
+    ERROR_CREATE_LISTING,
+    ERROR_LOAD_EDIT_PAGE,
+    ERROR_LOAD_LISTING_DETAILS,
+    ERROR_UPDATE_LISTING,
+    ERROR_DELETE_LISTING,
+    ERROR_LISTING_NOT_FOUND,
+    ERROR_SEND_VALID_DATA,
+    SUCCESS_LISTING_CREATED,
+    SUCCESS_LISTING_UPDATED,
+    SUCCESS_LISTING_DELETED,
+} = require('../constants.js');
 
 module.exports.index = async (req, res) => {
-  try {
-      const listings = await listing.find();
-      console.log("Listings fetched:", listings);
-      res.render("index.ejs", { listings });
-  } catch (err) {
-      console.error("Error fetching listings:", err);
-      req.flash("error", "Failed to fetch listings. Please try again later.");
-      return res.redirect("/");
-  }
+    try {
+        const listings = await listing.find();
+        console.log("Listings fetched:", listings);
+        res.render("index.ejs", { listings });
+    } catch (err) {
+        console.error("Error fetching listings:", err);
+        req.flash("error", ERROR_FETCH_LISTINGS);
+        return res.redirect("/");
+    }
 };
 
 module.exports.newpost = async (req, res) => {
@@ -22,52 +35,52 @@ module.exports.newpost = async (req, res) => {
 }; 
 
 module.exports.createpost = async (req, res) => {
-  try {
+    try {
       // Validate that listing data exists
-      if (!req.body.listing) {
-          return res.status(404).send("Enter valid listing details");
-      }
+        if (!req.body.listing) {
+            return res.status(404).send(ERROR_SEND_VALID_DATA);
+        }
 
-      const { title, description, price, country, location } = req.body.listing;
+        const { title, description, price, country, location } = req.body.listing;
 
       // Geocoding to get coordinates from location
-      const geoData = await geocodingClient.forwardGeocode({
-          query: location,
-          limit: 1
-      }).send();
+        const geoData = await geocodingClient.forwardGeocode({
+            query: location,
+            limit: 1
+        }).send();
 
-      const newListing = new listing({
-          title,
-          description,
-          price,
-          country,
-          location,
-          geometry: geoData.body.features[0].geometry,
-          owner: req.user._id,
-          image: []
-      });
+        const newListing = new listing({
+            title,
+            description,
+            price,
+            country,
+            location,
+            geometry: geoData.body.features[0].geometry,
+            owner: req.user._id,
+            image: []
+        });
 
       // Handle multiple image uploads from Cloudinary
-      if (req.files) {
-          req.files.forEach(file => {
-              newListing.image.push({
-                  url: file.path,
-                  filename: file.filename
-              });
-          });
-      }
+        if (req.files) {
+            req.files.forEach(file => {
+                newListing.image.push({
+                    url: file.path,
+                    filename: file.filename
+                });
+            });
+        }
 
       // Save the listing to the database
-      await newListing.save();
+        await newListing.save();
 
-      req.flash("success", "New listing created successfully");
-      return res.redirect("/listing");
+        req.flash("success", SUCCESS_LISTING_CREATED);
+        return res.redirect("/listing");
 
-  } catch (err) {
-      console.error(err);
-      req.flash("error", "Failed to create listing");
-      return res.redirect("/listing/new");
-  }
+    } catch (err) {
+        console.error(err);
+        req.flash("error", ERROR_CREATE_LISTING);
+        return res.redirect("/listing/new");
+    }
 };
 
 
@@ -76,84 +89,84 @@ module.exports.editpost = async (req, res) => {
         const { id } = req.params;
         const list = await listing.findById(id);
         if (!list) {
-            req.flash('error', 'Listing not found');
+            req.flash('error', ERROR_LISTING_NOT_FOUND);
             return res.redirect('/listing');
         }
         res.render("edit.ejs", { list });
     } catch (err) {
         console.error(err);
-        req.flash("error", "Failed to load edit page");
+        req.flash("error", ERROR_LOAD_EDIT_PAGE);
         return res.redirect("/listing");
     }
 };
 
 module.exports.showPost = async (req, res) => {
-  try {
-      const { id } = req.params;
-      const list = await listing.findById(id)
-          .populate({
-              path: 'reviews',
-              populate: {
-                  path: 'author'
-              }
-          })
-          .populate('owner');
+    try {
+        const { id } = req.params;
+        const list = await listing.findById(id)
+            .populate({
+                path: 'reviews',
+                populate: {
+                    path: 'author'
+                }
+            })
+            .populate('owner');
 
-      console.log(list);
+        console.log(list);
 
-      if (!list) {
-          req.flash('error', 'Listing not found');
-          return res.redirect('/listing');
-      }
+        if (!list) {
+            req.flash('error', ERROR_LISTING_NOT_FOUND);
+            return res.redirect('/listing');
+        }
 
-      res.render('show.ejs', { list });
-  } catch (err) {
-      console.error("Error fetching listing:", err);
-      req.flash("error", "Failed to load listing details");
-      return res.redirect("/listing");
-  }
+        res.render('show.ejs', { list });
+    } catch (err) {
+        console.error("Error fetching listing:", err);
+        req.flash("error", ERROR_LOAD_LISTING_DETAILS);
+        return res.redirect("/listing");
+    }
 };
 
 module.exports.saveEditpost = async (req, res) => {
-  const { id } = req.params;
+    const { id } = req.params;
 
-  try {
-      if (!req.body.listing) {
-          req.flash('error', 'Send valid data of listing');
-          return res.redirect(`/listing/${id}`);
-      }
+    try {
+        if (!req.body.listing) {
+            req.flash('error', ERROR_SEND_VALID_DATA);
+            return res.redirect(`/listing/${id}`);
+        }
 
-      let editList = await listing.findById(id);
+        let editList = await listing.findById(id);
 
-      if (req.files && req.files.length > 0) {
-          editList.image = [];
+        if (req.files && req.files.length > 0) {
+            editList.image = [];
 
-          req.files.forEach(file => {
+            req.files.forEach(file => {
               // Upload to Cloudinary and get the URL
-              editList.image.push({
-                  url: file.path,
-                  filename: file.filename
-              });
-          });
-      }
+                editList.image.push({
+                    url: file.path,
+                    filename: file.filename
+                });
+            });
+        }
 
       // Update other fields
-      editList.title = req.body.listing.title;
-      editList.description = req.body.listing.description;
-      editList.price = req.body.listing.price;
-      editList.location = req.body.listing.location;
-      editList.country = req.body.listing.country;
+        editList.title = req.body.listing.title;
+        editList.description = req.body.listing.description;
+        editList.price = req.body.listing.price;
+        editList.location = req.body.listing.location;
+        editList.country = req.body.listing.country;
 
-      await editList.save();
+        await editList.save();
 
-      req.flash('success', 'Listing updated successfully');
-      return res.redirect(`/listing/${id}`);
+        req.flash('success', SUCCESS_LISTING_UPDATED);
+        return res.redirect(`/listing/${id}`);
 
-  } catch (err) {
-      console.error(err);
-      req.flash("error", "Failed to update listing");
-      return res.redirect(`/listing/${id}/edit`);
-  }
+    } catch (err) {
+        console.error(err);
+        req.flash("error", ERROR_UPDATE_LISTING);
+        return res.redirect(`/listing/${id}/edit`);
+    }
 };
 
 
@@ -161,10 +174,10 @@ module.exports.deletepost = async (req, res) => {
     const { id } = req.params;
     try {
         await listing.findByIdAndDelete(id); // Deconstructing parameters
-        req.flash("success", "Listing deleted successfully");
+        req.flash("success", SUCCESS_LISTING_DELETED);
     } catch (err) {
         console.error(err);
-        req.flash("error", "Failed to delete listing");
+        req.flash("error", ERROR_DELETE_LISTING);
     }
     res.redirect("/listing");
 };

@@ -1,10 +1,11 @@
 const listing=require("../models/listing.js");
 const reviews=require("../models/reviews.js");
+const { ERROR_LOGIN_REQUIRED, ERROR_NO_PERMISSION, ERROR_NOT_AUTHOR } = require('../constants.js');
 
 module.exports.isLoggedIn=(req,res,next) =>{
     if(!req.isAuthenticated()) {
         req.session.redirectUrl=req.originalUrl;
-        req.flash("error","You must login");
+        req.flash("error",ERROR_LOGIN_REQUIRED);
         return res.redirect("/login");
     }
     next();
@@ -21,8 +22,8 @@ module.exports.saveRedirectUrl=(req,res,next) =>{
     let {id} =req.params;
     const editList = await listing.findById(id);
     if (!req.user || !editList.owner._id.equals(res.locals.currUser._id)) {
-      req.flash('error', "You don't have permission");
-      return res.redirect(`/listing/${id}`);
+        req.flash('error', ERROR_NO_PERMISSION);
+        return res.redirect(`/listing/${id}`);
     }
     next();
  }
@@ -31,8 +32,9 @@ module.exports.saveRedirectUrl=(req,res,next) =>{
     let {id,rid} =req.params;
     const review = await reviews.findById(rid);
     if (!review.author.equals(res.locals.currUser._id)) {
-      req.flash('error', "You are not the Author");
-      return res.redirect(`/listing/${id}`);
+        req.flash('error', ERROR_NOT_AUTHOR);
+        return res.redirect(`/listing/${id}`);
     }
     next();
-}
+ }
+ 
