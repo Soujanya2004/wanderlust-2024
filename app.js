@@ -18,7 +18,7 @@ const passport = require("passport");
 const localStrategy = require("passport-local");
 const User = require("./models/user.js");
 const { isLoggedIn, saveRedirectUrl, isOwner, isAuthor } = require("./middlewares/middleware.js");
-const { index, newpost, createpost, editpost, saveEditpost, deletepost, showPost, signup } = require("./controllers/listing.js");
+const { index, newpost, createpost, editpost, saveEditpost,search, deletepost, showPost, signup } = require("./controllers/listing.js");
 const { deleteReview, reviewPost } = require("./controllers/reviews.js");
 
 const app = express();
@@ -144,6 +144,9 @@ app.get("/listing", asyncwrap(index));
 
 // Create post
 app.post("/listing", upload.single('listing[image]'), isLoggedIn, asyncwrap(createpost));
+
+//search the listings
+app.post("/listing/search",asyncwrap(search)); 
 
 // Edit the listings
 app.get("/listing/:id/edit", isLoggedIn, isOwner, asyncwrap(editpost));
