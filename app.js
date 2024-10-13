@@ -26,7 +26,7 @@ const User=require("./models/user.js");
 const { isLoggedIn } = require("./middlewares/middleware.js");
 const {saveRedirectUrl}=require("./middlewares/middleware.js");
 const {isOwner,isAuthor}=require("./middlewares/middleware.js");
-const {index, newpost, createpost, editpost, saveEditpost, deletepost, showPost, signup}=require("./controllers/listing.js");
+const {index, newpost, createpost, editpost, saveEditpost,search, deletepost, showPost, signup}=require("./controllers/listing.js");
 const { deleteReview, reviewPost } = require("./controllers/reviews.js");
 const cors = require('cors'); // CORS added
 
@@ -180,6 +180,9 @@ app.get("/listing",asyncwrap(index));
 //create post
 app.post("/listing", upload.array('listing[image]', 10), isLoggedIn, asyncwrap(createpost));
 
+//search the listings
+app.post("/listing/search",asyncwrap(search)); 
+
 //edit the listings
 app.get("/listing/:id/edit",isLoggedIn,isOwner,asyncwrap(editpost));
 
@@ -189,7 +192,6 @@ app.put('/listing/:id', isLoggedIn,isOwner,upload.array('listing[image]'), async
 //delete listing
 app.delete("/listing/:id",isLoggedIn,isOwner,asyncwrap(deletepost));
 
-//show listing in detail
 app.get('/listing/:id', asyncwrap(showPost));
 
 //review submit route
