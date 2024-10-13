@@ -1,4 +1,4 @@
-# 🌍 Wanderlust 2024
+# 🌍 Wanderlust-2024
 
 <img src="https://github.com/user-attachments/assets/e8059385-3570-49ab-a20b-127ad6b83ada" height=200  width=300 alt="WL"/>
 
