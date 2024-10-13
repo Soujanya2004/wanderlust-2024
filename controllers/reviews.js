@@ -6,7 +6,7 @@ const {
 } = require('../constants.js')
 module.exports.reviewPost = (async (req, res) => {
     const { id } = req.params;
-    const list = await listing.findById(id);
+    const list = await listing.findById(id).populate("reviews");
 
     if (!list) {
         req.flash('error', ERROR_LISTING_NOT_FOUND);
@@ -28,5 +28,6 @@ module.exports.deleteReview =(async (req,res) =>{
     let {id,rid} =req.params;
     await listing.findByIdAndUpdate(id,{$pull:{reviews:rid}}); //update the listing-reviews array where review id matched rid
     await review.findByIdAndDelete(rid); //deconstructing parameters
+    req.flash("success", "Review Deleted!");
     res.redirect(`/listing/${id}`);
 })
