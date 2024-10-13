@@ -20,7 +20,7 @@ const {
 module.exports.index = async (req, res) => {
     try {
         const listings = await listing.find();
-        console.log("Listings fetched:", listings);
+        // console.log("Listings fetched:", listings);
         res.render("index.ejs", { listings });
     } catch (err) {
         console.error("Error fetching listings:", err);
@@ -112,7 +112,7 @@ module.exports.showPost = async (req, res) => {
             })
             .populate('owner');
 
-        console.log(list);
+        // console.log(list);
 
         if (!list) {
             req.flash('error', ERROR_LISTING_NOT_FOUND);
