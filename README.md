@@ -4,6 +4,8 @@
 
 Welcome to **Wanderlust 2024**! 🌟 This project aims to provide a comprehensive platform for travel enthusiasts, offering features such as map integration 🗺️, user-generated content ✍️, and a seamless experience for discovering new destinations. ✈️✨
 
+Live Link: https://wanderlust-2024-tkqf.onrender.com/listing
+
  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="900">
 
 ## 📚 Table of Contents
@@ -17,8 +19,6 @@ Welcome to **Wanderlust 2024**! 🌟 This project aims to provide a comprehensiv
  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="900">
  
 ## 🤝 How to Contribute
-
-<img src="https://github.com/user-attachments/assets/b477d957-6727-4fe2-900c-081e69b813eb" height=200  width=300 alt="WL"/>
 
 We welcome contributions to help improve **Wanderlust 2024**! 🚀 Here’s how you can get involved:
 
