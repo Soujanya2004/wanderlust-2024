@@ -1,4 +1,8 @@
 <% layout("/layouts/boilerplate") %>
+<script>
+    let accessToken = "<%= process.env.MAP_TOKEN %>";
+    let list = <%- JSON.stringify(list) %>;
+</script>
 <style>
     body {
     background-color: #f8f9fa;
@@ -153,25 +157,6 @@
             </div>
         </div>
     </div>
-    <script>
-        let accessToken = "<%= process.env.MAP_TOKEN %>";
-        let place = <%- JSON.stringify(list.geometry.coordinates) %>;
-        mapboxgl.accessToken = accessToken;
-
-        const map = new mapboxgl.Map({
-            container: 'map',
-            style: "mapbox://styles/mapbox/streets-v12", // Map style URL
-            center: place,
-            zoom: 9 //set according to precise
-        });
-
-        const marker = new mapboxgl.Marker({ color: 'red', rotation: 45 })
-            .setLngLat(place)
-            .setPopup(
-                new mapboxgl.Popup({ offset: 25 }).setHTML(
-                    "<h5><%= list.title %></h5><p>Exact location provided after booking</p>"
-                )
-            )
-            .addTo(map);
-    </script>
+    
+    <script src="/js/map.js"></script> <!--Call the script file at the end because the map will be displayed at the end-->
 </body>
