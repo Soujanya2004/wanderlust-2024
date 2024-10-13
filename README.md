@@ -136,17 +136,6 @@ Feel free to raise issues and contribute to the repository! 🎉💻
 
  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="900">
  
-
-## 📄 License
-
-<img src="https://github.com/user-attachments/assets/e6176825-c269-43d0-8da8-0ded79d266d7" height=200  width=300 alt="WL"/>
-
-
-
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
- <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="900">
  
 ## 📬 Contact
 
