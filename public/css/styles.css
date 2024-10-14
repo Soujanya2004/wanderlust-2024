@@ -9,24 +9,120 @@ body{
 .navbar{
     height: 5rem;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif !important;
-    background-color: rgb(2, 46, 106);
-}
-.fa-plane{
-    color: rgb(255, 87, 34);
-    font-size: 2rem;
-}
-.nav-link{
-    color: rgb(255, 255, 255) !important; /*overwrite bootstrap style*/
-    font-size: 1.3rem !important;
-    margin-left: 10px;
-}
-.nav-link:hover {
-    color: rgb(2, 46, 106) !important; /* blue color same as navbar */
-    background-color: white !important; /* white background */
-    border-radius: 25px; /* optional: gives a little rounded effect */
-    padding: 5px 10px; /* optional: to make the hover area more noticeable */
+    background-image: linear-gradient(#e8ecf5, #ffffff);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem 1rem;
+    position: relative;
+    z-index: 10;
 }
 
+/* Logo Icon Styles */
+.fa-plane {
+    color: #ff385c;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+/* Darker Hover Effect for the Plane Icon */
+.fa-plane:hover {
+    color: #e12d4b;
+    transform: scale(1.1);
+    text-shadow: 0 6px 14px rgba(0, 0, 0, 0.5);
+}
+
+/* brand */
+#explore {
+    font-size: 1.3rem !important;
+    font-weight: bold;
+    margin-left: 10px;
+    margin-right: 20px;
+}
+
+#explore:hover {
+    cursor: pointer;
+    color: rgb(255, 87, 34);
+    transition: color 0.3s ease;
+}
+
+.nav-link{
+    font-size: 1.1rem !important;
+    margin-left: 10px;
+    opacity: .8;
+}
+
+.nav-link:hover{
+    opacity: 1;
+}
+
+  /* Styling the search bar inside the navbar */
+  .search-bar {
+    display: flex;
+    margin-right: 7rem;
+    align-items: center;
+    /* padding-left: 10px; */
+    justify-content: center;
+  }
+
+  .search-bar input {
+    width: 300px;
+    margin-left: 3px;
+    line-height: 2rem;
+    border-radius: 10px;
+    background-color: #fafafa;
+    border: 1px solid #ced4da;
+    padding-left: 10px;
+  }
+
+  .search-bar button {
+    margin-left: 5px;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    padding: 6px 10px;
+    border: .5px solid rgb(209, 209, 209);
+  }
+
+  .search-bar button:hover {
+    background-color: #db5168f1;
+  }
+  
+  .search-bar button i {
+    margin-right: 5px;
+  }
+  .search{
+    border: 1px solid rgb(136, 136, 136);
+  }
+  /* Hover effects for the navbar links */
+  .navbar-nav .nav-link {
+    transition: color 0.3s ease;
+  }
+
+  .navbar-nav .nav-link:hover {
+    color: #000000;
+  }
+
+  /* Explore link hover effect */
+  #explore:hover {
+    color:rgb(255, 87, 34);
+    transition: color 0.3s ease;
+  }
+
+@media (max-width: 991px) {
+    .navbar-collapse {
+        background-color: white;
+        transition: background-color 0.3s ease;
+        position: relative;
+        top: 2rem;
+        width: 100%;
+    }
+    .search-bar input {
+        margin-left:3.5rem;
+      }
+}
+
+/* ////////////////////////////////////// */
+  /* Additional Styling*/
 .name{
     margin-top: 8px;
     font-size: 1.3rem !important;
@@ -108,22 +204,7 @@ footer{
     font-weight: 200 !important;
     color: black;
 }
-.btn{
-    background-color: rgb(255, 87, 34)!important;
-    color: rgb(255, 255, 255) !important;
-    margin-bottom: 1rem;
-}
-.btn:hover{
-    background-color: rgb(131, 239, 155) !important;
-    color:black !important;
-}
-.buttons{
-    display: flex;
-    
-}
-.button-form {
-    margin-right: 5px; /* Adjust margin between buttons */
-}
+
 .alert {
     position: relative;
   }
