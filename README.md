@@ -136,16 +136,11 @@ Feel free to raise issues and contribute to the repository! 🎉💻
  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="900">
  
  
-## 📬 Contact
-
-For questions or feedback, feel free to reach out via GitHub issues or contact the project maintainers. ✉️
-
- <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="900">
- 
-
 ## 🤝 Join Our Community of Contributors!
 
-<img src="https://github.com/user-attachments/assets/35934e5d-4bf8-4add-908c-3ce47c9b1536" height=200  width=300 alt="WL"/>
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/35934e5d-4bf8-4add-908c-3ce47c9b1536" height="200" width="300" alt="Wanderlust Logo"/>
+</div>
 
 We're excited to have you on board! Whether you're a seasoned developer or just starting out, your skills and ideas can make a significant impact on **Wanderlust 2024**. Here’s how you can get involved:
 
@@ -158,15 +153,36 @@ Every contribution, big or small, is valued and appreciated. Together, we can cr
  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="900">
 
 
-## ❤️ Made with Love by [Soujanya](https://github.com/Soujanya2004)
 
-<a href="https://github.com/Soujanya2004">
-    <img src="https://avatars.githubusercontent.com/Soujanya2004" alt="Your Profile" style="width: 100px; height: 100px; border-radius: 100%;">
-</a>
+## 👀 Our Valuable Contributors 💖✨
 
+<div align="center">
+  <a href="https://github.com/Soujanya2004/wanderlust-2024/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=Soujanya2004/wanderlust-2024&max=100" />
+  </a>
+</div>
 
+## 📬 Contact
 
-
+For questions or feedback, feel free to reach out via GitHub issues or contact the project maintainers. ✉️
 
  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="900">
  
+
+## ❤️ Made with Love by [Soujanya](https://github.com/Soujanya2004)
+
+<div align="center">
+  <a href="https://github.com/Soujanya2004">
+      <img src="https://avatars.githubusercontent.com/Soujanya2004" alt="Your Profile" style="width: 100px; height: 100px; border-radius: 50%; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);">
+  </a>
+  <h3 style="margin: 10px 0;">Thank You for Your Support! 💖</h3>
+  <p style="font-size: 18px; color: #555;">Your contributions help us grow and improve! Happy Coding ✨🚀</p>
+</div>
+
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="900" alt="Contributors Animation"/>
+</div>
+
+ 
+
+
