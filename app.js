@@ -124,6 +124,7 @@ app.get('/about',asyncwrap ( async (req, res) => {
   app.post('/signup', asyncwrap(async (req, res, next) => {
   const { username, email, password } = req.body;
 
+
   // Check for missing fields
   if (!username || !password) {
     req.flash('error', 'Username and password are required');
