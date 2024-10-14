@@ -2,6 +2,7 @@ if(process.env.NODE_ENV!="production") { //not to deploy .env file while uploadi
   require('dotenv').config();
 }
 
+const port = 8000;
 const express =require("express");
 const app=express();
 const mongoose=require("mongoose");
@@ -36,23 +37,27 @@ app.use(cors({
   credentials: true
 }));
 
-app.use(flash());
 app.use(cookieparser());
-app.set("view engine","ejs");
-app.set("views", path.join(__dirname, "views"));  //to run file from everywhere
-app.use(express.urlencoded({extended:true}));  //for parsing the data
-app.use(methodOverride('_method'));
-app.engine('ejs', ejsMate); //to create ejs template for every page ex. footer,navbar
-app.use(express.static(path.join(__dirname, "/public"))); //to use files in public folder
 
 const dbUrl=process.env.ATLAS_DB_TOKEN;
-
-main().catch(err => console.log(err));
 
 async function main() {
   await mongoose.connect(dbUrl);
   console.log("database connected");
 }
+
+main().catch(err => console.log(err));
+
+
+app.set("views", path.join(__dirname, "views"));  //to run file from everywhere
+app.set("view engine","ejs");
+app.use(express.static(path.join(__dirname, "/public"))); //to use files in public folder
+app.use(methodOverride('_method'));
+app.use(express.urlencoded({extended:true}));  //for parsing the data
+app.engine('ejs', ejsMate); //to create ejs template for every page ex. footer,navbar
+
+
+
 const store =MongoStore.create({
   mongoUrl:dbUrl,
   crypto:{
@@ -65,6 +70,7 @@ const store =MongoStore.create({
 store.on("error", ()=>{
   console.log("error in mongo session store", err);
 })
+
 const sessionOptions={
   store,
   secret:process.env.SECRET,
@@ -80,6 +86,8 @@ const sessionOptions={
 
 
 app.use(session(sessionOptions)); //used to save users login in ame browser always, has session id
+app.use(flash());
+
 
 app.use(passport.initialize());
 app.use(passport.session()); //to identify users from page to page
@@ -92,6 +100,7 @@ app.use((req, res, next) => {
   res.locals.success = req.flash('success');
   res.locals.error = req.flash('error');
   res.locals.currUser=req.user; //storecurrent session user info in currUser
+  console.log(res.locals);
   next();
 });
 
@@ -124,7 +133,7 @@ app.get('/about',asyncwrap ( async (req, res) => {
     const newUser = new User({ username, email });
     await User.register(newUser, password); 
     req.login(newUser, (err) => {
-      req.flash('success', 'Welcome! You have successfully signed up.');
+      req.flash('success', 'Welcome! Account created successfully.');
       res.redirect('/listing');
     });
   } catch (err) {
@@ -144,7 +153,7 @@ app.route("/login")
   failureRedirect: "/login",
   failureFlash: true
 }), (req, res) => {
-  req.flash("success", "Welcome back!");
+  req.flash("success", "Welcome back to wanderlust!");
   let redirect=res.locals.redirectUrl||"/listing";  
   res.redirect(redirect); // Redirect to a route that will display the message
 });
@@ -155,10 +164,10 @@ app.route("/login")
       if(err) {
        return  next(err);
       }
-      else{
-        req.flash("success","Logged out successfuly");
+      
+        req.flash("success","You logged out successfuly!");
         res.redirect("/listing");
-      }
+      
     })
 })
 
@@ -203,6 +212,6 @@ next(new expressError(404,"page not found"));
   res.render("error.ejs",{msg,status});
 })
 
-app.listen(8080, () =>{
-    console.log("server is listening");
+app.listen(port, () =>{
+    console.log("server is listening on port", port);
 });
