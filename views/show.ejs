@@ -2,11 +2,7 @@
 <script>
     let accessToken = "<%= process.env.MAP_TOKEN %>";
     let list = <%- JSON.stringify(list) %>;
-    console.log(list);
-    for(review of list.reviews){
-        console.log(review);
-        console.log(review.comment);
-    }
+    
 </script>
 <style>
     body {
