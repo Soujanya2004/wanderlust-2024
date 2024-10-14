@@ -147,7 +147,7 @@ module.exports.showPost = async (req, res) => {
 
 module.exports.saveEditpost = async (req, res) => {
     const { id } = req.params;
-
+    console.log("saveditpost");
     try {
         if (!req.body.listing) {
             req.flash('error', ERROR_SEND_VALID_DATA);
@@ -189,6 +189,7 @@ module.exports.saveEditpost = async (req, res) => {
 
 
 module.exports.deletepost = async (req, res) => {
+    console.log("Deleting listing with ID:", req.params.id);
     const { id } = req.params;
     try {
         await listing.findByIdAndDelete(id); // Deconstructing parameters
