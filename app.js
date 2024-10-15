@@ -100,7 +100,7 @@ app.use((req, res, next) => {
   res.locals.success = req.flash('success');
   res.locals.error = req.flash('error');
   res.locals.currUser=req.user; //storecurrent session user info in currUser
-  console.log(res.locals);
+  // console.log(res.locals);
   next();
 });
 
@@ -178,10 +178,6 @@ const listingController = require('./controllers/listing.js');
 
 // Create new listing form route
 // app.get("/new",isLoggedIn, asyncwrap(newpost));
-app.get("/listing/new", isLoggedIn, asyncwrap(listingController.newpost));
-
-//create new listing
-// Create new listing form route
 app.get("/listing/new", isLoggedIn, asyncwrap(listingController.newpost));
 
 
