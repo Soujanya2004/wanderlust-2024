@@ -122,46 +122,136 @@ body{
 }
 
 /* ////////////////////////////////////// */
-  /* Additional Styling*/
-.name{
-    margin-top: 8px;
-    font-size: 1.3rem !important;
-    color: rgb(255, 87, 34)!important;
-    font-weight: 800 !important;
-    margin-left: 10px;
-    text-decoration: none !important;
+ /* FOOTER SECTION */
+footer {
+  margin-top: 100px;
+  /* background-color: #f8f9fa; */
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+  /* align-items: flex-start; */
+  flex-wrap: wrap;
+}
+/* 
+.footer-left,
+.footer-middle,
+.footer-right {
+  flex: 1;
+  max-width: 300px;
+} */
+
+
+.footer-left .brand h2 {
+  font-size: 50px;
+  font-family: Reggae One;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
-.footer-info{
-    text-align: center;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: space-evenly;
+.footer-left .brand p {
+  font-size: 20px;
+  color: #666;
+  margin-bottom: 20px;
 }
-.f-name{
-    width: 100%;
-    padding-top: 20px;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    
+
+.footer-left .contact-info .email,
+.footer-left .contact-info .phone {
+  margin-bottom: 15px;
+  padding-left: 20px;
 }
-.fa-brands{
-    padding-left: 25px;
+
+.footer-left .contact-info i {
+  margin-right: 10px;
+  font-size: 30px;
+  color: #007bff;
 }
-.f-social{
-    width: 100%;
-    font-size: x-large;  
-    padding-top: 20px;   
+
+.footer-left .contact-info p {
+  font-size: 17px;
+  color: #666;
 }
-footer{
-    height: 9rem;
-    background-color: rgb(240, 240, 240);
+
+.footer-left .contact-info p a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
 }
-.form-label{
-    font-size: larger !important;
+
+.footer-left .contact-info p a:hover {
+  text-decoration: underline;
 }
+
+.footer-middle h3,
+.footer-right h3 {
+  font-size: 21px;
+  font-weight: bold;
+  font-family: rekkas;
+  color: #333;
+  margin-top: 15px;
+}
+
+.footer-middle ul,
+.footer-right ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-middle ul li,
+.footer-right ul li {
+  margin-bottom: 10px;
+}
+
+.footer-middle ul li a,
+.footer-right ul li a {
+  font-size: 14px;
+  color: #666;
+  text-decoration: none;
+}
+
+.footer-middle ul li a:hover,
+.footer-right ul li a:hover {
+  color: #333;
+}
+
+
+.footer-right h3 {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.footer-right{
+  padding-right: 50px;
+}
+
+.footer-right .social-media a {
+  margin-right: 10px;
+  font-size: 24px;
+  color: #007bff;
+  transition: color 0.3s;
+}
+
+.footer-right .social-media a:hover {
+  color: #0056b3;
+}
+
+.copyright {
+  display: block;
+  position: relative;
+  top: 30px;
+  bottom: 0px;
+  width: 100%;
+  text-align: center;
+
+}
+
+.copyright p {
+  font-size: 14px;
+  color: #666;
+}
+
+
 .listing-card{
     border: none !important;
     margin-bottom: 2.5rem !important;
