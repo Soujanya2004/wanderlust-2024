@@ -114,6 +114,25 @@ app.get('/about',asyncwrap ( async (req, res) => {
   }
 }));
 
+//terms and conditions page
+app.get('/terms',asyncwrap ( async (req, res) => {
+  try {
+      res.render('terms');
+  } catch (err) {
+      console.error(err);
+      res.status(500).send('Internal Server Error');
+  }
+}));
+
+//Privacy policy page
+app.get('/privacy',asyncwrap ( async (req, res) => {
+  try {
+      res.render('privacy');
+  } catch (err) {
+      console.error(err);
+      res.status(500).send('Internal Server Error');
+  }
+}));
 
   //API
   //signup
