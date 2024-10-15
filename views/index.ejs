@@ -1,5 +1,5 @@
 <% layout("/layouts/boilerplate") %>
-<style>
+<style>  
   #filters {
     display: flex;
     flex-wrap: wrap;
@@ -14,7 +14,150 @@
     opacity: 1;
     cursor: pointer;
   }
+
+/* FAQ SECTION */
+/* LEFT SECTION */
+.faq-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    margin-top: 30px;
+    /* background-color: #f8f9fa; */
+}
+
+.faq-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 25%;
+    margin: 0px 5px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.faq-left h2 {
+    font-size: 2em;
+    font-family: rakkas;
+    font-weight: bolder;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.faq-left p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.faq-left .contact-info {
+    margin-top: 20px;
+}
+
+.faq-left .contact-info span {
+    display: flex;
+    margin-bottom: 5px;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #333;
+}
+
+.faq-left .contact-info span i {
+    margin-right: 5px;
+    font-size: 1.7rem;
+    color: #28a745;
+}
+
+
+.faq-left .contact-info a {
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+
+/* RIGHT SECTION */
+.faq-right {
+    width: 75%;
+    padding: 20px 25px;
+    margin: 0px 5px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    /* overflow: hidden; */
+}
+
+.faq-item {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    background-color: #f6f6f6;
+    transition: box-shadow 0.3s ease;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.faq-item h3 {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.faq-item .faq-answer {
+    padding-left: 10px;
+    margin-top: 10px;
+    display: none;
+}
+
+.faq-item .faq-answer p {
+    font-size: .9rem;
+    color: #666;
+}
+
+.faq-item .faq-answer i {
+    margin-right: 5px;
+    font-size: 1.2rem;
+    vertical-align: middle;
+}
+
+.faq-item.active .faq-answer {
+    display: block;
+}
+@media (max-width: 768px) {
+  .faq-container {
+    flex-direction: column;
+    padding: 15px;
+  }
+
+  .faq-left {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 15px;
+  }
+
+  .faq-right {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .faq-item h3 {
+    font-size: 0.9rem;
+  }
+
+  .faq-answer p {
+    font-size: 0.85rem;
+  }
+}
 </style>
+
 
 <body>
   <div id="filters">
@@ -77,4 +220,83 @@
       </div>
     <% } %>
   </div>
+
+<!-- FAQ SECTION -->
+<div class="faq-container container">
+  <div class="faq-left">
+    <h2>Frequently Asked Questions</h2>
+    <p>Your travel-related queries, answered to ensure a smooth journey! 🌍✨</p>
+    <div class="contact-info">
+      <span><i class="fas fa-envelope"></i> Got any questions?</span>
+      <a href="mailto:support@wanderlust.com"><b>support@wanderlust.com</b></a>
+    </div>
+  </div>
+
+  <!-- RIGHT SIDE -->
+  <div class="faq-right" id="faq-list">
+    <!-- FAQs dynamically added -->
+    <div class="faq-item">
+      <h3>How can I find new travel destinations? <i class="fas fa-chevron-down"></i></h3>
+      <div class="faq-answer">
+        <p>Wanderlust provides an interactive map 🗺️ that lets you explore popular and hidden destinations around the world. You can also browse user-generated travel stories ✍️ for inspiration.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <h3>Can I contribute my own travel experiences? <i class="fas fa-chevron-down"></i></h3>
+      <div class="faq-answer">
+        <p>Yes! Create your own travel stories and share tips, photos, and experiences with the Wanderlust community. Your unique insights will help others discover new adventures! ✈️</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <h3>How do I use the map to plan my trips? <i class="fas fa-chevron-down"></i></h3>
+      <div class="faq-answer">
+        <p>Our integrated map feature allows you to view nearby attractions, accommodations, and local experiences, making trip planning seamless. Just zoom in and start exploring! 🗺️</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <h3>Is my personal information safe with Wanderlust? <i class="fas fa-chevron-down"></i></h3>
+      <div class="faq-answer">
+        <p>Absolutely. We prioritize the security and privacy of your data with industry-standard security protocols. Your information is safe with us. 🔐</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <h3>How do I sign up for Wanderlust? <i class="fas fa-chevron-down"></i></h3>
+      <div class="faq-answer">
+        <p>Signing up is easy! Just visit the registration page, enter your details, and start your journey toward discovering and sharing amazing destinations. 🌟</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Function to toggle FAQ answer visibility
+  function toggleFAQAnswer(faqItem) {
+      const faqAnswer = faqItem.querySelector('.faq-answer');
+      faqAnswer.style.display = (faqAnswer.style.display === 'block' ? 'none' : 'block');
+  }
+
+  // Function to hide all FAQ answers except the clicked one
+  function hideOtherFAQAnswers(clickedItem) {
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+        if (item !== clickedItem) {
+            const faqAnswer = item.querySelector('.faq-answer');
+            faqAnswer.style.display = 'none';
+        }
+    });
+  }
+
+  // Add click event listener to each FAQ item
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.addEventListener('click', () => {
+        toggleFAQAnswer(item); // Toggle answer visibility
+        hideOtherFAQAnswers(item); // Hide other answers
+    });
+  });
+</script>
+
 </body>
