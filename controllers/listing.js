@@ -29,10 +29,18 @@ module.exports.index = async (req, res) => {
     }
 };
 
+//bug fixes
 module.exports.newpost = async (req, res) => {
-    console.log(req.user);
-    res.render("new.ejs");
-}; 
+    try {
+        console.log("Rendering new listing form...");
+        res.render("new.ejs");
+    } catch (err) {
+        console.error("Error loading new listing form:", err);
+        req.flash("error", "Error loading form.");
+        return res.redirect("/listing");
+    }
+};
+
 
 module.exports.search = async (req, res) => {
     const { query } = req.body;
@@ -118,9 +126,18 @@ module.exports.editpost = async (req, res) => {
     }
 };
 
+const mongoose = require('mongoose');
+
 module.exports.showPost = async (req, res) => {
     try {
         const { id } = req.params;
+        
+        // Validate if 'id' is a valid ObjectId
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            req.flash('error', 'Invalid listing ID');
+            return res.redirect('/listing');
+        }
+
         const list = await listing.findById(id)
             .populate({
                 path: 'reviews',
@@ -130,20 +147,19 @@ module.exports.showPost = async (req, res) => {
             })
             .populate('owner');
 
-        // console.log(list);
-
         if (!list) {
             req.flash('error', ERROR_LISTING_NOT_FOUND);
             return res.redirect('/listing');
         }
-
         res.render('show.ejs', { list });
     } catch (err) {
-        console.error("Error fetching listing:", err);
+        console.error("Error fetching listing:", err.message);
+        console.error("Stack trace:", err.stack);
         req.flash("error", ERROR_LOAD_LISTING_DETAILS);
         return res.redirect("/listing");
     }
 };
+
 
 module.exports.saveEditpost = async (req, res) => {
     const { id } = req.params;
