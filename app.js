@@ -180,10 +180,6 @@ const listingController = require('./controllers/listing.js');
 // app.get("/new",isLoggedIn, asyncwrap(newpost));
 app.get("/listing/new", isLoggedIn, asyncwrap(listingController.newpost));
 
-//create new listing
-// Create new listing form route
-app.get("/listing/new", isLoggedIn, asyncwrap(listingController.newpost));
-
 
 //index route
 app.get("/listing",asyncwrap(index));
