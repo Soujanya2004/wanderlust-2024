@@ -170,10 +170,20 @@ app.route("/login")
         res.redirect("/listing");
       
     })
-})
+});
+
+//define listing conroller
+//BUG FIX
+const listingController = require('./controllers/listing.js');
+
+// Create new listing form route
+// app.get("/new",isLoggedIn, asyncwrap(newpost));
+app.get("/listing/new", isLoggedIn, asyncwrap(listingController.newpost));
 
 //create new listing
-app.get("/new",isLoggedIn, asyncwrap(newpost));
+// Create new listing form route
+app.get("/listing/new", isLoggedIn, asyncwrap(listingController.newpost));
+
 
 //index route
 app.get("/listing",asyncwrap(index));
