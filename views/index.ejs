@@ -10,9 +10,19 @@
     margin-top: 2rem;
     opacity: 0.7;
   }
+
+  /* listings */
   .filter:hover {
     opacity: 1;
     cursor: pointer;
+  }
+  .listing-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .listing-card:hover {
+    transform: scale(1.01);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   }
 
 /* FAQ SECTION */
@@ -204,21 +214,26 @@
   </div>
   
   <br>
-  <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1 justify-content-center">
-    <% for (let listing of listings) { %>
-      <div class="card col listing-card" style="width: 21rem;">
-        <a href="/listing/<%= listing._id %>" class="show">
-          <img src="<%= listing.image[0].url %>" class="card-img-top" alt="listing_image" style="height: 20rem;" />
-          <div class="card-body">
-            <h5 class="card-title"><%= listing.title %></h5>
-            <p class="card-text"><i><%= listing.description %></i> 
+  <!-- Listings -->
+  <div class="container my-4">
+    <div class="row">
+      <% for( listing of listings) { %>
+        <div class="col-lg-4 col-md-6">
+          <div class="card listing-card">
+            <img src="<%= listing.image[0].url %>" class="card-img-top" alt="listing_image" style="height: 20rem;" />
+            <div class="card-body">
+              <h5 class="card-title"><%= listing.title %></h5>
+              <p class="card-text"><i><%= listing.description %></i> 
               <br>&#8377;<%= listing.price.toLocaleString("en-IN") %> / night</p>
-            <p class="card-text">Location: <%= listing.location %>, <%= listing.country %></p>
-            <a href="/listing/<%= listing._id %>" class="btn btn-dark">Show in Detail</a>
+              <p class="card-text">Location: <%= listing.location %>, <%= listing.country %></p>
+              <a href="/listing/<%= listing._id %>" class="btn btn-dark">Show in Detail</a>
+            </div>
           </div>
-        </a>
-      </div>
-    <% } %>
+        </div>
+      <% } %>
+    </div>
+  </div>
+
   </div>
 
 <!-- FAQ SECTION -->
