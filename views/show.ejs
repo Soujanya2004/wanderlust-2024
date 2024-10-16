@@ -162,9 +162,7 @@
                                 class="card listing-card card-body col-lg-11 col-md-8 col-sm-10 col-xs-10 offset-lg-3 offset-md-2 offset-sm-1">
 
                                 <!-- Form for add reviews. -->
-                                <form action="/listings/<%= list._id %>/review" method="post" novalidate
-                                    class="needs-validation">
-
+                                <form action="/listing/<%= list._id %>/review" method="post" novalidate class="needs-validation">
                                     <div>
                                         <label for="rating" class="form-label bold2">Rating:</label>
                                         <fieldset class="starability-grow">
