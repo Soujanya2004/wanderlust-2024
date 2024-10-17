@@ -5,7 +5,6 @@
     
 </script>
 <style>
-
 .show-img {
     object-fit: cover;
     height: 400px;
@@ -128,7 +127,7 @@
                         </button>
                     </div>
                     <div class="card-body text-center">
-                        <h2 class="mt-5" style=" color: #022e6a; font-family: rakkas;">Owned by: <b><%= list.owner.username %></b></h3>
+                        <h2 class="mt-5" style=" color: #022e6a; font-family: rakkas;">Owned by: <b><%= list.owner.username %></b></h2>
                         <b><%= list.description %></b>
                         <p class="listing-price"><b>price:</b>
                             &#8377;<%= list.price.toLocaleString("en-IN") %>/night
@@ -158,13 +157,13 @@
                 </div>
             </div>
             <hr>
-
+            
             <!-- MAP -->
             <div class="col-10 offset-1">
                 <h3 class="text-center" style="padding: 10px; font-family: rakkas;">Where you will be</h3>
                 <div id="map" style="width: 100%; height: 400px;"></div>
             </div>
-
+            
             <!-- REVIEW -->
             <div class="container">
                 <% if (currUser) { %>

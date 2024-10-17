@@ -228,7 +228,8 @@ app.delete("/listing/:id/review/:rid",isLoggedIn,isAuthor,asyncwrap(deleteReview
 
 //for all invalid route error
 app.use("*",(req,res,next) =>{
-next(new expressError(404,"page not found"));
+  res.render("not_found.ejs");
+// next(new expressError(404,"page not found"));
 })
 
   //error handling
