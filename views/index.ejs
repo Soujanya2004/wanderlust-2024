@@ -1,208 +1,191 @@
 <% layout("/layouts/boilerplate") %>
-<style>  
-  #filters {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  .filter {
-    text-align: center;
-    margin-right: 3.5rem;
-    margin-top: 2rem;
-    opacity: 0.7;
-  }
-  .filter:hover {
-    opacity: 1;
-    cursor: pointer;
-  }
+<style>  llBar{
+          position: relative;
+          padding: 0px 30px;
+          margin-top: 100px;
+      }
 
-/* FAQ SECTION */
-/* LEFT SECTION */
-.faq-container {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    margin-top: 30px;
-    /* background-color: #f8f9fa; */
-}
+  /* Hide scrollbar while still allowing horizontal scrolling */
+    #filters {
+        display: flex;
+        overflow-x: auto; /* Allow horizontal scrolling */
+        padding: 10px;
+        scroll-behavior: smooth;
+        scrollbar-width: none; /* Firefox */
+    }
 
-.faq-left {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 25%;
-    margin: 0px 5px;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: #ffffff;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-}
-
-.faq-left h2 {
-    font-size: 2em;
-    font-family: rakkas;
-    font-weight: bolder;
-    color: #333;
-    margin-bottom: 20px;
-}
-
-.faq-left p {
-    font-size: 1.1rem;
-    color: #666;
-    margin-bottom: 20px;
-}
-
-.faq-left .contact-info {
-    margin-top: 20px;
-}
-
-.faq-left .contact-info span {
-    display: flex;
-    margin-bottom: 5px;
-    align-items: center;
-    font-size: 1rem;
-    font-weight: 700;
-    color: #333;
-}
-
-.faq-left .contact-info span i {
-    margin-right: 5px;
-    font-size: 1.7rem;
-    color: #28a745;
-}
-
-
-.faq-left .contact-info a {
-    text-decoration: none;
-    font-size: 1.2rem;
-}
-
-
-/* RIGHT SECTION */
-.faq-right {
-    width: 75%;
-    padding: 20px 25px;
-    margin: 0px 5px;
-    border-radius: 10px;
-    background-color: #ffffff;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    /* overflow: hidden; */
-}
-
-.faq-item {
-    margin-bottom: 20px;
-    padding: 15px;
-    border-radius: 8px;
-    border-top: 1px solid rgba(0, 0, 0, 0.2);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    background-color: #f6f6f6;
-    transition: box-shadow 0.3s ease;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-}
-
-.faq-item h3 {
-    font-size: 1rem;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 5px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-}
-
-.faq-item .faq-answer {
-    padding-left: 10px;
-    margin-top: 10px;
-    display: none;
-}
-
-.faq-item .faq-answer p {
-    font-size: .9rem;
-    color: #666;
-}
-
-.faq-item .faq-answer i {
-    margin-right: 5px;
-    font-size: 1.2rem;
-    vertical-align: middle;
-}
-
-.faq-item.active .faq-answer {
-    display: block;
-}
-@media (max-width: 768px) {
-  .faq-container {
-    flex-direction: column;
-    padding: 15px;
+  #filters::-webkit-scrollbar {
+      display: none; /* Hide scrollbar in Chrome, Safari, Opera */
   }
 
-  .faq-left {
-    width: 100%;
-    margin-bottom: 20px;
-    padding: 15px;
-  }
+    .filter {
+      flex: 0 0 auto; /* Ensure items don't shrink or grow */
+      width: 100px;
+      margin-right: 15px;
+      margin-top: 12px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: transform 0.3s ease;
+    }
 
-  .faq-right {
-    width: 100%;
-    padding: 15px;
-  }
+    .filter i {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #555;
+    }
 
-  .faq-item h3 {
-    font-size: 0.9rem;
-  }
+    .filter p {
+      margin: 0;
+      font-size: 14px;
+      color: #333;
+    }
 
-  .faq-answer p {
-    font-size: 0.85rem;
-  }
-}
+    .filter:hover {
+      transform: scale(1.1);
+      cursor: pointer;
+    }
+
+    /* Scroll buttons */
+    .scroll-btn {
+      position: absolute;
+      top: 21%;
+      transform: translateY(-50%);
+      background-color: transparent;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .scroll-btn i{
+      opacity: .5;
+      transition: color 0.3s ease;
+      transform: scale(1.1);
+      
+    }
+
+    .scroll-btn i:hover{
+      opacity: 1;
+      transition: color 0.3s ease;
+      transform: scale(1.1);
+      text-shadow: .5px 0px 1px black;
+    }
+
+    .scroll-btn.left {
+      left: 10px;
+    }
+
+    .scroll-btn.right {
+      right: 10px;
+    }
+
+    /* Hide the scroll buttons on small screens */
+
+    /* Media queries */
+    @media (max-width: 768px) {
+      #filters {
+        padding: 5px;
+      }
+      .filter {
+        margin-top: 10px;
+        width: 80px;
+        height: 80px;
+        margin-right: 10px;
+      }
+
+      .filter i {
+        font-size: 20px;
+      }
+
+      .filter p {
+        font-size: 12px;
+      }
+      .scroll-btn {
+        top: 19%;
+    }
+    }
+
+    @media (max-width: 480px) {
+      .filter {
+        width: 70px;
+        height: 70px;
+        margin-right: 8px;
+      }
+
+      .filter i {
+        font-size: 18px;
+      }
+
+      .filter p {
+        font-size: 11px;
+      }
+    }
 </style>
 
 
 <body>
-  <div id="filters">
-    <div class="filter">
-      <div><i class="fa-solid fa-fire"></i></div>
-      <p>Trending</p>
-    </div>
-    <div class="filter">
-      <div><i class="fa-solid fa-water"></i></div>
-      <p>Surfing</p>
-    </div>
-    <div class="filter">
-      <div><i class="fa-solid fa-city"></i></div>
-      <p>Amazing cities</p>
-    </div>
-    <div class="filter">
-      <div><i class="fa-solid fa-umbrella"></i></div>
-      <p>Beach</p>
-    </div>
-    <div class="filter">
-      <div><i class="fa-solid fa-cow"></i></div>
-      <p>Farms</p>
-    </div>
-    <div class="filter">
-      <div><i class="fa-solid fa-mountain"></i></div>
-      <p>Lake</p>
-    </div>
-    <div class="filter">
-      <div><i class="fa-solid fa-fort-awesome"></i></div>
-      <p>Castles</p>
-    </div>
-    <div class="filter">
-      <div><i class="fa-solid fa-bed"></i></div>
-      <p>Rooms</p>
-    </div>
-    <div class="filter">
-      <div><i class="fa-solid fa-tree"></i></div>
-      <p>Forest</p>
-    </div>
-    <div class="filter">
-      <div><i class="fa-solid fa-person-swimming"></i></div>
-      <p>Pool</p>
-    </div>
-  </div>
   
+    <div class="scrollBar">
+      <!-- Scroll Buttons -->
+      <button class="scroll-btn left" onclick="leftScroll()">
+        <i class="fas fa-angle-double-left"></i>
+      </button>
+  
+    <div id="filters">
+      <div class="filter">
+        <div><i class="fa-solid fa-fire"></i></div>
+        <p>Trending</p>
+      </div>
+      <div class="filter">
+        <div><i class="fa-solid fa-water"></i></div>
+        <p>Surfing</p>
+      </div>
+      <div class="filter">
+        <div><i class="fa-solid fa-city"></i></div>
+        <p>Amazing cities</p>
+      </div>
+      <div class="filter">
+        <div><i class="fa-solid fa-umbrella"></i></div>
+        <p>Beach</p>
+      </div>
+      <div class="filter">
+        <div><i class="fa-solid fa-cow"></i></div>
+        <p>Farms</p>
+      </div>
+      <div class="filter">
+        <div><i class="fa-solid fa-mountain"></i></div>
+        <p>Lake</p>
+      </div>
+      <div class="filter">
+        <div><i class="fa-solid fa-fort-awesome"></i></div>
+        <p>Castles</p>
+      </div>
+      <div class="filter">
+        <div><i class="fa-solid fa-bed"></i></div>
+        <p>Rooms</p>
+      </div>
+      <div class="filter">
+        <div><i class="fa-solid fa-tree"></i></div>
+        <p>Forest</p>
+      </div>
+      <div class="filter">
+        <div><i class="fa-solid fa-person-swimming"></i></div>
+        <p>Pool</p>
+      </div>
+    </div>
+    <button class="scroll-btn right" onclick="rightScroll()">
+      <i class="fas fa-angle-double-right"></i>
+    </button>
+    </div>
+
+    <!-- LISTINGS -->
   <br>
   <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1 justify-content-center">
     <% for (let listing of listings) { %>
@@ -272,6 +255,30 @@
   </div>
 </div>
 
+
+<script>
+  const filters = document.getElementById('filters');
+  const leftButton = document.querySelector('.left');
+  const rightButton = document.querySelector(".right");
+
+  function scrollLeft() {
+    filters.scrollBy({
+      left: -200,  // Scroll left by 200px
+      behavior: 'smooth'
+    });
+  }
+
+  function scrollRight() {
+    filters.scrollBy({
+      left: 200,  // Scroll right by 200px
+      behavior: 'smooth'
+    });
+  }
+
+leftButton.addEventListener('click',scrollLeft);
+rightButton.addEventListener('click',scrollRight);
+
+</script>
 <script>
   // Function to toggle FAQ answer visibility
   function toggleFAQAnswer(faqItem) {
@@ -298,5 +305,6 @@
     });
   });
 </script>
+
 
 </body>
