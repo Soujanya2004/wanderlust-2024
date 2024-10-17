@@ -263,7 +263,7 @@ footer {
     margin-left: 15px;
     margin-bottom: 40px !important;
     padding: 25px !important;
-    border-color:rgb(255, 87, 34)!important;
+    /* border-color:rgb(255, 87, 34)!important; */
 }
 .card-img-overlay{
     opacity: 0;
