@@ -1,21 +1,16 @@
 <% layout("/layouts/boilerplate") %>
-<style>  llBar{
-          position: relative;
-          padding: 0px 30px;
-          margin-top: 100px;
-      }
-
-  /* Hide scrollbar while still allowing horizontal scrolling */
+<style>
+/* Hide scrollbar while still allowing horizontal scrolling */
     #filters {
         display: flex;
         overflow-x: auto; /* Allow horizontal scrolling */
         padding: 10px;
         scroll-behavior: smooth;
-        scrollbar-width: none; /* Firefox */
+        scrollbar-width: none;
     }
 
   #filters::-webkit-scrollbar {
-      display: none; /* Hide scrollbar in Chrome, Safari, Opera */
+      display: none; /* Hide scrollbar */
   }
 
     .filter {
@@ -85,8 +80,6 @@
     .scroll-btn.right {
       right: 10px;
     }
-
-    /* Hide the scroll buttons on small screens */
 
     /* Media queries */
     @media (max-width: 768px) {
@@ -187,21 +180,26 @@
 
     <!-- LISTINGS -->
   <br>
-  <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1 justify-content-center">
-    <% for (let listing of listings) { %>
-      <div class="card col listing-card" style="width: 21rem;">
-        <a href="/listing/<%= listing._id %>" class="show">
-          <img src="<%= listing.image[0].url %>" class="card-img-top" alt="listing_image" style="height: 20rem;" />
-          <div class="card-body">
-            <h5 class="card-title"><%= listing.title %></h5>
-            <p class="card-text"><i><%= listing.description %></i> 
+  <!-- Listings -->
+  <div class="container my-4">
+    <div class="row">
+      <% for( listing of listings) { %>
+        <div class="col-lg-4 col-md-6">
+          <div class="card listing-card">
+            <img src="<%= listing.image[0].url %>" class="card-img-top" alt="listing_image" style="height: 20rem;" />
+            <div class="card-body">
+              <h5 class="card-title"><%= listing.title %></h5>
+              <p class="card-text"><i><%= listing.description %></i> 
               <br>&#8377;<%= listing.price.toLocaleString("en-IN") %> / night</p>
-            <p class="card-text">Location: <%= listing.location %>, <%= listing.country %></p>
-            <a href="/listing/<%= listing._id %>" class="btn btn-dark">Show in Detail</a>
+              <p class="card-text">Location: <%= listing.location %>, <%= listing.country %></p>
+              <a href="/listing/<%= listing._id %>" class="btn btn-dark">Show in Detail</a>
+            </div>
           </div>
-        </a>
-      </div>
-    <% } %>
+        </div>
+      <% } %>
+    </div>
+  </div>
+
   </div>
 
 <!-- FAQ SECTION -->
