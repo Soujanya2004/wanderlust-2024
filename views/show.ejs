@@ -72,6 +72,11 @@
     }
 }
 
+/* delete btn */
+#delted_btn{
+    border: none;
+    background-color: transparent;
+}
 </style>
 
 <body class="mt-10">
@@ -214,7 +219,7 @@
                                         <div>
                                             <% if (currUser && currUser._id.equals(review.author._id)) { %>
                                                 <form method="post" action="/listing/<%= list._id %>/review/<%= review._id %>?_method=DELETE" class="text-center">
-                                                    <i class="fa-solid trash fa-trash-can"></i>
+                                                    <button type="submit" id="delted_btn"><i class="fa-solid trash fa-trash-can"></i></button>
                                                 </form>
                                             <% } %>
                                         </div>
