@@ -318,5 +318,145 @@ footer {
      width: 100vh;
      margin: 0 auto;
     }
+/* FAQ SECTION */
+/* LEFT SECTION */
+.faq-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  margin-top: 30px;
+  /* background-color: #f8f9fa; */
+}
 
+.faq-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 25%;
+  margin: 0px 5px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.faq-left h2 {
+  font-size: 2em;
+  font-family: rakkas;
+  font-weight: bolder;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.faq-left p {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.faq-left .contact-info {
+  margin-top: 20px;
+}
+
+.faq-left .contact-info span {
+  display: flex;
+  margin-bottom: 5px;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.faq-left .contact-info span i {
+  margin-right: 5px;
+  font-size: 1.7rem;
+  color: #28a745;
+}
+
+
+.faq-left .contact-info a {
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+
+/* RIGHT SECTION */
+.faq-right {
+  width: 75%;
+  padding: 20px 25px;
+  margin: 0px 5px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  /* overflow: hidden; */
+}
+
+.faq-item {
+  margin-bottom: 20px;
+  padding: 15px;
+  border-radius: 8px;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: #f6f6f6;
+  transition: box-shadow 0.3s ease;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.faq-item h3 {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.faq-item .faq-answer {
+  padding-left: 10px;
+  margin-top: 10px;
+  display: none;
+}
+
+.faq-item .faq-answer p {
+  font-size: .9rem;
+  color: #666;
+}
+
+.faq-item .faq-answer i {
+  margin-right: 5px;
+  font-size: 1.2rem;
+  vertical-align: middle;
+}
+
+.faq-item.active .faq-answer {
+  display: block;
+}
+@media (max-width: 768px) {
+.faq-container {
+  flex-direction: column;
+  padding: 15px;
+}
+
+.faq-left {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 15px;
+}
+
+.faq-right {
+  width: 100%;
+  padding: 15px;
+}
+
+.faq-item h3 {
+  font-size: 0.9rem;
+}
+
+.faq-answer p {
+  font-size: 0.85rem;
+}
+}
  
