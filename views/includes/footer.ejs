@@ -35,6 +35,10 @@
         </div>
     </div>
     <div class="copyright">
-        <p>&copy; Wanderlust Private Limited All rights reserved.</p>
+        <p>&copy; <span id="year"></span> Wanderlust Private Limited. All rights reserved.</p>
     </div>
 </footer>
+
+<script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>
