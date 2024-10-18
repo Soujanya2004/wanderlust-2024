@@ -87,7 +87,10 @@
     transform: translateY(-2px);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
-
+#trash{
+    border: none;
+    background-color: transparent;
+}
 @media (max-width: 768px) {
     .show-img {
         height: 250px;
@@ -167,61 +170,63 @@
             <!-- REVIEW -->
             <div class="container">
                 <% if (currUser) { %>
-                    <p>
-                        <button class="btn btn-outline-danger btn-sm mt-0" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseWidthExample" aria-expanded="false"
-                            aria-controls="collapseWidthExample">
-                            Leave a review
-                        </button>
-                    </p>
-
-                    <div>
-                        <div class="collapse" id="collapseWidthExample">
-                            <div
-                                class="card listing-card card-body col-lg-11 col-md-8 col-sm-10 col-xs-10 offset-lg-3 offset-md-2 offset-sm-1">
-
-                                <!-- Form for add reviews. -->
-                                <form action="/listing/<%= list._id %>/review" method="post" novalidate class="needs-validation">
-                                    <div>
-                                        <label for="rating" class="form-label bold2"><b>Rating:</b></label>
-                                        <fieldset class="starability-grow">
-                                            
-                                            <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
-                                      
-                                            <input type="radio" id="rate1" name="review[rating]" value="1" />
-                                            <label for="rate1">1 star.</label>
-                                      
-                                            <input type="radio" id="rate2" name="review[rating]" value="2" />
-                                            <label for="rate2">2 stars.</label>
-                                      
-                                            <input type="radio" id="rate3" name="review[rating]" value="3" />
-                                            <label for="rate3">3 stars.</label>
-                                      
-                                            <input type="radio" id="rate4" name="review[rating]" value="4" />
-                                            <label for="rate4">4 stars.</label>
-                                      
-                                            <input type="radio" id="rate5" name="review[rating]" value="5" />
-                                            <label for="rate5">5 stars.</label>
-                                      
-                                            <span class="starability-focus-ring"></span>
-                                          </fieldset>
-                                      </div>
-
-                                    <div>
-                                        <label for="comment" class="form-label bold2"><b>Comments:</b></label>
-                                        <textarea name="review[Comments]"
-                                            class="form-control focus-ring focus-ring-secondary border rounded-1"
-                                            id="comment" placeholder="Add some comments here..." rows="4" required></textarea>
-                                        <div class="invalid-feedback">Please add some comments for review!</div>
-                                    </div>
-
-                                    <button class="btn btn-outline-secondary btn-sm mt-4">Submit</button>
-
-                                </form>
-
+                    <% if (!currUser._id.equals(list.owner._id)) { %>
+                        <p>
+                            <button class="btn btn-outline-danger btn-sm mt-0" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseWidthExample" aria-expanded="false"
+                                aria-controls="collapseWidthExample">
+                                Leave a review
+                            </button>
+                        </p>
+    
+                        <div>
+                            <div class="collapse" id="collapseWidthExample">
+                                <div
+                                    class="card listing-card card-body col-lg-11 col-md-8 col-sm-10 col-xs-10 offset-lg-3 offset-md-2 offset-sm-1">
+    
+                                    <!-- Form for add reviews. -->
+                                    <form action="/listing/<%= list._id %>/review" method="post" novalidate class="needs-validation">
+                                        <div>
+                                            <label for="rating" class="form-label bold2"><b>Rating:</b></label>
+                                            <fieldset class="starability-grow">
+                                                
+                                                <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
+                                          
+                                                <input type="radio" id="rate1" name="review[rating]" value="1" />
+                                                <label for="rate1">1 star.</label>
+                                          
+                                                <input type="radio" id="rate2" name="review[rating]" value="2" />
+                                                <label for="rate2">2 stars.</label>
+                                          
+                                                <input type="radio" id="rate3" name="review[rating]" value="3" />
+                                                <label for="rate3">3 stars.</label>
+                                          
+                                                <input type="radio" id="rate4" name="review[rating]" value="4" />
+                                                <label for="rate4">4 stars.</label>
+                                          
+                                                <input type="radio" id="rate5" name="review[rating]" value="5" />
+                                                <label for="rate5">5 stars.</label>
+                                          
+                                                <span class="starability-focus-ring"></span>
+                                              </fieldset>
+                                          </div>
+    
+                                        <div>
+                                            <label for="comment" class="form-label bold2"><b>Comments:</b></label>
+                                            <textarea name="review[Comments]"
+                                                class="form-control focus-ring focus-ring-secondary border rounded-1"
+                                                id="comment" placeholder="Add some comments here..." rows="4" required></textarea>
+                                            <div class="invalid-feedback">Please add some comments for review!</div>
+                                        </div>
+    
+                                        <button class="btn btn-outline-secondary btn-sm mt-4">Submit</button>
+    
+                                    </form>
+    
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    <% } %>
                 <% } %>
                 <hr>
 
@@ -239,7 +244,7 @@
                                                 <h4 class="card-title"><img id="reviw_logo" src="/user (1).png" alt=""><%= review.author.username %> <span style="font-size: 10px;"> owner</span></h4>
                                                 <div>
                                                     <% if (currUser && currUser._id.equals(review.author._id)) { %>
-                                                        <form method="post" action="/listing/<%= list._id %>/review/<%= review._id %>?_method=DELETE"><i class="fa-solid trash fa-trash-can"></i>
+                                                        <form method="post" action="/listing/<%= list._id %>/review/<%= review._id %>?_method=DELETE"><button id="trash" type="submit"><i class="fa-solid trash fa-trash-can"></i></button>
                                                         </form>
                                                     <% } %>
                                                 </div>
