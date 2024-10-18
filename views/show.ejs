@@ -38,52 +38,72 @@
     margin-bottom: -0.3rem;
 }
 /* reviewshow css */
-.review-card h4{
+.heading h4{
     font-size: 1rem;
     margin-left: -0.5rem !important;
     font-weight: 600 !important;
 }
-.review-card h4 img{
-    height: 1.5rem;
+.heading{
+    display: flex;
+    justify-content: space-between;
+}
+.card-title img{
+    height: 2rem;
     margin-right: 0.3rem;
 }
-.review-card .trash{
+
+.card-text i{
+    color: #ff6507;
+    font-size: 1.23rem;
+}
+
+.trash {
+    color: #dc3545;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.trash:hover {
+    transform: scale(1.5);
+    color: #d41f1f; 
+}
+
+#reviw_logo{
+    height: 2rem;
+    margin-right: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+#reviw_logo:hover{
+    transform: scale(1.2);
     cursor: pointer;
 }
-.review-card .star{
-    font-size: 0.6rem;
+
+/* Animation on the review cards */
+.review-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.review-card .heading{
-    margin-bottom: -0.3rem !important;
+
+.review-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
-.review-card .review-text{
-    color: #696969 !important;
-}
-.listing-card{
-    padding: 2rem !important;
-}
+
 @media (max-width: 768px) {
     .show-img {
         height: 250px;
     }
 
     .map {
-        height: 250px; 
+        height: 200px; 
     }
-}
-
-/* delete btn */
-#delted_btn{
-    border: none;
-    background-color: transparent;
 }
 </style>
 
 <body class="mt-10">
     <br>
-    <div class="container">
+    <div class="container my-4">
         <div class="row">
-            <div class="col-12 text-center mb-4">
+            <div class="col-12 text-center">
                 <h1 style="font-family: rakkas;"><b><%= list.title %></b></h1>
             </div>
             <div class="col-12 col-md-8 mx-auto">
@@ -107,17 +127,17 @@
                         </button>
                     </div>
                     <div class="card-body text-center">
-                        <h2 class="mt-5" style=" color: #022e6a; font-family: rakkas;">Owned by: <b><%= list.owner.username %></b></h3>
-                            <b><%= list.description %></b>
-                            <p class="listing-price"><b>price:</b>
-                                &#8377;<%= list.price.toLocaleString("en-IN") %>/night
-                            </p>
-                            <p class="listing-location"><b>location:</b>
-                                <%=list.location%>
-                            </p>
-                            <p class="listing-location"><b>country:</b>
-                                <%=list.country%>
-                            </p>
+                        <h2 class="mt-5" style=" color: #022e6a; font-family: rakkas;">Owned by: <b><%= list.owner.username %></b></h2>
+                        <b><%= list.description %></b>
+                        <p class="listing-price"><b>price:</b>
+                            &#8377;<%= list.price.toLocaleString("en-IN") %>/night
+                        </p>
+                        <p class="listing-location"><b>location:</b>
+                            <%=list.location%>
+                        </p>
+                        <p class="listing-location"><b>country:</b>
+                            <%=list.country%>
+                        </p>
                     </div>
                     <div class="text-center">
                         <% if (currUser && currUser._id.equals(list.owner._id)) { %>
@@ -137,17 +157,16 @@
                 </div>
             </div>
             <hr>
+            
             <!-- MAP -->
             <div class="col-10 offset-1">
                 <h3 class="text-center" style="padding: 10px; font-family: rakkas;">Where you will be</h3>
                 <div id="map" style="width: 100%; height: 400px;"></div>
             </div>
-
-            <div class="col-8 offset-2">
+            
+            <!-- REVIEW -->
+            <div class="container">
                 <% if (currUser) { %>
-                    
-
-                    <hr class="">
                     <p>
                         <button class="btn btn-outline-danger btn-sm mt-0" type="button" data-bs-toggle="collapse"
                             data-bs-target="#collapseWidthExample" aria-expanded="false"
@@ -164,7 +183,7 @@
                                 <!-- Form for add reviews. -->
                                 <form action="/listing/<%= list._id %>/review" method="post" novalidate class="needs-validation">
                                     <div>
-                                        <label for="rating" class="form-label bold2">Rating:</label>
+                                        <label for="rating" class="form-label bold2"><b>Rating:</b></label>
                                         <fieldset class="starability-grow">
                                             
                                             <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
@@ -189,7 +208,7 @@
                                       </div>
 
                                     <div>
-                                        <label for="comment" class="form-label bold2">Comments:</label>
+                                        <label for="comment" class="form-label bold2"><b>Comments:</b></label>
                                         <textarea name="review[Comments]"
                                             class="form-control focus-ring focus-ring-secondary border rounded-1"
                                             id="comment" placeholder="Add some comments here..." rows="4" required></textarea>
@@ -203,45 +222,51 @@
                             </div>
                         </div>
                     </div>
-
-
-
                 <% } %>
                 <hr>
-                <div>
-                    <h4 class="mt-5"><b>All reviews</b></h4>
-                    <div class="row">
-                        <% for (let review of list.reviews) { %>
-                            <div class="card review-card col-lg-5 col-md-6 col-lg-4 me-3 mb-3 mt-3">
-                                <div class="card-body">
-                                    <div class="d-flex heading justify-content-between">
-                                        <h4 class="card-title"><img src="/user (1).png" alt=""><%= review.author.username %></h4>
-                                        <div>
-                                            <% if (currUser && currUser._id.equals(review.author._id)) { %>
-                                                <form method="post" action="/listing/<%= list._id %>/review/<%= review._id %>?_method=DELETE" class="text-center">
-                                                    <button type="submit" id="delted_btn"><i class="fa-solid trash fa-trash-can"></i></button>
-                                                </form>
-                                            <% } %>
+
+                <!-- All Reviews -->
+                <!-- SHow Reviews -->
+                <% if (list.reviews.length > 0) { %>
+                    <div class="container">
+                        <h4 style="font-family: rakkas;">All Reviews</h4>
+                        <div class="row mt-4">
+                            <% for (review of list.reviews) { %>
+                                <div class="col-md-4 col-sm-6 col-xs-10 col-lg-3 mb-3">
+                                    <div class="card review-card  h-100">
+                                        <div class="card-body d-flex flex-column">
+                                            <div class="heading">
+                                                <h4 class="card-title"><img id="reviw_logo" src="/user (1).png" alt=""><%= review.author.username %> <span style="font-size: 10px;"> owner</span></h4>
+                                                <div>
+                                                    <% if (currUser && currUser._id.equals(review.author._id)) { %>
+                                                        <form method="post" action="/listing/<%= list._id %>/review/<%= review._id %>?_method=DELETE"><i class="fa-solid trash fa-trash-can"></i>
+                                                        </form>
+                                                    <% } %>
+                                                </div>
+                                            </div>
+                                            <p class="card-text mt-2">
+                                                <% for (let i = 1; i <= 5; i++) { %>
+                                                    <% if (i <= review.rating) { %>
+                                                        <i class="fa-solid fa-star star"></i>
+                                                    <% } else { %>
+                                                        <i class="fa-regular fa-star star"></i>
+                                                    <% } %>
+                                                <% } %>                                        
+                                            </p>
+                                            <p class="card-text flex-grow-1">
+                                                <%= review.Comments %>
+                                            </p>
+                                            <small class="text-muted">
+                                                Verified by <b>Wanderlust</b>
+                                            </small>
                                         </div>
                                     </div>
-
-                                    <p class="card-text">
-                                        <% for (let i = 1; i <= 5; i++) { %>
-                                            <% if (i <= review.rating) { %>
-                                                <i class="fa-solid fa-star star"></i>
-                                            <% } else { %>
-                                                <i class="fa-regular fa-star star"></i>
-                                            <% } %>
-                                        <% } %>                                        
-                                    </p>
-                                    <p class="review-text">
-                                        <%= review.Comments %>
-                                    </p>
                                 </div>
-                              
-                            </div>
-                        <% } %>
+                            <% } %>
+                        </div>
                     </div>
+                <% } %>
+                
                 </div>
             </div>
         </div>
