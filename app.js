@@ -195,7 +195,6 @@ app.route("/login")
       if(err) {
        return  next(err);
       }
-      
         req.flash("success","You logged out successfuly!");
         res.redirect("/listing");
       
