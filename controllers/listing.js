@@ -131,7 +131,7 @@ const mongoose = require('mongoose');
 module.exports.showPost = async (req, res) => {
     try {
         const { id } = req.params;
-        
+
         // Validate if 'id' is a valid ObjectId
         if (!mongoose.Types.ObjectId.isValid(id)) {
             req.flash('error', 'Invalid listing ID');
@@ -148,17 +148,23 @@ module.exports.showPost = async (req, res) => {
             .populate('owner');
 
         if (!list) {
-            req.flash('error', ERROR_LISTING_NOT_FOUND);
+            req.flash('error', 'Listing not found');
             return res.redirect('/listing');
         }
-        res.render('show.ejs', { list });
+
+        let userHasReviewed = false;
+        if (req.user) {
+            userHasReviewed = list.reviews.some(review => review.author._id.equals(req.user._id));
+        }
+
+        res.render('show.ejs', { list, userHasReviewed });
     } catch (err) {
         console.error("Error fetching listing:", err.message);
-        console.error("Stack trace:", err.stack);
-        req.flash("error", ERROR_LOAD_LISTING_DETAILS);
+        req.flash("error", "Could not load listing details");
         return res.redirect("/listing");
     }
 };
+
 
 
 module.exports.saveEditpost = async (req, res) => {
