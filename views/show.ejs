@@ -100,6 +100,61 @@
         height: 200px; 
     }
 }
+
+/* Form Container - Floating Effect */
+.dark-mode{
+    /* show listing */
+    h1, h2, h3, h4, p, .card-title {
+        color: #e0e0e0;
+    }
+
+    .card {
+        border: 1px solid #333;
+        box-shadow: -1px 4px 12px rgba(3, 3, 3, 0.4);
+    }
+
+    .listing-card {
+        background-color: #282828;
+    }
+
+    .show-img {
+        border: 1px solid #333;
+    }
+
+    /* REVIEW */
+    /* Input Fields Styling */
+    .review-form input {
+        background-color: #2c2c2c;
+        color: #ffffff;
+        border: 1px solid #555555;
+        transition: box-shadow 0.3s ease; /* Smooth hover transition for input */
+    }
+
+    .review-form input[type="text"]::placeholder{
+        color: #aaaaaa;
+        border: 1px solid #555555;
+        border-radius: 5px;
+        padding: 12px;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .review-form button[type="submit"] {
+        border: 2px solid #999;
+        color: #999;
+        background: #d4d4d4;
+    }
+    .review-form button[type="submit"]:hover {
+        color: #333;
+        border: none;
+        background: #fdfdfd;
+    }
+
+    .text-muted {
+    --bs-text-opacity: 1;
+    color:  #e0e0e0 !important;
+}
+}
 </style>
 
 <body class="mt-10">
@@ -130,7 +185,7 @@
                         </button>
                     </div>
                     <div class="card-body text-center">
-                        <h2 class="mt-5" style=" color: #022e6a; font-family: rakkas;">Owned by: <b><%= list.owner.username %></b></h2>
+                        <h2 class="mt-5" style="color: #5986c5; font-family: rakkas;">Owned by: <b><%= list.owner.username %></b></h2>
                         <b><%= list.description %></b>
                         <p class="listing-price"><b>price:</b>
                             &#8377;<%= list.price.toLocaleString("en-IN") %>/night
@@ -186,7 +241,7 @@
     
                                     <!-- Form for add reviews. -->
                                     <form action="/listing/<%= list._id %>/review" method="post" novalidate class="needs-validation">
-                                        <div>
+                                        <div class="review-form">
                                             <label for="rating" class="form-label bold2"><b>Rating:</b></label>
                                             <fieldset class="starability-grow">
                                                 
