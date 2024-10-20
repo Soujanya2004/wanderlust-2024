@@ -1,16 +1,9 @@
 body{
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    max-width: 100%;
     overflow-x: hidden;
-    background-color: rgb(242, 242, 242);
 }
 .navbar{
     height: 5rem;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif !important;
-    background-image: linear-gradient(#e8ecf5, #ffffff);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     padding: 0.5rem 1rem;
     position: relative;
     z-index: 10;
@@ -19,16 +12,9 @@ body{
 /* Logo Icon Styles */
 .fa-plane {
     color: #ff385c;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 2px 8px rgba(83, 9, 9, 0.3);
     transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
     cursor: pointer;
-}
-
-/* Darker Hover Effect for the Plane Icon */
-.fa-plane:hover {
-    color: #e12d4b;
-    transform: scale(1.1);
-    text-shadow: 0 6px 14px rgba(0, 0, 0, 0.5);
 }
 
 /* brand */
@@ -37,12 +23,6 @@ body{
     font-weight: bold;
     margin-left: 10px;
     margin-right: 20px;
-}
-
-#explore:hover {
-    cursor: pointer;
-    color: rgb(255, 87, 34);
-    transition: color 0.3s ease;
 }
 
 .nav-link{
@@ -69,8 +49,6 @@ body{
     margin-left: 3px;
     line-height: 2rem;
     border-radius: 10px;
-    background-color: #fafafa;
-    border: 1px solid #ced4da;
     padding-left: 10px;
   }
 
@@ -81,10 +59,6 @@ body{
     border-radius: 10px;
     padding: 6px 10px;
     border: .5px solid rgb(209, 209, 209);
-  }
-
-  .search-bar button:hover {
-    background-color: #db5168f1;
   }
   
   .search-bar button i {
@@ -98,28 +72,6 @@ body{
     transition: color 0.3s ease;
   }
 
-  .navbar-nav .nav-link:hover {
-    color: #000000;
-  }
-
-  /* Explore link hover effect */
-  #explore:hover {
-    color:rgb(255, 87, 34);
-    transition: color 0.3s ease;
-  }
-
-@media (max-width: 991px) {
-    .navbar-collapse {
-        background-color: white;
-        transition: background-color 0.3s ease;
-        position: relative;
-        top: 2rem;
-        width: 100%;
-    }
-    .search-bar input {
-        margin-left:3.5rem;
-      }
-}
 
 /* ////////////////////////////////////// */
  /* FOOTER SECTION */
@@ -144,16 +96,16 @@ footer {
 .footer-left .brand h2 {
   font-size: 50px;
   font-family: Reggae One;
-  color: #333;
   font-weight: bold;
   margin-bottom: 10px;
 }
 
+
 .footer-left .brand p {
   font-size: 20px;
-  color: #666;
   margin-bottom: 20px;
 }
+
 
 .footer-left .contact-info .email,
 .footer-left .contact-info .phone {
@@ -164,16 +116,13 @@ footer {
 .footer-left .contact-info i {
   margin-right: 10px;
   font-size: 30px;
-  color: #007bff;
 }
 
 .footer-left .contact-info p {
   font-size: 17px;
-  color: #666;
 }
 
 .footer-left .contact-info p a {
-  color: #007bff;
   text-decoration: none;
   font-weight: bold;
 }
@@ -205,7 +154,6 @@ footer {
 .footer-middle ul li a,
 .footer-right ul li a {
   font-size: 14px;
-  color: #666;
   text-decoration: none;
 }
 
@@ -217,7 +165,6 @@ footer {
 
 .footer-right h3 {
   font-size: 18px;
-  color: #333;
   margin-bottom: 10px;
 }
 
@@ -228,13 +175,9 @@ footer {
 .footer-right .social-media a {
   margin-right: 10px;
   font-size: 24px;
-  color: #007bff;
   transition: color 0.3s;
 }
 
-.footer-right .social-media a:hover {
-  color: #0056b3;
-}
 
 .copyright {
   display: block;
@@ -248,10 +191,9 @@ footer {
 
 .copyright p {
   font-size: 14px;
-  color: #666;
 }
 
-
+/* listing cards */
 .listing-card{
     border: none !important;
     margin-bottom: 2.5rem !important;
@@ -270,7 +212,6 @@ footer {
 }
 .card-img-overlay:hover{
     opacity: 0.19;
-    background-color: rgb(255, 255, 255);
     border-radius: 1.2rem!important;
 }
 .show{
@@ -280,9 +221,8 @@ footer {
     height: 60vh;
     width: 100%;
 }
-.card-body{
-    padding: 0 !important;
-   
+.card-body {
+  padding: 15px 10px !important;
 }
 .card-img-top{
     border-radius: 1rem!important;
@@ -292,7 +232,6 @@ footer {
 .card-text{
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
     font-weight: 200 !important;
-    color: black;
 }
 
 .alert {
@@ -336,21 +275,17 @@ footer {
   margin: 0px 5px;
   padding: 20px;
   border-radius: 10px;
-  background-color: #ffffff;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
 .faq-left h2 {
   font-size: 2em;
   font-family: rakkas;
   font-weight: bolder;
-  color: #333;
   margin-bottom: 20px;
 }
 
 .faq-left p {
   font-size: 1.1rem;
-  color: #666;
   margin-bottom: 20px;
 }
 
@@ -364,7 +299,6 @@ footer {
   align-items: center;
   font-size: 1rem;
   font-weight: 700;
-  color: #333;
 }
 
 .faq-left .contact-info span i {
@@ -386,27 +320,19 @@ footer {
   padding: 20px 25px;
   margin: 0px 5px;
   border-radius: 10px;
-  background-color: #ffffff;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  /* overflow: hidden; */
 }
 
 .faq-item {
   margin-bottom: 20px;
   padding: 15px;
   border-radius: 8px;
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  background-color: #f6f6f6;
   transition: box-shadow 0.3s ease;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }
 
 .faq-item h3 {
   font-size: 1rem;
   font-weight: bold;
-  color: #333;
   margin-bottom: 5px;
   display: flex;
   justify-content: space-between;
@@ -421,7 +347,6 @@ footer {
 }
 
 .faq-item .faq-answer p {
-  font-size: .9rem;
   color: #666;
 }
 
@@ -460,3 +385,169 @@ footer {
 }
 }
  
+
+/* DARKMODE TOGGLER */
+.dark-mode {
+  background-color: #1d1d1d;
+}
+
+/* Toggle button container */
+.toggle-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+
+}
+.toggle-container button{
+  background-color: transparent;
+}
+
+/* Toggle button styles */
+.dark-mode-toggle {
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Hover effect for the button */
+.dark-mode-toggle i:hover {
+  transform: scale(1.07);
+}
+
+/* Toggle icon styling */
+#toggleIcon {
+  font-size: 30px;
+  color: #f0f0f0; /* Moon icon color for dark mode */
+  transition: transform 0.5s ease, color 0.5s ease;
+}
+
+/* Sun color for light mode */
+body:not(.dark-mode) #toggleIcon {
+  color: #f39c12;
+}
+
+/* Dark mode icon color */
+.dark-mode #toggleIcon {
+  color: #f0f0f0; /* Moon icon color for dark mode */
+}
+
+
+/* SLIDING BAR */
+/* Hide scrollbar while still allowing horizontal scrolling */
+#filters {
+  display: flex;
+  overflow-x: auto; /* Allow horizontal scrolling */
+  padding: 10px;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+#filters::-webkit-scrollbar {
+display: none; /* Hide scrollbar */
+}
+
+.filter {
+flex: 0 0 auto; /* Ensure items don't shrink or grow */
+width: 100px;
+margin-right: 15px;
+margin-top: 12px;
+border-radius: 10px;
+text-align: center;
+padding: 10px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+transition: transform 0.3s ease;
+}
+
+.filter i {
+font-size: 20px;
+margin-bottom: 10px;
+}
+
+.filter p {
+margin: 0;
+font-size: 14px;
+}
+
+.filter:hover {
+transform: scale(1.1);
+cursor: pointer;
+}
+
+/* Scroll buttons */
+.scroll-btn {
+position: absolute;
+top: 21%;
+transform: translateY(-50%);
+background-color: transparent;
+border: none;
+padding: 10px;
+cursor: pointer;
+z-index: 1000;
+}
+
+.scroll-btn i{
+opacity: .5;
+transition: color 0.3s ease;
+transform: scale(1.1);
+
+}
+
+.scroll-btn i:hover{
+opacity: 1;
+transition: color 0.3s ease;
+transform: scale(1.1);
+}
+
+.scroll-btn.left {
+left: 10px;
+}
+
+.scroll-btn.right {
+right: 10px;
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+#filters {
+  padding: 5px;
+}
+.filter {
+  margin-top: 10px;
+  width: 80px;
+  height: 80px;
+  margin-right: 10px;
+}
+
+.filter i {
+  font-size: 20px;
+}
+
+.filter p {
+  font-size: 12px;
+}
+.scroll-btn {
+  top: 19%;
+}
+}
+
+@media (max-width: 480px) {
+.filter {
+  width: 70px;
+  height: 70px;
+  margin-right: 8px;
+}
+
+.filter i {
+  font-size: 18px;
+}
+
+.filter p {
+  font-size: 11px;
+}
+}

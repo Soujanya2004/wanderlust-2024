@@ -1,0 +1,191 @@
+/* DARKMODE TOGGLER */
+.dark-mode{
+    .navbar{
+        background-image: linear-gradient(#000000, #1d1d1d);
+    }
+     .fa-plane:hover {
+        color: #e12d4b;
+        transform: scale(1.1);
+        text-shadow: 0 6px 14px rgba(255, 255, 255, 0.5);
+    }
+    
+     .navbar-brand, .nav-link {
+      color: #ffffff;
+    }
+
+    .navbar-toggler {
+        background-color: #495057;
+    }
+    .search-form input {
+        background-color: #343a40;
+        color: #ffffff;
+    }
+    .search-form input::placeholder {
+        color: #b0b3b8;
+    }
+
+    .search-form button {
+        background-color: #495057;
+        color: #ffffff;
+        border: none;
+    }
+
+    .nav-link:hover {
+        color: #e12d4b;
+    }
+
+    @media (max-width: 991px) {
+        .navbar-collapse {
+            background-color: #1d1d1d;
+            transition: background-color 0.3s ease;
+            position: relative;
+            top: 2rem;
+            width: 100%;
+        }
+        .search-bar input {
+            margin-left:3.5rem;
+          }
+    }
+
+    /* SLIDING BAR css */
+
+    .card {
+        background-color: #202122;
+        color: #ffffff;
+        cursor: pointer;
+        border-radius: 15px;
+    }
+    .card-body {
+        color: #ffffff;
+    }
+    .card-title {
+        color: #ffffff;
+    }
+    .card-subtitle {
+        color: #ffffff;
+    }
+    .card-text {
+        color: #ffffff;
+    }
+    .card-body .btn-dark{
+        background-color: #ffffff;
+        color: #1d1d1d;
+    }
+    .card-body .btn-dark:hover{
+        color: #000000;
+    }
+
+    /* FAQ SECTION css*/
+    .faq-left {
+        color: #ffffff;
+        border: 1px solid #5c5c5c;
+        background-color: #272727;
+    }
+    .faq-right {
+        border: 1px solid #5c5c5c;
+        background-color: #272727;
+        color: #ffffff;
+    }
+    .faq-item {
+        border-top: 1px solid #5c5c5c;
+        border-bottom: 1px solid #5c5c5c;
+        background-color: #272727;
+        color: #ffffff;
+    }
+    .faq-item:hover {
+        background-color: #495057;
+        color: #ffffff;
+    }
+    .faq-item h5 {
+        color: #ffffff;
+    }
+    .faq-item p {
+        color: #ffffff;
+    }
+    
+    /* Review section */
+    .review-section {
+        background-color: #343a40;
+        color: #ffffff;
+    }
+    .review-item {
+        background-color: #343a40;
+        color: #ffffff;
+    }
+    .review-item:hover{
+        background-color: #495057;
+        color: #ffffff;
+        transform: scale(1.1);
+        text-shadow: 0 6px 14px rgba(255, 255, 255, 0.5);
+        transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+        box-shadow: 0 6px 14px rgba(255, 255, 255, 0.5);
+        transition: transform 0.3s ease-in-out, color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        box-shadow: 0 6px 14px rgba(255, 255, 255, 0.5);
+    }
+    
+
+    /* Footer sectionn */
+    footer {
+        background-color: transparent;
+        color: #ffffff;
+    }
+    footer p {
+        color: #ffffff;
+    }
+    .footer-left .contact-info i {
+        color: #007bff;
+    }
+    footer a {
+        color: #007bff;
+    }
+    footer a:hover {
+        color: #007bff;
+    }
+
+    .company-links h3{
+        color: #f7f7f7;
+    }
+    .company-links ul li a{
+        color: #dddddd;
+    }
+    
+    .company-links ul li a:hover{
+        color: #fafafa;
+        text-decoration: underline;
+        transition: color 0.3s ease-in-out;
+    }
+
+    .footer-right h3{
+        color: #f7f7f7;
+    }
+
+    .social-media a {
+        color: #ffffff;
+    }
+
+    .social-media a:hover {
+        color: #ffffff;
+        transform: scale(1.1);
+    }  
+
+
+    
+      /* SLIDING BAR */
+      .filter {
+        background-color: #202122;
+        color: #ffffff;
+        }
+        .filter i {
+            color: #ffffff;
+        }
+        .filter p {
+            color: #ffffff;
+        }
+        .scroll-btn i{
+            color: #ffffff;
+            text-shadow: .5px 0px 1px rgb(179, 179, 179);
+        }
+        .scroll-btn i:hover{
+            text-shadow: .5px 0px 1px rgb(179, 179, 179);
+        }
+}
