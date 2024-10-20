@@ -1,11 +1,148 @@
 <%- layout("/layouts/boilerplate") -%>
+
+<style>
+    /* Dark Theme for the Contributor Page */
+    .dark-mode {
+        .contributor-container {
+            color: #f1f1f1;
+            background-color: #1e1e1e;
+        }
+        .contributor-hero {
+            background-color: #2a2a2a;
+            color: #f1f1f1;
+        }
+        .contributor-hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #cccccc;
+        }   
+        .contributor-btn-primary {
+            background-color: #ff7f50;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .contributor-btn-primary:hover {
+            background-color: #e06c3b;
+        }
+        .contributor-stats-grid div {
+            background-color: #2b2b2b;
+            text-align: center;
+            color: #f1f1f1;
+        }
+        
+        .contributor-stats-grid p {
+            color: #cccccc;
+        }
+        .contributor-contributor-card{
+            background-color: #2b2b2b;
+            color: #f1f1f1;
+        }
+        .contributor-contributor-card p{
+            color: #f1f1f1;
+        }
+        .contributor-contributions{
+            color: #3e3e3e;
+        }
+        .contributor-footer svg{
+            color: #646464;        
+        }
+
+        /* Dark Mode for the Footer */
+       /* Dark Theme - Contribute Section */
+        .contributor-cta {
+            background-color: #2b2b2b;
+            padding: 3rem;
+            text-align: center;
+            color: #f1f1f1;
+        }
+
+        .contributor-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .contributor-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #cccccc;
+        }
+
+        /* Input Field Styling */
+        #subscribeForm {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        #emailInput {
+            padding: 10px;
+            width: 60%;
+            margin-right: 10px;
+            border: 2px solid #555555;
+            background-color: #2c2c2c;
+            color: #ffffff;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        #emailInput::placeholder {
+            color: #aaaaaa;
+        }
+
+        #subscribeForm button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #ff7f50;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #subscribeForm button:hover {
+            background-color: #e06c3b;
+        }
+
+        /* Notification Styling */
+        .contributor-notification {
+            background-color: #ff7f50;
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: none;
+            font-size: 1rem;
+        }
+
+        .contributor-notification.contributor-hidden {
+            display: none;
+        }
+
+        .contributor-notification.contributor-show {
+            display: block;
+        }
+
+
+    }
+</style>
+
 <div class="contributor-container">
     <!-- Hero Section -->
     <section class="contributor-hero">
         <div class="contributor-hero-content">
             <h1>Welcome to wanderlust-2024  </h1>
             <p>Empowering writers, one commit at a time</p>
-            <button class="contributor-btn contributor-btn-primary" onclick="scrollToContribute()">Become a Contributor</button>
+            <!-- <button class="contributor-btn contributor-btn-primary" onclick="scrollToContribute()">Become a Contributor</button> -->
+             <a class="btn btn-outline-danger" href="https://github.com/Soujanya2004/wanderlust-2024">Become a Contributor</a>
         </div>
     </section>
 
