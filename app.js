@@ -134,6 +134,17 @@ app.get('/privacy',asyncwrap ( async (req, res) => {
   }
 }));
 
+//CONTRIBUTORS
+app.get('/contributors',asyncwrap(async (req, res) => {
+  try {
+      res.render("contributors.ejs");
+  } catch (err) {
+      console.error("Error fetching contributors:", err);
+      req.flash("error", err);
+      return res.redirect("/listing");
+  }
+}));
+
   //API
   //signup
   app.get("/signup",asyncwrap (async(req,res) => {
