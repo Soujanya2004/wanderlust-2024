@@ -1,58 +1,11 @@
 <% layout("/layouts/boilerplate") %>
 <br>
 <br>
-<style>
-/* Form Container - Floating Effect */
-.dark-mode{
-    .form_body {
-        background-color: #1e1e1e;
-        border-radius: 10px;
-        padding: 30px;
-        box-shadow: 0 7px 15px rgba(0, 0, 0, 0.5); /* Initial shadow to lift form */
-        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover transition */
-    }
-
-    .form_body:hover {
-        transform: translateY(-5px); /* Moves the form upward */
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8); /* Increases shadow to create more depth */
-    }
-
-    /* Input Fields Styling */
-    .login_form input[type="text"], input[type="password"] {
-        background-color: #2c2c2c;
-        color: #ffffff;
-        border: 1px solid #555555;
-        transition: box-shadow 0.3s ease; /* Smooth hover transition for input */
-    }
-
-    .login_form input[type="text"]::placeholder,
-    .login_form input[type="password"]::placeholder {
-        color: #aaaaaa;
-        border: 1px solid #555555;
-        border-radius: 5px;
-        padding: 12px;
-        width: 100%;
-        margin-top: 10px;
-    }
-
-    .login_form button[type="submit"] {
-        border: 2px solid #999;
-        color: #999;
-    }
-    .login_form button[type="submit"]:hover {
-        color: #333;
-        border: none;
-        background: #999;
-    }
-
-
-}
-</style>
 
 <div class="row">
-    <div class="col-6 offset-3 form_body">
+    <div class="col-6 offset-3">
         <form method="POST" action="/login" novalidate class="needs-validation">
-            <div class="mb-3 login_form">
+            <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
                 <br>
                 <input type="text" name="username" placeholder="Username" class="form-control" required>
@@ -61,7 +14,7 @@
                     Username not found
                </div>
             </div>
-            <div class="mb-3 login_form">
+            <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
                 <br>
                 <input type="password" name="password" placeholder="Password"  class="form-control" required>
@@ -71,7 +24,7 @@
               </div>
               <br>
               
-                <button class="btn col-6 offset-3" name="saveButton" type="submit">LOGIN</button>
+                <button class="btn offset-6" name="saveButton" type="submit">LOGIN</button>
             </div>
         </form>
         
