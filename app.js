@@ -202,6 +202,14 @@ app.route("/login")
     })
 });
 
+//profile page
+// GET: Display Profile Page
+app.get('/profile', isLoggedIn,asyncwrap( async (req, res) => {
+  const user = await User.findById(req.user._id);
+  res.render('profile', { user });
+}));
+
+
 //define listing conroller
 //BUG FIX
 const listingController = require('./controllers/listing.js');

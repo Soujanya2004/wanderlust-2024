@@ -1,0 +1,116 @@
+<%- layout("/layouts/boilerplate") -%>
+<style>
+    .profile-container {
+        max-width: 800px;
+        margin: 3rem auto;
+        padding: 2rem;
+        background-color: #ffffff;
+        border-radius: 15px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        font-size: 2rem;
+        text-align: center;
+        margin-bottom: 2rem;
+        color: #2c3e50;
+    }
+
+    .profile-card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 2rem;
+        background-color: #f7f7f7;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease;
+    }
+
+    .profile-card:hover {
+        transform: scale(1.02);
+    }
+
+    .profile-picture img {
+        border-radius: 50%;
+        width: 160px;
+        height: 160px;
+        object-fit: cover;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .profile-details {
+        flex: 1;
+        margin-left: 2.5rem;
+    }
+
+    .profile-details p {
+        font-size: 1.2rem;
+        margin: 0.5rem 0;
+    }
+
+    .profile-details strong {
+        color: #34495e;
+    }
+
+    .edit-profile-container {
+        margin-top: 1rem;
+        text-align: center;
+    }
+
+    /* Profile Picture Upload Styling */
+    .upload-container {
+        margin-top: 1.5rem;
+        text-align: center;
+    }
+
+    .upload-container input[type="file"] {
+        display: none;
+    }
+
+    .upload-container label {
+        font-size: 1rem;
+        color: #ffffff;
+        background-color: #e63f22;
+        padding: 0.75rem 1.5rem;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+</style>
+
+<div class="profile-container">
+    <h1>Welcome, <%= user.username %>!</h1>
+
+    <div class="profile-card">
+        <div class="profile-picture">
+            <div>
+                <% if (user.profileImage) { %>
+                    <img src="<%= user.profileImage %>" alt="Profile Image">
+                <% } else { %>
+                    <img src="../profile.png" alt="Default Profile Image">
+                <% } %>
+            </div>
+            <div class="upload-container">
+                <form action="/profile/upload" method="POST" enctype="multipart/form-data">
+                    <input type="file" id="profilePic" name="profilePic">
+                    <label for="profilePic">Upload Profile pic</label>
+                </form>
+            </div>
+        </div>
+
+        <div class="profile-details">
+            <p><strong>Username:</strong> <%= user.username %></p>
+            <p><strong>Email ID:</strong> <%= user.email %></p>
+
+            <a class="btn btn-outline-primary" href="/profile/edit" class="btn">Edit Profile</a>
+
+            <!-- Profile Picture Upload Feature -->
+            
+        </div>
+    </div>
+
+    <div class="edit-profile-container">
+        <a class="btn btn-outline-primary" href="/profile/edit">Edit Your Details</a>
+    </div>
+</div>
