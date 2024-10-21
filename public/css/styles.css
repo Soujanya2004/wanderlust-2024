@@ -586,7 +586,7 @@ right: 10px;
   }
 }
 
-/* Form Styles */
+
 .enhanced-form {
   background-color: #fff;
   padding: 2rem;
@@ -609,7 +609,7 @@ right: 10px;
   padding: 10px 0;
   outline: none;
   background: transparent;
-  transition: border-bottom 0.3s ease;
+  transition: border-bottom 0.4s ease;
 }
 
 .floating-input:focus {
@@ -693,7 +693,7 @@ right: 10px;
 .login-form {
   background-color: #fff;
   padding: 40px;
-  border-radius: 15px;
+  border-radius: 14px;
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
   animation: fadeInForm 0.8s ease-in-out;
 }
