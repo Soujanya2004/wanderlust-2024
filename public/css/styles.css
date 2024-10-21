@@ -551,3 +551,250 @@ right: 10px;
   font-size: 11px;
 }
 }
+
+/* signup styles */
+.animated-form {
+  animation: fadeInUp 1s ease-in-out forwards;
+  opacity: 0;
+}
+
+.animated-title {
+  animation: titleAnimation 1.2s ease-in-out forwards;
+  opacity: 0;
+}
+
+/* Keyframes for Animations */
+@keyframes fadeInUp {
+  from {
+      opacity: 0;
+      transform: translateY(30px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+@keyframes titleAnimation {
+  from {
+      opacity: 0;
+      transform: translateY(-30px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* Form Styles */
+.enhanced-form {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.form-label {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.floating-input {
+  border: none;
+  border-bottom: 2px solid #ccc;
+  width: 100%;
+  padding: 10px 0;
+  outline: none;
+  background: transparent;
+  transition: border-bottom 0.3s ease;
+}
+
+.floating-input:focus {
+  border-bottom: 2px solid #007bff;
+}
+
+.input-underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #007bff;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.floating-input:focus + .input-underline {
+  transform: scaleX(1);
+}
+
+.valid-feedback {
+  color: #28a745;
+  font-size: 0.9rem;
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+
+.floating-input:valid ~ .valid-feedback {
+  opacity: 1;
+}
+
+/* Button Animation */
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 30px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+}
+
+.eye-button {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #999;
+  font-size: 1.2rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.eye-button:hover {
+  color: #333;
+  transform: scale(1.1);
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .col-md-6 {
+      width: 90%;
+  }
+}
+
+/* login page styles */
+
+.login-form {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  animation: fadeInForm 0.8s ease-in-out;
+}
+
+/* Title Styling with Fade and Slide Animation */
+.login-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #3498db;
+  opacity: 0;
+  animation: slideInTitle 0.8s forwards;
+}
+
+/* Input Fields with Underline Animation */
+.styled-input {
+  border: none;
+  border-bottom: 2px solid #ddd;
+  background-color: transparent;
+  padding: 10px;
+  font-size: 1.1rem;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.styled-input:focus {
+  border-color: #3498db;
+  box-shadow: 0px 6px 15px rgba(52, 152, 219, 0.2);
+}
+
+.input-underline {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  height: 2px;
+  width: 0;
+  background-color: #3498db;
+  transition: width 0.4s ease;
+}
+
+.styled-input:focus ~ .input-underline {
+  width: 100%;
+}
+
+/* Floating Labels */
+.floating-label {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+  color: #888;
+  pointer-events: none;
+}
+
+.styled-input:focus ~ .floating-label,
+.styled-input:not(:placeholder-shown) ~ .floating-label {
+  top: 0;
+  font-size: 0.85rem;
+  color: #3498db;
+}
+
+/* Gradient Button with Hover Effects */
+.btn-gradient {
+  background: linear-gradient(135deg, #3498db, #2ecc71);
+  color: #fff;
+  border: none;
+  padding: 12px 0;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background 0.5s ease, transform 0.3s ease;
+  position: relative;
+}
+
+.btn-gradient:hover {
+  background: linear-gradient(135deg, #2ecc71, #3498db);
+  transform: translateY(-3px);
+  box-shadow: 0px 6px 15px rgba(52, 152, 219, 0.4);
+}
+
+/* Form Animation Effects */
+@keyframes fadeInForm {
+  from {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+@keyframes slideInTitle {
+  0% {
+      opacity: 0;
+      transform: translateY(-30px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}

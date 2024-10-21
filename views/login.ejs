@@ -1,32 +1,21 @@
 <% layout("/layouts/boilerplate") %>
-<br>
-<br>
-
-<div class="row">
-    <div class="col-6 offset-3">
-        <form method="POST" action="/login" novalidate class="needs-validation">
-            <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <br>
-                <input type="text" name="username" placeholder="Username" class="form-control" required>
-                
-                <div class="invalid-feedback">
-                    Username not found
-               </div>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h1 class="text-center mb-4 login-title">Login for Wanderlust</h1>
+        <form action="/login" method="post" novalidate class="needs-validation login-form">
+            <div class="mb-4 position-relative">
+                <label for="username" class="form-label floating-label">Username</label>
+                <input type="text" name="username" id="username" class="form-control styled-input" required>
+                <div class="input-underline"></div>
+                <div class="valid-feedback">Looks good!</div>
             </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <br>
-                <input type="password" name="password" placeholder="Password"  class="form-control" required>
-                
-               <div class="invalid-feedback">
-                   Password not found
-              </div>
-              <br>
-              
-                <button class="btn offset-6" name="saveButton" type="submit">LOGIN</button>
+            <div class="mb-4 position-relative">
+                <label for="password" class="form-label floating-label">Password</label>
+                <input type="password" name="password" id="password" class="form-control styled-input" required>
+                <div class="input-underline"></div>
+                <div class="valid-feedback">Valid password!</div>
             </div>
+            <button class="btn btn-gradient w-100">Login</button>
         </form>
-        
     </div>
 </div>

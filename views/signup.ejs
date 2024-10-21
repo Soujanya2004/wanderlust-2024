@@ -1,55 +1,46 @@
 <% layout("/layouts/boilerplate") %>
-<br>
-<br>
-<div class="row">
-    <div class="col-6 offset-3">
-        <form method="POST" action="/signup" novalidate class="needs-validation">
-            <div class="mb-3">
+
+<div class="row justify-content-center">
+    <div class="col-md-6 animated-form">
+        <h1 class="text-center mb-5 animated-title">Wanderlust Signup</h1>
+        <form action="/signup" method="post" novalidate class="needs-validation enhanced-form">
+            <div class="mb-4 position-relative">
                 <label for="username" class="form-label">Username</label>
-                <br>
-                <input type="text" name="username" placeholder="Username" class="form-control" required>
-                <div class="valid-feedback">
-                     looks great!
-                </div>
-                <div class="invalid-feedback">
-                    Please enter valid username
-               </div>
-               <label for="email" class="form-label">Email Id</label>
-                <br>
-                <input type="email" name="email" placeholder="Email"  class="form-control"required>
-                <div class="valid-feedback">
-                     looks great!
-                </div>
-                <div class="invalid-feedback">
-                    Please enter valid username
-               </div>
+                <input type="text" name="username" id="username" class="form-control floating-input" required>
+                <div class="input-underline"></div>
+                <div class="valid-feedback">Looks good!</div>
             </div>
-            <div class="mb-3">
+            <div class="mb-4 position-relative">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" name="email" id="email" class="form-control floating-input" required>
+                <div class="input-underline"></div>
+                <div class="valid-feedback">Valid email!</div>
+            </div>
+            <div class="mb-4 position-relative">
                 <label for="password" class="form-label">Password</label>
-                <br>
-                <input type="password" name="password" placeholder="Password"  class="form-control" required>
-                <div class="valid-feedback">
-                    looks great!
-               </div>
-               <div class="invalid-feedback">
-                   Please enter valid password
-              </div>
-              <br>
-              <div class="mb-3">
-                <label for="password" class="form-label">Confirm Password</label>
-                <br>
-                <input type="password" name="cnf-password" placeholder="Password"  class="form-control" required>
-                <div class="valid-feedback">
-                    looks great!
-               </div>
-               <div class="invalid-feedback">
-                   Passwords Should match
-              </div>
-              <br>
-              
-                <button class="btn offset-6" name="saveButton" type="submit">Signup</button>
+                <input type="password" name="password" id="password" class="form-control floating-input" required>
+                <div class="input-underline"></div>
+                <div class="valid-feedback">Valid password!</div>
+                <button type="button" class="eye-button" onclick="togglePasswordVisibility()">
+                    <i class="fa fa-eye"></i>
+                </button>
             </div>
+            <button class="btn btn-primary w-100">Sign Up</button>
         </form>
-        
     </div>
 </div>
+
+<script>
+    function togglePasswordVisibility() {
+        const passwordInput = document.getElementById('password');
+        const eyeButton = document.querySelector('.eye-button');
+
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            eyeButton.innerHTML = '<i class="fa fa-eye-slash"></i>';
+        } else {
+            passwordInput.type = 'password';
+            eyeButton.innerHTML = '<i class="fa fa-eye"></i>';
+        }
+    }
+</script>
