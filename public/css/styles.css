@@ -551,116 +551,44 @@ right: 10px;
   font-size: 11px;
 }
 }
+/* signup page styles */
 
-/* signup styles */
-.animated-form {
-  animation: fadeInUp 1s ease-in-out forwards;
-  opacity: 0;
-}
-
-.animated-title {
-  animation: titleAnimation 1.2s ease-in-out forwards;
-  opacity: 0;
-}
-
-/* Keyframes for Animations */
-@keyframes fadeInUp {
-  from {
-      opacity: 0;
-      transform: translateY(30px);
-  }
-  to {
-      opacity: 1;
-      transform: translateY(0);
-  }
-}
-
-@keyframes titleAnimation {
-  from {
-      opacity: 0;
-      transform: translateY(-30px);
-  }
-  to {
-      opacity: 1;
-      transform: translateY(0);
-  }
-}
-
-
-.enhanced-form {
-  background-color: #fff;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+h1 {
+  color: red;
 }
 
 .form-label {
-  font-size: 1.1rem;
-  font-weight: bold;
-  color: #333;
-  transition: color 0.3s ease;
+  color: red;
 }
 
 .floating-input {
+  background-color: transparent;
   border: none;
-  border-bottom: 2px solid #ccc;
+  border-bottom: 2px solid red;
+  color: red;
+  padding: 8px;
   width: 100%;
-  padding: 10px 0;
-  outline: none;
-  background: transparent;
-  transition: border-bottom 0.4s ease;
+  transition: border-bottom 0.3s ease;
 }
 
 .floating-input:focus {
-  border-bottom: 2px solid #007bff;
+  outline: none;
+  border-bottom: 2px solid white;
 }
 
 .input-underline {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 100%;
   height: 2px;
-  background-color: #007bff;
+  width: 100%;
+  background-color: white;
   transform: scaleX(0);
-  transform-origin: left;
   transition: transform 0.3s ease;
 }
 
-.floating-input:focus + .input-underline {
+.floating-input:focus ~ .input-underline {
   transform: scaleX(1);
-}
-
-.valid-feedback {
-  color: #28a745;
-  font-size: 0.9rem;
-  opacity: 0;
-  animation: fadeIn 0.5s forwards;
-}
-
-.floating-input:valid ~ .valid-feedback {
-  opacity: 1;
-}
-
-/* Button Animation */
-.btn-primary {
-  background-color: #007bff;
-  border: none;
-  padding: 0.8rem 1.5rem;
-  font-size: 1.1rem;
-  font-weight: bold;
-  border-radius: 30px;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.btn-primary:hover {
-  background-color: #0056b3;
-  transform: translateY(-2px);
-}
-
-.btn-primary:active {
-  transform: translateY(1px);
 }
 
 .eye-button {
@@ -668,133 +596,121 @@ right: 10px;
   right: 10px;
   top: 50%;
   transform: translateY(-50%);
-  background: none;
+  background: transparent;
   border: none;
+  color: red;
   cursor: pointer;
-  color: #999;
-  font-size: 1.2rem;
-  transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .eye-button:hover {
-  color: #333;
-  transform: scale(1.1);
+  color: white;
 }
 
-/* Media Queries */
-@media (max-width: 768px) {
-  .col-md-6 {
-      width: 90%;
-  }
-}
-
-/* login page styles */
-
-.login-form {
-  background-color: #fff;
-  padding: 40px;
-  border-radius: 14px;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-  animation: fadeInForm 0.8s ease-in-out;
-}
-
-/* Title Styling with Fade and Slide Animation */
-.login-title {
-  font-family: 'Poppins', sans-serif;
-  font-size: 2rem;
-  font-weight: 700;
-  color: #3498db;
-  opacity: 0;
-  animation: slideInTitle 0.8s forwards;
-}
-
-/* Input Fields with Underline Animation */
-.styled-input {
+/* Button Styles */
+.btn-primary {
+  background-color: red;
   border: none;
-  border-bottom: 2px solid #ddd;
-  background-color: transparent;
-  padding: 10px;
-  font-size: 1.1rem;
-  width: 100%;
-  outline: none;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.styled-input:focus {
-  border-color: #3498db;
-  box-shadow: 0px 6px 15px rgba(52, 152, 219, 0.2);
-}
-
-.input-underline {
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  height: 2px;
-  width: 0;
-  background-color: #3498db;
-  transition: width 0.4s ease;
-}
-
-.styled-input:focus ~ .input-underline {
-  width: 100%;
-}
-
-/* Floating Labels */
-.floating-label {
-  position: absolute;
-  top: 50%;
-  left: 10px;
-  transform: translateY(-50%);
-  transition: all 0.3s ease;
-  color: #888;
-  pointer-events: none;
-}
-
-.styled-input:focus ~ .floating-label,
-.styled-input:not(:placeholder-shown) ~ .floating-label {
-  top: 0;
-  font-size: 0.85rem;
-  color: #3498db;
-}
-
-/* Gradient Button with Hover Effects */
-.btn-gradient {
-  background: linear-gradient(135deg, #3498db, #2ecc71);
-  color: #fff;
-  border: none;
-  padding: 12px 0;
-  border-radius: 50px;
-  font-size: 1rem;
+  padding: 12px;
+  color: white;
   font-weight: bold;
-  transition: background 0.5s ease, transform 0.3s ease;
-  position: relative;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.btn-gradient:hover {
-  background: linear-gradient(135deg, #2ecc71, #3498db);
-  transform: translateY(-3px);
-  box-shadow: 0px 6px 15px rgba(52, 152, 219, 0.4);
+.btn-primary:hover {
+  background-color: white;
+  color: red;
+  transform: scale(1.05);
 }
 
-/* Form Animation Effects */
-@keyframes fadeInForm {
-  from {
-      opacity: 0;
-      transform: translateY(20px);
-  }
-  to {
-      opacity: 1;
-      transform: translateY(0);
-  }
+.animated-form {
+  background-color: white;
+  border: 2px solid red;
+  padding: 40px;
+  border-radius: 10px;
+  animation: fadeIn 1s ease;
 }
 
-@keyframes slideInTitle {
+/* Animations */
+@keyframes fadeIn {
   0% {
       opacity: 0;
-      transform: translateY(-30px);
+      transform: translateY(-20px);
   }
   100% {
       opacity: 1;
       transform: translateY(0);
   }
 }
+
+.animated-title {
+  animation: fadeTitle 1.5s ease;
+}
+
+@keyframes fadeTitle {
+  0% {
+      opacity: 0;
+      letter-spacing: -3px;
+  }
+  100% {
+      opacity: 1;
+      letter-spacing: normal;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .animated-form {
+      padding: 20px;
+  }
+}
+
+/* login page styles */
+
+
+.login-title {
+  color: #d9534f; /* Red color for the title */
+}
+
+.login-form {
+  background-color: #f8f9fa; /* Light background for the form */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.login-form:hover {
+  transform: scale(1.02); /* Scale effect on hover */
+}
+
+.form-control {
+  border: 2px solid #d9534f; /* Red border */
+  transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #a94442; /* Darker red on focus */
+  box-shadow: 0 0 5px rgba(217, 83, 79, 0.5); /* Focus shadow effect */
+}
+
+.btn-gradient {
+  background: linear-gradient(90deg, #d9534f, #c9302c); /* Gradient button */
+  color: white;
+  transition: background 0.3s ease;
+}
+
+.btn-gradient:hover {
+  background: linear-gradient(90deg, #c9302c, #d9534f); /* Reverse gradient on hover */
+}
+
+.input-underline {
+  height: 2px;
+  background: #d9534f; /* Red underline */
+  transition: width 0.3s ease;
+  width: 0;
+}
+
+.form-control:focus + .input-underline {
+  width: 100%; /* Expand underline on focus */
+}
+
