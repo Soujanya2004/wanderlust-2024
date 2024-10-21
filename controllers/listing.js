@@ -170,6 +170,19 @@ module.exports.saveEditpost = async (req, res) => {
             return res.redirect(`/listing/${id}`);
         }
 
+        // Extract location
+        let location = req.body.listing.location
+
+        // Forword geocodding.using mapbox SDK
+        const geoData = await geocodingClient.forwardGeocode({
+            query: location,
+            limit: 1
+        }).send();
+
+        // Extract updated geometry
+        let updatedGeometry = geoData.body.features[0].geometry;
+
+
         let editList = await listing.findById(id);
 
         if (req.files && req.files.length > 0) {
@@ -188,8 +201,9 @@ module.exports.saveEditpost = async (req, res) => {
         editList.title = req.body.listing.title;
         editList.description = req.body.listing.description;
         editList.price = req.body.listing.price;
-        editList.location = req.body.listing.location;
+        editList.location = location; // Pass new location
         editList.country = req.body.listing.country;
+        editList.geometry = updatedGeometry; // Save the GeoJSON object in geometry
 
         await editList.save();
 
