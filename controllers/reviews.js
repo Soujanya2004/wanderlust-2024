@@ -5,34 +5,41 @@ const {
     ERROR_LISTING_NOT_FOUND
 } = require('../constants.js');
 
-//add review
-module.exports.reviewPost = (async (req, res) => {
+module.exports.reviewPost = async (req, res) => {
     const { id } = req.params;
-    const list = await listing.findById(id);
+    const list = await listing.findById(id).populate('reviews');
 
-    try{
+    try {
         if (!list) {
-            req.flash('error', ERROR_LISTING_NOT_FOUND);
+            req.flash('error', 'Listing not found');
             return res.redirect('/listing');
         }
-    
+
+        // Check if the current user has already left a review
+        const existingReview = list.reviews.find(review => review.author.equals(req.user._id));
+
+        if (existingReview) {
+            req.flash('error', 'You have already left a review for this listing.');
+            return res.redirect(`/listing/${id}`);
+        }
+
+        // Proceed with adding the new review
         const newReview = new review(req.body.review);
         newReview.author = req.user._id;
-        console.log("author is", newReview.author);
         list.reviews.push(newReview);
-    
+
         await newReview.save();
         await list.save();
-        console.log(list)
-        req.flash('success', SUCCESS_REVIEW_ADDED);
+
+        req.flash('success', 'Review added successfully!');
         res.redirect(`/listing/${list.id}`);
-    }catch(e) {
+    } catch (e) {
         console.error(e);
-        req.flash('error', 'An error occurred while adding review.');
-        console.log(e);
-        // res.redirect(`/listing/${id}`);
+        req.flash('error', 'An error occurred while adding your review.');
+        res.redirect(`/listing/${id}`);
     }
-});
+};
+
 
 //delete a review
 module.exports.deleteReview =(async (req,res) =>{

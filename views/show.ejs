@@ -221,11 +221,14 @@
                 <h3 class="text-center" style="padding: 10px; font-family: rakkas;">Where you will be</h3>
                 <div id="map" style="width: 100%; height: 400px;"></div>
             </div>
+
             
             <!-- REVIEW -->
             <div class="container">
                 <% if (currUser) { %>
                     <% if (!currUser._id.equals(list.owner._id)) { %>
+                        <% if (!userHasReviewed) { %>  <!-- Check if the user hasn't already left a review -->
+                        <hr>
                         <p>
                             <button class="btn btn-outline-danger btn-sm mt-0" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapseWidthExample" aria-expanded="false"
@@ -233,54 +236,47 @@
                                 Leave a review
                             </button>
                         </p>
-    
+            
                         <div>
                             <div class="collapse" id="collapseWidthExample">
-                                <div
-                                    class="card listing-card card-body col-lg-11 col-md-8 col-sm-10 col-xs-10 offset-lg-3 offset-md-2 offset-sm-1">
-    
-                                    <!-- Form for add reviews. -->
+                                <div class="card listing-card card-body col-lg-11 col-md-8 col-sm-10 col-xs-10 offset-lg-3 offset-md-2 offset-sm-1">
+            
+                                    <!-- Form for adding reviews -->
                                     <form action="/listing/<%= list._id %>/review" method="post" novalidate class="needs-validation">
                                         <div class="review-form">
                                             <label for="rating" class="form-label bold2"><b>Rating:</b></label>
                                             <fieldset class="starability-grow">
-                                                
                                                 <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
-                                          
                                                 <input type="radio" id="rate1" name="review[rating]" value="1" />
                                                 <label for="rate1">1 star.</label>
-                                          
                                                 <input type="radio" id="rate2" name="review[rating]" value="2" />
                                                 <label for="rate2">2 stars.</label>
-                                          
                                                 <input type="radio" id="rate3" name="review[rating]" value="3" />
                                                 <label for="rate3">3 stars.</label>
-                                          
                                                 <input type="radio" id="rate4" name="review[rating]" value="4" />
                                                 <label for="rate4">4 stars.</label>
-                                          
                                                 <input type="radio" id="rate5" name="review[rating]" value="5" />
                                                 <label for="rate5">5 stars.</label>
-                                          
                                                 <span class="starability-focus-ring"></span>
-                                              </fieldset>
-                                          </div>
-    
+                                            </fieldset>
+                                        </div>
+            
                                         <div>
                                             <label for="comment" class="form-label bold2"><b>Comments:</b></label>
-                                            <textarea name="review[Comments]"
-                                                class="form-control focus-ring focus-ring-secondary border rounded-1"
-                                                id="comment" placeholder="Add some comments here..." rows="4" required></textarea>
+                                            <textarea name="review[Comments]" class="form-control focus-ring focus-ring-secondary border rounded-1" id="comment" placeholder="Add some comments here..." rows="4" required></textarea>
                                             <div class="invalid-feedback">Please add some comments for review!</div>
                                         </div>
-    
+            
                                         <button class="btn btn-outline-secondary btn-sm mt-4">Submit</button>
-    
                                     </form>
-    
+            
                                 </div>
                             </div>
                         </div>
+                    <% } else { %>
+                        <hr>
+                        <p class="text-muted">You have already left a review for this listing.</p>
+                    <% } %>
                     <% } %>
                 <% } %>
                 <hr>
