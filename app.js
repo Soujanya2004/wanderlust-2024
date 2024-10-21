@@ -195,12 +195,19 @@ app.route("/login")
       if(err) {
        return  next(err);
       }
-      
         req.flash("success","You logged out successfuly!");
         res.redirect("/listing");
       
     })
 });
+
+//profile page
+// GET: Display Profile Page
+app.get('/profile', isLoggedIn,asyncwrap( async (req, res) => {
+  const user = await User.findById(req.user._id);
+  res.render('profile', { user });
+}));
+
 
 //define listing conroller
 //BUG FIX
