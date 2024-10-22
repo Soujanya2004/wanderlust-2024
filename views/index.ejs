@@ -1,5 +1,7 @@
 <% layout("/layouts/boilerplate") %>
+<style>
 
+</style>
 <body>
   
     <div class="scrollBar">
@@ -66,10 +68,17 @@
             <img src="<%= listing.image[0].url %>" class="card-img-top" alt="listing_image" style="height: 20rem;" />
             <div class="card-body">
               <h5 class="card-title"><%= listing.title %></h5>
-              <p class="card-text"><i><%= listing.description %></i> 
+
+                <% if (listing.description.length < 100) { %>
+                  <p class="card-text"><i><%= listing.description %></i>              
+                <% } else if (listing.description.length > 100) {%>
+                  <p class="card-text desc"><i><%= listing.description.slice(0,70) %></i>              
+                <a class="btn btn-link" href="/listing/<%= listing._id %>">Show More</a>
+              <% } %> 
+
               <br>&#8377;<%= listing.price.toLocaleString("en-IN") %> / night</p>
               <p class="card-text">Location: <%= listing.location %>, <%= listing.country %></p>
-              <a href="/listing/<%= listing._id %>" class="btn btn-dark">Show in Detail</a>
+              <a href="/listing/<%= listing._id %>" class="btn btn-dark show_btn">Show in Detail</a>
             </div>
           </div>
         </div>
@@ -177,6 +186,30 @@ rightButton.addEventListener('click',scrollRight);
     item.addEventListener('click', () => {
         toggleFAQAnswer(item); // Toggle answer visibility
         hideOtherFAQAnswers(item); // Hide other answers
+    });
+  });
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const toggleDescriptionLinks = document.querySelectorAll('.toggle-description');
+    
+    toggleDescriptionLinks.forEach(link => {
+      link.addEventListener('click', function () {
+        const cardBody = this.closest('.card-body');
+        const shortDescription = cardBody.querySelector('.short-description');
+        const fullDescription = cardBody.querySelector('.full-description');
+        
+        // Toggle between short and full descriptions
+        if (fullDescription.classList.contains('d-none')) {
+          fullDescription.classList.remove('d-none');
+          shortDescription.classList.add('d-none');
+          this.textContent = "Show less";
+        } else {
+          fullDescription.classList.add('d-none');
+          shortDescription.classList.remove('d-none');
+          this.textContent = "Show more";
+        }
+      });
     });
   });
 </script>
