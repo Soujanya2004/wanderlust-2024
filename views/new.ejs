@@ -51,43 +51,55 @@
     <br>
     <div class="row">
         <div class="col-8 offset-2 form_body">
-            <form method="POST" action="/listing" enctype="multipart/form-data">
+            <form method="POST" action="/listing" enctype="multipart/form-data" novalidate class="needs-validation">
                 <div class="mb-3 listing_form">
                     <label for="title" class="form-label">Title</label>
                     <br>
                     <input name="listing[title]" class="form-control" placeholder="Enter title" required>
+                    <div class="invalid-feedback">Please add a title!</div>    
+                    <div class="valid-feedback">Looks good!</div>                    
+                </div>
+                <div class="mb-3 listing_form">
+                    <label for="description" class="form-label">Description</label>
+                    <br>
+                    <input name="listing[description]" class="form-control" placeholder="Enter description" required>
+                    <div class="invalid-feedback">Please add a description!</div>
+                    <div class="valid-feedback">Looks good!</div>
                 </div>
                 <div class="mb-3 listing_form">
                     <label for="images" class="form-label">Upload Images</label>
                     <br>
                     <!-- multiple file uploads -->
                     <input type="file" name="listing[image]" class="form-control" id="imageInput" multiple required>
+                    <div class="invalid-feedback">Please upload a image!</div>
+                    <div class="valid-feedback">Looks good!</div>
                 </div>
 
                 <!-- Image preview here -->
                 <div id="imagePreview" class="mb-3"></div>
 
-                <div class="mb-3 listing_form">
-                    <label for="description" class="form-label">Description</label>
-                    <br>
-                    <input name="listing[description]" class="form-control" placeholder="Enter description" required>
-                </div>
                 <div class="row">
                     <div class="mb-3 col-4 listing_form">
                         <label for="price" class="form-label">Price</label>
                         <br>
                         <input name="listing[price]" class="form-control" placeholder="Enter price" required>
+                        <div class="invalid-feedback">Please add a price!</div>
+                        <div class="valid-feedback">Looks good!</div>
                     </div>
                     <div class="mb-3 col-4 listing_form">
                         <label for="country" class="form-label">Country</label>
                         <br>
                         <input name="listing[country]" class="form-control" placeholder="Enter country" required>
+                        <div class="invalid-feedback">please enter a country name!</div>
+                        <div class="valid-feedback">Looks good!</div>
                     </div>
                 </div>
                 <div class="mb-3 listing_form">
                     <label for="location" class="form-label">Location</label>
                     <br>
                     <input name="listing[location]" class="form-control" placeholder="Enter location" required>
+                    <div class="invalid-feedback">Please enter a valid location!</div>
+                    <div class="valid-feedback">Looks good!</div>
                 </div>
                 <br><br>
                 <button class="btn btn-outline-danger offset-6" name="saveButton" type="submit">ADD</button>
