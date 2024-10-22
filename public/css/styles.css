@@ -195,7 +195,6 @@ footer {
 
 /* listing cards */
 .listing-card{
-    height: 550px !important;
     border: none !important;
     margin-bottom: 2.5rem !important;
     margin-left: 2rem !important;
@@ -228,21 +227,11 @@ footer {
     border-radius: 1rem!important;
     width: 100% !important;
     object-fit: cover !important;
-    height: 13rem !important;
 }
 .card-text{
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
     font-weight: 200 !important;
 }
-.dsc{
-  height: 1rem !important;
-}
-
-.show_btn{
-  position: absolute;
-  bottom: 1.2rem !important;
-}
-
 
 
 .alert {
