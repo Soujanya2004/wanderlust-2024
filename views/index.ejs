@@ -178,30 +178,29 @@ rightButton.addEventListener('click',scrollRight);
 
 </script>
 <script>
-  // Function to toggle FAQ answer visibility
-  function toggleFAQAnswer(faqItem) {
-      const faqAnswer = faqItem.querySelector('.faq-answer');
-      faqAnswer.style.display = (faqAnswer.style.display === 'block' ? 'none' : 'block');
-  }
-
-  // Function to hide all FAQ answers except the clicked one
-  function hideOtherFAQAnswers(clickedItem) {
-    const faqItems = document.querySelectorAll('.faq-item');
-    faqItems.forEach(item => {
-        if (item !== clickedItem) {
-            const faqAnswer = item.querySelector('.faq-answer');
-            faqAnswer.style.display = 'none';
-        }
-    });
-  }
-
-  // Add click event listener to each FAQ item
   document.querySelectorAll('.faq-item').forEach(item => {
     item.addEventListener('click', () => {
-        toggleFAQAnswer(item); // Toggle answer visibility
-        hideOtherFAQAnswers(item); // Hide other answers
+        const faqAnswer = item.querySelector('.faq-answer');
+
+        // Toggle current FAQ item
+        item.classList.toggle('open');
+
+        // If it's open, expand; otherwise, collapse
+        if (item.classList.contains('open')) {
+            faqAnswer.style.maxHeight = faqAnswer.scrollHeight + "px";
+        } else {
+            faqAnswer.style.maxHeight = 0;
+        }
+
+        // Hide other FAQ answers
+        document.querySelectorAll('.faq-item').forEach(otherItem => {
+            if (otherItem !== item && otherItem.classList.contains('open')) {
+                otherItem.classList.remove('open');
+                otherItem.querySelector('.faq-answer').style.maxHeight = 0;
+            }
+        });
     });
-  });
+});
 </script>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
