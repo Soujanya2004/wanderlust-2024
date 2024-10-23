@@ -115,7 +115,7 @@
 /* Form Container - Floating Effect */
 .dark-mode{
     /* show listing */
-    h1, h2, h3, h4, p, hr, .card-title {
+    h1, h2, h3, h4, p, hr, h6, .card-title {
         color: #e0e0e0;
     }
 
@@ -296,12 +296,18 @@
                     <% } %>
                     <% } %>
                 <% } %>
-                <hr>
+                
 
                 <!-- All Reviews -->
                 <!-- SHow Reviews -->
-                <% if (list.reviews.length > 0) { %>
+                
                     <div class="container">
+                        <hr>
+                        <% if (list.reviews.length == 0) { %>
+                            <h6>⭐ No review posted yet for this property.</h6>
+                            <hr>
+                        <% } %>
+                        <% if (list.reviews.length > 0) { %>
                         <h4>🌟 All Reviews</h4>
                         <div class="row mt-4">
                             <% for (review of list.reviews) { %>
