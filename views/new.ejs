@@ -64,6 +64,7 @@
                     <label for="description" class="form-label">Description</label>
                     <br>
                     <textarea name="listing[description]" class="form-control" cols="30" rows="5" placeholder="Enter description" required></textarea>
+                    <input name="listing[description]" class="form-control" placeholder="Enter description" required>
                     <div class="invalid-feedback">Please add a description!</div>
                     <div class="valid-feedback">Looks good!</div>
                 </div>
@@ -87,13 +88,7 @@
                         <div class="invalid-feedback">Please add a price!</div>
                         <div class="valid-feedback">Looks good!</div>
                     </div>
-                    <div class="mb-3 col-5 listing_form">
-                        <label for="location" class="form-label">Location</label>
-                        <br>
-                        <input name="listing[location]" class="form-control" placeholder="Enter location" required>
-                        <div class="invalid-feedback">Please enter a valid location!</div>
-                        <div class="valid-feedback">Looks good!</div>
-                    </div>
+               
                     <div class="mb-3 col-4 listing_form">
                         <label for="country" class="form-label">Country</label>
                         <br>
@@ -103,7 +98,15 @@
                     </div>
                 </div>
                 <br>
-                <button class="btn btn-outline-danger" name="saveButton" type="submit">ADD</button>
+                <div class="mb-3 listing_form">
+                    <label for="location" class="form-label">Location</label>
+                    <br>
+                    <input name="listing[location]" class="form-control" placeholder="Enter location" required>
+                    <div class="invalid-feedback">Please enter a valid location!</div>
+                    <div class="valid-feedback">Looks good!</div>
+                </div>
+                <br><br>
+                <button class="btn btn-outline-danger offset-6" name="saveButton" type="submit">ADD</button>
                 <br><br>
             </form>
         </div>
