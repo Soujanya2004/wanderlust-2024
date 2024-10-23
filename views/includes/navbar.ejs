@@ -15,7 +15,7 @@
     <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
       
       <!-- Left side navigation links -->
-      <ul class="navbar-nav ml-auto">
+      <ul class="navbar-nav ml-auto main-menues normal-nav">
         <li class="nav-item">
           <a class="nav-link" href="/listing/new">Airbnb ur Home</a>
         </li>
@@ -30,15 +30,89 @@
         </li>
       </ul>
 
+
+      <!-- Nav bar for mobile only -->
+      <div class="mobile-nav">
+        <ul>
+          <li class="nav-item">
+            <a class="nav-link" href="/listing/new">Airbnb ur Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#footer">Contact Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/listing/#faq">FAQs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/contributors">Our Contributors</a>
+          </li>
+
+          <% if(!currUser) {%> <!--If inside currUser have not any user data then show this-->
+          <li class="nav-item">
+            <a class="nav-link" href="/signup">Sign up</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Log in</a>
+          </li>
+          <% } %>
+
+          <% if(currUser) {%> <!--If inside currUser have any user data then show this-->
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/profile">Your profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">Log out</a>
+          </li>
+          <% } %>
+        </ul>
+
+      </div>
+
+
+
       <!-- Search bar in the middle -->
-      <div class="search-bar">
-        <form class="d-flex mx-3 search-form" action="/listing/search" method="post">
-          <input class="form-control me-2" type="search" name="query" placeholder="Search your Airbnb.." aria-label="Search">
+      <div class="input-group search-box">
+        <form class="d-flex mx-3" action="/listing/search" method="post">
+          <!-- <input class="form-control me-2" type="search" name="query" placeholder="Search your Airbnb.." aria-label="Search">
           <button class="btn btn-outline-secondary search" type="submit">
             <i class="fas fa-search"></i>Search
-          </button>
+          </button> -->
+          <input class="form-control me-2" type="search" name="query" placeholder="Search your Airbnb.." aria-label="Search" aria-describedby="button-addon2">
+          <button class="btn btn-outline-danger search" type="submit" id="button-addon2"><i class="fas fa-search"></i></button>
         </form>
       </div>
+      <div class="nav-link dropdown d-down flex normal-nav">
+        <a role="button" class="nav-link drop-button dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          <box-icon name='menu'></box-icon>
+          <% if(!currUser) {%>
+            <img src="/noprofilenav.png" alt="" class="nav-provile">
+          <% } %>
+
+          <% if(currUser) {%> 
+            <img src="/profilenav.png" alt="" class="nav-provile">
+          <% } %>
+          
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <% if(!currUser) {%>
+            <li class="nav-item drop">
+              <a class="nav-link" href="/login">Login</a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li class="nav-item drop">
+              <a class="nav-link" href="/signup">Signup</a>
+            </li>
+          <% } %>
+          <% if(currUser) {%>
+            <li class="nav-item drop"><a class="nav-link" href="/logout">Log Out</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li class="nav-item drop align"><a class="nav-link" href="/profile">Your profile</a><box-icon name='chevron-right'></box-icon></li>
+          <% } %>
+          
+        </ul>
+      </div>
+
       
       <!-- Right side (Authentication Links) -->
       <ul class="navbar-nav">

@@ -44,6 +44,10 @@ module.exports.newpost = async (req, res) => {
 
 module.exports.search = async (req, res) => {
     const { query } = req.body;
+    if(query.length === 0){
+        req.flash("error","Please enter something in search box for searching.");
+        return res.redirect("/listing");
+    }
     if (query && query.trim()) {
       const regex = new RegExp(query.trim(), 'i'); // Case-insensitive search
       const searchQuery = {
