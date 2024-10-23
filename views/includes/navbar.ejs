@@ -82,11 +82,6 @@
           <button class="btn btn-outline-danger search" type="submit" id="button-addon2"><i class="fas fa-search"></i></button>
         </form>
       </div>
-
-
-
-
-
       <div class="nav-link dropdown d-down flex normal-nav">
         <a role="button" class="nav-link drop-button dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
           <box-icon name='menu'></box-icon>
@@ -118,6 +113,29 @@
         </ul>
       </div>
 
+      
+      <!-- Right side (Authentication Links) -->
+      <ul class="navbar-nav">
+        <% if(currUser) { %> 
+          <div class="dropdown mt-2" style=" margin-left: 1rem">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa-sharp fa-solid fa-user"></i> 
+            </button>
+            <ul style="width: fit-content;" class="dropdown-menu">
+              <li><a class="btn" style="border: none;" href="/logout">Log Out</a></li>
+              <li><a class="btn" style="border: none;" href="/profile">Your profile</a></li>
+            </ul>
+          </div>
+        <% } %>
+        <% if(!currUser) { %>  
+          <li class="nav-item">
+            <a class="nav-link" href="/login" style="background-color: red;">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/signup">Signup</a>
+          </li>
+        <% } %>
+      </ul>
       <div class="toggle-container">
         <button id="darkModeToggle" class="dark-mode-toggle">
           <i id="toggleIcon" class="fa-solid fa-moon"></i> <!-- Default icon is the moon -->

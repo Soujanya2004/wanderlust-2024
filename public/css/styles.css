@@ -210,7 +210,6 @@ footer {
     
 }
 .card{
-    
     margin-left: 15px;
     margin-bottom: 40px !important;
     padding: 25px !important;
@@ -242,6 +241,7 @@ footer {
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
     font-weight: 200 !important;
 }
+
 
 .alert {
     position: relative;
