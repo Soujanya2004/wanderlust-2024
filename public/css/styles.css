@@ -352,7 +352,7 @@ footer {
 .faq-item .faq-answer {
   padding-left: 10px;
   margin-top: 10px;
-  display: none;
+  /* display: none; */
 }
 
 .faq-item .faq-answer p {
@@ -365,9 +365,28 @@ footer {
   vertical-align: middle;
 }
 
-.faq-item.active .faq-answer {
-  display: block;
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-out;
 }
+
+.faq-item.open .faq-answer {
+  max-height: 500px; /* Adjust this height based on expected content */
+}
+
+.faq-item h3 {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq-item.open h3 i {
+  transform: rotate(180deg);
+  transition: transform 0.3s ease;
+}
+
 @media (max-width: 768px) {
 .faq-container {
   flex-direction: column;
