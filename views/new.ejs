@@ -51,6 +51,7 @@
     <br>
     <div class="row">
         <div class="col-8 offset-2 form_body">
+            <h3 class="d-flex justify-content-center mt-2 heading">Add your property details</h3>
             <form method="POST" action="/listing" enctype="multipart/form-data" novalidate class="needs-validation">
                 <div class="mb-3 listing_form">
                     <label for="title" class="form-label">Title</label>
@@ -62,6 +63,7 @@
                 <div class="mb-3 listing_form">
                     <label for="description" class="form-label">Description</label>
                     <br>
+                    <textarea name="listing[description]" class="form-control" cols="30" rows="5" placeholder="Enter description" required></textarea>
                     <input name="listing[description]" class="form-control" placeholder="Enter description" required>
                     <div class="invalid-feedback">Please add a description!</div>
                     <div class="valid-feedback">Looks good!</div>
@@ -79,13 +81,14 @@
                 <div id="imagePreview" class="mb-3"></div>
 
                 <div class="row">
-                    <div class="mb-3 col-4 listing_form">
+                    <div class="mb-3 col-3 listing_form">
                         <label for="price" class="form-label">Price</label>
                         <br>
                         <input name="listing[price]" class="form-control" placeholder="Enter price" required>
                         <div class="invalid-feedback">Please add a price!</div>
                         <div class="valid-feedback">Looks good!</div>
                     </div>
+               
                     <div class="mb-3 col-4 listing_form">
                         <label for="country" class="form-label">Country</label>
                         <br>
@@ -94,6 +97,7 @@
                         <div class="valid-feedback">Looks good!</div>
                     </div>
                 </div>
+                <br>
                 <div class="mb-3 listing_form">
                     <label for="location" class="form-label">Location</label>
                     <br>
