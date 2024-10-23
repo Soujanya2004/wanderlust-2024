@@ -4,8 +4,8 @@ body{
 .navbar{
     height: 5rem;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif !important;
-    padding: 0.5rem 1rem;
-    position: relative;
+    /* padding: 0.5rem 0.5rem !important; */
+    position: absolute;
     z-index: 10;
 }
 
@@ -27,15 +27,18 @@ body{
 
 .nav-link{
     font-size: 1.1rem !important;
-    margin-left: 10px;
-    opacity: .8;
 }
 
-.nav-link:hover{
-    opacity: 1;
+.main-menues .nav-link{
+  margin: 0 0.3rem;
+}
+
+.main-menues .nav-link:hover{
+  color: #ff385c !important;
 }
 
   /* Styling the search bar inside the navbar */
+  
   .search-bar {
     display: flex;
     margin-right: 7rem;
@@ -70,6 +73,12 @@ body{
   /* Hover effects for the navbar links */
   .navbar-nav .nav-link {
     transition: color 0.3s ease;
+  }
+  .search-box{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-left: auto !important;
   }
 
 
@@ -510,6 +519,62 @@ left: 10px;
 
 .scroll-btn.right {
 right: 10px;
+}
+
+.mobile-nav{
+  display: none !important;
+}
+.drop-button{
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 1px solid rgb(138, 138, 138) !important;
+  padding: 0.3rem 1rem !important;
+  border-radius: 0.4rem;
+}
+.drop-button:hover{
+  box-shadow: 0 4px 5px rgba(3, 3, 3, 0.4);
+}
+.drop-button::after {
+  display: none !important;
+}
+.nav-provile{
+  height: 1.8rem;
+  margin-left: 0.6rem;
+}
+.drop{
+  padding: 0.5rem 1rem !important;
+}
+.align{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+}
+.main-menues{
+  width: 90%;
+}
+
+@media (max-width: 992px){
+  .normal-nav{
+    display: none !important;
+  }
+  .mobile-nav{
+    display: block !important;
+  }
+  .collapse{
+    margin: 0 !important;
+    padding: 0 0 1rem 0 !important;
+    /* border: 1px solid rgb(191, 191, 191) !important; */
+    box-shadow: -1px 4px 5px rgba(3, 3, 3, 0.4);
+  }
+  .mobile-nav ul {
+    list-style-type: none; /* Removes bullet points */
+    padding-left: 0.7rem; /* Removes any left padding */
+  }
+  .mobile-nav li {
+    margin-bottom: 10px; /* Adds some space between list items */
+  }
 }
 
 /* Media queries */
