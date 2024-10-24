@@ -27,7 +27,7 @@ Live Link: https://wanderlust-2024-tkqf.onrender.com/listing
 We welcome contributions to help improve **Wanderlust 2024**! 🚀 Here’s how you can get involved:
 
 1. **Fork the Repository** 🍴
-   - Navigate to the [Wanderlust 2024 GitHub page](https://github.com/your-username/Wanderlust-2024). 🌐
+   - Navigate to the [Wanderlust 2024 GitHub page](https://github.com/Soujanya2004/Wanderlust-2024). 🌐
    - Click on the Fork button in the top-right corner of the page to create a copy of the repository in your GitHub account. ➕
 
 2. **Clone Your Forked Repository** 🔄
