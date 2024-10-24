@@ -1,0 +1,57 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+    /* align image at ceter */
+    .not-found-back{
+        display: flex;
+        justify-content: center;
+        margin-top: 25px;
+    }
+
+    .not-found-image{
+        height: 200px;
+    }
+
+    .not-found-content{
+        text-align: center;
+    }
+
+    .not-found-content h1{
+        font-family: rakkas;
+    }
+
+    .dark-mode{
+        .not-found {
+            /* background-color: #1a1a1a; */
+            color: #f1f1f1;
+        }
+
+        .not-found-content h1 {
+            color: #ff385c;
+        }
+
+         .not-found-content p {
+            color: #f1f1f1;
+        }
+
+
+         .not-found-image {
+            filter: brightness(80%);
+        }
+
+    } 
+</style>
+
+
+<div class="not-found">
+    <div class="not-found-back">
+        <img class="not-found-image" src="404.png.png" alt="not-found-background">
+    </div>
+    <div class="not-found-content">
+        <h1>This page doesn’t exist</h1>
+        <p>Please check your URL or return to Wanderlust.</p>
+        <form action="/listing" method="get">
+            <button class="btn btn-outline-danger">Go To Homepage</button>
+        </form>
+    </div>
+</div>

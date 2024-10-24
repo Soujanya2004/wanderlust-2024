@@ -1,44 +1,120 @@
-<style>
-  .form{
-      height: 2.5rem;
-  }
-  .search-btn{
-    margin-top: 1.3rem;
-   
-  }
-  .form{
-    border-radius: 25px;
-  }
-</style>
-<nav class="navbar navbar-expand-lg bg-body-light border-bottom sticky-top">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/listing"><i class="fa fa-plane" aria-hidden="true"></i></a>
-    
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        
-        
-        <a class="nav-link" href="/listing">Explore</a>
-       </div>
-       <div class="search-btn ms-auto">
-        <form class="d-flex search-inp" role="search">
-          <input class="form-control me-2 form" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success form" type="submit">Search</button>
+ <!-- Updated Navbar with search form -->
+ <nav class="navbar navbar-expand-lg sticky-top">
+  <div class="container">
+    <!-- Brand and explore link on the left -->
+    <a class="navbar-brand" href="/listing"><i class="fa-solid fa-plane fa-rotate-by fa-2xl" style="--fa-rotate-angle: -39deg;"></i></a>
+    <a class="nav-link" id="explore" href="/listing">Explore</a>
+
+    <!-- Navbar Toggler for small screens -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar Collapse (links and form) -->
+    <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+      
+      <!-- Left side navigation links -->
+      <ul class="navbar-nav ml-auto main-menues normal-nav custom_nav">
+        <li class="nav-item">
+          <a class="nav-link" id="air_bnb" href="/listing/new">Airbnb ur Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#footer">Contact Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/listing/#faq">FAQs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/contributors">Our Contributors</a>
+        </li>
+      </ul>
+
+
+      <!-- Nav bar for mobile only -->
+      <div class="mobile-nav">
+        <ul>
+          <li class="nav-item">
+            <a class="nav-link" href="/listing/new">Airbnb ur Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#footer">Contact Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/listing/#faq">FAQs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/contributors">Our Contributors</a>
+          </li>
+
+          <% if(!currUser) {%> <!--If inside currUser have not any user data then show this-->
+          <li class="nav-item">
+            <a class="nav-link" href="/signup">Sign up</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Log in</a>
+          </li>
+          <% } %>
+
+          <% if(currUser) {%> <!--If inside currUser have any user data then show this-->
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/profile">Your profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">Log out</a>
+          </li>
+          <% } %>
+        </ul>
+
+      </div>
+
+
+
+      <!-- Search bar in the middle -->
+      <div class="input-group search-box">
+        <form class="d-flex mx-3" action="/listing/search" method="post">
+          <input class="form-control me-2" type="search" name="query" placeholder="Search your Airbnb.." aria-label="Search" aria-describedby="button-addon2">
+          <button class="btn btn-outline-danger search" type="submit" id="button-addon2"><i class="fas fa-search"></i></button>
         </form>
-       </div>
-       <div class="navbar-nav ms-auto">
-        <a class="nav-link" href="/new">Airbnb your place</a>
-        <%if(currUser) { %> 
-          <a class="name" href=""><i>Hello <%" "%><%=currUser.username%></i></a>
-          <a class="nav-link" href="/logout">Logout</a>
-          <%} %>
-        <%if(!currUser) { %>  
-          <a class="nav-link" href="/login"><b>Login</b></a>
-          <a class="nav-link" href="/signup"><b>Signup</b></a>
-        <%} %>
-        
-       </div>
+      </div>
+      <div class="nav-link dropdown d-down flex normal-nav">
+        <a role="button" class="nav-link drop-button dropdown-toggle tg" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="fa-solid fa-bars"></i>
+          <% if(!currUser) {%>
+            <img src="/noprofilenav.png" alt="" class="nav-provile">
+          <% } %>
+
+          <% if(currUser) {%> 
+            <img src="/profilenav.png" alt="" class="nav-provile">
+          <% } %>
+          
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end desk-drop">
+          <% if(!currUser) {%>
+            <li class="nav-item drop">
+              <a class="nav-link" href="/login">Login</a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li class="nav-item drop">
+              <a class="nav-link" href="/signup">Signup</a>
+            </li>
+          <% } %>
+          <% if(currUser) {%>
+            <li class="nav-item drop"><a class="nav-link" href="/logout">Log Out</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li class="nav-item drop align"><a class="nav-link" href="/profile">Your profile</a> &nbsp;&nbsp;&nbsp;<i class="fa-solid fa-angle-right"></i></li>
+          <% } %>
+          
+        </ul>
+      </div>
+
+      
+      <div class="toggle-container">
+        <button id="darkModeToggle" class="dark-mode-toggle">
+          <i id="toggleIcon" class="fa-solid fa-moon"></i> <!-- Default icon is the moon -->
+        </button>
+      </div>
     </div>
-    
   </div>
 </nav>

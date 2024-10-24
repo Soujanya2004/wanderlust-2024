@@ -1,0 +1,38 @@
+<!-- For success message flashing -->
+<% if(success && success.length){ %>
+
+    <button type="button" class="btn btn-primary" id="liveToastBtn" style="display:none;">Show live toast</button>
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-success bg-gradient text-white">
+                <strong class="me-auto">Success</strong>
+                <small>Just now</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body text-success">
+                <%= success %>
+            </div>
+        </div>
+    </div>
+
+<% } %>
+
+
+<!-- For error message flashing -->
+<% if(error && error.length){ %>
+
+    <button type="button" class="btn btn-primary" id="liveToastBtn" style="display:none;">Show live toast</button>
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-danger bg-gradient text-white">
+                <strong class="me-auto">Error</strong>
+                <small>Just now</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body text-danger">
+                <%= error %>
+            </div>
+        </div>
+    </div>
+
+<% } %>

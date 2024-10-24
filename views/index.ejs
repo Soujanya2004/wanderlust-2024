@@ -1,5 +1,6 @@
 <% layout("/layouts/boilerplate") %>
 <style>
+
   #filters {
     display: flex;
     flex-wrap: wrap;
@@ -13,12 +14,18 @@
     margin-left: 2rem;
     margin-top: 2rem;
     opacity: 0.7;
+  .card-img-top{
+    height: 13rem !important;
+
   }
-  .filter:hover {
-    opacity: 1;
-    cursor: pointer;
+  .dsc{
+    height: 1rem !important;
   }
-/* Card Container Styles */
+  .show_btn{
+    position: absolute;
+    bottom: 1.2rem !important;
+  }
+
 .listing-card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -78,49 +85,136 @@
 
 
 
-</style>
 
+
+
+</style>
 <body>
-  <div id="filters">
-    <div class="filter">
-      <div><i class="fa-solid fa-fire"></i></div>
-      <p>Trending</p>
+  
+    <div class="scrollBar">
+      <!-- Scroll Buttons -->
+      <button class="scroll-btn left" onclick="leftScroll()">
+        <i class="fas fa-angle-double-left"></i>
+      </button>
+  
+    <div id="filters">
+      <div class="filter">
+        <div><i class="fa-solid fa-fire"></i></div>
+        <p>Trending</p>
+      </div>
+      <div class="filter">
+        <div><i class="fa-solid fa-water"></i></div>
+        <p>Surfing</p>
+      </div>
+      <div class="filter">
+        <div><i class="fa-solid fa-city"></i></div>
+        <p>Amazing cities</p>
+      </div>
+      <div class="filter">
+        <div><i class="fa-solid fa-umbrella"></i></div>
+        <p>Beach</p>
+      </div>
+      <div class="filter">
+        <div><i class="fa-solid fa-cow"></i></div>
+        <p>Farms</p>
+      </div>
+      <div class="filter">
+        <div><i class="fa-solid fa-mountain"></i></div>
+        <p>Lake</p>
+      </div>
+      <div class="filter">
+        <div><i class="fa-solid fa-fort-awesome"></i></div>
+        <p>Castles</p>
+      </div>
+      <div class="filter">
+        <div><i class="fa-solid fa-bed"></i></div>
+        <p>Rooms</p>
+      </div>
+      <div class="filter">
+        <div><i class="fa-solid fa-tree"></i></div>
+        <p>Forest</p>
+      </div>
+      <div class="filter">
+        <div><i class="fa-solid fa-person-swimming"></i></div>
+        <p>Pool</p>
+      </div>
     </div>
-    <div class="filter">
-      <div><i class="fa-solid fa-water"></i></div>
-      <p>Surfing</p>
+    <button class="scroll-btn right" onclick="rightScroll()">
+      <i class="fas fa-angle-double-right"></i>
+    </button>
     </div>
-    <div class="filter">
-      <div><i class="fa-solid fa-city"></i></div>
-      <p>Amazing cities</p>
+
+    <!-- LISTINGS -->
+  <br>
+  <!-- Listings -->
+  <div class="container my-4">
+    <div class="row">
+      <% for( listing of listings) { %>
+        <div class="col-lg-4 col-md-6">
+          <div class="card listing-card">
+            <img src="<%= listing.image[0].url %>" class="card-img-top" alt="listing_image" style="height: 20rem;" />
+            <div class="card-body">
+              <h5 class="card-title"><%= listing.title %></h5>
+
+                <% if (listing.description.length < 100) { %>
+                  <p class="card-text"><i><%= listing.description %></i>              
+                <% } else if (listing.description.length > 100) {%>
+                  <p class="card-text desc"><i><%= listing.description.slice(0,70) %></i>              
+                <a class="btn btn-link" href="/listing/<%= listing._id %>">Show More</a>
+              <% } %> 
+
+              <br>&#8377;<%= listing.price.toLocaleString("en-IN") %> / night</p>
+              <p class="card-text">Location: <%= listing.location %>, <%= listing.country %></p>
+              <a href="/listing/<%= listing._id %>" class="btn btn-dark show_btn">Show in Detail</a>
+            </div>
+          </div>
+        </div>
+      <% } %>
     </div>
-    <div class="filter">
-      <div><i class="fa-solid fa-umbrella"></i></div>
-      <p>Beach</p>
+  </div>
+
+  </div>
+
+<!-- FAQ SECTION -->
+<div class="faq-container container" id="faq">
+  <div class="faq-left">
+    <h2>Frequently Asked Questions</h2>
+    <p>Your travel-related queries, answered to ensure a smooth journey! 🌍✨</p>
+    <div class="contact-info">
+      <span><i class="fas fa-envelope"></i> Got any questions?</span>
+      <a href="mailto:support@wanderlust.com"><b>support@wanderlust.com</b></a>
     </div>
-    <div class="filter">
-      <div><i class="fa-solid fa-cow"></i></div>
-      <p>Farms</p>
+  </div>
+
+  <!-- RIGHT SIDE -->
+  <div class="faq-right" id="faq-list">
+    <!-- FAQs dynamically added -->
+    <div class="faq-item">
+      <h3>How can I find new travel destinations? <i class="fas fa-chevron-down"></i></h3>
+      <div class="faq-answer">
+        <p>Wanderlust provides an interactive map 🗺️ that lets you explore popular and hidden destinations around the world. You can also browse user-generated travel stories ✍️ for inspiration.</p>
+      </div>
     </div>
-    <div class="filter">
-      <div><i class="fa-solid fa-mountain"></i></div>
-      <p>Lake</p>
+
+    <div class="faq-item">
+      <h3>Can I contribute my own travel experiences? <i class="fas fa-chevron-down"></i></h3>
+      <div class="faq-answer">
+        <p>Yes! Create your own travel stories and share tips, photos, and experiences with the Wanderlust community. Your unique insights will help others discover new adventures! ✈️</p>
+      </div>
     </div>
-    <div class="filter">
-      <div><i class="fa-solid fa-fort-awesome"></i></div>
-      <p>Castles</p>
+
+    <div class="faq-item">
+      <h3>How do I use the map to plan my trips? <i class="fas fa-chevron-down"></i></h3>
+      <div class="faq-answer">
+        <p>Our integrated map feature allows you to view nearby attractions, accommodations, and local experiences, making trip planning seamless. Just zoom in and start exploring! 🗺️</p>
+      </div>
     </div>
-    <div class="filter">
-      <div><i class="fa-solid fa-bed"></i></div>
-      <p>Rooms</p>
-    </div>
-    <div class="filter">
-      <div><i class="fa-solid fa-tree"></i></div>
-      <p>Forest</p>
-    </div>
-    <div class="filter">
-      <div><i class="fa-solid fa-person-swimming"></i></div>
-      <p>Pool</p>
+
+    <div class="faq-item">
+      <h3>Is my personal information safe with Wanderlust? <i class="fas fa-chevron-down"></i></h3>
+      <div class="faq-answer">
+        <p>Absolutely. We prioritize the security and privacy of your data with industry-standard security protocols. Your information is safe with us. 🔐</p>
+      </div>
     </div>
   </div>
   
@@ -138,7 +232,91 @@
           <div class="detail-btn">  <a href="/listing/<%= listing._id %>" class="btn btn-dark">Show in Detail</a></div>
           </div>
         </a>
+
+
+    <div class="faq-item">
+      <h3>How do I sign up for Wanderlust? <i class="fas fa-chevron-down"></i></h3>
+      <div class="faq-answer">
+        <p>Signing up is easy! Just visit the registration page, enter your details, and start your journey toward discovering and sharing amazing destinations. 🌟</p>
+
       </div>
-    <% } %>
+    </div>
   </div>
+</div>
+
+
+<script>
+  const filters = document.getElementById('filters');
+  const leftButton = document.querySelector('.left');
+  const rightButton = document.querySelector(".right");
+
+  function scrollLeft() {
+    filters.scrollBy({
+      left: -200,  // Scroll left by 200px
+      behavior: 'smooth'
+    });
+  }
+
+  function scrollRight() {
+    filters.scrollBy({
+      left: 200,  // Scroll right by 200px
+      behavior: 'smooth'
+    });
+  }
+
+leftButton.addEventListener('click',scrollLeft);
+rightButton.addEventListener('click',scrollRight);
+
+</script>
+<script>
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.addEventListener('click', () => {
+        const faqAnswer = item.querySelector('.faq-answer');
+
+        // Toggle current FAQ item
+        item.classList.toggle('open');
+
+        // If it's open, expand; otherwise, collapse
+        if (item.classList.contains('open')) {
+            faqAnswer.style.maxHeight = faqAnswer.scrollHeight + "px";
+        } else {
+            faqAnswer.style.maxHeight = 0;
+        }
+
+        // Hide other FAQ answers
+        document.querySelectorAll('.faq-item').forEach(otherItem => {
+            if (otherItem !== item && otherItem.classList.contains('open')) {
+                otherItem.classList.remove('open');
+                otherItem.querySelector('.faq-answer').style.maxHeight = 0;
+            }
+        });
+    });
+});
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const toggleDescriptionLinks = document.querySelectorAll('.toggle-description');
+    
+    toggleDescriptionLinks.forEach(link => {
+      link.addEventListener('click', function () {
+        const cardBody = this.closest('.card-body');
+        const shortDescription = cardBody.querySelector('.short-description');
+        const fullDescription = cardBody.querySelector('.full-description');
+        
+        // Toggle between short and full descriptions
+        if (fullDescription.classList.contains('d-none')) {
+          fullDescription.classList.remove('d-none');
+          shortDescription.classList.add('d-none');
+          this.textContent = "Show less";
+        } else {
+          fullDescription.classList.add('d-none');
+          shortDescription.classList.remove('d-none');
+          this.textContent = "Show more";
+        }
+      });
+    });
+  });
+</script>
+
+
 </body>

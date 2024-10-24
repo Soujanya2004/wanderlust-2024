@@ -1,52 +1,110 @@
 <% layout("/layouts/boilerplate") %>
-<body>
     <br>
+    <style>
+    /* Form Container - Floating Effect */
+    .dark-mode{
+        .form_body {
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 7px 15px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .form_body label{
+            color: #999;
+            transition: color 0.3s ease;
+        }
+        .form_body:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Input Fields Styling */
+        .edit_form input[type="text"]{
+            background-color: #2c2c2c;
+            color: #ffffff;
+            border: 1px solid #555555;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .edit_form input[type="text"]::placeholder {
+            color: #aaaaaa;
+        }
+
+        .edit_form input[type="text"] {
+            border-radius: 5px;
+            padding: 12px;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        /* Button Styling */
+        .edit_form button[type="submit"] {
+            border: 2px solid #999;
+            color: #999;
+            background: transparent;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .edit_form button[type="submit"]:hover {
+            color: #333;
+            border: none;
+            background: #999;
+        }
+
+        /* Image preview styling */
+        img {
+            border: 1px solid #555;
+        }
+    }
+</style>
+
+        
     <div class="container">
         <div class="row">
-            <div class="col-10 offset-1">
+            <div class="col-10 offset-1 form_body">
                 <form method="POST" action="/listing/<%= list._id %>?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data">
-                    <div class="mb-3">
+                    <div class="mb-3 edit_form">
                         <label for="title" class="form-label">Title</label>
                         <input name="listing[title]" class="form-control" value="<%= list.title %>" required>
                         <div class="valid-feedback">Looks good!</div>
                         <div class="invalid-feedback">Please enter a valid title.</div>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3 edit_form">
                         <label for="description" class="form-label">Description</label>
                         <textarea name="listing[description]" class="form-control" required><%= list.description %></textarea>
                         <div class="valid-feedback">Looks good!</div>
                         <div class="invalid-feedback">Please enter a valid description.</div>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3 edit_form">
                         <label for="price" class="form-label">Price (&#8377;)</label>
                         <input name="listing[price]" type="number" class="form-control" value="<%= list.price %>" required>
                         <div class="valid-feedback">Looks good!</div>
                         <div class="invalid-feedback">Please enter a valid price.</div>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3 edit_form">
                         <h4>Current Images</h4>
                         <% list.image.forEach(image => { %>
                             <img src="<%= image.url %>" alt="listing_image" style="height: 10rem; width: auto; margin-right: 10px;" />
                         <% }); %>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3 edit_form">
                         <label for="images" class="form-label">Upload New Images</label>
                         <input type="file" name="listing[image]" class="form-control" accept="image/*" multiple>
                         <small class="form-text text-muted">You can upload multiple images.</small>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3 edit_form">
                         <label for="location" class="form-label">Location</label>
                         <input name="listing[location]" class="form-control" value="<%= list.location %>" required>
                         <div class="valid-feedback">Looks good!</div>
                         <div class="invalid-feedback">Please enter a valid location.</div>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3 edit_form">
                         <label for="country" class="form-label">Country</label>
                         <input name="listing[country]" class="form-control" value="<%= list.country %>" required>
                         <div class="valid-feedback">Looks good!</div>
@@ -58,5 +116,3 @@
             </div>
         </div>
     </div>
-</body>
-</html>

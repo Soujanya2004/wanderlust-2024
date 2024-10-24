@@ -1,10 +1,44 @@
-<footer style=" margin-top: auto;">
-    <div class="footer-info">
-        <div class="f-social">
-            <i class="fa-brands fa-instagram"></i>
-            <i class="fa-brands fa-facebook"></i>
-            <i class="fa-brands fa-square-x-twitter"></i>
+<footer class="container" id="footer">
+    <div class="footer-left">
+        <div class="brand">
+            <h2>Wanderlust</h2>
+            <p>Where adventure meets comfort.</p>
         </div>
-        <div class="f-name"></i>Wanderlust Private Limited</div>
+        <div class="contact-info"  id="cantact-us">
+            <div class="email" style="display: flex; align-items: center;">
+                <i class="fas fa-envelope" style="position: relative; bottom: 10px;"></i>
+                <p>Need assistance with your booking or any inquiries?<br>
+                    <a href="mailto:support@Wanderlust.com">supportWanderlust@gmail.com</a></p>
+            </div>
+            <div class="phone" style="display: flex; align-items: center;">
+                <i class="fas fa-phone" style="position: relative; bottom: 10px;"></i>
+                <p>Available 24/7<br><a href="tel:+919876543210">+91-0123456789</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="footer-middle">
+        <div class="company-links">
+            <h3>Company</h3>
+            <ul>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/privacy">Privacy Policy</a></li>
+                <li><a href="/terms">Terms & Conditions</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-right">
+        <h3>Subscribe Us</h3>
+        <div class="social-media">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>&copy; <span id="year"></span> Wanderlust Private Limited. All rights reserved.</p>
     </div>
 </footer>
+
+<script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>
