@@ -78,7 +78,10 @@
             <div class="mb-3 signup_form">
                 <label for="password" class="form-label">Password</label>
                 <br>
-                <input type="password" name="password" placeholder="Password"  class="form-control" required>
+                <div class="password-box">
+                    <input type="password" name="password" placeholder="Password"  class="form-control" required>
+                    <i id="togglePassword"  class="passkey passwordToggler fa fa-eye"></i> 
+                </div>
                 <div class="valid-feedback">
                     looks great!
                </div>
@@ -89,7 +92,10 @@
               <div class="mb-3 signup_form">
                 <label for="password" class="form-label">Confirm Password</label>
                 <br>
-                <input type="password" name="cnf-password" placeholder="Password"  class="form-control" required>
+                <div class="password-box">
+                    <input type="password" name="cnf-password" placeholder="Password" class="form-control" required>
+                    <i id="togglePassword" class="cnf-passkey passwordToggler fa fa-eye"></i> 
+                </div>
                 <div class="valid-feedback">
                     looks great!
                </div>

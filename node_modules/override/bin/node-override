@@ -1,0 +1,3 @@
+#!/usr/bin/env node
+process.argv.shift();
+require('../lib/run')();
