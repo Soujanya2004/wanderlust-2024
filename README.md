@@ -64,7 +64,7 @@ We welcome contributions to help improve **Wanderlust 2024**! 🚀 Here’s how 
 7. **Push Your Changes** ⬆️
    - Push the changes to your forked repository:
      ```bash
-     git push origin feature/your-feature-name
+      feature/your-feature-name
      ```
 
 ## 🛠️ How to Set Up the Project Locally
@@ -82,7 +82,7 @@ We welcome contributions to help improve **Wanderlust 2024**! 🚀 Here’s how 
      ```
 
 3. **Set Up Your Mapbox Account** 🌐
-   - Go to [Mapbox](https://www.mapbox.com) and sign up for a free account. 🆓
+   - Go to [Mapbox](https:git push origin//www.mapbox.com) and sign up for a free account. 🆓
    - After logging in, navigate to the Tokens section under your account settings. 🔑
    - Create a new Access Token and copy it. You will need this for the `.env` file. 📄
 
@@ -174,7 +174,7 @@ For questions or feedback, feel free to reach out via GitHub issues or contact t
  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="900">
  
 
-## ❤️ Made with Love by [Soujanya](https://github.com/Soujanya2004)
+## ❤️ Made with Love by [Soujanya C](https://github.com/Soujanya2004)
 
 <div align="center">
   <a href="https://github.com/Soujanya2004">
