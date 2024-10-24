@@ -12,6 +12,18 @@
      .navbar-brand, .nav-link {
       color: #ffffff;
     }
+    .drop-button:hover{
+        box-shadow: 0 5px 3px rgba(212, 212, 212, 0.303);
+    }
+    .desk-drop{
+        background-color: #343a40;
+        color: #ffffff;
+        box-shadow: 0 5px 3px rgba(212, 212, 212, 0.351);
+
+    }
+    .desk-drop .dropdown-divider{
+        color: #ffffff;
+    }
 
     .navbar-toggler {
         background-color: #495057;

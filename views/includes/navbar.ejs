@@ -74,17 +74,13 @@
       <!-- Search bar in the middle -->
       <div class="input-group search-box">
         <form class="d-flex mx-3" action="/listing/search" method="post">
-          <!-- <input class="form-control me-2" type="search" name="query" placeholder="Search your Airbnb.." aria-label="Search">
-          <button class="btn btn-outline-secondary search" type="submit">
-            <i class="fas fa-search"></i>Search
-          </button> -->
           <input class="form-control me-2" type="search" name="query" placeholder="Search your Airbnb.." aria-label="Search" aria-describedby="button-addon2">
           <button class="btn btn-outline-danger search" type="submit" id="button-addon2"><i class="fas fa-search"></i></button>
         </form>
       </div>
       <div class="nav-link dropdown d-down flex normal-nav">
-        <a role="button" class="nav-link drop-button dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-          <box-icon name='menu'></box-icon>
+        <a role="button" class="nav-link drop-button dropdown-toggle tg" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="fa-solid fa-bars"></i>
           <% if(!currUser) {%>
             <img src="/noprofilenav.png" alt="" class="nav-provile">
           <% } %>
@@ -94,7 +90,7 @@
           <% } %>
           
         </a>
-        <ul class="dropdown-menu dropdown-menu-end">
+        <ul class="dropdown-menu dropdown-menu-end desk-drop">
           <% if(!currUser) {%>
             <li class="nav-item drop">
               <a class="nav-link" href="/login">Login</a>
@@ -107,35 +103,13 @@
           <% if(currUser) {%>
             <li class="nav-item drop"><a class="nav-link" href="/logout">Log Out</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li class="nav-item drop align"><a class="nav-link" href="/profile">Your profile</a><box-icon name='chevron-right'></box-icon></li>
+            <li class="nav-item drop align"><a class="nav-link" href="/profile">Your profile</a> &nbsp;&nbsp;&nbsp;<i class="fa-solid fa-angle-right"></i></li>
           <% } %>
           
         </ul>
       </div>
 
       
-      <!-- Right side (Authentication Links) -->
-      <ul class="navbar-nav">
-        <% if(currUser) { %> 
-          <div class="dropdown mt-2" style=" margin-left: 1rem">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fa-sharp fa-solid fa-user"></i> 
-            </button>
-            <ul style="width: fit-content;" class="dropdown-menu">
-              <li><a class="btn" style="border: none;" href="/logout">Log Out</a></li>
-              <li><a class="btn" style="border: none;" href="/profile">Your profile</a></li>
-            </ul>
-          </div>
-        <% } %>
-        <% if(!currUser) { %>  
-          <li class="nav-item">
-            <a class="nav-link" href="/login" style="background-color: red;">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/signup">Signup</a>
-          </li>
-        <% } %>
-      </ul>
       <div class="toggle-container">
         <button id="darkModeToggle" class="dark-mode-toggle">
           <i id="toggleIcon" class="fa-solid fa-moon"></i> <!-- Default icon is the moon -->
