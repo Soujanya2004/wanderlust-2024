@@ -9,8 +9,11 @@
             box-shadow: 0 7px 15px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+        h3 {
+            color: #fff;
+        }
         .form_body label{
-            color: #999;
+            color: #ffffff;
             transition: color 0.3s ease;
         }
         .form_body:hover {
@@ -50,45 +53,38 @@
             border: none;
             background: #999;
         }
-
-        /* Image preview styling */
-        img {
-            border: 1px solid #555;
+        .form-text{
+            color: #aaaaaa7f !important;
         }
+    
     }
 </style>
 
         
     <div class="container">
         <div class="row">
-            <div class="col-10 offset-1 form_body">
+            <div class="col-8 mx-auto form_body">
+                <h3 class="text-center">Edit Property details</h3>
                 <form method="POST" action="/listing/<%= list._id %>?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data">
                     <div class="mb-3 edit_form">
                         <label for="title" class="form-label">Title</label>
                         <input name="listing[title]" class="form-control" value="<%= list.title %>" required>
                         <div class="valid-feedback">Looks good!</div>
-                        <div class="invalid-feedback">Please enter a valid title.</div>
+                        <div class="invalid-feedback">Please enter a valid title!</div>
                     </div>
 
                     <div class="mb-3 edit_form">
                         <label for="description" class="form-label">Description</label>
-                        <textarea name="listing[description]" class="form-control" required><%= list.description %></textarea>
+                        <textarea name="listing[description]" class="form-control" rows="5" required><%= list.description %></textarea>
                         <div class="valid-feedback">Looks good!</div>
-                        <div class="invalid-feedback">Please enter a valid description.</div>
+                        <div class="invalid-feedback">Please enter a valid description!</div>
                     </div>
 
                     <div class="mb-3 edit_form">
-                        <label for="price" class="form-label">Price (&#8377;)</label>
-                        <input name="listing[price]" type="number" class="form-control" value="<%= list.price %>" required>
-                        <div class="valid-feedback">Looks good!</div>
-                        <div class="invalid-feedback">Please enter a valid price.</div>
-                    </div>
-
-                    <div class="mb-3 edit_form">
-                        <h4>Current Images</h4>
                         <% list.image.forEach(image => { %>
-                            <img src="<%= image.url %>" alt="listing_image" style="height: 10rem; width: auto; margin-right: 10px;" />
+                            <img src="<%= image.url %>" alt="listing_image" style="height: 8rem; width: auto; margin-right: 10px;" />
                         <% }); %>
+                        <br><small class="form-text text-muted">Images preview that already uploaded.</small>
                     </div>
 
                     <div class="mb-3 edit_form">
@@ -96,22 +92,32 @@
                         <input type="file" name="listing[image]" class="form-control" accept="image/*" multiple>
                         <small class="form-text text-muted">You can upload multiple images.</small>
                     </div>
+                    <div class="row">
 
-                    <div class="mb-3 edit_form">
-                        <label for="location" class="form-label">Location</label>
-                        <input name="listing[location]" class="form-control" value="<%= list.location %>" required>
-                        <div class="valid-feedback">Looks good!</div>
-                        <div class="invalid-feedback">Please enter a valid location.</div>
+                        <div class="mb-3 col-3 edit_form">
+                            <label for="price" class="form-label">Price (&#8377;)</label>
+                            <input name="listing[price]" type="number" class="form-control" value="<%= list.price %>" required>
+                            <div class="valid-feedback">Looks good!</div>
+                            <div class="invalid-feedback">Please enter a valid price!</div>
+                        </div>
+
+                        <div class="mb-3 col-5 edit_form">
+                            <label for="location" class="form-label">Location</label>
+                            <input name="listing[location]" class="form-control" value="<%= list.location %>" required>
+                            <div class="valid-feedback">Looks good!</div>
+                            <div class="invalid-feedback">Please enter a valid location!</div>
+                        </div>
+    
+                        <div class="mb-3 col-4 edit_form">
+                            <label for="country" class="form-label">Country</label>
+                            <input name="listing[country]" class="form-control" value="<%= list.country %>" required>
+                            <div class="valid-feedback">Looks good!</div>
+                            <div class="invalid-feedback">Please enter a valid country!</div>
+                        </div>
+
                     </div>
 
-                    <div class="mb-3 edit_form">
-                        <label for="country" class="form-label">Country</label>
-                        <input name="listing[country]" class="form-control" value="<%= list.country %>" required>
-                        <div class="valid-feedback">Looks good!</div>
-                        <div class="invalid-feedback">Please enter a valid country.</div>
-                    </div>
-
-                    <button type="submit" name="saveButton" class="btn btn-primary">Save</button>
+                    <button type="submit" name="saveButton" class="btn btn-danger">Save</button>
                 </form>
             </div>
         </div>
