@@ -81,8 +81,10 @@
             <div class="mb-3 login_form">
                 <label for="password" class="form-label">Password</label>
                 <br>
-                <input type="password" name="password" placeholder="Password"  class="form-control" required>
-                
+                <div class="password-box">
+                    <input type="password" name="password" placeholder="Password"  class="form-control" required>
+                    <i id="togglePassword" class="passkey passwordToggler fa fa-eye"></i> 
+                </div>
                <div class="invalid-feedback">
                    Password not found
               </div>
