@@ -9,6 +9,10 @@
             box-shadow: 0 7px 15px rgba(0, 0, 0, 0.5); /* Initial shadow to lift form */
             transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover transition */
         }
+
+        h3{
+            color: #ffffff;
+        }
     
         .form_body:hover {
             transform: translateY(-5px); /* Moves the form upward */
@@ -44,6 +48,9 @@
             border: none;
             background: #999;
         }
+        .listing_form .form-text{
+            color: #b0b0b082 !important;
+        }
     
     
     }
@@ -74,6 +81,7 @@
                     <!-- multiple file uploads -->
                     <input type="file" name="listing[image]" class="form-control" id="imageInput" multiple required>
                     <div class="invalid-feedback">Please upload a image!</div>
+                    <small class="form-text text-muted">You can upload multiple images.</small>
                     <div class="valid-feedback">Looks good!</div>
                 </div>
 
