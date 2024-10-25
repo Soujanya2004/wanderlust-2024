@@ -43,31 +43,13 @@
             color: #fff;
         }
         
-        /* Button Styling */
-        .login_form button[type="submit"] {
-            border: 2px solid #999;
-            color: #999;
-            background: transparent;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        .login_form button[type="submit"]:hover {
-            color: #333;
-            border: none;
-            background: #999;
-        }
-
-        /* Image preview styling */
-        img {
-            border: 1px solid #555;
-        }
     }
 </style>
 
 
 
 <div class="row">
-    <div class="col-6 offset-3 form_body">
+    <div class="col-5 mx-auto form_body">
         <form method="POST" action="/login" novalidate class="needs-validation">
             <div class="mb-3 login_form">
                 <label for="username" class="form-label">Username</label>
@@ -89,9 +71,9 @@
                    Password not found
               </div>
               <br>
-              
-                <button class="btn col-6 offset-3" name="saveButton" type="submit">LOGIN</button>
-            </div>
+              <div class="text-center text-md-end">
+                <button class="btn btn-danger" name="saveButton" type="submit">LOGIN</button>
+              </div>
         </form>
         
     </div>
