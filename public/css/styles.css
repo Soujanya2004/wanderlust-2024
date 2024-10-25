@@ -412,55 +412,49 @@ footer {
   font-size: 0.85rem;
 }
 }
- 
-
-/* DARKMODE TOGGLER */
+/* ------------------ DARKMODE TOGGLER style ------------ */
 .dark-mode {
   background-color: #1d1d1d;
 }
 
 /* Toggle button container */
-.toggle-container {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 999;
 
-}
 .toggle-container button{
   background-color: transparent;
 }
 
-/* Toggle button styles */
+
 .dark-mode-toggle {
-  background-color: #f0f0f0;
+  background-color: transparent;
   border: none;
-  border-radius: 50%;
   cursor: pointer;
   outline: none;
 }
 
-/* Hover effect for the button */
-.dark-mode-toggle i:hover {
-  transform: scale(1.07);
-}
+
 
 /* Toggle icon styling */
-#toggleIcon {
-  font-size: 30px;
-  color: #f0f0f0; /* Moon icon color for dark mode */
-  transition: transform 0.5s ease, color 0.5s ease;
+.toggleIcon {
+  font-size: 25px;
+  color: #f0f0f0;
+  /* border: 1px solid #66666686; */
+  border-radius: 50% !important;
+  padding: 0.4rem;
+  transition: transform 0.5s ease;
 }
 
 /* Sun color for light mode */
-body:not(.dark-mode) #toggleIcon {
-  color: #f39c12;
+body:not(.dark-mode) .toggleIcon {
+  color: #333;
+  border: 1px solid #66666686;
 }
 
 /* Dark mode icon color */
-.dark-mode #toggleIcon {
+.dark-mode .toggleIcon {
   color: #f0f0f0; /* Moon icon color for dark mode */
+  background-color: #1d1d1d;
 }
+/*-------- Dark mode toggle styling end --------- */
 
 
 /* SLIDING BAR */
