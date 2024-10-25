@@ -40,3 +40,19 @@ document.addEventListener('DOMContentLoaded', function () {
       }
   }
 });
+document.addEventListener('DOMContentLoaded', function () {
+  const togglePassword = document.querySelectorAll('.passwordToggler');
+  togglePassword.forEach((toggle) => {
+      toggle.addEventListener('click', function (e) {
+          // console.log(e.target.classList.contains('cnf-passkey'))
+          let password;
+          if (e.target.classList.contains('cnf-passkey'))
+              password = document.querySelector('input[name="cnf-password"]');
+          else
+              password = document.querySelector('input[name="password"]');
+          const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+          password.setAttribute('type', type);
+          this.classList.toggle('fa-eye-slash'); // Toggle icon
+      })
+  });
+});
