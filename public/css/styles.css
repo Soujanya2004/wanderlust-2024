@@ -462,6 +462,41 @@ body:not(.dark-mode) #toggleIcon {
   color: #f0f0f0; /* Moon icon color for dark mode */
 }
 
+/* Go to top styling */
+.goto-top{
+  background-color: #ff385c;
+  height: 3.5rem;
+  width: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 1.3rem;
+  right: 1.3rem;
+  border-radius: 50%;
+  cursor: pointer;
+  animation: upDown 3s ease-in-out infinite;
+  transition: background-color 0.3s ease;
+  z-index: 999 !important;
+}
+.goto-top:hover{
+background-color: #b52943;
+}
+@keyframes upDown {
+0% {
+  transform: translateY(0); /* Start at normal position */
+}
+50% {
+  transform: translateY(-25px); /* Move up by 10px */
+}
+100% {
+  transform: translateY(0); /* Move back to original position */
+}
+}
+.goto-top i{
+font-size: 1.5rem;
+color: #f0f0f0;
+}
 
 /* SLIDING BAR */
 /* Hide scrollbar while still allowing horizontal scrolling */
