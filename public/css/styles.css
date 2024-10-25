@@ -573,8 +573,28 @@ right: 10px;
 .main-menues{
   width: 90%;
 }
+.mobile-toggle{
+  display: none !important;
+}
 
 @media (max-width: 992px){
+  .desktop-toggle{
+    display: none !important;
+  }
+  .mobile-toggle{
+    display: block !important;
+  }
+  /* Sun color for light mode */
+  body:not(.dark-mode) .toggleIcon {
+    color: #333;
+    border: 1px solid #66666686;
+  }
+
+  /* Dark mode icon color */
+  .dark-mode .toggleIcon {
+    color: #1d1d1d; /* Moon icon color for dark mode */
+    background-color: #f0f0f0; 
+}
   .normal-nav{
     display: none !important;
   }
