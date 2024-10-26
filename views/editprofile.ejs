@@ -1,4 +1,46 @@
 <%- layout("/layouts/boilerplate") -%>
+<style>
+    .dark-mode{
+        h1 {
+            color: #ffffff;
+            text-align: center;
+            font-family: 'Rakkas', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        form label {
+            color: #ffffff;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .login_form input[type="text"],
+        .login_form input[type="email"] {
+            background-color: #2c2c2c;
+            color: #ffffff;
+            border: 1px solid #555555;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .login_form input[type="text"]::placeholder,
+        .login_form input[type="email"]::placeholder {
+            color: #aaaaaa;
+        }
+
+        .login_form input[type="text"],
+        .login_form input[type="email"] {
+            border-radius: 5px;
+            padding: 12px;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .login_form label{
+            color: #fff;
+        }
+    }
+</style>
 
 <div class="edit-profile-container">
     <h1 style="text-align: center; padding-top: 2rem; font-family: rakkas;">Edit Your Profile</h1>
