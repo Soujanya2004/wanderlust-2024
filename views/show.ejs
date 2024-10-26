@@ -216,11 +216,11 @@
                         <% if (currUser && currUser._id.equals(list.owner._id)) { %>
                             <div class="buttons">
                                 <form method="get" action="/listing/<%= list._id %>/edit" class="d-inline">
-                                    <button class="btn btn-outline-danger">Edit</button>
+                                    <button class="btn btn-danger">Edit</button>
                                 </form>
 
                                 <form method="post" action="/listing/<%= list._id %>?_method=DELETE" class="d-inline">
-                                    <button class="btn btn-outline-secondary">Delete</button>
+                                    <button class="btn btn-secondary">Delete</button>
                                 </form>
                                 
                                 <form method="get" action="/listing" class="d-inline">
