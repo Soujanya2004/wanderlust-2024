@@ -29,6 +29,7 @@ const {isOwner,isAuthor}=require("./middlewares/middleware.js");
 const {index, newpost, createpost, editpost, saveEditpost,search, deletepost, showPost, signup}=require("./controllers/listing.js");
 const { deleteReview, reviewPost } = require("./controllers/reviews.js");
 const cors = require('cors'); // CORS added
+const router = require('./routes/routes.js')
 
 // Use CORS for all routes
 app.use(cors({
@@ -104,145 +105,10 @@ app.use((req, res, next) => {
   next();
 });
 
-//About us page
-app.get('/about',asyncwrap ( async (req, res) => {
-  try {
-      res.render('about');
-  } catch (err) {
-      console.error(err);
-      res.status(500).send('Internal Server Error');
-  }
-}));
-
-//terms and conditions page
-app.get('/terms',asyncwrap ( async (req, res) => {
-  try {
-      res.render('terms');
-  } catch (err) {
-      console.error(err);
-      res.status(500).send('Internal Server Error');
-  }
-}));
-
-//Privacy policy page
-app.get('/privacy',asyncwrap ( async (req, res) => {
-  try {
-      res.render('privacy');
-  } catch (err) {
-      console.error(err);
-      res.status(500).send('Internal Server Error');
-  }
-}));
-
-//CONTRIBUTORS
-app.get('/contributors',asyncwrap(async (req, res) => {
-  try {
-      res.render("contributors.ejs");
-  } catch (err) {
-      console.error("Error fetching contributors:", err);
-      req.flash("error", err);
-      return res.redirect("/listing");
-  }
-}));
-
-  //API
-  //signup
-  app.get("/signup",asyncwrap (async(req,res) => {
-  res.render("signup.ejs");
-  }));
-
-  app.post('/signup', asyncwrap(async (req, res, next) => {
-  const { username, email, password } = req.body;
 
 
-  // Check for missing fields
-  if (!username || !password) {
-    req.flash('error', 'Username and password are required');
-    return res.redirect('/signup');
-  }
-  try {
-    const newUser = new User({ username, email });
-    await User.register(newUser, password); 
-    req.login(newUser, (err) => {
-      req.flash('success', 'Welcome! Account created successfully.');
-      res.redirect('/listing');
-    });
-  } catch (err) {
-    req.flash('error', err.message);
-    res.redirect('/signup');
-  }
-}));
-
-//login
-app.route("/login")
-.get( asyncwrap ((req,res) =>{
-  res.render("login.ejs");
-}))
-.post(
-  saveRedirectUrl,
-  passport.authenticate("local", {
-  failureRedirect: "/login",
-  failureFlash: true
-}), (req, res) => {
-  req.flash("success", "Welcome back to wanderlust!");
-  let redirect=res.locals.redirectUrl||"/listing";  
-  res.redirect(redirect); // Redirect to a route that will display the message
-});
-  
-  //logout
-  app.get("/logout",(req,res,next) =>{
-    req.logout((err) =>{
-      if(err) {
-       return  next(err);
-      }
-        req.flash("success","You logged out successfuly!");
-        res.redirect("/listing");
-      
-    })
-});
-
-//profile page
-// GET: Display Profile Page
-app.get('/profile', isLoggedIn,asyncwrap( async (req, res) => {
-  const user = await User.findById(req.user._id);
-  res.render('profile', { user });
-}));
-
-
-//define listing conroller
-//BUG FIX
-const listingController = require('./controllers/listing.js');
-
-// Create new listing form route
-// app.get("/new",isLoggedIn, asyncwrap(newpost));
-app.get("/listing/new", isLoggedIn, asyncwrap(listingController.newpost));
-
-
-//index route
-app.get("/listing",asyncwrap(index));
-
-//create post
-app.post("/listing", upload.array('listing[image]', 10), isLoggedIn, asyncwrap(createpost));
-
-//search the listings
-app.post("/listing/search",asyncwrap(search)); 
-
-//edit the listings
-app.get("/listing/:id/edit",isLoggedIn,isOwner,asyncwrap(editpost));
-
-//save the updated listing
-app.put('/listing/:id', isLoggedIn,isOwner,upload.array('listing[image]'), asyncwrap(saveEditpost));
-
-//delete listing
-app.delete("/listing/:id",isLoggedIn,isOwner,asyncwrap(deletepost));
-
-app.get('/listing/:id', asyncwrap(showPost));
-
-//review submit route
-app.post("/listing/:id/review", isLoggedIn, asyncwrap(reviewPost));
- 
-//delete reviews
-app.delete("/listing/:id/review/:rid",isLoggedIn,isAuthor,asyncwrap(deleteReview));
+//use router
+app.use('/', router);
 
 //for all invalid route error
 app.use("*",(req,res,next) =>{
@@ -258,5 +124,5 @@ app.use("*",(req,res,next) =>{
 })
 
 app.listen(port, () =>{
-    console.log("server is listening on port", port);
+  console.log("server is listening on port", port);
 });
