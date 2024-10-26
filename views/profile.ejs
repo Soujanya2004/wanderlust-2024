@@ -122,10 +122,11 @@
             </div>
             <div class="upload-container">
                 <form action="/profile/upload" method="POST" enctype="multipart/form-data">
-                    <input type="file" id="profilePic" name="profilePic">
-                    <label for="profilePic">Upload Profile pic</label>
+                    <input type="file" id="profilePic" name="profilePic" onchange="this.form.submit()">
+                    <label for="profilePic">Upload Profile Pic</label>
                 </form>
             </div>
+            
         </div>
 
         <div class="profile-details">
