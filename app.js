@@ -209,6 +209,35 @@ app.get('/profile', isLoggedIn,asyncwrap( async (req, res) => {
   res.render('profile', { user });
 }));
 
+// GET: Render Edit Profile Form
+app.get("/profile/edit", isLoggedIn, async (req, res) => {
+  try {
+      const user = await User.findById(req.user._id);
+      res.render('editprofile', { user });
+  } catch (err) {
+      console.error("Error loading profile edit form:", err);
+      res.status(500).send("Error loading profile edit form.");
+  }
+});
+
+// POST: Update Profile Details
+app.post('/profile/edit', isLoggedIn, async (req, res) => {
+  try {
+      const { username, email } = req.body;
+      if (!email) throw new Error("Email is required.");
+
+      const user = await User.findById(req.user._id);
+      user.username = username;
+      user.email = email;
+
+      await user.save();
+      res.redirect('/listing');
+  } catch (err) {
+      console.error("Error updating profile:", err);
+      res.status(400).send("Profile update failed. Make sure all required fields are filled.");
+  }
+});
+
 
 //define listing conroller
 //BUG FIX
