@@ -1,15 +1,15 @@
 const express = require('express')
 const router = express.Router();
-const User = require("./models/user.js");
+const User = require("../models/user.js");
 const asyncwrap = require('../utils/error.js')
 const flash = require('connect-flash')
-const {isLoggedIn, saveRedirectUrl, isAuthor, isOwner} = require('../middlewares/middleware.js')
+const { isLoggedIn, saveRedirectUrl, isAuthor, isOwner } = require('../middlewares/middleware.js')
 const passport = require("passport")
-const {index, newpost, createpost, editpost, saveEditpost,search, deletepost, showPost, signup}=require("../controllers/listing.js");
-const upload = multer({storage})
+const { index, newpost, createpost, editpost, saveEditpost, search, deletepost, showPost, signup } = require("../controllers/listing.js");
+const upload = multer({ storage })
 const reviews = require('../models/reviews.js')
-const {deleteReview, reviewPost}  = require('../controllers/reviews.js')
-
+const { deleteReview, reviewPost } = require('../controllers/reviews.js')
+const multer = require('multer')
 //About us page
 router.get('/about', asyncwrap(async (req, res) => {
     try {
@@ -117,6 +117,40 @@ router.get('/profile', isLoggedIn, asyncwrap(async (req, res) => {
     res.render('profile', { user });
 }));
 
+
+// Configure separate multer storage for profile uploads if using local storage
+const profileStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "uploads/"); // Ensure this folder exists
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + "-" + file.originalname);
+    }
+});
+const profileUpload = multer({ storage: profileStorage });
+
+// Route for handling profile image upload
+router.post("/profile/upload", isLoggedIn, profileUpload.single("profilePic"), async (req, res) => {
+    try {
+        if (!req.file) {
+            req.flash("error", "No file uploaded.");
+            return res.redirect("/profile");
+        }
+
+        const userId = req.user._id; // Ensure user is logged in
+        const imagePath = `/uploads/${req.file.filename}`;
+
+        // Update the user's profile image path in the database
+        await User.findByIdAndUpdate(userId, { profileImage: imagePath });
+
+        req.flash("success", "Profile image uploaded successfully.");
+        res.redirect("/profile");
+    } catch (err) {
+        console.error("Error uploading profile image:", err);
+        req.flash("error", "Error uploading profile image.");
+        res.status(500).redirect("/profile");
+    }
+});
 
 //define listing conroller
 //BUG FIX
