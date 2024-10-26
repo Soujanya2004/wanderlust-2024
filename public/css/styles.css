@@ -412,56 +412,85 @@ footer {
   font-size: 0.85rem;
 }
 }
- 
-
-/* DARKMODE TOGGLER */
+/* ------------------ DARKMODE TOGGLER style ------------ */
 .dark-mode {
   background-color: #1d1d1d;
 }
 
 /* Toggle button container */
-.toggle-container {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 999;
 
-}
 .toggle-container button{
   background-color: transparent;
 }
 
-/* Toggle button styles */
+
 .dark-mode-toggle {
-  background-color: #f0f0f0;
+  background-color: transparent;
   border: none;
-  border-radius: 50%;
   cursor: pointer;
   outline: none;
 }
 
-/* Hover effect for the button */
-.dark-mode-toggle i:hover {
-  transform: scale(1.07);
-}
+
 
 /* Toggle icon styling */
-#toggleIcon {
-  font-size: 30px;
-  color: #f0f0f0; /* Moon icon color for dark mode */
-  transition: transform 0.5s ease, color 0.5s ease;
+.toggleIcon {
+  font-size: 25px;
+  color: #f0f0f0;
+  /* border: 1px solid #66666686; */
+  border-radius: 50% !important;
+  padding: 0.4rem;
+  transition: transform 0.5s ease;
 }
 
 /* Sun color for light mode */
-body:not(.dark-mode) #toggleIcon {
-  color: #f39c12;
+body:not(.dark-mode) .toggleIcon {
+  color: #333;
+  border: 1px solid #66666686;
 }
 
 /* Dark mode icon color */
-.dark-mode #toggleIcon {
+.dark-mode .toggleIcon {
   color: #f0f0f0; /* Moon icon color for dark mode */
+  background-color: #1d1d1d;
 }
+/*-------- Dark mode toggle styling end --------- */
 
+/* Go to top styling */
+.goto-top{
+  background-color: #ff385c;
+  height: 3.5rem;
+  width: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 1.3rem;
+  right: 1.3rem;
+  border-radius: 50%;
+  cursor: pointer;
+  animation: upDown 3s ease-in-out infinite;
+  transition: background-color 0.3s ease;
+  z-index: 999 !important;
+}
+.goto-top:hover{
+background-color: #b52943;
+}
+@keyframes upDown {
+0% {
+  transform: translateY(0); /* Start at normal position */
+}
+50% {
+  transform: translateY(-25px); /* Move up by 10px */
+}
+100% {
+  transform: translateY(0); /* Move back to original position */
+}
+}
+.goto-top i{
+font-size: 1.5rem;
+color: #f0f0f0;
+}
 
 /* SLIDING BAR */
 /* Hide scrollbar while still allowing horizontal scrolling */
