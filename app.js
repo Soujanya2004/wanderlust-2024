@@ -55,6 +55,7 @@ app.use(express.static(path.join(__dirname, "/public"))); //to use files in publ
 app.use(methodOverride('_method'));
 app.use(express.urlencoded({extended:true}));  //for parsing the data
 app.engine('ejs', ejsMate); //to create ejs template for every page ex. footer,navbar
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
 
 
@@ -208,6 +209,35 @@ app.get('/profile', isLoggedIn,asyncwrap( async (req, res) => {
   res.render('profile', { user });
 }));
 
+// GET: Render Edit Profile Form
+app.get("/profile/edit", isLoggedIn, async (req, res) => {
+  try {
+      const user = await User.findById(req.user._id);
+      res.render('editprofile', { user });
+  } catch (err) {
+      console.error("Error loading profile edit form:", err);
+      res.status(500).send("Error loading profile edit form.");
+  }
+});
+
+// POST: Update Profile Details
+app.post('/profile/edit', isLoggedIn, async (req, res) => {
+  try {
+      const { username, email } = req.body;
+      if (!email) throw new Error("Email is required.");
+
+      const user = await User.findById(req.user._id);
+      user.username = username;
+      user.email = email;
+
+      await user.save();
+      res.redirect('/listing');
+  } catch (err) {
+      console.error("Error updating profile:", err);
+      res.status(400).send("Profile update failed. Make sure all required fields are filled.");
+  }
+});
+
 
 //define listing conroller
 //BUG FIX
@@ -216,6 +246,43 @@ const listingController = require('./controllers/listing.js');
 // Create new listing form route
 // app.get("/new",isLoggedIn, asyncwrap(newpost));
 app.get("/listing/new", isLoggedIn, asyncwrap(listingController.newpost));
+
+
+
+// Configure separate multer storage for profile uploads if using local storage
+const profileStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+      cb(null, "uploads/"); // Ensure this folder exists
+  },
+  filename: (req, file, cb) => {
+      cb(null, Date.now() + "-" + file.originalname);
+  }
+});
+const profileUpload = multer({ storage: profileStorage });
+
+
+// Route for handling profile image upload
+app.post("/profile/upload", isLoggedIn, profileUpload.single("profilePic"), async (req, res) => {
+  try {
+      if (!req.file) {
+          req.flash("error", "No file uploaded.");
+          return res.redirect("/profile");
+      }
+
+      const userId = req.user._id; // Ensure user is logged in
+      const imagePath = `/uploads/${req.file.filename}`;
+
+      // Update the user's profile image path in the database
+      await User.findByIdAndUpdate(userId, { profileImage: imagePath });
+      
+      req.flash("success", "Profile image uploaded successfully.");
+      res.redirect("/profile");
+  } catch (err) {
+      console.error("Error uploading profile image:", err);
+      req.flash("error", "Error uploading profile image.");
+      res.status(500).redirect("/profile");
+  }
+});
 
 
 //index route
