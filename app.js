@@ -30,6 +30,12 @@ const {index, newpost, createpost, editpost, saveEditpost,search, deletepost, sh
 const { deleteReview, reviewPost } = require("./controllers/reviews.js");
 const cors = require('cors'); // CORS added
 
+//delte old profile pics and to avoid ERR_HTTP_HEADERS_SENT Error
+const fs = require('fs');
+const { promisify } = require('util');
+const unlinkAsync = promisify(fs.unlink); // Promisify fs.unlink
+
+
 // Use CORS for all routes
 app.use(cors({
   origin: 'http://your-frontend-domain.com', // Replace with your frontend domain
@@ -270,6 +276,24 @@ app.post("/profile/upload", isLoggedIn, profileUpload.single("profilePic"), asyn
       }
 
       const userId = req.user._id; // Ensure user is logged in
+      const user = await User.findById(userId);
+
+      if (user.profileImage) {
+        const oldImagePath = path.join(__dirname, user.profileImage);
+        
+        // Check if file exists before deleting
+        if (fs.existsSync(oldImagePath)) {
+          try {
+            await unlinkAsync(oldImagePath);
+            console.log("Old profile image deleted successfully.");
+        } catch (err) {
+            console.error("Error deleting old image:", err);
+        }
+        } else {
+            console.log("Old image file not found, skipping deletion.");
+        }
+    }
+
       const imagePath = `/uploads/${req.file.filename}`;
 
       // Update the user's profile image path in the database
