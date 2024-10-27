@@ -205,7 +205,6 @@ footer {
 .listing-card{
     border: none !important;
     margin-bottom: 2.5rem !important;
-    margin-left: 2rem !important;
     
 }
 .card{
@@ -604,13 +603,14 @@ right: 10px;
   display: none !important;
 }
 
-@media (max-width: 992px){
+@media (max-width: 990px){
   .desktop-toggle{
     display: none !important;
   }
   .mobile-toggle{
     display: block !important;
   }
+  
   /* Sun color for light mode */
   body:not(.dark-mode) .toggleIcon {
     color: #333;
@@ -621,22 +621,22 @@ right: 10px;
   .dark-mode .toggleIcon {
     color: #1d1d1d; /* Moon icon color for dark mode */
     background-color: #f0f0f0; 
-}
+  }
   .normal-nav{
     display: none !important;
   }
   .mobile-nav{
     display: block !important;
+    padding: 0 0.8rem !important;
   }
-  .collapse{
-    margin: 0 !important;
-    padding: 0 0 1rem 0 !important;
-    /* border: 1px solid rgb(191, 191, 191) !important; */
-    box-shadow: -1px 4px 5px rgba(3, 3, 3, 0.4);
+  .search-box{
+    padding: 0 0.8rem 1rem 0.8rem !important;
   }
+
   .mobile-nav ul {
     list-style-type: none; /* Removes bullet points */
     padding-left: 0.7rem; /* Removes any left padding */
+    margin-bottom: 0 !important;
   }
   .mobile-nav li {
     margin-bottom: 10px; /* Adds some space between list items */
@@ -722,7 +722,11 @@ right: 10px;
       border-radius:50px;
     }
 
-    
+    @media (min-width: 991px) and (max-width: 1005px) {
+      .search-box {
+        width: 40% !important;
+      }
+    }
     @media (min-width: 1000px) and (max-width: 1399px) {
       .custom_nav {
         flex-direction: row;
