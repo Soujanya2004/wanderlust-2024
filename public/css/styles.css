@@ -206,7 +206,6 @@ footer {
 .listing-card{
     border: none !important;
     margin-bottom: 2.5rem !important;
-    margin-left: 2rem !important;
     
 }
 .card{
@@ -630,12 +629,7 @@ right: 10px;
   .mobile-nav{
     display: block !important;
   }
-  .collapse{
-    margin: 0 !important;
-    padding: 0 0 1rem 0 !important;
-    /* border: 1px solid rgb(191, 191, 191) !important; */
-    box-shadow: -1px 4px 5px rgba(3, 3, 3, 0.4);
-  }
+
   .mobile-nav ul {
     list-style-type: none; /* Removes bullet points */
     padding-left: 0.7rem; /* Removes any left padding */
