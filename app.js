@@ -31,6 +31,12 @@ const { deleteReview, reviewPost } = require("./controllers/reviews.js");
 const cors = require('cors'); // CORS added
 const router = require('./routes/routes.js')
 
+//delte old profile pics and to avoid ERR_HTTP_HEADERS_SENT Error
+const fs = require('fs');
+const { promisify } = require('util');
+const unlinkAsync = promisify(fs.unlink); // Promisify fs.unlink
+
+
 // Use CORS for all routes
 app.use(cors({
   origin: 'http://your-frontend-domain.com', // Replace with your frontend domain
@@ -111,7 +117,6 @@ app.use((req, res, next) => {
 
 //use router
 app.use('/', router);
-
 
 
 

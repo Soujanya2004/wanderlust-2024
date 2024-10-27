@@ -10,6 +10,9 @@ const upload = multer({ storage })
 const reviews = require('../models/reviews.js')
 const { deleteReview, reviewPost } = require('../controllers/reviews.js')
 const multer = require('multer')
+const fs = require('fs')
+const unlinkAsync = promisify(fs.unlink);
+
 //About us page
 router.get('/about', asyncwrap(async (req, res) => {
     try {
@@ -138,6 +141,24 @@ router.post("/profile/upload", isLoggedIn, profileUpload.single("profilePic"), a
         }
 
         const userId = req.user._id; // Ensure user is logged in
+        const user = await User.findById(userId);
+
+        if (user.profileImage) {
+            const oldImagePath = path.join(__dirname, user.profileImage);
+
+            // Check if file exists before deleting
+            if (fs.existsSync(oldImagePath)) {
+                try {
+                    await unlinkAsync(oldImagePath);
+                    console.log("Old profile image deleted successfully.");
+                } catch (err) {
+                    console.error("Error deleting old image:", err);
+                }
+            } else {
+                console.log("Old image file not found, skipping deletion.");
+            }
+        }
+
         const imagePath = `/uploads/${req.file.filename}`;
 
         // Update the user's profile image path in the database
@@ -151,11 +172,11 @@ router.post("/profile/upload", isLoggedIn, profileUpload.single("profilePic"), a
         res.status(500).redirect("/profile");
     }
 });
-
 //define listing conroller
 //BUG FIX
 const listingController = require('../controllers/listing.js');
 const multer = require('multer');
+const { promisify } = require('util');
 // Create new listing form route
 // app.get("/new",isLoggedIn, asyncwrap(newpost));
 router.get("/listing/new", isLoggedIn, asyncwrap(listingController.newpost));
