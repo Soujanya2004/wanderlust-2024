@@ -3,8 +3,7 @@ body{
 }
 .navbar{
     height: 5rem;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif !important;
-    /* padding: 0.5rem 0.5rem !important; */
+    font-family: Arial, Helvetica, sans-serif !important;
     position: absolute;
     z-index: 10;
 }
@@ -23,6 +22,7 @@ body{
     font-weight: bold;
     margin-left: -5px;
     margin-right: 10px;
+    font-family: "Lucida Console", Courier, monospace;
 }
 
 .nav-link{
@@ -104,7 +104,7 @@ footer {
 
 .footer-left .brand h2 {
   font-size: 50px;
-  font-family: Reggae One;
+  font-family: 'Lobster', cursive !important;
   font-weight: bold;
   margin-bottom: 10px;
 }
@@ -144,7 +144,6 @@ footer {
 .footer-right h3 {
   font-size: 21px;
   font-weight: bold;
-  font-family: rekkas;
   color: #333;
   margin-top: 15px;
 }
@@ -213,7 +212,6 @@ footer {
     margin-left: 15px;
     margin-bottom: 40px !important;
     padding: 25px !important;
-    /* border-color:rgb(255, 87, 34)!important; */
 }
 .card-img-overlay{
     opacity: 0;
@@ -288,7 +286,7 @@ footer {
 
 .faq-left h2 {
   font-size: 2em;
-  font-family: rakkas;
+  font-family: "Lucida Console", Courier, monospace;
   font-weight: bolder;
   margin-bottom: 20px;
 }
