@@ -1,17 +1,46 @@
 <%- layout("/layouts/boilerplate") -%>
-<div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1 justify-content-center">
-    <% for (let listing of results) { %>
-      <div class="card col listing-card" style="width: 21rem;">
-        <a href="/listing/<%= listing._id %>" class="show">
-          <img src="<%= listing.image[0].url %>" class="card-img-top" alt="listing_image" style="height: 20rem;" />
+<style>
+  .listing-card{
+        min-height: fit-content !important;
+        /* padding-bottom: 1rem !important; */
+  }
+  .popup{
+    transition: transform 0.3s ease;
+  }
+  .popup:hover{
+    /* transform: translateY(-0.2rem); */
+    transform: scale(1.01) translateY(-0.1rem);
+  }
+  .card-img-top{
+    height: 20rem !important;
+  }
+  .show_btn{
+    margin-bottom: 0 !important;
+  }
+  .card-body{
+    padding-bottom: 0.2 !important;
+    height: fit-content !important;
+    /* max-height: auto; */
+  }
+</style>
+  <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2 gx-3"> <!-- Changed row-col-3 to row-cols-3 and removed row-cols-xs-1 -->
+    <% for (listing of results) { %>
+      <div class="col popup"> <!-- Added .col to ensure grid layout works -->
+
+        <div class="card listing-card">
+          <img src="<%= listing.image[0].url %>" class="card-img-top" alt="listing_image" />
           <div class="card-body">
-            <h5 class="card-title"><%= listing.title %></h5>
-            <p class="card-text"><i><%= listing.description %></i> 
-              <br>&#8377;<%= listing.price.toLocaleString("en-IN") %> / night</p>
-            <p class="card-text">Location: <%= listing.location %>, <%= listing.country %></p>
-            <a href="/listing/<%= listing._id %>" class="btn btn-dark">Show in Detail</a>
+            <h4 class="card-title">
+              <%= listing.title.length > 26 ? listing.title.substring(0, 25) + '....' : listing.title %>
+            </h4>    
+            <p class="mt-3">
+              <span class="price" data-base-price="<%= listing.price %>"><%= listing.price.toLocaleString("en-IN") %></span> / night 
+              <span class="gst-label">(excl. GST)</span>
+            </p>
+            <p class="card-text location"><i class="fa-solid fa-location-crosshairs"></i>&nbsp; <%= listing.location %>, <%= listing.country %></p>
+            <a href="/listing/<%= listing._id %>" class="btn btn-dark show_btn">Show in Detail</a>
           </div>
-        </a>
-      </div>
+        </div>
+      </div> <!-- End of .col -->
     <% } %>
   </div>
