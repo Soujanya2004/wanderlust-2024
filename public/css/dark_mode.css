@@ -214,4 +214,16 @@
         .scroll-btn i:hover{
             text-shadow: .5px 0px 1px rgb(179, 179, 179);
         }
+        .password-box {
+            position: relative;
+            width: 100%; /* Adjust width as needed */
+        }
+        #togglePassword {
+            position: absolute;
+            right: 10px; /* Position from the right */
+            top: 50%; /* Center vertically */
+            transform: translateY(-50%); /* Adjust vertical alignment */
+            cursor: pointer;
+            color: #adadad; /* Icon color */
+          }
 }
