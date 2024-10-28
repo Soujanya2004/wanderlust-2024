@@ -188,6 +188,12 @@
     .faq-left .contact-info span i {
         color: #cacaca;
       }
+      .tax-toggler{
+        background-color: #363636;
+      }
+      .tax-toggler label{
+        color: #fff;
+      }
 
     
       /* SLIDING BAR */
