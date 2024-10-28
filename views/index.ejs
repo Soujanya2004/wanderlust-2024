@@ -52,8 +52,25 @@
         .red-text {
     color: rgba(255, 0, 0, 0.607);
   }
-
-
+  /* Styling for GST toggle */
+        .tax-toggler-container {
+            display: flex;
+            justify-content: flex-end;
+          }
+        .tax-toggler {
+          box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.2); 
+          width: 200px;
+          position: relative;
+          right: 1rem; 
+          padding: 8px 14px;
+          border-radius: 8px;
+          z-index: 10;
+            }
+        .tax-toggler label {
+            font-size: 11px;
+            margin-left: 5px;
+            cursor: pointer;
+        }
 </style>
 <body>
   
@@ -131,6 +148,7 @@
     <div class="row row-cols-3 row-cols-lg-3 row-cols-md-2 row-cols-sm-2 gx-3"> <!-- Changed row-col-3 to row-cols-3 and removed row-cols-xs-1 -->
       <% for (listing of listings) { %>
         <div class="col popup"> <!-- Added .col to ensure grid layout works -->
+
           <div class="card listing-card">
             <img src="<%= listing.image[0].url %>" class="card-img-top" alt="listing_image" />
             <div class="card-body">
@@ -206,8 +224,8 @@
   </div>
 </div>
 
-
 <!-- GST CALCULATE -->
+
 <script>
   //Change the gstRate accordingly
 const gstRate = 0.18;
@@ -239,7 +257,6 @@ function toggleGST() {
 document.addEventListener("DOMContentLoaded", toggleGST);
 </script>
 
-
 <script>
   const filters = document.getElementById('filters');
   const leftButton = document.querySelector('.left');
@@ -263,6 +280,8 @@ leftButton.addEventListener('click',scrollLeft);
 rightButton.addEventListener('click',scrollRight);
 
 </script>
+
+<!-- FILLTERS -->
 <script>
   document.querySelectorAll('.faq-item').forEach(item => {
     item.addEventListener('click', () => {
@@ -288,6 +307,9 @@ rightButton.addEventListener('click',scrollRight);
     });
 });
 </script>
+
+
+<!-- FILLTERS -->
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const toggleDescriptionLinks = document.querySelectorAll('.toggle-description');
