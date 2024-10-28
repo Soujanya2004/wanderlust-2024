@@ -62,10 +62,11 @@
     /* SLIDING BAR css */
 
     .card {
-        background-color: #202122;
+        background-color: #363636;
+        box-shadow: 0 8px 8px #000000;
         color: #ffffff;
         cursor: pointer;
-        border-radius: 15px;
+        /* border-radius: 15px; */
     }
     .card-body {
         color: #ffffff;
@@ -145,22 +146,26 @@
         color: #ffffff;
     }
     .footer-left .contact-info i {
-        color: #007bff;
+        color: #a4a4a4;
     }
     footer a {
-        color: #007bff;
+        color: #878787;
     }
     footer a:hover {
-        color: #007bff;
+        color: #b5b5b5;
     }
-
+    .btw-foot{
+        color: #a4a4a4;
+    }
     .company-links h3{
         color: #f7f7f7;
     }
     .company-links ul li a{
         color: #dddddd;
     }
-    
+    .location{
+        opacity: 0.7 !important;
+    }
     .company-links ul li a:hover{
         color: #fafafa;
         text-decoration: underline;
@@ -176,15 +181,24 @@
     }
 
     .social-media a:hover {
-        color: #ffffff;
+        color: #bdbdbd;
         transform: scale(1.1);
     }  
 
+    .faq-left .contact-info span i {
+        color: #cacaca;
+      }
+      .tax-toggler{
+        background-color: #363636;
+      }
+      .tax-toggler label{
+        color: #fff;
+      }
 
     
       /* SLIDING BAR */
       .filter {
-        background-color: #202122;
+        background-color: #363636;
         color: #ffffff;
         }
         .filter i {

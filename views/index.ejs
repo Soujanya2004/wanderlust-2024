@@ -1,17 +1,56 @@
 <% layout("/layouts/boilerplate") %>
 <style>
   .listing-card{
-      height: 550px !important;
+        min-height: fit-content !important;
+        /* padding-bottom: 1rem !important; */
+  }
+  .popup{
+    transition: transform 0.3s ease;
+  }
+  .popup:hover{
+    /* transform: translateY(-0.2rem); */
+    transform: scale(1.01) translateY(-0.1rem);
   }
   .card-img-top{
-    height: 13rem !important;
-  }
-  .dsc{
-    height: 1rem !important;
+    height: 20rem !important;
   }
   .show_btn{
-    position: absolute;
-    bottom: 1.2rem !important;
+    margin-bottom: 0 !important;
+  }
+  .card-body{
+    padding-bottom: 0.2 !important;
+    height: fit-content !important;
+    /* max-height: auto; */
+  }
+  .faq-left{
+    padding-left: 2rem;
+  }
+  .contact-info a{
+    color: #999;
+    font-size: 1.1rem !important;
+    font-weight: 400 !important;
+  }
+   /* Styling for GST toggle */
+   .tax-toggler-container {
+            display: flex;
+            justify-content: flex-end;
+          }
+        .tax-toggler {
+          box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.2); 
+          width: 200px;
+          position: relative;
+          right: 1rem; 
+          padding: 8px 14px;
+          border-radius: 8px;
+          z-index: 10;
+            }
+        .tax-toggler label {
+            font-size: 11px;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+        .red-text {
+    color: rgba(255, 0, 0, 0.607);
   }
   /* Styling for GST toggle */
         .tax-toggler-container {
@@ -90,6 +129,7 @@
 
     <!-- LISTINGS -->
   <br>
+
   <!-- Listings -->
   <div class="container">
     <!-- toogler -->
@@ -102,32 +142,31 @@
       </div>
     </div>
   </div>
-    <div class="row">
-      <% for( listing of listings) { %>
-        <div class="col-lg-4 col-md-6">
+
+  <!-- Listings -->
+  <div class="container my-4">
+    <div class="row row-cols-3 row-cols-lg-3 row-cols-md-2 row-cols-sm-2 gx-3"> <!-- Changed row-col-3 to row-cols-3 and removed row-cols-xs-1 -->
+      <% for (listing of listings) { %>
+        <div class="col popup"> <!-- Added .col to ensure grid layout works -->
+
           <div class="card listing-card">
-            <img src="<%= listing.image[0].url %>" class="card-img-top" alt="listing_image" style="height: 20rem;" />
+            <img src="<%= listing.image[0].url %>" class="card-img-top" alt="listing_image" />
             <div class="card-body">
-              <h5 class="card-title"><%= listing.title %></h5>
-
-                <% if (listing.description.length < 100) { %>
-                  <p class="card-text"><i><%= listing.description %></i></p>            
-                <% } else if (listing.description.length > 100) {%>
-                  <p class="card-text desc"><i><%= listing.description.slice(0, 70) %></i>
-                  <a class="btn btn-link" href="/listing/<%= listing._id %>">Show More</a></p>
-              <% } %> 
-
-              <p class="card-text">
-                &#8377;<span class="price" data-base-price="<%= listing.price %>"><%= listing.price.toLocaleString("en-IN") %></span> / night 
+              <h4 class="card-title">
+                <%= listing.title.length > 26 ? listing.title.substring(0, 25) + '....' : listing.title %>
+              </h4>    
+              <p class="mt-3">
+                <span class="price" data-base-price="<%= listing.price %>"><%= listing.price.toLocaleString("en-IN") %></span> / night 
                 <span class="gst-label">(excl. GST)</span>
-              </p>              
-              <p class="card-text">Location: <%= listing.location %>, <%= listing.country %></p>
+              </p>
+              <p class="card-text location"><i class="fa-solid fa-location-crosshairs"></i>&nbsp; <%= listing.location %>, <%= listing.country %></p>
               <a href="/listing/<%= listing._id %>" class="btn btn-dark show_btn">Show in Detail</a>
             </div>
           </div>
-        </div>
+        </div> <!-- End of .col -->
       <% } %>
     </div>
+    
   </div>
 
   </div>
@@ -136,10 +175,12 @@
 <div class="faq-container container" id="faq">
   <div class="faq-left">
     <h2>Frequently Asked Questions</h2>
-    <p>Your travel-related queries, answered to ensure a smooth journey! 🌍✨</p>
+    <p>Your travel-related queries, answered to ensure a smooth journey! 
+      <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f30f/512.gif" alt="🌏" width="28" height="28">
+      <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/2728/512.gif" alt="✨" width="28" height="28"></p>
     <div class="contact-info">
       <span><i class="fas fa-envelope"></i> Got any questions?</span>
-      <a href="mailto:support@wanderlust.com"><b>support@wanderlust.com</b></a>
+      <a href="mailto:support@wanderlust.com">support@wanderlust.com</a>
     </div>
   </div>
 
@@ -184,6 +225,7 @@
 </div>
 
 <!-- GST CALCULATE -->
+
 <script>
   //Change the gstRate accordingly
 const gstRate = 0.18;
@@ -201,10 +243,12 @@ function toggleGST() {
       // Show GST
       priceElement.innerText = totalPrice.toLocaleString("en-IN", { style: "currency", currency: "INR" });
       gstLabels[index].innerText = "(incl. GST)";
+      gstLabels[index].classList.add("red-text"); // Add red color
     } else {
       // without GST
       priceElement.innerText = basePrice.toLocaleString("en-IN", { style: "currency", currency: "INR" });
       gstLabels[index].innerText = "(excl. GST)";
+      gstLabels[index].classList.remove("red-text"); // Add red color
     }
   });
 }
@@ -213,8 +257,6 @@ function toggleGST() {
 document.addEventListener("DOMContentLoaded", toggleGST);
 </script>
 
-
-<!-- FILLTERS -->
 <script>
   const filters = document.getElementById('filters');
   const leftButton = document.querySelector('.left');
@@ -295,3 +337,6 @@ rightButton.addEventListener('click',scrollRight);
 
 
 </body>
+
+
+

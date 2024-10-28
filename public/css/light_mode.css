@@ -61,7 +61,7 @@
     }
     
      .footer-left .contact-info i {
-        color: #007bff;
+        color: #727272;
       }
       
      .footer-left .contact-info p {
@@ -69,7 +69,7 @@
     }
         
      .footer-left .contact-info p a {
-        color: #007bff;
+        color: #a2a2a2;
     }
      .footer-middle h3,
         .footer-right h3 {
@@ -95,13 +95,17 @@
     }
     
     .footer-right .social-media a {
-        color: #007bff;
+        color: #474747;
     }
     .footer-right .social-media a:hover {
-        color: #0056b3;
+        color: #656565;
       }
       .copyright p {
         color: #666;
+      }
+      .card{
+        background-color: #e5e5e53d;
+        box-shadow: 0 8px 10px #b1b1b19e;
       }
       .card-img-overlay:hover{
         background-color: rgb(255, 255, 255);
@@ -128,7 +132,7 @@
       }
 
       .faq-left .contact-info span i {
-        color: #28a745;
+        color: #474747;
       }
 
       /* RIGHT SECTION */
