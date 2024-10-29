@@ -4,9 +4,9 @@
         max-width: 800px;
         margin: 3rem auto;
         padding: 2rem;
-        background-color: #ffffff;
+        background-color: #e7e7e7c5;
         border-radius: 15px;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 5px 16px rgba(0, 0, 0, 0.353);
     }
 
     h1 {
@@ -18,25 +18,23 @@
 
     .profile-card {
         display: flex;
-        align-items: center;
         justify-content: space-between;
         padding: 2rem;
         background-color: #f7f7f7;
-        border-radius: 15px;
+        border-radius: 10px;
+        border: 2px solid rgba(128, 128, 128, 0.593);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-        transition: transform 0.3s ease;
     }
-
-    .profile-card:hover {
-        transform: scale(1.02);
-    }
-
-    .profile-picture img {
+    .profile-picture {
         border-radius: 50%;
         width: 160px;
         height: 160px;
         object-fit: cover;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+    .profile-picture img{
+        width: inherit;
+        height: inherit;
     }
 
     .profile-details {
@@ -47,16 +45,13 @@
     .profile-details p {
         font-size: 1.2rem;
         margin: 0.5rem 0;
+        color: #878787;
     }
 
-    .profile-details strong {
+    .profile-details span {
         color: #34495e;
+        font-weight: 600;
     }
-
-    /* .edit-profile-container {
-        margin-top: 1rem;
-        text-align: center;
-    } */
 
     /* Profile Picture Upload Styling */
     .upload-container {
@@ -77,11 +72,19 @@
         cursor: pointer;
         transition: background-color 0.3s ease;
     }
+    @media(max-width: 455px){
+        .profile-details{
+            margin-left: 0;
+        }
+        .profile-card{
+            padding: 2rem 1rem;
+        }
+    }
 
     /* DARKMODE CSS */
     .dark-mode{
         .profile-container {
-            background-color: #2b2b2b;
+            background-color: #494949;
             box-shadow: 0 2px 5px rgba(119, 119, 119, 0.4);
         }
 
@@ -102,8 +105,8 @@
             color: #cccccc;
         }
 
-        .profile-details strong {
-            color: #a5a5a5;
+        .profile-details span {
+            color: #f5f5f5;
         }
     }
 </style>
@@ -111,29 +114,21 @@
 <div class="profile-container">
     <h1>Welcome, <%= user.username %>!</h1>
 
-    <div class="profile-card">
+    <div class="d-flex flex-column align-items-center justify-content-center flex-md-row justify-content-md-around profile-card">
         <div class="profile-picture">
-            <div>
                 <% if (user.profilePicture.purl) { %>
                     <img src="<%= user.profilePicture.purl %>" alt="Profile Image">
                 <% } else { %>
                     <img src="../profile.png" alt="Default Profile Image">
                 <% } %>
-            </div>            
         </div>
 
         <div class="profile-details">
-            <p><strong>Username:</strong> <%= user.username %></p>
-            <p><strong>Email ID:</strong> <%= user.email %></p>
-
-            <a class="btn btn-outline-primary" href="/profile/edit" class="btn">Edit Profile</a>
-
-            <!-- Profile Picture Upload Feature -->
-            
+            <p><span>Username:</span> <%= user.username %></p>
+            <p><span>Email ID:</span> <%= user.email %></p>
+            <div class="">
+                <a class="btn btn-secondary btn-sm text-center" href="/profile/edit" class="btn">Edit Profile</a>            
+            </div>
         </div>
     </div>
-
-    <!-- <div class="edit-profile-container">
-        <a class="btn btn-outline-primary" href="/profile/edit">Edit Your Details</a>
-    </div> -->
 </div>
