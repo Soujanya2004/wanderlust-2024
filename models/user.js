@@ -7,9 +7,9 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    profileImage: {
-        type: String, // Store the file path or URL here
-        default: "../profile.png" // default profile image
+    profilePicture: {
+        purl: String, // Store the file path or URL here
+        pfilename: String,        
     }
 });
 
