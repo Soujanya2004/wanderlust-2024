@@ -10,6 +10,10 @@ const userSchema = new Schema({
     profileImage: {
         type: String, // Store the file path or URL here
         default: "../profile.png" // default profile image
+    },
+    isAdmin: { // Add this field
+        type: Boolean,
+        default: false // Default is false for regular users
     }
 });
 
