@@ -52,6 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
               password = document.querySelector('input[name="password"]');
           const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
           password.setAttribute('type', type);
+          this.classList.toggle('fa-eye'); // Toggle icon
           this.classList.toggle('fa-eye-slash'); // Toggle icon
       })
   });

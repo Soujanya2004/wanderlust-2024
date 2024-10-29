@@ -99,16 +99,18 @@ app.use((req, res, next) => {
   next();
 });
 
+
+// Default route for '/' path
 app.get("/", asyncwrap(async (req,res) => {
 
     const listings = await listing.find();
-    // console.log("Listings fetched:", listings);
     res.render("index.ejs", { listings });
   
 })); 
 
-// About us page
-app.get('/about', asyncwrap(async (req, res) => {
+
+//About us page
+app.get('/about',asyncwrap ( async (req, res) => {
   try {
     res.render('about');
   } catch (err) {
@@ -322,6 +324,6 @@ app.use((err, req, res, next) => {
   res.render("error.ejs", { msg, status });
 });
 
-app.listen(port, () => {
-  console.log(`App listening at http://localhost:${port}`);
+app.listen(port, () =>{
+    console.log("server is listening on port", port);
 });
