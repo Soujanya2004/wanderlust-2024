@@ -2,44 +2,52 @@
 <br>
 <br>
 <style>
+    .form_body {
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            padding: 30px;
+            box-shadow: 0 7px 15px rgba(113, 113, 113, 0.626);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
     /* Form Container - Floating Effect */
     .dark-mode{
         .form_body {
-            background-color: #1e1e1e;
-            border-radius: 10px;
+            background-color: #2e2e2e;
+            border-radius: 5px;
             padding: 30px;
             box-shadow: 0 7px 15px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
     
-        .form_body:hover {
+        /* .form_body:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8);
-        }
+        } */
         .form-label {
             color: #ffffff;
         }
         /* Input Fields Styling */
         .signup_form input[type="text"], input[type="password"],input[type="email"]{
-            background-color: #2c2c2c;
+            background-color: #373737;
             color: #ffffff;
             border: 1px solid #555555;
-            transition: box-shadow 0.3s ease;
+            /* transition: box-shadow 0.3s ease; */
         }
     
         .signup_form input[type="text"]::placeholder,
-        .signup_form input[type="password"]::placeholder {
+        .signup_form input[type="password"]::placeholder, 
+        .signup_form input[type="email"]::placeholder {
             color: #aaaaaa;
-            border: 1px solid #555555;
-            border-radius: 5px;
-            padding: 12px;
-            width: 100%;
-            margin-top: 10px;
+            /* border: 1px solid #555555; */
+            /* border-radius: 5px; */
+            /* padding: 12px; */
+            /* width: 100%; */
+            /* margin-top: 10px; */
         }
     }
     </style>
 <div class="row">
-    <div class="col-6 offset-3 form_body">
+    <div class="col-4 mx-auto form_body">
         <form method="POST" action="/signup" novalidate class="needs-validation">
             <div class="mb-3 signup_form">
                 <label for="username" class="form-label">Username</label>
@@ -76,8 +84,8 @@
                <div class="invalid-feedback">
                    Please enter valid password
               </div>
-              <br>
-              <div class="mb-3 signup_form">
+            </div>
+            <div class="mb-3 signup_form">
                 <label for="password" class="form-label">Confirm Password</label>
                 <br>
                 <div class="password-box">
@@ -90,8 +98,13 @@
                <div class="invalid-feedback">
                    Passwords Should match
               </div>
-              <br>
-                <button class="btn btn-outline-danger col-6 offset-3" name="saveButton" type="submit">Signup</button>
+            </div>
+            <br>
+            <div class="d-grid gap-2">
+                <button class="btn btn-danger" name="saveButton" type="submit">Sign up</button>
+                <!-- <a class="btn btn-secondary" name="saveButton" type="button">Go back</a> -->
+                <a href="/listing" class="btn btn-secondary" type="button">Go back</a>
+              </div>
             </div>
         </form>
         

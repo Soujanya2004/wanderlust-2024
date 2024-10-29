@@ -111,6 +111,14 @@ app.use((req, res, next) => {
   next();
 });
 
+// Default route for '/' path
+app.get("/", asyncwrap(async (req,res) => {
+
+    const listings = await listing.find();
+    res.render("index.ejs", { listings });
+  
+})); 
+
 //About us page
 app.get('/about',asyncwrap ( async (req, res) => {
   try {
