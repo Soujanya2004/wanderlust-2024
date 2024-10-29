@@ -31,11 +31,7 @@ const { deleteReview, reviewPost } = require("./controllers/reviews.js");
 const cors = require('cors');
 const fs = require('fs');
 const { promisify } = require('util');
-const unlinkAsync = promisify(fs.unlink);
-// const profileRoutes = require("./routes/profilePicUpload"); // Import the profile route
-// const multer  = require("multer"); // Require multer
-// const {storage} = require("../cloudConfig.js") // Require the storage from cloud storage configuration file
-// const upload = multer({ storage }); 
+
 
 
 app.use(cors({
