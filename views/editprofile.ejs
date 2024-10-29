@@ -45,7 +45,7 @@
 <div class="edit-profile-container">
     <h1 style="text-align: center; padding-top: 2rem; font-family: rakkas;">Edit Your Profile</h1>
 
-    <form action="/profile/edit" method="POST">
+    <form action="/profile/edit" method="POST" enctype="multipart/form-data">
         <div class="mb-3 col-6 offset-3">
             <label for="username" class="form-label">Username</label>
             <input type="text" name="username" class="form-control" value="<%= user.username %>" required>
@@ -54,6 +54,11 @@
         <div class="mb-3 col-6 offset-3">
             <label for="email" class="form-label">Email</label>
             <input type="email" name="email" class="form-control" value="<%= user.email %>" required>
+        </div>
+
+        <div class="mb-3 col-6 offset-3">
+            <label for="image" class="form-label form-label-listings">Upload Profile Image</label>
+            <input type="file" name="profileimage" id="" class="form-control" required>
         </div>
 
         <button type="submit" class="btn btn-outline-danger col-4 offset-4">Save Changes</button>

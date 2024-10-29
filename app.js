@@ -29,10 +29,10 @@ const { isOwner, isAuthor } = require("./middlewares/middleware.js");
 const { index, newpost, createpost, editpost, saveEditpost, search, deletepost, showPost, signup } = require("./controllers/listing.js");
 const { deleteReview, reviewPost } = require("./controllers/reviews.js");
 const cors = require('cors');
-
 const fs = require('fs');
 const { promisify } = require('util');
-const unlinkAsync = promisify(fs.unlink);
+
+
 
 app.use(cors({
   origin: 'http://your-frontend-domain.com',
@@ -57,7 +57,9 @@ app.use(express.static(path.join(__dirname, "/public")));
 app.use(methodOverride('_method'));
 app.use(express.urlencoded({ extended: true }));
 app.engine('ejs', ejsMate);
-app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
+// app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
+app.use(express.json());
+
 
 const store = MongoStore.create({
   mongoUrl: dbUrl,
@@ -224,17 +226,24 @@ app.get("/profile/edit", isLoggedIn, async (req, res) => {
   }
 });
 
-app.post('/profile/edit', isLoggedIn, async (req, res) => {
+app.post('/profile/edit', isLoggedIn, upload.single("profileimage"), async (req, res) => {
   try {
+    let purl = req.file.path;
+    let pfilename = req.file.filename;
     const { username, email } = req.body;
-    if (!email) throw new Error("Email is required.");
+    if (!email || !username){
+      req.flash("error", "Username & Email must be there!")
+      return res.redirect('/profile/edit'); // Return to ensure single response
+    }
 
     const user = await User.findById(req.user._id);
     user.username = username;
     user.email = email;
+    user.profilePicture = {purl, pfilename}
 
     await user.save();
-    return res.redirect('/listing'); // Return to ensure single response
+    // console.log(user);
+    return res.redirect('/profile'); // Return to ensure single response
   } catch (err) {
     console.error("Error updating profile:", err);
     return res.status(400).send("Profile update failed. Make sure all required fields are filled.");
@@ -243,59 +252,8 @@ app.post('/profile/edit', isLoggedIn, async (req, res) => {
 
 // Listing controller
 const listingController = require('./controllers/listing.js');
-
 // Create new listing form route
 app.get("/listing/new", isLoggedIn, asyncwrap(listingController.newpost));
-
-// Profile image upload
-const profileStorage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads/");
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + "-" + file.originalname);
-  }
-});
-const profileUpload = multer({ storage: profileStorage });
-
-app.post("/profile/upload", isLoggedIn, profileUpload.single("profilePic"), async (req, res) => {
-  try {
-    if (!req.file) {
-      req.flash("error", "No file uploaded.");
-      return res.redirect("/profile"); // Return to prevent multiple responses
-    }
-
-    const userId = req.user._id;
-    const user = await User.findById(userId);
-
-    // Check and delete old profile image
-    if (user.profileImage) {
-      const oldImagePath = path.join(__dirname, user.profileImage);
-      
-      if (fs.existsSync(oldImagePath)) {
-        try {
-          await unlinkAsync(oldImagePath);
-          console.log("Old profile image deleted successfully.");
-        } catch (err) {
-          console.error("Error deleting old image:", err);
-        }
-      } else {
-        console.log("Old image file not found, skipping deletion.");
-      }
-    }
-
-    const imagePath = `/uploads/${req.file.filename}`;
-    await User.findByIdAndUpdate(userId, { profileImage: imagePath });
-    
-    req.flash("success", "Profile image uploaded successfully.");
-    return res.redirect("/profile"); // Return to ensure single response
-  } catch (err) {
-    console.error("Error uploading profile image:", err);
-    req.flash("error", "Error uploading profile image.");
-    return res.status(500).redirect("/profile"); // Return to ensure single response
-  }
-});
-
 // Listing routes
 app.get("/listing", asyncwrap(index));
 app.post("/listing", upload.array('listing[image]', 10), isLoggedIn, asyncwrap(createpost));

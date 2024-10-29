@@ -114,19 +114,12 @@
     <div class="profile-card">
         <div class="profile-picture">
             <div>
-                <% if (user.profileImage) { %>
-                    <img src="<%= user.profileImage %>" alt="Profile Image">
+                <% if (user.profilePicture.purl) { %>
+                    <img src="<%= user.profilePicture.purl %>" alt="Profile Image">
                 <% } else { %>
                     <img src="../profile.png" alt="Default Profile Image">
                 <% } %>
-            </div>
-            <div class="upload-container">
-                <form action="/profile/upload" method="POST" enctype="multipart/form-data">
-                    <input type="file" id="profilePic" name="profilePic" onchange="this.form.submit()">
-                    <label for="profilePic">Upload Profile Pic</label>
-                </form>
-            </div>
-            
+            </div>            
         </div>
 
         <div class="profile-details">
