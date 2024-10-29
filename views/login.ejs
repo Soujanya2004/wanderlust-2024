@@ -2,19 +2,28 @@
 <br>
 <br>
 <style>
+    
+    .form_body{
+        background-color: #f1f1f1;
+        border-radius: 8px;
+        padding: 30px;
+        box-shadow: 0 7px 15px rgba(113, 113, 113, 0.626);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .login_form input[type="text"],
+    .login_form input[type="password"] {
+        border-radius: 5px;
+        padding: 12px;
+        width: 100%;
+        margin-top: 10px;
+    }
     /* Form Container - Floating Effect */
     .dark-mode{
         .form_body {
-            background-color: #1e1e1e;
-            border-radius: 10px;
+            background-color: #2e2e2e;
+            border-radius: 8px;
             padding: 30px;
             box-shadow: 0 7px 15px rgba(0, 0, 0, 0.5); /* Initial shadow to lift form */
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover transition */
-        }
-
-        .form_body:hover {
-            transform: translateY(-5px); /* Moves the form upward */
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8); /* Increases shadow to create more depth */
         }
 
         /* Input Fields Styling */
@@ -46,9 +55,8 @@
 </style>
 
 
-
 <div class="row">
-    <div class="col-5 mx-auto form_body">
+    <div class="col-4 mx-auto form_body">
         <form method="POST" action="/login" novalidate class="needs-validation">
             <div class="mb-3 login_form">
                 <label for="username" class="form-label">Username</label>
@@ -70,8 +78,10 @@
                    Password not found
               </div>
               <br>
-              
-                <button class="btn btn-outline-danger col-6 offset-3" name="saveButton" type="submit">LOGIN</button>
+              <div class="d-grid gap-2">
+                <button class="btn btn-danger" name="saveButton" type="submit">LOG IN</button>
+                <a href="/listing" class="btn btn-secondary" type="button">Go back</a>
+              </div>
             </div>
         </form>
         
