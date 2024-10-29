@@ -2,7 +2,7 @@
 <% if(success && success.length){ %>
 
     <button type="button" class="btn btn-primary" id="liveToastBtn" style="display:none;">Show live toast</button>
-    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div class="toast-container position-fixed top-4 end-0 p-5">
         <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header bg-success bg-gradient text-white">
                 <strong class="me-auto">Success</strong>
@@ -22,7 +22,7 @@
 <% if(error && error.length){ %>
 
     <button type="button" class="btn btn-primary" id="liveToastBtn" style="display:none;">Show live toast</button>
-    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div class="toast-container position-fixed top-4 end-0 p-5">
         <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header bg-danger bg-gradient text-white">
                 <strong class="me-auto">Error</strong>
