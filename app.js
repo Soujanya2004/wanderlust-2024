@@ -20,13 +20,13 @@ const cookieparser = require("cookie-parser");
 const session = require("express-session");
 const MongoStore = require('connect-mongo');
 const flash = require("connect-flash");
-const passport = require("passport");
-const localStrategy = require("passport-local");
-const User = require("./models/user.js");
-const { isLoggedIn } = require("./middlewares/middleware.js");
-const { saveRedirectUrl } = require("./middlewares/middleware.js");
-const { isOwner, isAuthor } = require("./middlewares/middleware.js");
-const { index, newpost, createpost, editpost, saveEditpost, search, deletepost, showPost, signup } = require("./controllers/listing.js");
+const passport=require("passport");
+const localStrategy=require("passport-local");
+const User=require("./models/user.js");
+const { isLoggedIn, isAdmin } = require("./middlewares/middleware.js");
+const {saveRedirectUrl}=require("./middlewares/middleware.js");
+const {isOwner,isAuthor}=require("./middlewares/middleware.js");
+const {index, newpost, createpost, editpost, saveEditpost,search, deletepost, showPost, signup}=require("./controllers/listing.js");
 const { deleteReview, reviewPost } = require("./controllers/reviews.js");
 const cors = require('cors');
 const fs = require('fs');
@@ -100,6 +100,62 @@ app.use((req, res, next) => {
   res.locals.currUser = req.user;
   next();
 });
+
+
+// ADMIN
+// ADMIN
+
+
+app.get('/admin/dashboard',isLoggedIn ,isAdmin, async (req, res) => {
+  try {
+    const listings = await listing.find();
+    // console.log(listings);
+    res.render('adminDashboard', { listings });
+  } catch (error) {
+      console.error('Error fetching listings:', error);
+      res.status(500).send('Internal Server Error');
+  }
+});
+
+
+//manage users
+app.get('/admin/users',isLoggedIn ,isAdmin, async (req, res) => {
+  try {
+    const users = await User.find();
+    // console.log(users);
+    res.render('manageUser', { users });
+  } catch (error) {
+      console.error('Error fetching Users:', error);
+      res.status(500).send('Internal Server Error');
+  }
+});
+
+//route to delete users
+app.delete('/admin/user/:id',isLoggedIn, isAdmin, async (req, res) => {
+  try {
+    console.log("Deleting user with ID:", req.params.id);
+      await User.findByIdAndDelete(req.params.id);
+      req.flash('success', 'User deleted!');
+      res.redirect('/admin/users');
+  } catch (error) {
+      res.status(500).send('Error deleting user: ' + error.message);
+  }
+});
+
+// Route to DELETE listings
+app.delete('/admin/listing/:id',isLoggedIn, isAdmin, async (req, res) => {
+  try {
+    console.log("Deleting listing with ID:", req.params.id);
+      await listing.findByIdAndDelete(req.params.id);
+      req.flash('success', 'Listing deleted!');
+      res.redirect('/admin/dashboard');
+  } catch (error) {
+      res.status(500).send('Error deleting listing: ' + error.message);
+  }
+});
+
+// ADMIN
+// ADMIN
 
 
 // Default route for '/' path
@@ -200,21 +256,26 @@ app.post('/signup', asyncwrap(async (req, res, next) => {
 
 // Login Route: Ensure return after authentication
 app.route("/login")
-  .get(asyncwrap((req, res) => {
-    res.render("login.ejs");
-  }))
-  .post(
-    saveRedirectUrl,
-    passport.authenticate("local", {
-      failureRedirect: "/login",
-      failureFlash: true
-    }), (req, res) => {
-      req.flash("success", "Welcome back to wanderlust!");
-      const redirect = res.locals.redirectUrl || "/listing";
-      return res.redirect(redirect); // Return to ensure single response
-    }
-  );
-
+.get( asyncwrap ((req,res) =>{
+  res.render("login.ejs");
+}))
+.post(
+  saveRedirectUrl,
+  passport.authenticate("local", {
+  failureRedirect: "/login",
+  failureFlash: true
+}), (req, res) => {
+  req.flash("success", "Welcome back to wanderlust!");
+  //admin login
+  if(req.user.isAdmin) {
+    req.flash("success","Welcome back to wanderlust! You are an admin.");
+    res.redirect("/admin/dashboard");
+  }
+  let redirect=res.locals.redirectUrl||"/listing";  
+  res.redirect(redirect); // Redirect to a route that will display the message
+});
+  
+ 
   app.get("/logout", (req, res, next) => {
     req.logout((err) => {
       if (err) {

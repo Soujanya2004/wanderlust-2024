@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/icon.png" />
+
+    <title>Wanderlust- listing Management</title>
+    <link rel="stylesheet" href="/css/styles.css"> 
+    <link rel="stylesheet" href="/css/light_mode.css">
+    <link rel="stylesheet" href="/css/dark_mode.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    
+
+<style>
+    h1 {
+        text-align: center;
+        font-family: rakkas;
+        font-size: 2em;
+        color: #333;
+        margin-top: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-family: Arial, sans-serif;
+        font-size: 1em;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    th, td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #e12d4b;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    td img {
+        width: 50px;
+        height: auto;
+        border-radius: 5px;
+        margin-right: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    form {
+        display: inline;
+    }
+    .btn{
+        width:70px;
+        padding: 0;
+        margin: 3px;
+    }
+       /* Responsive adjustments */
+       @media (max-width: 995px) {
+        table {
+            font-size: 0.7em;
+        }
+
+        h1 {
+            font-size: .9em;
+        }
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <!-- Brand and explore link on the left -->
+      <a class="navbar-brand" href="/listing"><i class="fa-solid fa-plane fa-rotate-by fa-2xl" style="--fa-rotate-angle: -39deg;"></i></a>
+      <a class="navbar-brand" href="/admin/dashboard"><i><b>Welcome To The Admin's Dashboard</b></i></a>
+      
+      <!-- dark mode toggle button for mobile -->
+     <div class="toggle-container mobile-toggle">
+      <button class="darkModeToggle dark-mode-toggle">
+        <i class="toggleIcon bx bxs-moon"></i>
+      </button>
+     </div>
+      
+      <!-- Navbar Toggler for small screens -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <!-- Navbar Collapse (links and form) -->
+      <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+        
+        <!-- Left side navigation links -->
+        <ul class="navbar-nav ml-auto main-menues normal-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/dashboard">Manage Listings</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/users">Manage Users</a>
+          </li>
+          <li class="nav-item toggle-container desktop-toggle">
+            <button class="darkModeToggle dark-mode-toggle">
+              <i class="toggleIcon bx bxs-moon"></i>
+            </button>
+          </li>
+        </ul>
+  
+        <!-- Nav bar for mobile only -->
+      <div class="mobile-nav">
+        <ul>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/dashboard">Manage Listings</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/users">Manage Users</a>
+          </li>
+
+          <% if(!currUser) {%> <!--If inside currUser have not any user data then show this-->
+            <li class="nav-item">
+              <a class="nav-link" href="/signup">Sign up</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Log in</a>
+            </li>
+            <% } %>
+
+              <% if(currUser) {%>
+                <li class="nav-item">
+                  <a class="nav-link" href="/logout">Log out</a>
+                </li>
+                <% } %>
+        </ul>
+
+      </div>
+  
+        <!-- Search bar in the middle -->
+        <div class="input-group search-box">
+          <form class="d-flex mx-3" action="/listing/search" method="post">
+            <input class="form-control me-2" type="search" name="query" placeholder="Search your Airbnb.." aria-label="Search" aria-describedby="button-addon2">
+            <button class="btn btn-outline-danger search" type="submit" id="button-addon2"><i class="fas fa-search"></i></button>
+          </form>
+        </div>
+        <div class="nav-link dropdown d-down flex normal-nav">
+          <a role="button" class="nav-link drop-button dropdown-toggle tg" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa-solid fa-bars"></i>
+            <% if(!currUser) {%>
+              <img src="/noprofilenav.png" alt="" class="nav-provile">
+            <% } %>
+  
+            <% if(currUser) {%> 
+              <img src="/profilenav.png" alt="" class="nav-provile">
+            <% } %>
+            
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end desk-drop">
+            <% if(!currUser) {%>
+              <li class="nav-item drop">
+                <a class="nav-link" href="/login">Login</a>
+              </li>
+              <li><hr class="dropdown-divider"></li>
+              <li class="nav-item drop">
+                <a class="nav-link" href="/signup">Signup</a>
+              </li>
+            <% } %>
+            <% if(currUser) {%>
+              <li class="nav-item drop"><a class="nav-link" href="/logout">Log Out</a></li>
+             <% } %>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+<div class="container">
+    
+    <h1 class="admin">Listings Management Dashboard</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Location</th>
+                <th>Country</th>
+                <th>Reviews</th>
+                <th>Images</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% listings.forEach(list => { %> <!-- Use forEach to iterate over listings -->
+                <tr>
+                    <td><%= list.title %></td>
+                    <td><%= list.description %></td>
+                    <td><%= list.price %></td>
+                    <td><%= list.location %></td>
+                    <td><%= list.country %></td>
+                    <td><a href="" class="btn btn-secondary">view</a></td>
+                    <td>
+                        <% list.image.forEach(image => { %>
+                            <img src="<%= image.url %>" alt="<%= image.filename %>" style="width: 50px; height: auto;">
+                        <% }) %>
+                    </td>
+                    <td>
+                        <!-- Edit Form -->
+                        <form action="/admin/listing/edit/<%= list._id %>" method="GET">
+                            <button class="btn btn-outline-primary" type="submit">Edit</button>
+                        </form>
+
+                        <!-- Delete Form -->
+                        <form action="/admin/listing/<%= list._id %>?_method=DELETE" method="POST" onsubmit="return confirm('Are you sure you want to delete this listing?');">
+                            <button class="btn btn-outline-danger" type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }) %> <!-- Closing the forEach loop -->
+        </tbody>
+    </table>
+        
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+<script src="/js/script.js"></script>
+<script src="/js/toggler.js"></script>
+<script src="/js/contributor.js"></script>
+</body>
+</html>

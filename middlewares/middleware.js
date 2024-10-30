@@ -38,3 +38,10 @@ module.exports.saveRedirectUrl=(req,res,next) =>{
     next();
  }
  
+//ADMIN ACESS
+ module.exports.isAdmin=async (req, res, next) =>{
+    if (req.isAuthenticated() && req.user.isAdmin) {
+        return next();
+    }
+    res.status(403).send("Access denied.");
+}
