@@ -304,27 +304,35 @@ app.get("/profile/edit", isLoggedIn, async (req, res) => {
 
 app.post('/profile/edit', isLoggedIn, upload.single("profileimage"), async (req, res) => {
   try {
-    let purl = req.file.path;
-    let pfilename = req.file.filename;
     const { username, email } = req.body;
-    if (!email || !username){
-      req.flash("error", "Username & Email must be there!")
-      return res.redirect('/profile/edit'); // Return to ensure single response
+
+    // Find the user by ID
+    const user = await User.findById(req.user._id);
+
+    // Update fields only if they are provided in the request
+    if (username) user.username = username;
+    if (email) user.email = email;
+
+    // Update profile picture only if a new file is uploaded
+    if (req.file) {
+      user.profilePicture = {
+        purl: req.file.path,
+        pfilename: req.file.filename
+      };
     }
 
-    const user = await User.findById(req.user._id);
-    user.username = username;
-    user.email = email;
-    user.profilePicture = {purl, pfilename}
-
+    // Save the updated user document
     await user.save();
-    // console.log(user);
-    return res.redirect('/profile'); // Return to ensure single response
+    req.flash("success", "Profile updated successfully!");
+    return res.redirect('/profile'); // Redirect after successful update
+
   } catch (err) {
     console.error("Error updating profile:", err);
-    return res.status(400).send("Profile update failed. Make sure all required fields are filled.");
+    req.flash("error", "Something went wrong! Maybe this username or email already exists!");
+    return res.redirect('/profile/edit');
   }
 });
+
 
 // Listing controller
 const listingController = require('./controllers/listing.js');
