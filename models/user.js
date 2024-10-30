@@ -7,10 +7,12 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    profileImage: {
-        type: String, // Store the file path or URL here
-        default: "../profile.png" // default profile image
+    // Field for upload profile pic feature
+    profilePicture: {
+        purl: String, // Store the file path or URL here
+        pfilename: String, 
     },
+    // Field for checking the admin
     isAdmin: { // Add this field
         type: Boolean,
         default: false // Default is false for regular users
