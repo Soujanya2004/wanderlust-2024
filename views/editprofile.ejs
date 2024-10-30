@@ -1,7 +1,7 @@
 <%- layout("/layouts/boilerplate") -%>
     <style>
         .outer{
-            margin: 7rem 0;
+            margin: 5rem 0;
         }
         .edit-profile-container{
             background-color: #f1f1f1;
@@ -64,9 +64,10 @@
 
                 <div class="mb-3 profile-edit-form">
                     <label for="image" class="form-label form-label-listings">Upload Profile Image</label>
-                    <input type="file" name="profileimage" id="" class="form-control" required>
+                    <input type="file" name="profileimage" id="" class="form-control">
+                    <div class="form-text" id="basic-addon4">If you want you can upload your profile picture.</div>
                 </div>
-
+                <br>
                 <div class="d-grid gap-2">
                     <button class="btn btn-danger" type="submit">Save Changes</button>
                     <a href="/profile" class="btn btn-secondary" type="button">Go back</a>
