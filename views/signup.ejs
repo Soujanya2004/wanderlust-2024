@@ -18,11 +18,6 @@
             box-shadow: 0 7px 15px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-    
-        /* .form_body:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8);
-        } */
         .form-label {
             color: #ffffff;
         }
@@ -38,16 +33,11 @@
         .signup_form input[type="password"]::placeholder, 
         .signup_form input[type="email"]::placeholder {
             color: #aaaaaa;
-            /* border: 1px solid #555555; */
-            /* border-radius: 5px; */
-            /* padding: 12px; */
-            /* width: 100%; */
-            /* margin-top: 10px; */
         }
     }
     </style>
 <div class="row">
-    <div class="col-4 mx-auto form_body">
+    <div class="col-11 col-md-8 col-lg-4 mx-auto form_body">
         <form method="POST" action="/signup" novalidate class="needs-validation">
             <div class="mb-3 signup_form">
                 <label for="username" class="form-label">Username</label>
@@ -89,7 +79,7 @@
                 <label for="password" class="form-label">Confirm Password</label>
                 <br>
                 <div class="password-box">
-                    <input type="password" name="cnf-password" placeholder="Password" class="form-control" required>
+                    <input type="password" name="cnfPassword" placeholder="Password" class="form-control" required>
                     <i id="togglePassword" class="cnf-passkey passwordToggler fa fa-eye"></i> 
                 </div>
                 <div class="valid-feedback">

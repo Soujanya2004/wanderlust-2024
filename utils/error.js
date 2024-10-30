@@ -1,6 +1,6 @@
 module.exports= (fn) =>{
    return function(req,res,next) {
-    fn(req,res,next).catch(next); //calls next error handling route
+      Promise.resolve(fn(req,res,next)).catch(next); //calls next error handling route
    }; 
 };
 

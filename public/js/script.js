@@ -40,6 +40,8 @@ document.addEventListener('DOMContentLoaded', function () {
       }
   }
 });
+
+// Password views eye toggler.
 document.addEventListener('DOMContentLoaded', function () {
   const togglePassword = document.querySelectorAll('.passwordToggler');
   togglePassword.forEach((toggle) => {
@@ -47,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
           // console.log(e.target.classList.contains('cnf-passkey'))
           let password;
           if (e.target.classList.contains('cnf-passkey'))
-              password = document.querySelector('input[name="cnf-password"]');
+              password = document.querySelector('input[name="cnfPassword"]');
           else
               password = document.querySelector('input[name="password"]');
           const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
@@ -57,6 +59,8 @@ document.addEventListener('DOMContentLoaded', function () {
       })
   });
 });
+
+
 
 let backToTop = document.querySelector(".goto-top");
 
