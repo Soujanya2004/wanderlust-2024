@@ -159,11 +159,16 @@ app.get("/signup", asyncwrap(async (req, res) => {
 }));
 
 app.post('/signup', asyncwrap(async (req, res, next) => {
-  const { username, email, password } = req.body;
+  const { username, email, password, cnfPassword } = req.body;
 
-  if (!username || !password) {
-    req.flash('error', 'Username and password are required');
+  if (!username || !password || !cnfPassword ) {
+    req.flash('error', 'All the fields are required');
     return res.redirect('/signup'); // Return to ensure single response
+  }
+
+  if(password !== cnfPassword){
+    req.flash('error', 'Both password value should be same!');
+    return res.redirect('/signup');
   }
 
   try {
