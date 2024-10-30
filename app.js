@@ -31,7 +31,7 @@ const { deleteReview, reviewPost } = require("./controllers/reviews.js");
 const cors = require('cors');
 const fs = require('fs');
 const { promisify } = require('util');
-
+const { contactUsController } = require("./controllers/contactUs.js");
 
 
 app.use(cors({
@@ -110,6 +110,16 @@ app.get("/", asyncwrap(async (req,res) => {
   
 })); 
 
+app.get("/contact",  (req, res) => {
+	try {
+		res.render("contact");
+	} catch (err) {
+		console.error(err);
+		res.status(500).send("Internal Server Error");
+	}
+}); 
+
+app.post("/contact", asyncwrap(contactUsController));
 
 //About us page
 app.get('/about',asyncwrap ( async (req, res) => {
