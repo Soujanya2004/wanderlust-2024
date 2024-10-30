@@ -3,40 +3,35 @@
     /* Form Container - Floating Effect */
     .dark-mode{
         .form_body {
-            background-color: #1e1e1e;
+            background-color: #2e2e2e;
             border-radius: 10px;
             padding: 30px;
             box-shadow: 0 7px 15px rgba(0, 0, 0, 0.5); /* Initial shadow to lift form */
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover transition */
+            transition: box-shadow 0.3s ease; /* Smooth hover transition */
         }
 
         h3{
             color: #ffffff;
         }
-    
-        .form_body:hover {
-            transform: translateY(-5px); /* Moves the form upward */
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8); /* Increases shadow to create more depth */
-        }
+
         .form-label {
             color: #ffffff;
         }
         /* Input Fields Styling */
-        .listing_form input[type="text"], input[type="password"] {
-            background-color: #2c2c2c;
+        .listing_form input, textarea{
+            background-color: #1b1b1b;
             color: #ffffff;
             border: 1px solid #555555;
-            transition: box-shadow 0.3s ease; /* Smooth hover transition for input */
+            transition: box-shadow 0.3s ease;
+        }
+        .listing_form input, textarea:focus{
+            background-color: #1b1b1b;
+            color: #ffffff;
         }
     
-        .listing_form input[type="text"]::placeholder,
-        .listing_form input[type="password"]::placeholder {
-            color: #aaaaaa;
-            border: 1px solid #555555;
-            border-radius: 5px;
-            padding: 12px;
-            width: 100%;
-            margin-top: 10px;
+        .listing_form input::placeholder,
+        .listing_form textarea::placeholder {
+            color: #aaaaaa !important;
         }
     
         .listing_form button[type="submit"] {
@@ -57,7 +52,7 @@
     </style>
     <br>
     <div class="row">
-        <div class="col-8 offset-2 form_body">
+        <div class="col-12 col-md-10 col-lg-8 mx-auto form_body">
             <h3 class="d-flex justify-content-center mt-2 heading">Add your property details</h3>
             <form method="POST" action="/listing" enctype="multipart/form-data" novalidate class="needs-validation">
                 <div class="mb-3 listing_form">

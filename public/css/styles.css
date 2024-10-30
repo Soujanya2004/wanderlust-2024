@@ -729,6 +729,9 @@ right: 10px;
 .filter p {
   font-size: 11px;
 }
+.footer-left .mail, .mobile{
+  font-size: 0.8rem !important;
+}
 }
 
 

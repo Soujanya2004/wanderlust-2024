@@ -7,7 +7,7 @@
             border-radius: 10px;
             padding: 30px;
             box-shadow: 0 7px 15px rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: #2e2e2e;
         }
         h3 {
             color: #fff;
@@ -16,17 +16,17 @@
             color: #ffffff;
             transition: color 0.3s ease;
         }
-        .form_body:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8);
-        }
 
         /* Input Fields Styling */
-        .edit_form input[type="text"]{
-            background-color: #2c2c2c;
+        .edit_form input, textarea{
+            background-color: #1b1b1b;
             color: #ffffff;
             border: 1px solid #555555;
             transition: box-shadow 0.3s ease;
+        }
+        .edit_form input, textarea:focus{
+            background-color: #1b1b1b;
+            color: #ffffff;
         }
 
         .edit_form input[type="text"]::placeholder {
@@ -63,7 +63,7 @@
         
     <div class="container">
         <div class="row">
-            <div class="col-8 mx-auto form_body">
+                <div class="col-12 col-md-10 col-lg-8 mx-auto form_body">
                 <h3 class="text-center">Edit Property details</h3>
                 <form method="POST" action="/listing/<%= list._id %>?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data">
                     <div class="mb-3 edit_form">
