@@ -10,7 +10,7 @@
     }
     
      .navbar-brand, .nav-link {
-      color: #ffffff;
+      color:  rgb(255, 87, 34);
     }
     .drop-button:hover{
         box-shadow: 0 5px 3px rgba(212, 212, 212, 0.303);
