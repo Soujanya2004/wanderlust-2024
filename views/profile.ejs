@@ -26,15 +26,17 @@
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     }
     .profile-picture {
-        border-radius: 50%;
+        border-radius: 50% !important;
         width: 160px;
         height: 160px;
         object-fit: cover;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        box-shadow: 4px 10px 8px rgba(0, 0, 0, 0.534);
     }
     .profile-picture img{
         width: inherit;
         height: inherit;
+        border: 5px solid rgb(124, 124, 124);
+        border-radius: 50% !important;
     }
 
     .profile-details {
@@ -116,8 +118,8 @@
 
     <div class="d-flex flex-column align-items-center justify-content-center flex-md-row justify-content-md-around profile-card">
         <div class="profile-picture">
-                <% if (user.profilePicture.purl) { %>
-                    <img src="<%= user.profilePicture.purl %>" alt="Profile Image">
+                <% if (currUser.profilePicture.purl) { %>
+                    <img src="<%=profilePic%>" alt="Profile Image">
                 <% } else { %>
                     <img src="../profile.png" alt="Default Profile Image">
                 <% } %>
