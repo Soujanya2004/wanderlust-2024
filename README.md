@@ -174,7 +174,7 @@ For questions or feedback, feel free to reach out via GitHub issues or contact t
  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="900">
  
 
-## ❤️ Made with Love by [Soujanya](https://github.com/Soujanya2004)
+## ❤️ Made with Love by [Soujanya C](https://github.com/Soujanya2004)
 
 <div align="center">
   <a href="https://github.com/Soujanya2004">
