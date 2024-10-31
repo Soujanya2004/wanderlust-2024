@@ -2,7 +2,7 @@ if (process.env.NODE_ENV != "production") {
   require('dotenv').config();
 }
 
-const port = 8000;
+const port = 8080;
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -99,13 +99,19 @@ app.use((req, res, next) => {
   res.locals.error = req.flash('error');
   res.locals.currUser = req.user;
 
-  //Customize the profile image and make it available for front end.
-  let originalUrl = req.user.profilePicture.purl;
-  modifiedProfilePic = originalUrl.replace("/upload", "/upload/q_auto,e_blur:50,w_250,h_250");
-  res.locals.profilePic = modifiedProfilePic;
-  // ,c_fill,r_max
+  // Check if profile picture exists; if not, use a default URL
+  if (req.user && req.user.profilePicture && req.user.profilePicture.purl) {
+    let originalUrl = req.user.profilePicture.purl;
+    let modifiedProfilePic = originalUrl.replace("/upload", "/upload/q_auto,e_blur:50,w_250,h_250");
+    res.locals.profilePic = modifiedProfilePic;
+  } else {
+    // Default profile picture if none is set
+    res.locals.profilePic = "/images/default-profile.png"; // Replace with your actual default image path
+  }
+
   next();
 });
+
 
 
 // ADMIN
@@ -365,6 +371,7 @@ app.use("*", (req, res) => {
 // Error handling middleware
 app.use((err, req, res, next) => {
   const { status = 500, msg = "Something went wrong" } = err;
+  console.log(err);
   if (res.headersSent) {
     return next(err); // Exit if headers already sent
   }
