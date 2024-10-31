@@ -71,6 +71,56 @@
         padding: 0;
         margin: 3px;
     }
+
+    .dark-mode{
+      /* Table styles for dark mode */
+      table {
+          background-color: #1e1e1e;
+          color: #e0e0e0;
+      }
+
+      th {
+          background-color: #e12d4b;
+          color: #ffffff;
+      }
+
+      td, th {
+          border-color: #333;
+      }
+
+      tr:hover {
+          background-color: #333333;
+      }
+
+      /* Form, button, and icon styles */
+      input[type="search"], .form-control{
+          background-color: #333;
+          color: #e0e0e0;
+          border-color: #555;
+      }
+
+      input[type="search"]::placeholder {
+          color: #888;
+      }
+
+      
+
+      /* Other minor adjustments */
+      h1 {
+          color: #e0e0e0;
+      }
+
+      .dropdown-menu {
+          background-color: #2a2a2a;
+          border-color: #333;
+      }
+
+      .nav-link img.nav-provile {
+          border-radius: 50%;
+          border: 2px solid #e0e0e0;
+      }
+    }
+
        /* Responsive adjustments */
        @media (max-width: 995px) {
         table {
