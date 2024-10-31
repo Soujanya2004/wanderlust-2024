@@ -14,11 +14,12 @@ Live Link: https://wanderlust-2024-tkqf.onrender.com/listing
 | ![GitHub stars](https://img.shields.io/github/stars/Soujanya2004/wanderlust-2024) | ![forks](https://img.shields.io/github/forks/Soujanya2004/wanderlust-2024) | ![issues](https://img.shields.io/github/issues/Soujanya2004/wanderlust-2024?color=32CD32) | ![pull requests](https://img.shields.io/github/issues-pr/Soujanya2004/wanderlust-2024?color=FFFF8F) | ![Closed PRs](https://img.shields.io/github/issues-pr-closed/Soujanya2004/wanderlust-2024?color=20B2AA) | ![Languages](https://img.shields.io/github/languages/count/Soujanya2004/wanderlust-2024?color=20B2AA) | ![Contributors](https://img.shields.io/github/contributors/Soujanya2004/wanderlust-2024?color=00FA9A) |
 
 ## 📚 Table of Contents
+- [🤝 How to Contribute](#-how-to-contribute)
+- [🛠️ How to Set Up the Project Locally](#️-how-to-set-up-the-project-locally)
+- [📬 Contact](#-contact)
+- [👀 Our Valuable Contributors](#-our-valuable-contributors-)
+- [❤️ Made with Love by Soujanya C](#-made-with-love-by-soujanya-c)
 
-
-- 🤝 How to Contribute
-- 🛠️ How to Set Up the Project Locally
-- 📬 Contact
 
  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="900">
  
