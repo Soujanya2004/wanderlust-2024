@@ -29,10 +29,7 @@ const listingSchema = new Schema({
     required: true,
   },
   description: String,
-  image: {
-    type: [imageSchema],
-    required: true,
-  },
+  image: [imageSchema],
   price: Number,
   location: String,
   country: String,

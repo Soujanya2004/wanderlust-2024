@@ -20,7 +20,7 @@ const {
 module.exports.index = async (req, res) => {
     try {
         const listings = await listing.find();
-        // console.log("Listings fetched:", listings);
+        // console.log("Listings fetched:", listings[0].image);
         res.render("index.ejs", { listings });
     } catch (err) {
         console.error("Error fetching listings:", err);
@@ -64,21 +64,22 @@ module.exports.search = async (req, res) => {
     }
   };
 
-module.exports.createpost = async (req, res) => {
+  module.exports.createpost = async (req, res) => {
     try {
-      // Validate that listing data exists
         if (!req.body.listing) {
-            return res.status(404).send(ERROR_SEND_VALID_DATA);
+            req.flash("error", "Please provide valid listing data.");
+            return res.status(404).send("Please provide valid listing data.");
         }
 
         const { title, description, price, country, location } = req.body.listing;
 
-      // Geocoding to get coordinates from location
+        // Geocoding to get coordinates from location
         const geoData = await geocodingClient.forwardGeocode({
             query: location,
             limit: 1
         }).send();
 
+        // Create the new listing
         const newListing = new listing({
             title,
             description,
@@ -87,31 +88,36 @@ module.exports.createpost = async (req, res) => {
             location,
             geometry: geoData.body.features[0].geometry,
             owner: req.user._id,
-            image: []
+            image: []  // Initialize as an empty array
         });
 
-      // Handle multiple image uploads from Cloudinary
+        // console.log('Files received:', req.files);
+
+        // Map uploaded files to image data
         if (req.files) {
             req.files.forEach(file => {
                 newListing.image.push({
-                    url: file.path,
-                    filename: file.filename
+                        url: file.path,
+                        filename: file.filename // Adjust based on where images are stored
                 });
             });
         }
 
-      // Save the listing to the database
+        // Save the listing to the database
         await newListing.save();
+        // console.log(newListing);
 
-        req.flash("success", SUCCESS_LISTING_CREATED);
+        req.flash("success", "Listing successfully created!");
         return res.redirect("/listing");
 
     } catch (err) {
-        console.error(err);
-        req.flash("error", ERROR_CREATE_LISTING);
+        console.error("Error creating listing:", err);
+        req.flash("error", "An error occurred while creating the listing.");
         return res.redirect("/listing/new");
     }
 };
+
+
 
 
 module.exports.editpost = async (req, res) => {
