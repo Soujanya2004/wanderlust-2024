@@ -107,7 +107,10 @@
     box-shadow: -1px 4px 12px rgba(120, 120, 120, 0.4);
 }
 .owner-avatar{
-    height: 2rem;
+    height: 2.5rem;
+    border-radius: 50% !important;
+    border: 2px solid rgb(79, 79, 79);
+    box-shadow: 2px 2px 5px #000000;
     margin-right: 0.5rem;
 }
 .listing-price{
@@ -129,18 +132,27 @@
     color: #626262 !important;
     }
     .card {
-        border: 1px solid #333;
+        border: 1px solid #2b2b2b;
         box-shadow: -1px 4px 12px rgba(3, 3, 3, 0.4);
     }
 
     .listing-card {
-        background-color: #282828;
+        background-color: #323232;
     }
 
     .show-img {
         border: 1px solid #333;
     }
-
+    .owner-avatar{
+    border: 2px solid rgb(255, 255, 255);
+    box-shadow: 2px 2px 5px #000000;
+    }
+    .card-body p{
+        color: #f9f9f9;
+    }
+    .card-body p b{
+        color: #979797;    
+    }
     /* REVIEW */
     /* Input Fields Styling */
     .review-form input {
@@ -219,7 +231,13 @@
                         <p class="listing-location"><b>Country:</b>
                             <%=list.country%>
                         </p>
-                        <p class="mt-2"><img src="/user@.png" alt="User" class="owner-avatar">Owned by: <b><%= list.owner.username %></b></p>
+                        <p class="mt-2">
+                            <% if(list.owner.profilePicture && list.owner.profilePicture.purl) {%>
+                                <img src="<%=profilePic%>" alt="User" class="owner-avatar">
+                            <% } else { %>
+                                <img src="/profile.png" alt="User" class="owner-avatar">
+                            <% } %>
+                            Owned by: <b><%= list.owner.username %></b></p>
                     </div>
                     <div>
                         <% if (currUser && currUser._id.equals(list.owner._id)) { %>
