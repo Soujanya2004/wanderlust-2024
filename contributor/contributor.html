@@ -18,6 +18,15 @@
             text-decoration: none;
             border-radius: 5px;
         }
+        .contributor-hero video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
     </style>
 </head>
 <body>
@@ -27,12 +36,15 @@
   <div class="contributor-container">
     <!-- Hero Section -->
     <section class="contributor-hero">
+        <video autoplay muted loop>
+            <source src="../public/assets/wanderlust.mp4" type="video/mp4">
+        </video>
         <div class="contributor-hero-content">
-            <h1>Welcome to wanderlust-2024  </h1>
+            <h1>Welcome to wanderlust-2024</h1>
             <p>Empowering writers, one commit at a time</p>
             <button class="contributor-btn contributor-btn-primary" onclick="scrollToContribute()">Become a Contributor</button>
         </div>
-    </section>
+    </section></div>
 
     <!-- Stats Section -->
     <section class="contributor-stats">
