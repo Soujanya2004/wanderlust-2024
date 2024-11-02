@@ -31,7 +31,7 @@
        <!-- user is an admin or not -->
        <% if(currUser && currUser.isAdmin) { %> 
         <li class="nav-item">
-          <a class="nav-link" id="air_bnb" href="/listing/new">Add ur property</a>
+          <a class="nav-link" href="/listing/new">Add ur property</a>
         </li>
        <% } %>
 
@@ -59,6 +59,11 @@
           <li class="nav-item">
             <a class="nav-link" href="/listing/new">Airbnb ur Home</a>
           </li>
+       <% if(currUser && currUser.isAdmin) { %> 
+        <li class="nav-item">
+          <a class="nav-link" href="/listing/new">Add ur property</a>
+        </li>
+       <% } %>
           <li class="nav-item">
             <a class="nav-link" href="/contact">Contact Us</a>
           </li>
