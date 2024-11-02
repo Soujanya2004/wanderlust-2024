@@ -25,8 +25,15 @@
       <!-- Left side navigation links -->
       <ul class="navbar-nav ml-auto main-menues normal-nav custom_nav">
         <li class="nav-item">
-          <a class="nav-link" id="air_bnb" href="/listing/new">Airbnb ur Home</a>
+          <a class="nav-link" id="air_bnb" href="/listing">Airbnb ur Home</a>
         </li>
+
+       <% if(currUser && currUser.isAdmin) { %> <!-- user is loggedin and is an admin -->
+        <li class="nav-item">
+          <a class="nav-link" id="air_bnb" href="/listing/new">Add ur listing</a>
+        </li>
+       <% } %>
+
         <li class="nav-item">
           <a class="nav-link" href="/contact">Contact Us</a>
         </li>
