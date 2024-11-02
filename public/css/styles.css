@@ -36,7 +36,9 @@ body{
 .main-menues .nav-link:hover{
   color: #ff385c !important;
 }
-
+ul li{
+  width: 9rem;
+}
   /* Styling the search bar inside the navbar */
   
   .search-bar {
