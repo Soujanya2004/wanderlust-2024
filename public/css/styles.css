@@ -631,9 +631,11 @@ right: 10px;
 .drop-button::after {
   display: none !important;
 }
-.nav-provile{
-  height: 1.8rem;
+.nav-profile{
+  height: 1.8rem !important;
   margin-left: 0.6rem;
+  border: 1px solid rgb(77, 77, 77);
+  border-radius: 50% !important;
 }
 .drop{
   padding: 0.5rem 1rem !important;

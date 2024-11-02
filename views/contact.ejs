@@ -3,19 +3,7 @@
 <% layout("/layouts/boilerplate") %>
 
 <style>
-	* {
-		margin: 0;
-		padding: 0;
-		box-sizing: border-box;
-	}
-	.contactContainer {
-		padding-top: 40px;
-		margin-top: -10px;
-		margin-left: -60px;
-		width: 100vw;
-		background-color: #495057;
-		color: white;
-	}
+	
 	.bg-dark-section {
 		background-color: #212529;
 		border-radius: 0.5rem;
@@ -23,26 +11,31 @@
 	.contact-header {
 		font-size: 2rem;
 		font-weight: bold;
-		color: white;
+		color: rgb(74, 74, 74);
 	}
 	.contact-description {
-		color: rgb(218, 218, 218);
+		color: rgb(153, 153, 153);
 	}
 	.contact-form {
-		border: 1px solid #495057;
+		/* border: 1px solid #495057; */
 		padding: 4rem;
 		border-radius: 0.5rem;
-		background-color: #343a40;
+		background-color: #f3f3f3;
         padding-bottom: 80px;
+		box-shadow: 0 8px 16px rgba(33, 33, 33, 0.692);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
 	}
-    .contact-form:hover{
-        transform: scale(1.02);
-        box-shadow: 0 8px 16px rgba(255, 193, 7, 0.2);
-    }
+	@media(max-width: 560px){
+		.contact-form{
+			padding: 3.5rem 1.5rem !important;
+		}
+		.main-content{
+			padding: 0 !important;
+		}
+	}
 	.form-control:focus {
         box-shadow: none;
-		border-color: #ffc107;
+		border-color: #161616;
 	}
 	.btn-submit {
 		background-color: #ffc107;
@@ -60,6 +53,26 @@
     .section{
         padding-bottom: 150px;
     }
+
+	.dark-mode{
+		.contact-header{
+			color: #cacaca;
+		}
+		.contact-form{
+			background-color: #2e2e2e;
+			box-shadow: 0 10px 16px #000;
+		}
+		.form-label {
+			color: #f3f3f3;
+		}
+		.form-input .form-control{
+			background-color: #454545;
+            color: #ffffff;
+		}
+		.form-input .form-control::placeholder{
+			color: #cacaca;
+		}
+	}
 </style>
 
 <body>
@@ -77,14 +90,14 @@
 
 				<div class="row mt-5 w-100">
 					<!-- Contact Form -->
-					<div class="col-lg-6 mx-auto">
+					<div class="col-14 col-lg-6 mx-auto main-content">
 						<form
 							class="contact-form"
 							method="POST"
 							action="/contact">
 							<!-- Name Fields -->
-							<div class="row mb-3">
-								<div class="col">
+							<div class="row mb-3 inputs">
+								<div class="col form-input">
 									<label
 										for="firstname"
 										class="form-label"
@@ -92,12 +105,12 @@
 									>
 									<input
 										type="text"
-										class="form-control"
+										class="form-control form-control-sm"
 										name="firstname"
 										placeholder="Enter first name"
 										required />
 								</div>
-								<div class="col">
+								<div class="col form-input">
 									<label
 										for="lastName"
 										class="form-label"
@@ -105,14 +118,14 @@
 									>
 									<input
 										type="text"
-										class="form-control"
+										class="form-control form-control-sm"
 										name="lastname"
 										placeholder="Enter last name" />
 								</div>
 							</div>
 
 							<!-- Email -->
-							<div class="mb-3">
+							<div class="mb-3 form-input">
 								<label
 									for="email"
 									class="form-label"
@@ -120,14 +133,14 @@
 								>
 								<input
 									type="email"
-									class="form-control"
+									class="form-control form-control-sm"
 									name="email"
 									placeholder="Enter email address"
 									required />
 							</div>
 
                             <!-- Subject -->
-							<div class="mb-3">
+							<div class="mb-3 form-input">
 								<label
 									for="subject"
 									class="form-label"
@@ -135,24 +148,24 @@
 								>
 								<input
 									type="text"
-									class="form-control"
+									class="form-control form-control-sm"
 									name="subject"
 									placeholder="Enter your subject"
 									required />
 							</div>
 
 							<!-- Message -->
-							<div class="mb-4">
+							<div class="mb-4 form-input">
 								<label
 									for="message"
 									class="form-label"
 									>Message</label
 								>
 								<textarea
-									class="form-control"
+									class="form-control form-control-sm"
 									name="message"
 									rows="5"
-									placeholder="Enter your message here"
+									placeholder="Enter your message here...."
 									required></textarea>
 							</div>
 
@@ -160,7 +173,7 @@
 							<button
 								type="submit"
 								name="saveButton"
-								class="btn btn-submit w-100">
+								class="btn btn-danger w-100">
 								Send Message
 							</button>
 						</form>

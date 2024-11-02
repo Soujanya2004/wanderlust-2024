@@ -69,6 +69,8 @@
 
 #reviw_logo{
     height: 2rem;
+    width: 2rem;
+    border-radius: 50% !important;
     margin-right: 0.5rem;
     transition: transform 0.3s ease;
 }
@@ -107,7 +109,10 @@
     box-shadow: -1px 4px 12px rgba(120, 120, 120, 0.4);
 }
 .owner-avatar{
-    height: 2rem;
+    height: 2.5rem;
+    border-radius: 50% !important;
+    border: 2px solid rgb(79, 79, 79);
+    box-shadow: 2px 2px 5px #000000;
     margin-right: 0.5rem;
 }
 .listing-price{
@@ -129,18 +134,27 @@
     color: #626262 !important;
     }
     .card {
-        border: 1px solid #333;
+        border: 1px solid #2b2b2b;
         box-shadow: -1px 4px 12px rgba(3, 3, 3, 0.4);
     }
 
     .listing-card {
-        background-color: #282828;
+        background-color: #323232;
     }
 
     .show-img {
         border: 1px solid #333;
     }
-
+    .owner-avatar{
+    border: 2px solid rgb(255, 255, 255);
+    box-shadow: 2px 2px 5px #000000;
+    }
+    .card-body p{
+        color: #f9f9f9;
+    }
+    .card-body p b{
+        color: #979797;    
+    }
     /* REVIEW */
     /* Input Fields Styling */
     .review-form input {
@@ -219,7 +233,13 @@
                         <p class="listing-location"><b>Country:</b>
                             <%=list.country%>
                         </p>
-                        <p class="mt-2"><img src="/user@.png" alt="User" class="owner-avatar">Owned by: <b><%= list.owner.username %></b></p>
+                        <p class="mt-2">
+                            <% if(list.owner.profilePicture && list.owner.profilePicture.purl) {%>
+                                <img src="<%=profilePic%>" alt="User" class="owner-avatar">
+                            <% } else { %>
+                                <img src="/profile.png" alt="User" class="owner-avatar">
+                            <% } %>
+                            Owned by: <b><%= list.owner.username %></b></p>
                     </div>
                     <div>
                         <% if (currUser && currUser._id.equals(list.owner._id)) { %>
@@ -326,7 +346,16 @@
                                     <div class="card review-card  h-100 ms-0">
                                         <div class="card-body d-flex flex-column">
                                             <div class="heading">
-                                                <h4 class="card-title"><img id="reviw_logo" src="/user (1).png" alt=""><%= review.author.username %> <span style="font-size: 10px;"> owner</span></h4>
+
+                                                <h4 class="card-title">
+                                                    <% if(review.author.profilePicture && review.author.profilePicture.purl) { %>
+                                                        <img id="reviw_logo" src="<%=review.author.profilePicture.purl%>" alt="Reviewer" class="reviewer-profile">
+                                                    <% } else { %>
+                                                        <img id="reviw_logo" src="/profile.png" alt="Reviewer" class="reviewer-profile">
+                                                    <% } %>
+                                                    <%= review.author.username %> <span style="font-size: 9px; opacity: 0.7;"> owner</span>
+                                                </h4>
+
                                                 <div>
                                                     <% if (currUser && currUser._id.equals(review.author._id)) { %>
                                                         <form method="post" action="/listing/<%= list._id %>/review/<%= review._id %>?_method=DELETE"><button id="trash" type="submit"><i class="fa-solid trash fa-trash-can"></i></button>
@@ -343,11 +372,11 @@
                                                     <% } %>
                                                 <% } %>                                        
                                             </p>
-                                            <p class="card-text flex-grow-1">
+                                            <p class="flex-grow-1">
                                                 <%= review.Comments %>
                                             </p>
-                                            <small class="text-muted">
-                                                Verified by <b>Wanderlust</b>
+                                            <small class="text-muted" style="font-size: 10px;"">
+                                                <i class='bx bx-error-circle'></i> Verified by Wanderlust
                                             </small>
                                         </div>
                                     </div>

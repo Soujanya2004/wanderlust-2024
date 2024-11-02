@@ -99,12 +99,16 @@
           aria-expanded="false">
           <i class="fa-solid fa-bars"></i>
           <% if(!currUser) {%>
-            <img src="/noprofilenav.png" alt="" class="nav-provile">
+            <img src="/noprofilenav.png" alt="" class="nav-profile">
             <% } %>
 
               <% if(currUser) {%>
-                <img src="/profilenav.png" alt="" class="nav-provile">
+                <% if(currUser.profilePicture.purl) {%>
+                  <img src="<%=profilePic%>" alt="Profile" class="nav-profile">
+                <% } else { %>
+                  <img src="/profile.png" alt="Profile" class="nav-profile">
                 <% } %>
+              <% } %>
 
         </a>
         <ul class="dropdown-menu dropdown-menu-end desk-drop">
