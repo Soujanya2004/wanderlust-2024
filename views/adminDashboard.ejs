@@ -209,11 +209,16 @@
           <a role="button" class="nav-link drop-button dropdown-toggle tg" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fa-solid fa-bars"></i>
             <% if(!currUser) {%>
-              <img src="/noprofilenav.png" alt="" class="nav-provile">
+              <img src="/noprofilenav.png" alt="" class="nav-provile" style="
+              height: 1.9rem;
+              padding-left: .5rem">
             <% } %>
   
             <% if(currUser) {%> 
-              <img src="/profilenav.png" alt="" class="nav-provile">
+              <img src="/profilenav.png" alt="" class="nav-provile" style="
+              height: 1.9rem;
+              padding-left: .5rem
+              ">
             <% } %>
             
           </a>
@@ -260,7 +265,7 @@
                     <td><%= list.price %></td>
                     <td><%= list.location %></td>
                     <td><%= list.country %></td>
-                    <td><a href="" class="btn btn-secondary">view</a></td>
+                    <td><a href="/admin/reviews/<%= list._id %>" class="btn btn-secondary">view</a></td>
                     <td>
                         <% list.image.forEach(image => { %>
                             <img src="<%= image.url %>" alt="<%= image.filename %>" style="width: 50px; height: auto;">
@@ -276,6 +281,11 @@
                         <form action="/admin/listing/<%= list._id %>?_method=DELETE" method="POST" onsubmit="return confirm('Are you sure you want to delete this listing?');">
                             <button class="btn btn-outline-danger" type="submit">Delete</button>
                         </form>
+
+                        <!-- New View Profile Button -->
+                      <form action="/admin/listing/<%= list._id %>" method="GET">
+                        <button class="btn btn-outline-info" type="submit">View</button>
+                      </form>
                     </td>
                 </tr>
             <% }) %> <!-- Closing the forEach loop -->

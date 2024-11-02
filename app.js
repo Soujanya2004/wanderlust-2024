@@ -104,7 +104,11 @@ app.use((req, res, next) => {
     let originalUrl = req.user.profilePicture.purl;
     let modifiedProfilePic = originalUrl.replace("/upload", "/upload/q_auto,e_blur:50,w_250,h_250");
     res.locals.profilePic = modifiedProfilePic;
-  } 
+  } else {
+    // Default profile picture if none is set
+    res.locals.profilePic = "/images/default-profile.png"; // Replace with your actual default image path
+  }
+
   next();
 });
 
@@ -160,6 +164,47 @@ app.delete('/admin/listing/:id',isLoggedIn, isAdmin, async (req, res) => {
   } catch (error) {
       res.status(500).send('Error deleting listing: ' + error.message);
   }
+});
+
+
+// View manage listing from admin dashboard
+app.get('/admin/listing/:id',isLoggedIn, isAdmin, async (req, res) => {
+  try {
+    const {id}=req.params;
+    // console.log(id);
+    const list = await listing.findById(id);
+    // console.log(list);
+    if (!list) {
+        return res.status(404).send('Listing not found');
+    }
+    res.render('view_manage_listing.ejs', { list }); // Create a new view file called show.ejs or similar
+} catch (err) {
+    res.status(500).send(err.message);
+}
+});
+
+// View listing's reviews from admin dashboard
+app.get('/admin/reviews/:id',isLoggedIn, isAdmin, async (req, res) => {
+  try {
+    const {id}=req.params;
+    // console.log(id);
+    const list = await listing.findById(id).populate({
+      path: 'reviews',
+      populate: {
+          path: 'author'
+      }
+  })
+  .populate('owner');
+
+    // console.log(list.reviews[0].author.username);
+
+    if (!list) {
+        return res.status(404).send('Listing not found');
+    }
+    res.render('view_reviews.ejs', { list }); // Create a new view file called show.ejs or similar
+} catch (err) {
+    res.status(500).send(err.message);
+}
 });
 
 // ADMIN
@@ -312,7 +357,7 @@ app.get("/profile/edit", isLoggedIn, async (req, res) => {
 
 app.post('/profile/edit', isLoggedIn, upload.single("profileimage"), async (req, res) => {
   try {
-    const { username, email, deleteProfile } = req.body;
+    const { username, email } = req.body;
 
     // Find the user by ID
     const user = await User.findById(req.user._id);
@@ -321,14 +366,8 @@ app.post('/profile/edit', isLoggedIn, upload.single("profileimage"), async (req,
     if (username) user.username = username;
     if (email) user.email = email;
 
-    // If the check box was checked. Then the existing file path removed form DB
-    if(deleteProfile === "true"){
-      user.profilePicture = {
-        purl: null,
-        pfilename: null
-      };
-    } 
-    else if (req.file) {     // Update profile picture only if a new file is uploaded
+    // Update profile picture only if a new file is uploaded
+    if (req.file) {
       user.profilePicture = {
         purl: req.file.path,
         pfilename: req.file.filename
