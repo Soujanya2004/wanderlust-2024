@@ -165,11 +165,15 @@
             <a role="button" class="nav-link drop-button dropdown-toggle tg" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="fa-solid fa-bars"></i>
               <% if(!currUser) {%>
-                <img src="/noprofilenav.png" alt="" class="nav-provile">
+                <img src="/noprofilenav.png" alt="" class="nav-provile" style="
+                height: 1.9rem;
+                padding-left: .5rem">
               <% } %>
     
               <% if(currUser) {%> 
-                <img src="/profilenav.png" alt="" class="nav-provile">
+                <img src="/profilenav.png" alt="" class="nav-provile" style="
+                height: 1.9rem;
+                padding-left: .5rem">
               <% } %>
               
             </a>
