@@ -68,17 +68,14 @@
             <li class="nav-item">
               <a class="nav-link" href="/login">Log in</a>
             </li>
-            <% } %>
-
-              <% if(currUser) {%> <!--If inside currUser have any user data then show this-->
-
-                <li class="nav-item">
-                  <a class="nav-link" href="/profile">Your profile</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/logout">Log out</a>
-                </li>
-                <% } %>
+          <% } else { %>
+            <li class="nav-item">
+              <a class="nav-link" href="/profile">Your profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Log out</a>
+            </li>
+          <% } %>
         </ul>
 
       </div>
@@ -100,15 +97,13 @@
           <i class="fa-solid fa-bars"></i>
           <% if(!currUser) {%>
             <img src="/noprofilenav.png" alt="" class="nav-profile">
-            <% } %>
-
-              <% if(currUser) {%>
-                <% if(currUser.profilePicture.purl) {%>
-                  <img src="<%=profilePic%>" alt="Profile" class="nav-profile">
-                <% } else { %>
-                  <img src="/profile.png" alt="Profile" class="nav-profile">
-                <% } %>
+          <% } else {%>
+              <% if(currUser.profilePicture && currUser.profilePicture.purl) {%>
+                <img src="<%=profilePic%>" alt="Profile" class="nav-profile">
+              <% } else { %>
+                <img src="/profile.png" alt="Profile" class="nav-profile">
               <% } %>
+          <% } %>
 
         </a>
         <ul class="dropdown-menu dropdown-menu-end desk-drop">
@@ -122,15 +117,14 @@
             <li class="nav-item drop">
               <a class="nav-link" href="/signup">Signup</a>
             </li>
-            <% } %>
-              <% if(currUser) {%>
-                <li class="nav-item drop"><a class="nav-link" href="/logout">Log Out</a></li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li class="nav-item drop align"><a class="nav-link" href="/profile">Your profile</a>
+          <% } else {%>
+              <li class="nav-item drop"><a class="nav-link" href="/logout">Log Out</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li class="nav-item drop align"><a class="nav-link" href="/profile">Your profile</a>
                   &nbsp;&nbsp;&nbsp;<i class="fa-solid fa-angle-right"></i></li>
-                <% } %>
+          <% } %>
 
         </ul>
       </div>
