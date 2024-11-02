@@ -43,7 +43,10 @@
             }
 
             .profile-edit-form label {
-                color: #fff;
+                color: #fff !important;
+            }
+            .form-text{
+                color: #8c8c8c;
             }
         }
     </style>
@@ -54,18 +57,22 @@
             <form action="/profile/edit" method="POST" enctype="multipart/form-data">
                 <div class="mb-3 profile-edit-form">
                     <label for="username" class="form-label">Username</label>
-                    <input type="text" name="username" class="form-control" value="<%= user.username %>" required>
+                    <input type="text" name="username" class="form-control form-control-sm" value="<%= user.username %>" required>
                 </div>
 
                 <div class="mb-3 profile-edit-form">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" name="email" class="form-control" value="<%= user.email %>" required>
+                    <input type="email" name="email" class="form-control form-control-sm" value="<%= user.email %>" required>
                 </div>
 
                 <div class="mb-3 profile-edit-form">
                     <label for="image" class="form-label form-label-listings">Upload Profile Image</label>
-                    <input type="file" name="profileimage" id="" class="form-control">
+                    <input type="file" name="profileimage" id="" class="form-control form-control-sm">
                     <div class="form-text" id="basic-addon4">If you want you can upload your profile picture.</div>
+                </div>
+                <div class="form-check cursor-pointer">
+                    <input class="form-check-input cursor-pointer" type="checkbox" value="true" name="deleteProfile" id="flexCheckDefault">
+                    <label class="form-check-label cursor-pointer text-danger" for="flexCheckDefault">To remove profile picture please check this box!</label>
                 </div>
                 <br>
                 <div class="d-grid gap-2">
