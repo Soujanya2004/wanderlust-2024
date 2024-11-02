@@ -28,9 +28,10 @@
           <a class="nav-link" id="air_bnb" href="/listing">Airbnb ur Home</a>
         </li>
 
-       <% if(currUser && currUser.isAdmin) { %> <!-- user is loggedin and is an admin -->
+       <!-- user is an admin or not -->
+       <% if(currUser && currUser.isAdmin) { %> 
         <li class="nav-item">
-          <a class="nav-link" id="air_bnb" href="/listing/new">Add ur listing</a>
+          <a class="nav-link" id="air_bnb" href="/listing/new">Add ur property</a>
         </li>
        <% } %>
 
