@@ -71,16 +71,14 @@
                 </div>
                 <div class="mb-3 listing_form">
                     <label for="images" class="form-label">Upload Images</label>
-                    <br>
-                    <!-- multiple file uploads -->
-                    <input type="file" name="listing[image]" class="form-control" id="imageInput" multiple required>
-                    <div class="invalid-feedback">Please upload a image!</div>
+                    <input type="file" name="listing[image]" class="form-control" id="fileInput" multiple required>
+                    <div class="invalid-feedback">Please upload at least one image!</div>
                     <small class="form-text text-muted">You can upload multiple images.</small>
                     <div class="valid-feedback">Looks good!</div>
                 </div>
-
-                <!-- Image preview here -->
-                <div id="imagePreview" class="mb-3"></div>
+            
+                <!-- Image preview container -->
+                <div id="previewContainer" class="mb-3"></div>
 
                 <div class="row">
                     <div class="mb-3 col-3 listing_form">
@@ -117,26 +115,39 @@
 
     <!-- JS for image preview -->
     <script>
-        const imageInput = document.getElementById('imageInput');
-        const imagePreview = document.getElementById('imagePreview');
+        const fileInput = document.getElementById("fileInput");
+        const fileList = []; // Array to hold selected files
 
-        imageInput.addEventListener('change', function() {
-            imagePreview.innerHTML = '';
-            const files = imageInput.files;
+        fileInput.addEventListener("change", function (event) {
+        const files = Array.from(event.target.files);
+        
+        // Add new files to the fileList
+        fileList.push(...files);
 
-            for (let i = 0; i < files.length; i++) {
-                const file = files[i];
-                const reader = new FileReader();
-
-                reader.onload = function(e) {
-                    const img = document.createElement('img');
-                    img.src = e.target.result;
-                    img.style.maxWidth = '150px';
-                    img.style.margin = '10px';
-                    imagePreview.appendChild(img);
-                };
-
-                reader.readAsDataURL(file);
-            }
+        // Display preview and update the file input to include all selected files
+        displayPreview();
+        updateFileInput();
         });
+
+        function displayPreview() {
+        // Display images in fileList as preview
+        const previewContainer = document.getElementById("previewContainer");
+        previewContainer.innerHTML = ""; // Clear existing content
+
+        fileList.forEach((file, index) => {
+            const img = document.createElement("img");
+            img.src = URL.createObjectURL(file);
+            img.alt = `Image ${index + 1}`;
+            img.style.width = "100px"; // Adjust as needed
+            previewContainer.appendChild(img);
+        });
+        }
+
+        function updateFileInput() {
+        // Clear the original file input and set files from fileList
+        const dataTransfer = new DataTransfer();
+        fileList.forEach(file => dataTransfer.items.add(file));
+        fileInput.files = dataTransfer.files;
+        }
+
     </script>
