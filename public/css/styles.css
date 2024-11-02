@@ -765,8 +765,8 @@ right: 10px;
     }
 
     #air_bnb:hover {
-      background-color: #ff385c !important;
-      box-shadow: 2px 2px 5px rgba(255, 56, 92, 0.3);
+      background-color: red !important;
+      box-shadow: 4px 4px 4px rgba(83, 9, 9, 0.3);
       transform: scale(1.01);
     }
 
