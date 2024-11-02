@@ -182,6 +182,31 @@ app.get('/admin/listing/:id',isLoggedIn, isAdmin, async (req, res) => {
     res.status(500).send(err.message);
 }
 });
+
+// View listing's reviews from admin dashboard
+app.get('/admin/reviews/:id',isLoggedIn, isAdmin, async (req, res) => {
+  try {
+    const {id}=req.params;
+    // console.log(id);
+    const list = await listing.findById(id).populate({
+      path: 'reviews',
+      populate: {
+          path: 'author'
+      }
+  })
+  .populate('owner');
+
+    // console.log(list.reviews[0].author.username);
+
+    if (!list) {
+        return res.status(404).send('Listing not found');
+    }
+    res.render('view_reviews.ejs', { list }); // Create a new view file called show.ejs or similar
+} catch (err) {
+    res.status(500).send(err.message);
+}
+});
+
 // ADMIN
 // ADMIN
 
