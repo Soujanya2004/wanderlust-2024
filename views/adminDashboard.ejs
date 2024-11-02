@@ -265,7 +265,7 @@
                     <td><%= list.price %></td>
                     <td><%= list.location %></td>
                     <td><%= list.country %></td>
-                    <td><a href="" class="btn btn-secondary">view</a></td>
+                    <td><a href="/admin/reviews/<%= list._id %>" class="btn btn-secondary">view</a></td>
                     <td>
                         <% list.image.forEach(image => { %>
                             <img src="<%= image.url %>" alt="<%= image.filename %>" style="width: 50px; height: auto;">
