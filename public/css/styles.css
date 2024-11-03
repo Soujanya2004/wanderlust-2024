@@ -83,7 +83,11 @@ color: #ff385c !important;
   margin-left: auto !important;
 }
 
-
+.auth:hover{
+  overflow: hidden !important;
+  scale: 1.1;
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
 /* ////////////////////////////////////// */
 /* FOOTER SECTION */
 .btw-foot{
