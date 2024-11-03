@@ -156,20 +156,21 @@ module.exports.showPost = async (req, res) => {
                 }
             })
             .populate('owner');
-
+        // console.log(list);
         if (!list) {
             req.flash('error', 'Listing not found');
             return res.redirect('/listing');
         }
 
         let userHasReviewed = false;
-        if (req.user) {
-            userHasReviewed = list.reviews.some(review => review.author._id.equals(req.user._id));
+        if (req.user && list.owner) {
+            userHasReviewed = list.reviews.some(review => review.author && review.author._id && review.author._id.equals(req.user._id));
         }
+
 
         res.render('show.ejs', { list, userHasReviewed });
     } catch (err) {
-        console.error("Error fetching listing:", err.message);
+        console.error("Error fetching listing:", err);
         req.flash("error", "Could not load listing details");
         return res.redirect("/listing");
     }
