@@ -10,9 +10,7 @@ const listing = require("./models/listing.js");
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
-const reviews = require("./models/reviews.js");
 const asyncwrap = require("./utils/error.js");
-const expressError = require("./utils/expressError.js");
 const multer = require('multer');
 const { storage } = require("./cloudConfig.js");
 const upload = multer({ storage });
@@ -29,8 +27,6 @@ const {isOwner,isAuthor}=require("./middlewares/middleware.js");
 const {index, newpost, createpost, editpost, saveEditpost,search, deletepost, showPost, signup}=require("./controllers/listing.js");
 const { deleteReview, reviewPost } = require("./controllers/reviews.js");
 const cors = require('cors');
-const fs = require('fs');
-const { promisify } = require('util');
 const { contactUsController } = require("./controllers/contactUs.js");
 
 
@@ -97,18 +93,14 @@ passport.deserializeUser(User.deserializeUser());
 app.use((req, res, next) => {
   res.locals.success = req.flash('success');
   res.locals.error = req.flash('error');
-  res.locals.currUser = req.user;
+  res.locals.currUser = req.user || null;
 
   // Check if profile picture exists; if not, use a default URL
   if (req.user && req.user.profilePicture && req.user.profilePicture.purl) {
     let originalUrl = req.user.profilePicture.purl;
     let modifiedProfilePic = originalUrl.replace("/upload", "/upload/q_auto,e_blur:50,w_250,h_250");
     res.locals.profilePic = modifiedProfilePic;
-  } else {
-    // Default profile picture if none is set
-    res.locals.profilePic = "/images/default-profile.png"; // Replace with your actual default image path
   }
-
   next();
 });
 
@@ -357,7 +349,7 @@ app.get("/profile/edit", isLoggedIn, async (req, res) => {
 
 app.post('/profile/edit', isLoggedIn, upload.single("profileimage"), async (req, res) => {
   try {
-    const { username, email } = req.body;
+    const { username, email, deleteProfile } = req.body;
 
     // Find the user by ID
     const user = await User.findById(req.user._id);
@@ -367,7 +359,13 @@ app.post('/profile/edit', isLoggedIn, upload.single("profileimage"), async (req,
     if (email) user.email = email;
 
     // Update profile picture only if a new file is uploaded
-    if (req.file) {
+    if(deleteProfile === "true"){
+      user.profilePicture = {
+        purl: null,
+        pfilename: null
+      }   
+    } 
+    else if (req.file) {
       user.profilePicture = {
         purl: req.file.path,
         pfilename: req.file.filename
