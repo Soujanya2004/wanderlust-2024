@@ -27,110 +27,71 @@
         margin-top: 20px;
     }
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 20px 0;
-        font-family: Arial, sans-serif;
-        font-size: 1em;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    .listing-row {
+        border: 1px solid #ddd;
         border-radius: 8px;
-        overflow: hidden;
-    }
-
-    th, td {
+        margin-bottom: 10px;
         padding: 15px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #f9f9f9;
     }
 
-    th {
-        background-color: #e12d4b;
-        color: white;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
+    .listing-title {
+        font-weight: bold;  
     }
 
-    tr:hover {
-        background-color: #f1f1f1;
+    .description-cell {
+        max-height: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .btn {
+        width: 70px;
+        padding: 6px 12px;
+        margin: 3px 0;
     }
 
-    td img {
-        width: 50px;
-        height: auto;
-        border-radius: 5px;
-        margin-right: 5px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
-
-    form {
-        display: inline;
-    }
-    .btn{
-        width:70px;
-        padding: 0;
-        margin: 3px;
-    }
-
-    .dark-mode{
-      /* Table styles for dark mode */
-      table {
-          background-color: #1e1e1e;
-          color: #e0e0e0;
-      }
-
-      th {
-          background-color: #e12d4b;
-          color: #ffffff;
-      }
-
-      td, th {
-          border-color: #333;
-      }
-
-      tr:hover {
-          background-color: #333333;
-      }
-
-      /* Form, button, and icon styles */
-      input[type="search"], .form-control{
-          background-color: #333;
-          color: #e0e0e0;
-          border-color: #555;
-      }
-
-      input[type="search"]::placeholder {
-          color: #888;
-      }
-
-      
-
-      /* Other minor adjustments */
-      h1 {
-          color: #e0e0e0;
-      }
-
-      .dropdown-menu {
-          background-color: #2a2a2a;
-          border-color: #333;
-      }
-
-      .nav-link img.nav-provile {
-          border-radius: 50%;
-          border: 2px solid #e0e0e0;
-      }
-    }
-
-       /* Responsive adjustments */
-       @media (max-width: 995px) {
-        table {
-            font-size: 0.7em;
+        /* Dark Mode Styles */
+        .dark-mode {
+          .listing-row {
+              background-color: #242424;
+              color: #e0e0e0;
+              border-color: #444;
+          }
+          .listing-title, h1 {
+              color: #ffffff;
+          }
         }
 
-        h1 {
-            font-size: .9em;
+        /* Responsive Design for Small Screens */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .listing-row {
+                padding: 10px;
+            }
+
+            .heading{
+              display: none;
+            }
+             
+            .img-fluid{
+              width: 200px !important;
+              height: 100px !important;
+              object-fit: cover;
+            }
+            
+            .all_btns{
+              display: flex !important;
+            }
+
+            .all_btns .btn{
+              margin-right: 5px;
+            }
         }
-    }
+
 </style>
 
 <nav class="navbar navbar-expand-lg sticky-top">
@@ -244,34 +205,32 @@
 <div class="container">
     
     <h1 class="admin">Listings Management Dashboard</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Location</th>
-                <th>Country</th>
-                <th>Reviews</th>
-                <th>Images</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
+      <div class="row bg-danger text-white p-2 rounded listing-row heading">
+        <div class="col-2 col-md-2">Title</div>
+        <div class="col-3 col-md-2">Description</div>
+        <div class="col col-md-1">Price</div>
+        <div class="col col-md-1">Location</div>
+        <div class="col col-md-1">Country</div>
+        <div class="col col-md-1">Reviews</div>
+        <div class="col-2 col-md-2">Images</div>
+        <div class="col col-md-2">Actions</div>
+    </div>
             <% listings.forEach(list => { %> <!-- Use forEach to iterate over listings -->
-                <tr>
-                    <td><%= list.title %></td>
-                    <td><%= list.description %></td>
-                    <td><%= list.price %></td>
-                    <td><%= list.location %></td>
-                    <td><%= list.country %></td>
-                    <td><a href="/admin/reviews/<%= list._id %>" class="btn btn-secondary">view</a></td>
-                    <td>
-                        <% list.image.forEach(image => { %>
-                            <img src="<%= image.url %>" alt="<%= image.filename %>" style="width: 50px; height: auto;">
-                        <% }) %>
-                    </td>
-                    <td>
+              <div class="row border-bottom p-2 listing-row">
+                <div class="col-12 col-md-2 listing-title"><%= list.title %></div>
+                <div class="col-12 col-md-2 description-cell"><%= list.description %></div>
+                <div class="col-12 col-md-1"><b><%= list.price %></b></div>
+                <div class="col-12 col-md-1"><i><%= list.location %></i></div>
+                <div class="col-12 col-md-1"><b><%= list.country %></b></div>
+                <div class="col-12 col-md-1">
+                    <a href="/admin/reviews/<%= list._id %>" class="btn btn-secondary btn-sm">View</a>
+                </div>
+                <div class="col-12 col-md-2">
+                    <% list.image.forEach(image => { %>
+                        <img src="<%= image.url %>" alt="<%= image.filename %>" class="img-fluid rounded me-1" style="width: 50px; height: auto;">
+                    <% }) %>
+                </div>
+                <div class="col-12 col-md-2  all_btns">
                         <!-- Edit Form -->
                         <form action="/admin/listing/edit/<%= list._id %>" method="GET">
                             <button class="btn btn-outline-primary" type="submit">Edit</button>
@@ -286,11 +245,9 @@
                       <form action="/admin/listing/<%= list._id %>" method="GET">
                         <button class="btn btn-outline-info" type="submit">View</button>
                       </form>
-                    </td>
-                </tr>
-            <% }) %> <!-- Closing the forEach loop -->
-        </tbody>
-    </table>
+                    </div>
+                  </div>
+              <% }) %>
         
 </div>
 
