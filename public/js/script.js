@@ -78,3 +78,32 @@ window.addEventListener("scroll", handleScroll);
 backToTop.addEventListener("click", () => {
   window.scrollTo({top: 0, behavior: "smooth"});
 });
+
+
+
+// Feedback form
+let feedbackForm = document.querySelector(".feedback-popup");
+let feedbackContainer = document.querySelector(".feedback-container");
+let submitFeedback = document.querySelector("#feedback");
+let closeForm = document.querySelector("#close-button");
+let form = document.querySelector("#review-form");
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+})
+
+submitFeedback.addEventListener("click", () => {
+  feedbackContainer.classList.remove("fade-out");
+  feedbackForm.style.display = "flex";
+});
+
+closeForm.addEventListener("click", (event) => {
+  event.preventDefault();
+  feedbackContainer.classList.add("fade-out");
+  form.reset();
+  // feedbackForm.style.display = "none";
+
+  setTimeout( () => {
+    feedbackForm.style.display = "none";
+  }, 200)
+})

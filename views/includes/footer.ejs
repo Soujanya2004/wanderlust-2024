@@ -1,3 +1,33 @@
+<style>
+    .dark-mode{
+
+        .feedback-container{
+            background-color: #2e2e2e;
+            box-shadow: 5px 10px 15px rgba(0, 0, 0, 0.712);
+        } 
+        #review-form input, 
+        #review-form textarea{
+            background-color: #787878 !important;
+            border: 2px solid #c1bfbf !important;
+            color: white !important;
+        }
+        #review-form input:focus{
+            background-color: #787878 !important;
+            border: 2px solid #cdcdcd !important;
+        }
+        #review-form textarea:focus{
+            background-color: #787878 !important;
+            border: 2px solid #cdcdcd !important;
+        }
+        #review-form input::placeholder {
+            color: #dadada !important;
+        }
+        #review-form textarea::placeholder{
+            color: #dadada !important;
+        }
+    }
+</style>
+
 <footer class="container" id="footer">
     <div class="footer-left">
         <div class="brand">
@@ -9,11 +39,12 @@
             </div>
             <p>Where adventure meets comfort.</p>
         </div>
-        <div class="contact-info"  id="cantact-us">
+        <div class="contact-info" id="cantact-us">
             <div class="email" style="display: flex; align-items: center;">
                 <i class="fas fa-envelope" style="position: relative; bottom: 10px;"></i>
                 <p>Need assistance with your booking or any inquiries?<br>
-                    <a href="mailto:support@Wanderlust.com" class="mail">supportWanderlust@gmail.com</a></p>
+                    <a href="mailto:support@Wanderlust.com" class="mail">supportWanderlust@gmail.com</a>
+                </p>
             </div>
             <div class="phone" style="display: flex; align-items: center;">
                 <i class="fas fa-phone" style="position: relative; bottom: 10px;"></i>
@@ -38,9 +69,46 @@
             <a href="#"><i class="fab fa-facebook"></i></a>
             <a href="#"><i class="fab fa-twitter"></i></a>
         </div>
+        <div class="feedback">
+            <button id="feedback">Give your Feedback</button>
+        </div>
     </div>
     <div class="copyright">
         <p>&copy; <span id="year"></span> Wanderlust Private Limited. All rights reserved.</p>
+    </div>
+
+
+    <div class="feedback-popup">
+        <div class="feedback-container">
+            <h2 data-aos="zoom-out-down" data-aos-duration="1200" data-aos-delay="200">Share Your Wanderlust Experience!</h2>
+            <form id="review-form" novalidate class="needs-validation" >
+                <!-- <label for="rating" data-aos="zoom-out-down" data-aos-duration="1200" data-aos-delay="200">Your Rating:
+                </label> -->
+                <div class="star-rating" id="rating" aria-label="Rating" role="radiogroup" data-aos="zoom-out-down" required>
+                    <input type="radio" id="star5" name="rating" value="5" />
+                    <label for="star5" title="5 stars">★</label>
+                    <input type="radio" id="star4" name="rating" value="4" />
+                    <label for="star4" title="4 stars">★</label>
+                    <input type="radio" id="star3" name="rating" value="3" />
+                    <label for="star3" title="3 stars">★</label>
+                    <input type="radio" id="star2" name="rating" value="2" />
+                    <label for="star2" title="2 stars">★</label>
+                    <input type="radio" id="star1" name="rating" value="1" />
+                    <label for="star1" title="1 star">★</label>
+                </div>
+                <!-- <label for="user-name" data-aos="zoom-out-down" data-aos-duration="1200" data-aos-delay="200">Your Name:</label> -->
+                <input type="text" id="name" name="name" class="feedback-name form-control" placeholder="Enter your name here." required>
+
+                <!-- <label for="comment">Leave your comment: </label> -->
+                <textarea id="comment" name="comment" class="feedback-comment form-control" placeholder="Enter your comment here...." required></textarea>
+
+                <div class="feed-buttons">
+                    <button id="close-button" class="close-button btn btn-secondary">Close</button>
+                    <button type="submit" class="submit-button btn btn-danger" data-aos="zoom-out-down">Submit</button>
+                </div>
+
+            </form>
+        </div>
     </div>
 </footer>
 
