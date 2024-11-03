@@ -234,15 +234,20 @@
                             <%=list.country%>
                         </p>
                         <p class="mt-2">
-                            <% if(list.owner.profilePicture && list.owner.profilePicture.purl) {%>
-                                <img src="<%=profilePic%>" alt="User" class="owner-avatar">
+                            <% if (list.owner && list.owner.profilePicture && list.owner.profilePicture.purl) { %>
+                                <img src="<%= list.owner.profilePicture.purl %>" alt="User" class="owner-avatar">
                             <% } else { %>
                                 <img src="/profile.png" alt="User" class="owner-avatar">
                             <% } %>
-                            Owned by: <b><%= list.owner.username %></b></p>
+                                <% if (list.owner) { %>
+                                    Owned by: <b><%= list.owner.username %></b>
+                                <% } else { %>
+                                    Owned by: <b>Unknown User</b>
+                                <% } %>
+                            </p>
                     </div>
                     <div>
-                        <% if (currUser && currUser._id.equals(list.owner._id)) { %>
+                        <% if (currUser && list.owner && currUser._id.equals(list.owner._id)) { %>
                             <div class="buttons">
                                 <form method="get" action="/listing/<%= list._id %>/edit" class="d-inline">
                                     <button class="btn btn-danger">Edit</button>
@@ -275,7 +280,7 @@
             <!-- REVIEW -->
             <div class="container">
                 <% if (currUser) { %>
-                    <% if (!currUser._id.equals(list.owner._id)) { %>
+                    <% if (list.owner && !currUser._id.equals(list.owner._id)) { %>
                         <% if (!userHasReviewed) { %>  <!-- Check if the user hasn't already left a review -->
                         <hr>
                         <p>
@@ -348,20 +353,29 @@
                                             <div class="heading">
 
                                                 <h4 class="card-title">
-                                                    <% if(review.author.profilePicture && review.author.profilePicture.purl) { %>
-                                                        <img id="reviw_logo" src="<%=review.author.profilePicture.purl%>" alt="Reviewer" class="reviewer-profile">
+                                                    <% if (review.author && review.author.profilePicture && review.author.profilePicture.purl) { %>
+                                                        <img id="reviw_logo" src="<%= review.author.profilePicture.purl %>" alt="Reviewer" class="reviewer-profile">
                                                     <% } else { %>
                                                         <img id="reviw_logo" src="/profile.png" alt="Reviewer" class="reviewer-profile">
                                                     <% } %>
-                                                    <%= review.author.username %> <span style="font-size: 9px; opacity: 0.7;"> owner</span>
+                                                    
+                                                    
+                                                        <% if (review.author) { %>
+                                                            <%= review.author.username %> <span style="font-size: 9px; opacity: 0.7;"> owner</span>
+                                                        <% } else { %>
+                                                            <span style="font-size: 9px; opacity: 0.7;"> Unknown author</span>
+                                                        <% } %>
+                                                    
                                                 </h4>
 
                                                 <div>
-                                                    <% if (currUser && currUser._id.equals(review.author._id)) { %>
-                                                        <form method="post" action="/listing/<%= list._id %>/review/<%= review._id %>?_method=DELETE"><button id="trash" type="submit"><i class="fa-solid trash fa-trash-can"></i></button>
+                                                    <% if (currUser && review.author && currUser._id.equals(review.author._id)) { %>
+                                                        <form method="post" action="/listing/<%= list._id %>/review/<%= review._id %>?_method=DELETE">
+                                                            <button id="trash" type="submit"><i class="fa-solid trash fa-trash-can"></i></button>
                                                         </form>
                                                     <% } %>
                                                 </div>
+                                                                                                    
                                             </div>
                                             <p class="card-text mt-2">
                                                 <% for (let i = 1; i <= 5; i++) { %>
