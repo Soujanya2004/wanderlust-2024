@@ -1,6 +1,6 @@
 <!-- Updated Navbar with search form -->
 <nav class="navbar navbar-expand-lg sticky-top">
-  <div class="container">
+  <div class="container" style='margin-left: 11rem;'>
     <!-- Brand and explore link on the left -->
     <a class="navbar-brand" href="/"><i class="fa-solid fa-plane fa-rotate-by fa-2xl"
         style="--fa-rotate-angle: -39deg;"></i></a>
@@ -25,16 +25,16 @@
       <!-- Left side navigation links -->
       <ul class="navbar-nav ml-auto main-menues normal-nav custom_nav">
         <li class="nav-item">
-          <a class="nav-link" id="air_bnb" href="/listing/new">Airbnb ur Home</a>
+          <a class="nav-link" id="air_bnb" href="/listing/new">Add ur property</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/contact">Contact Us</a>
+          <a class="nav-link hight-light" href="/contact">Contact Us</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/listing/#faq">FAQs</a>
+          <a class="nav-link hight-light" href="/listing/#faq">FAQs</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/contributors">Our Contributors</a>
+          <a class="nav-link hight-light" href="/contributors">Our Contributors</a>
         </li>
         <li class="nav-item toggle-container desktop-toggle">
           <button class="darkModeToggle dark-mode-toggle">
@@ -48,9 +48,9 @@
       <!-- Nav bar for mobile only -->
       <div class="mobile-nav">
         <ul>
-          <li class="nav-item">
-            <a class="nav-link" href="/listing/new">Airbnb ur Home</a>
-          </li>
+         <li class="nav-item">
+          <a class="nav-link" id="air_bnb" href="/listing/new">Add ur property</a>
+        </li>
           <li class="nav-item">
             <a class="nav-link" href="/contact">Contact Us</a>
           </li>
@@ -84,7 +84,7 @@
 
       <!-- Search bar in the middle -->
       <div class="input-group search-box">
-        <form class="d-flex mx-3" action="/listing/search" method="post">
+        <form class="d-flex mx-3 input-form" action="/listing/search" method="post">
           <input class="form-control me-2" type="search" name="query" placeholder="Search your Airbnb.."
             aria-label="Search" aria-describedby="button-addon2">
           <button class="btn btn-outline-danger search" type="submit" id="button-addon2"><i
@@ -92,7 +92,7 @@
         </form>
       </div>
       <div class="nav-link dropdown d-down flex normal-nav">
-        <a role="button" class="nav-link drop-button dropdown-toggle tg" data-bs-toggle="dropdown"
+        <a role="button" class="nav-link drop-button dropdown-toggle tg input-form" data-bs-toggle="dropdown"
           aria-expanded="false">
           <i class="fa-solid fa-bars"></i>
           <% if(!currUser) {%>
@@ -106,7 +106,7 @@
           <% } %>
 
         </a>
-        <ul class="dropdown-menu dropdown-menu-end desk-drop">
+        <ul class="dropdown-menu dropdown-menu-end desk-drop" style="margin-right: 14rem;">
           <% if(!currUser) {%>
             <li class="nav-item drop">
               <a class="nav-link" href="/login">Login</a>
