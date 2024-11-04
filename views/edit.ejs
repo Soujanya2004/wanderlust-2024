@@ -81,8 +81,16 @@
                     </div>
 
                     <div class="mb-3 edit_form">
-                        <% list.image.forEach(image => { %>
-                            <img src="<%= image.url %>" alt="listing_image" style="height: 8rem; width: auto; margin-right: 10px;" />
+                        <% list.image.forEach ((image, i) => { %>
+
+                            <div class="preview-item">
+                                <img src="<%= image.url %>" alt="listing_image" style="height: 8rem; width: auto; margin-right: 10px;" />
+                                <div class="delete-checkbox">
+                                    <input class="form-check-input" type="checkbox" id="image-<%=i%>" name="deleteImages[]" value="<%=image.filename %>">
+                                    <label for="image-<%=i%>" class="form-check-label delete-label">Delete</label>
+                                </div>
+                            </div>
+
                         <% }); %>
                         <br><small class="form-text text-muted">Images preview that already uploaded.</small>
                     </div>
