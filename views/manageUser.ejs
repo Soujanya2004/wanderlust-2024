@@ -213,15 +213,10 @@
                 <% users.forEach(user => { %> 
                     <tr>
                         <td><b><%= user.username %></b></td>
-                        <td><%= user.email %></td>
-                        <td><%= user.isAdmin ? 'Admin' : 'User' %></td>
+                        <td><i><%= user.email %></i></td>
+                        <td><b><%= user.isAdmin ? 'Admin' : 'User' %></b></td>
                         <td>
                             <div class="user_btn">
-                                <!-- Edit Form -->
-                            <form action="/admin/user/edit/<%= user._id %>" method="GET">
-                                <button type="submit" class="btn btn-outline-primary">Edit</button>
-                            </form>
-
                             <!-- Delete Form -->
                             <form action="/admin/user/<%= user._id %>?_method=DELETE" method="POST" onsubmit="return confirm('Are you sure you want to delete this user?');">
                                 <button type="submit" class="btn btn-outline-danger">Delete</button>
