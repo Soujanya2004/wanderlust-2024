@@ -202,6 +202,17 @@ module.exports.saveEditpost = async (req, res) => {
 
         let editList = await listing.findById(id);
 
+
+        console.log(req.body.deleteImages);
+
+         // Handle image deletion
+         if (req.body.deleteImages && req.body.deleteImages.length > 0) {
+            // Filter out images not selected for deletion
+            editList.image = editList.image.filter(img => !req.body.deleteImages.includes(img.filename));
+
+        }
+
+
         if (req.files && req.files.length > 0) {
             editList.image = [];
 
