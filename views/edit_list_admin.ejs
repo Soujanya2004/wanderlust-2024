@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/icon.png" />
+
+    <title>Wanderlust- listing Management</title>
+    <link rel="stylesheet" href="/css/styles.css"> 
+    <link rel="stylesheet" href="/css/light_mode.css">
+    <link rel="stylesheet" href="/css/dark_mode.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <style>
+        .all_btns{
+            display: flex !important;
+            justify-content: center;
+        }
+        .all_btns .btn{
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+    </style>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+          <!-- Brand and explore link on the left -->
+          <a class="navbar-brand" href="/listing"><i class="fa-solid fa-plane fa-rotate-by fa-2xl" style="--fa-rotate-angle: -39deg;"></i></a>
+          <a class="navbar-brand" href="/admin/dashboard"><i><b>Welcome To The Admin's Dashboard</b></i></a>
+          
+          <!-- dark mode toggle button for mobile -->
+         <div class="toggle-container mobile-toggle">
+          <button class="darkModeToggle dark-mode-toggle">
+            <i class="toggleIcon bx bxs-moon"></i>
+          </button>
+         </div>
+          
+          <!-- Navbar Toggler for small screens -->
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                  aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+          </button>
+      
+          <!-- Navbar Collapse (links and form) -->
+          <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+            
+            <!-- Left side navigation links -->
+            <ul class="navbar-nav ml-auto main-menues normal-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/dashboard">Manage Listings</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/users">Manage Users</a>
+              </li>
+              <li class="nav-item toggle-container desktop-toggle">
+                <button class="darkModeToggle dark-mode-toggle">
+                  <i class="toggleIcon bx bxs-moon"></i>
+                </button>
+              </li>
+            </ul>
+      
+            <!-- Nav bar for mobile only -->
+          <div class="mobile-nav">
+            <ul>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/dashboard">Manage Listings</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/users">Manage Users</a>
+              </li>
+    
+              <% if(!currUser) {%> <!--If inside currUser have not any user data then show this-->
+                <li class="nav-item">
+                  <a class="nav-link" href="/signup">Sign up</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/login">Log in</a>
+                </li>
+                <% } %>
+    
+                  <% if(currUser) {%>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/logout">Log out</a>
+                    </li>
+                    <% } %>
+            </ul>
+    
+          </div>
+      
+            <!-- Search bar in the middle -->
+            <div class="input-group search-box">
+              <form class="d-flex mx-3" action="/listing/search" method="post">
+                <input class="form-control me-2" type="search" name="query" placeholder="Search your Airbnb.." aria-label="Search" aria-describedby="button-addon2">
+                <button class="btn btn-outline-danger search" type="submit" id="button-addon2"><i class="fas fa-search"></i></button>
+              </form>
+            </div>
+            <div class="nav-link dropdown d-down flex normal-nav">
+              <a role="button" class="nav-link drop-button dropdown-toggle tg" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-bars"></i>
+                <% if(!currUser) {%>
+                  <img src="/noprofilenav.png" alt="" class="nav-provile" style="
+                  height: 1.9rem;
+                  padding-left: .5rem">
+                <% } %>
+      
+                <% if(currUser) {%> 
+                  <img src="/profilenav.png" alt="" class="nav-provile" style="
+                  height: 1.9rem;
+                  padding-left: .5rem
+                  ">
+                <% } %>
+                
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end desk-drop">
+                <% if(!currUser) {%>
+                  <li class="nav-item drop">
+                    <a class="nav-link" href="/login">Login</a>
+                  </li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li class="nav-item drop">
+                    <a class="nav-link" href="/signup">Signup</a>
+                  </li>
+                <% } %>
+                <% if(currUser) {%>
+                  <li class="nav-item drop"><a class="nav-link" href="/logout">Log Out</a></li>
+                 <% } %>
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+
+    <!-- EDIT lISTING -->
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12 col-md-10 col-lg-8 mx-auto form_body">
+            <h3 class="text-center" style="font-family: rakkas;">Edit Property details</h3>
+            <form method="POST" action="/listing/<%= list._id %>?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data">
+                <div class="mb-3 edit_form">
+                    <label for="title" class="form-label">Title</label>
+                    <input name="listing[title]" class="form-control" value="<%= list.title %>" required>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please enter a valid title!</div>
+                </div>
+
+                <div class="mb-3 edit_form">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea name="listing[description]" class="form-control" rows="5" required><%= list.description %></textarea>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please enter a valid description!</div>
+                </div>
+
+                <div class="mb-3 edit_form">
+                    <% list.image.forEach(image => { %>
+                        <img src="<%= image.url %>" alt="listing_image" style="height: 8rem; width: auto; margin-right: 10px;" />
+                    <% }); %>
+                    <br><small class="form-text text-muted">Images preview that already uploaded.</small>
+                </div>
+
+                <div class="mb-3 edit_form">
+                    <label for="images" class="form-label">Upload New Images</label>
+                    <input type="file" name="listing[image]" class="form-control" accept="image/*" multiple>
+                    <small class="form-text text-muted">You can upload multiple images.</small>
+                </div>
+                <div class="row">
+
+                    <div class="mb-3 col-3 edit_form">
+                        <label for="price" class="form-label">Price (&#8377;)</label>
+                        <input name="listing[price]" type="number" class="form-control" value="<%= list.price %>" required>
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback">Please enter a valid price!</div>
+                    </div>
+
+                    <div class="mb-3 col-5 edit_form">
+                        <label for="location" class="form-label">Location</label>
+                        <input name="listing[location]" class="form-control" value="<%= list.location %>" required>
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback">Please enter a valid location!</div>
+                    </div>
+
+                    <div class="mb-3 col-4 edit_form">
+                        <label for="country" class="form-label">Country</label>
+                        <input name="listing[country]" class="form-control" value="<%= list.country %>" required>
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback">Please enter a valid country!</div>
+                    </div>
+
+                </div>
+                <div class="all_btns">
+                    <button type="submit" class="btn btn-primary">Update Listing</button>
+                    <a href="/admin/dashboard" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+            <br><br><br><br>
+        </div>
+    </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <script src="/js/script.js"></script>
+    <script src="/js/toggler.js"></script>
+    <script src="/js/contributor.js"></script>
+</body>
+</html>

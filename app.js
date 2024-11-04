@@ -199,6 +199,23 @@ app.get('/admin/reviews/:id',isLoggedIn, isAdmin, async (req, res) => {
 }
 });
 
+
+// Render show edit form
+app.get('/admin/listing/edit/:id',isLoggedIn, isAdmin, async (req, res) => {
+  try {
+    // console.log(req.params.id);
+    const list = await listing.findById(req.params.id);
+    if (!list){
+      return res.status(404).send("Listing not found");
+    }
+    res.render('edit_list_admin', { list });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server error");
+  }
+});
+
+
 // ADMIN
 // ADMIN
 
