@@ -374,8 +374,16 @@ app.post('/profile/edit', isLoggedIn, upload.single("profileimage"), async (req,
 
     // Save the updated user document
     await user.save();
-    req.flash("success", "Profile updated successfully!");
-    return res.redirect('/profile'); // Redirect after successful update
+
+    // Stay logged in after change profile details.
+    req.login(user, (err) => {
+      if (err) {
+        req.flash('error', 'Login failed.');
+        return res.redirect('/login'); // Return here to prevent further execution
+      }
+      req.flash("success", "Profile updated successfully!");
+      return res.redirect('/profile'); // Redirect after successful update
+    });
 
   } catch (err) {
     console.error("Error updating profile:", err);
