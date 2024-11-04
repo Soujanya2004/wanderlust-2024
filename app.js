@@ -112,8 +112,8 @@ app.use((req, res, next) => {
 
 app.get('/admin/dashboard',isLoggedIn ,isAdmin, async (req, res) => {
   try {
-    const listings = await listing.find();
-    // console.log(listings);
+    const listings = await listing.find().populate('owner');;
+    // console.log(listings.owner);
     res.render('adminDashboard', { listings });
   } catch (error) {
       console.error('Error fetching listings:', error);

@@ -36,10 +36,6 @@
         background-color: #f9f9f9;
     }
 
-    .listing-title {
-        font-weight: bold;  
-    }
-
     .description-cell {
         max-height: 200px;
         overflow: hidden;
@@ -217,7 +213,15 @@
     </div>
             <% listings.forEach(list => { %> <!-- Use forEach to iterate over listings -->
               <div class="row border-bottom p-2 listing-row">
-                <div class="col-12 col-md-2 listing-title"><%= list.title %></div>
+                <% if (list.owner && list.owner.username) { %>
+                  <div class="col-12 col-md-2 listing-title"><%= list.title %> 
+                    <div style="font-size: .8rem; color: #c24040;">Owned By: <b><%= list.owner.username %></b></div>
+                  </div>
+              <% } else { %>
+                  <div class="col-12 col-md-2 listing-title"><%= list.title %>
+                    <div style="font-size: .8rem; color: #c24040;"> Owned By: <b>Unknown User</b></div>
+                  </div>
+              <% } %>              
                 <div class="col-12 col-md-2 description-cell"><%= list.description %></div>
                 <div class="col-12 col-md-1"><b><%= list.price %></b></div>
                 <div class="col-12 col-md-1"><i><%= list.location %></i></div>
