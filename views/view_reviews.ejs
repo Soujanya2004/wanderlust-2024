@@ -118,123 +118,70 @@
             color: #888;
             font-style: italic;
         }
+
+        /* DARK MODE CSS */
+        .dark-mode{
+            /* Dark mode for container */
+            .listing {
+                background-color: #1f1f1f;
+                border: 1px solid #333;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+            }
+
+            /* Headings */
+            .listing h1 {
+                color: #ff6b6b;
+                border-bottom: 2px solid #333;
+            }
+
+            /* Paragraph and text styling */
+            .listing p,
+            .listing strong {
+                color: #b0b0b0;
+            }
+
+            /* Image Gallery styling */
+            .image-gallery img {
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            }
+
+            /* Table styling for reviews */
+            .reviews-table {
+                background-color: #1f1f1f;
+                color: #e0e0e0;
+                border-color: #333;
+            }
+
+            .reviews-table th {
+                background-color: #333;
+            }
+
+            .reviews-table td {
+                border: 1px solid #444;
+            }
+
+            .review-author {
+                color: #ffb74d;
+            }
+
+            .reviews-title {
+                color: #e9ecef;
+            }
+            .no-reviews-message {
+                color: #888;
+            }
+        }
     </style>
 
     
     <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg sticky-top">
-        <div class="container">
-        <!-- Brand and explore link on the left -->
-        <a class="navbar-brand" href="/listing"><i class="fa-solid fa-plane fa-rotate-by fa-2xl" style="--fa-rotate-angle: -39deg;"></i></a>
-        <a class="navbar-brand" href="/admin/dashboard"><i><b>Welcome To The Admin's Dashboard</b></i></a>
-        
-        <!-- dark mode toggle button for mobile -->
-        <div class="toggle-container mobile-toggle">
-        <button class="darkModeToggle dark-mode-toggle">
-            <i class="toggleIcon bx bxs-moon"></i>
-        </button>
-        </div>
-        
-        <!-- Navbar Toggler for small screens -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-        </button>
-    
-        <!-- Navbar Collapse (links and form) -->
-        <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
-            
-            <!-- Left side navigation links -->
-            <ul class="navbar-nav ml-auto main-menues normal-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="/admin/dashboard">Manage Listings</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/admin/users">Manage Users</a>
-            </li>
-            <li class="nav-item toggle-container desktop-toggle">
-                <button class="darkModeToggle dark-mode-toggle">
-                <i class="toggleIcon bx bxs-moon"></i>
-                </button>
-            </li>
-            </ul>
-    
-            <!-- Nav bar for mobile only -->
-        <div class="mobile-nav">
-            <ul>
-            <li class="nav-item">
-                <a class="nav-link" href="/admin/dashboard">Manage Listings</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/admin/users">Manage Users</a>
-            </li>
+    <%- include("./includes/admin_navbar.ejs") %>
 
-            <% if(!currUser) {%> <!--If inside currUser have not any user data then show this-->
-                <li class="nav-item">
-                <a class="nav-link" href="/signup">Sign up</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="/login">Log in</a>
-                </li>
-                <% } %>
-
-                <% if(currUser) {%>
-                    <li class="nav-item">
-                    <a class="nav-link" href="/logout">Log out</a>
-                    </li>
-                    <% } %>
-            </ul>
-
-        </div>
-    
-            <!-- Search bar in the middle -->
-            <div class="input-group search-box">
-            <form class="d-flex mx-3" action="/listing/search" method="post">
-                <input class="form-control me-2" type="search" name="query" placeholder="Search your Airbnb.." aria-label="Search" aria-describedby="button-addon2">
-                <button class="btn btn-outline-danger search" type="submit" id="button-addon2"><i class="fas fa-search"></i></button>
-            </form>
-            </div>
-            <div class="nav-link dropdown d-down flex normal-nav">
-            <a role="button" class="nav-link drop-button dropdown-toggle tg" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa-solid fa-bars"></i>
-                <% if(!currUser) {%>
-                <img src="/noprofilenav.png" alt="" class="nav-provile" style="
-                height: 1.9rem;
-                padding-left: .5rem">
-                <% } %>
-    
-                <% if(currUser) {%> 
-                <img src="/profilenav.png" alt="" class="nav-provile" style="
-                height: 1.9rem;
-                padding-left: .5rem
-                ">
-                <% } %>
-                
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end desk-drop">
-                <% if(!currUser) {%>
-                <li class="nav-item drop">
-                    <a class="nav-link" href="/login">Login</a>
-                </li>
-                <li><hr class="dropdown-divider"></li>
-                <li class="nav-item drop">
-                    <a class="nav-link" href="/signup">Signup</a>
-                </li>
-                <% } %>
-                <% if(currUser) {%>
-                <li class="nav-item drop"><a class="nav-link" href="/logout">Log Out</a></li>
-                <% } %>
-                
-            </ul>
-            </div>
-        </div>
-        </div>
-    </nav>
 
         <div class="container listing">
             <h1><%= list.title %></h1>
             <p><strong>Description:</strong> <%= list.description %></p>
-            <p><strong>Price:</strong> $<%= list.price %></p>
+            <p><strong>Price:</strong> &#8377;<%= list.price %></p>
             <p><strong>Location:</strong> <%= list.location %>, <%= list.country %></p>
             <!-- Centered Image Gallery with Bootstrap Columns -->
             <div class="image-gallery row col-10 offset-1">

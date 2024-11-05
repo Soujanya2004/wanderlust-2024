@@ -112,8 +112,8 @@ app.use((req, res, next) => {
 
 app.get('/admin/dashboard',isLoggedIn ,isAdmin, async (req, res) => {
   try {
-    const listings = await listing.find();
-    // console.log(listings);
+    const listings = await listing.find().populate('owner');;
+    // console.log(listings.owner);
     res.render('adminDashboard', { listings });
   } catch (error) {
       console.error('Error fetching listings:', error);
@@ -197,6 +197,65 @@ app.get('/admin/reviews/:id',isLoggedIn, isAdmin, async (req, res) => {
 } catch (err) {
     res.status(500).send(err.message);
 }
+});
+
+
+// Render show edit form
+app.get('/admin/listing/edit/:id',isLoggedIn, isAdmin, async (req, res) => {
+  try {
+    // console.log(req.params.id);
+    const list = await listing.findById(req.params.id);
+    if (!list){
+      return res.status(404).send("Listing not found");
+    }
+    res.render('edit_list_admin', { list });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server error");
+  }
+});
+
+
+//update listing admin
+
+app.put('/admin/listing/edit/:id',isLoggedIn, isAdmin, upload.array('listing[image]',10), async (req, res) => {
+  const { id } = req.params;
+  const { title, description, price, location, country } = req.body.listing;
+  
+  try {
+    if (!req.body.listing) {
+      req.flash('error', ERROR_SEND_VALID_DATA);
+      return res.redirect(`/admin/listing/edit/${id}`);
+  }
+
+    // Find the listing by ID
+    const up_listing = await listing.findById(id);
+
+    // Update the fields
+    up_listing.title = title;
+    up_listing.description = description;
+    up_listing.price = price;
+    up_listing.location = location;
+    up_listing.country = country;
+
+    // Check if new images are uploaded
+    if (req.files && req.files.length > 0) {
+      // If new images are provided, replace the old ones (you may adjust this to add instead of replace)
+      up_listing.image = req.files.map(file => ({
+        url: file.path,
+        filename: file.filename
+      }));
+    }
+
+    // Save the updated listing
+    await up_listing.save();
+
+    // Redirect to the admin dashboard or listing page after the update
+    res.redirect(`/admin/dashboard`);
+  } catch (error) {
+    console.error("Error updating listing:", error);
+    res.status(500).send("Error updating listing.");
+  }
 });
 
 // ADMIN
@@ -374,8 +433,16 @@ app.post('/profile/edit', isLoggedIn, upload.single("profileimage"), async (req,
 
     // Save the updated user document
     await user.save();
-    req.flash("success", "Profile updated successfully!");
-    return res.redirect('/profile'); // Redirect after successful update
+
+    // Stay logged in after change profile details.
+    req.login(user, (err) => {
+      if (err) {
+        req.flash('error', 'Login failed.');
+        return res.redirect('/login'); // Return here to prevent further execution
+      }
+      req.flash("success", "Profile updated successfully!");
+      return res.redirect('/profile'); // Redirect after successful update
+    });
 
   } catch (err) {
     console.error("Error updating profile:", err);

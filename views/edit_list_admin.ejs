@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/icon.png" />
+
+    <title>Wanderlust- listing Management</title>
+    <link rel="stylesheet" href="/css/styles.css"> 
+    <link rel="stylesheet" href="/css/light_mode.css">
+    <link rel="stylesheet" href="/css/dark_mode.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <style>
+        .all_btns{
+            display: flex !important;
+            justify-content: center;
+        }
+        .all_btns .btn{
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+
+    .dark-mode{
+         
+            h3,  .form-label, .form-text {
+                color: #f1f1f1;
+            }
+            .form-control {
+                background-color: #333;
+                color: #e0e0e0;
+                border: 1px solid #555;
+            }
+            .form-control::placeholder {
+                color: #888;
+            }
+            .form-control:focus {
+                background-color: #444;
+                border-color: #888;
+                color: #fff;
+            }
+            .edit_form input[type="file"] {
+                background-color: inherit;
+                color: #e0e0e0;
+                border: 1px solid #555;
+            }
+            .edit_form .valid-feedback, .edit_form .invalid-feedback {
+                color: #a0a0a0;
+            }
+        }
+    </style>
+    <!-- NAVBAR -->
+    <%- include("./includes/admin_navbar.ejs") %>
+
+
+    <!-- EDIT lISTING -->
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12 col-md-10 col-lg-8 mx-auto form_body">
+            <h3 class="text-center" style="font-family: rakkas;">Edit Property details</h3>
+            <form method="POST" action="/admin/listing/edit/<%= list._id %>?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data">
+                <div class="mb-3 edit_form">
+                    <label for="title" class="form-label">Title</label>
+                    <input name="listing[title]" class="form-control" value="<%= list.title %>" required>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please enter a valid title!</div>
+                </div>
+
+                <div class="mb-3 edit_form">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea name="listing[description]" class="form-control" rows="5" required><%= list.description %></textarea>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please enter a valid description!</div>
+                </div>
+
+                <div class="mb-3 edit_form">
+                    <% list.image.forEach(image => { %>
+                        <img src="<%= image.url %>" alt="listing_image" style="height: 8rem; width: auto; margin-right: 10px;" />
+                    <% }); %>
+                    <br><small class="form-text text-muted">Images preview that already uploaded.</small>
+                </div>
+
+                <div class="mb-3 edit_form">
+                    <label for="images" class="form-label">Upload New Images</label>
+                    <input type="file" name="listing[image]" class="form-control" accept="image/*" multiple>
+                    <small class="form-text text-muted">You can upload multiple images.</small>
+                </div>
+                <div class="row">
+
+                    <div class="mb-3 col-3 edit_form">
+                        <label for="price" class="form-label">Price (&#8377;)</label>
+                        <input name="listing[price]" type="number" class="form-control" value="<%= list.price %>" required>
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback">Please enter a valid price!</div>
+                    </div>
+
+                    <div class="mb-3 col-5 edit_form">
+                        <label for="location" class="form-label">Location</label>
+                        <input name="listing[location]" class="form-control" value="<%= list.location %>" required>
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback">Please enter a valid location!</div>
+                    </div>
+
+                    <div class="mb-3 col-4 edit_form">
+                        <label for="country" class="form-label">Country</label>
+                        <input name="listing[country]" class="form-control" value="<%= list.country %>" required>
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback">Please enter a valid country!</div>
+                    </div>
+
+                </div>
+                <div class="all_btns">
+                    <button type="submit" class="btn btn-primary">Update Listing</button>
+                    <a href="/admin/dashboard" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+            <br><br><br><br>
+        </div>
+    </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <script src="/js/script.js"></script>
+    <script src="/js/toggler.js"></script>
+    <script src="/js/contributor.js"></script>
+</body>
+</html>
