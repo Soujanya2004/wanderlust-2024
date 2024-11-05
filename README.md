@@ -174,7 +174,7 @@ Every contribution, big or small, is valued and appreciated. Together, we can cr
 
 <div align="center">
   <a href="https://github.com/Soujanya2004/wanderlust-2024/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=Soujanya2004/wanderlust-2024&max=100" />
+    <img src="https://contrib.rocks/image?repo=Soujanya2004/wanderlust-2024&max=200" />
   </a>
 </div>
 
