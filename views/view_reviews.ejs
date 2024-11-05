@@ -1,21 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="/icon.png" />
-
-    <title>Wanderlust- Admin View listing</title>
-    <link rel="stylesheet" href="/css/styles.css"> 
-    <link rel="stylesheet" href="/css/light_mode.css">
-    <link rel="stylesheet" href="/css/dark_mode.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-</head>
-<body>
+<!-- INCLUDE boilerplate -->
+<% layout("/layouts/admin_boilerplate") %>
 
     <style>
         /* Styling for the Listing Container */
@@ -173,11 +157,6 @@
         }
     </style>
 
-    
-    <!-- NAVBAR -->
-    <%- include("./includes/admin_navbar.ejs") %>
-
-
         <div class="container listing">
             <h1><%= list.title %></h1>
             <p><strong>Description:</strong> <%= list.description %></p>
@@ -224,12 +203,3 @@
                     <% } %>
                 </div>
             </div>
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
-        <script src="/js/script.js"></script>
-        <script src="/js/toggler.js"></script>
-        <script src="/js/contributor.js"></script>
-    </body>
-    </html>
