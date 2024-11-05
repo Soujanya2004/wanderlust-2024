@@ -1,3 +1,17 @@
+// /preloader js styling
+let preloader = document.querySelector("#preloader");
+
+window.addEventListener("load",function(e){
+
+    preloader.style.display = "none";
+    // setTimeout(function() {
+    //   preloader.style.display = 'none';
+    // }, 1000);
+
+});
+
+
+
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 (() => {
   "use strict";
