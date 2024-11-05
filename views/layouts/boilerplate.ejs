@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="/icon.png" />
     <title>Wanderlust</title>
+    <link rel="stylesheet" href="/css/preloader.css">
     <link rel="stylesheet" href="/css/styles.css"> 
     <link rel="stylesheet" href="/css/light_mode.css">
     <link rel="stylesheet" href="/css/dark_mode.css">
@@ -18,7 +19,7 @@
     <script src="https://api.mapbox.com/mapbox-gl-js/v3.5.1/mapbox-gl.js"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
-<style>
+<!-- <style>
         #preloader {
             position: fixed;
             top: 0;
@@ -54,16 +55,17 @@
                 transform: rotate(360deg) translateX(50px) rotate(-360deg); 
             }
         }
-    </style>
+    </style> -->
 
 </head>
 <body class="light-mode">
-
     <div id="preloader">
         <div class="loader">
-            <i class="fa-solid fa-plane plane"></i>
+            <!-- <i class="fa-solid fa-plane plane"></i> -->
         </div>
+        <span class="load"></span>
     </div>
+    
 
     <%- include("../includes/navbar.ejs") %>
     
@@ -77,19 +79,21 @@
     <hr class="btw-foot">
     <%- include("../includes/footer.ejs") %>
 
+    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <script src="/js/script.js"></script>
     <script src="/js/toggler.js"></script>
     <script src="/js/contributor.js"></script>
-    <script>
+    <!-- <script>
         window.addEventListener('load', function() {
             const preloader = document.getElementById('preloader');
             setTimeout(function() {
                 preloader.style.display = 'none';
             }, 1000);
         });
-    </script>
+    </script> -->
 </body>
 </html>
