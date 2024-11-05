@@ -106,11 +106,17 @@
     box-shadow: -1px 4px 12px rgba(120, 120, 120, 0.4);
 }
 .owner-avatar{
-    height: 2.5rem;
+    height: 2.7rem !important;
+    width: 2.7rem !important;
     border-radius: 50% !important;
     border: 2px solid rgb(79, 79, 79);
     box-shadow: 2px 2px 5px #000000;
     margin-right: 0.5rem;
+    transition: all 0.3s ease;
+}
+.owner-avatar:hover{
+    transform: scale(1.2);
+    cursor: pointer;
 }
 .listing-price{
     margin-top: 0.5rem;
