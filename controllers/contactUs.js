@@ -6,7 +6,7 @@ const mailSender = require("../utils/mailSender");
 exports.contactUsController = async (req, res) => {
     console.log("REQ KI BODY");
 	const { firstname, lastname, email, message, subject } = req.body;
-	console.log(req.body);
+	// console.log(req.body);
 	try {
 		const emailRes = await mailSender(
 			email,
