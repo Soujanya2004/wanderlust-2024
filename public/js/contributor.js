@@ -106,3 +106,15 @@ function scrollToContribute() {
 
 // Initialize the page when the DOM is loaded
 document.addEventListener('DOMContentLoaded', init);
+
+// Create the button element
+const backButton = document.createElement('button');
+backButton.textContent = 'Back to Previous Page';
+
+// Add an event listener to the button
+backButton.addEventListener('click', function() {
+    window.history.back();
+});
+
+// Append the button to the body
+document.body.appendChild(backButton);

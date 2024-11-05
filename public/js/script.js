@@ -121,3 +121,15 @@ closeForm.addEventListener("click", (event) => {
     feedbackForm.style.display = "none";
   }, 200)
 })
+
+// Create the button element
+const backButton = document.createElement('button');
+backButton.textContent = 'Back to Previous Page';
+
+// Add an event listener to the button
+backButton.addEventListener('click', function() {
+    window.history.back();
+});
+
+// Append the button to the body
+document.body.appendChild(backButton);

@@ -24,3 +24,5 @@ exports.contactUsController = async (req, res) => {
 		return res.redirect("/contact");
 	}
 };
+
+
