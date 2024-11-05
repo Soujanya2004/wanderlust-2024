@@ -258,3 +258,5 @@ module.exports.deletepost = async (req, res) => {
     }
     res.redirect("/listing");
 };
+
+
