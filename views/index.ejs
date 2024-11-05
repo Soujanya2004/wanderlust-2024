@@ -1,331 +1,221 @@
-<% layout("/layouts/boilerplate") %>
-<style>
-  .listing-card{
-        min-height: fit-content !important;
-        /* padding-bottom: 1rem !important; */
-  }
-  .popup{
-    transition: transform 0.3s ease;
-  }
-  .popup:hover{
-    /* transform: translateY(-0.2rem); */
-    transform: scale(1.01) translateY(-0.1rem);
-  }
-  .card-img-top{
-    height: 20rem !important;
-  }
-  .show_btn{
-    margin-bottom: 0 !important;
-  }
-  .card-body{
-    padding-bottom: 0.2 !important;
-    height: fit-content !important;
-    /* max-height: auto; */
-  }
-  .faq-left{
-    padding-left: 2rem;
-  }
-  .contact-info a{
-    color: #999;
-    font-size: 1.1rem !important;
-    font-weight: 400 !important;
-  }
-   /* Styling for GST toggle */
-  .tax-toggler-container {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wanderlust - Embark on Your Dream Journey</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <style>
+    
+  .hero-section {
+    background-image: url('https://png.pngtree.com/background/20210709/original/pngtree-cartoon-tourism-red-warm-color-picture-image_925262.jpg');
+    
+    background-size: cover;
+    background-position: center;
+    height: 80vh;
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
   }
-  .tax-toggler {
-    box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.2); 
-    width: 250px;
-    position: relative;
-    right: 1rem; 
-    padding: 10px 14px;
-    border-radius: 8px;
-    z-index: 10;
+  .hero-section h1, .hero-section p {
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7); /* Added text shadow for better readability */
   }
-  .tax-toggler label {
-    font-size: 15px;
-    margin-left: 5px;
-    cursor: pointer;
-    padding-right: 5px;
+  .highlight-button {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Subtle shadow for the button */
   }
-  .red-text {
-    color: rgba(255, 0, 0, 0.607);
-  }
-  #gstToggle{
-    font-size: 1.2rem;
-    position: relative;
-    bottom: 2px;
-  }
-</style>
+
+
+    .feature-icon {
+      width: 4rem;
+      height: 4rem;
+    }
+    .testimonial-image {
+      width: 6rem;
+      height: 6rem;
+    }
+    .destination-card {
+      transition: transform 0.3s ease;
+    }
+    .destination-card:hover {
+      transform: scale(1.05);
+    }
+  </style>
+  
+</head>
 <body>
+  <div class="hero-section text-white">
+    <h1 class="text-4xl md:text-6xl font-bold mb-4">Explore. Discover. Wander.</h1>
+    <p class="text-xl md:text-2xl mb-8">Embark on your dream journey with Wanderlust.</p>
+    <a href="/explore" class="highlight-button bg-red-500 border border-outline hover:bg-red-600 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-300">
+      Start Exploring
+    </a>
+  </div>
   
-    <div class="scrollBar">
-      <!-- Scroll Buttons -->
-      <button class="scroll-btn left" onclick="leftScroll()">
-        <i class="fas fa-angle-double-left"></i>
-      </button>
-  
-    <div id="filters">
-      <div class="filter">
-        <div><i class="fa-solid fa-fire"></i></div>
-        <p>Trending</p>
+
+  <div class="container mx-auto px-4 py-16">
+    <h2 class="text-3xl md:text-4xl font-bold mb-8">Why Choose Wanderlust?</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="bg-white rounded-lg shadow-lg p-6">
+        <div class="flex items-center mb-4">
+          <div class="feature-icon bg-red-500 rounded-full flex items-center justify-center text-white mr-4">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <h3 class="text-xl font-bold">Discover the World</h3>
+        </div>
+        <p class="text-gray-700">Uncover hidden gems, explore vibrant destinations, and embark on unforgettable adventures.</p>
       </div>
-      <div class="filter">
-        <div><i class="fa-solid fa-water"></i></div>
-        <p>Surfing</p>
+      <div class="bg-white rounded-lg shadow-lg p-6">
+        <div class="flex items-center mb-4">
+          <div class="feature-icon bg-red-500 rounded-full flex items-center justify-center text-white mr-4">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3 class="text-xl font-bold">Join the Community</h3>
+        </div>
+        <p class="text-gray-700">Connect with fellow travelers, share your experiences, and be inspired by stories from around the globe.</p>
       </div>
-      <div class="filter">
-        <div><i class="fa-solid fa-city"></i></div>
-        <p>Amazing cities</p>
-      </div>
-      <div class="filter">
-        <div><i class="fa-solid fa-umbrella"></i></div>
-        <p>Beach</p>
-      </div>
-      <div class="filter">
-        <div><i class="fa-solid fa-cow"></i></div>
-        <p>Farms</p>
-      </div>
-      <div class="filter">
-        <div><i class="fa-solid fa-mountain"></i></div>
-        <p>Lake</p>
-      </div>
-      <div class="filter">
-        <div><i class="fa-solid fa-fort-awesome"></i></div>
-        <p>Castles</p>
-      </div>
-      <div class="filter">
-        <div><i class="fa-solid fa-bed"></i></div>
-        <p>Rooms</p>
-      </div>
-      <div class="filter">
-        <div><i class="fa-solid fa-tree"></i></div>
-        <p>Forest</p>
-      </div>
-      <div class="filter">
-        <div><i class="fa-solid fa-person-swimming"></i></div>
-        <p>Pool</p>
+      <div class="bg-white rounded-lg shadow-lg p-6">
+        <div class="flex items-center mb-4">
+          <div class="feature-icon bg-red-500 rounded-full flex items-center justify-center text-white mr-4">
+            <i class="fas fa-calendar-alt"></i>
+          </div>
+          <h3 class="text-xl font-bold">Plan Your Journey</h3>
+        </div>
+        <p class="text-gray-700">Effortlessly plan your dream vacation with our user-friendly tools and personalized recommendations.</p>
       </div>
     </div>
-    <button class="scroll-btn right" onclick="rightScroll()">
-      <i class="fas fa-angle-double-right"></i>
-    </button>
-    </div>
+  </div>
 
-    <!-- LISTINGS -->
-  <br>
-
-  <!-- Listings -->
-  <div class="container">
-    <!-- toogler -->
-    <div class="tax-toggler-container">
-      <div class="tax-toggler">
-        <div class="form-check-reverse form-switch">
-          <input type="checkbox" role="switch" class="form-check-input" id="gstToggle" onclick="toggleGST()">
-          <label for="gstToggle" class="form-check-label">Display total after taxes</label>
+  <div class="bg-gray-100 py-16">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-bold mb-8">What Our Travelers Say</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <div class="flex items-center mb-4">
+            <img src="https://img.freepik.com/free-photo/headshot-handsome-bearded-man-smiling-standing-against-white-background_1258-26733.jpg?semt=ais_hybrid" alt="Customer 1" class="testimonial-image rounded-full mr-4">
+            <div>
+              <h3 class="text-lg font-bold">John Doe</h3>
+              <p class="text-gray-600">Wanderlust Enthusiast</p>
+            </div>
+          </div>
+          <p class="text-gray-700">"Wanderlust has transformed the way I plan and experience my travels. The platform is user-friendly and the community is amazing."</p>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <div class="flex items-center mb-4">
+            <img src="https://media.istockphoto.com/id/882495390/photo/happiness.jpg?s=612x612&w=0&k=20&c=SVUBI4k1eTLtc8rUcO4iWAgOo7SUcUdT8qOE7p3G9F8=" alt="Customer 2" class="testimonial-image rounded-full mr-4">
+            <div>
+              <h3 class="text-lg font-bold">Jane Smith</h3>
+              <p class="text-gray-600">Travel Influencer</p>
+            </div>
+          </div>
+          <p class="text-gray-700">"I've been using Wanderlust for years, and it's the best platform for discovering unique destinations and sharing my adventures with the world."</p>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <div class="flex items-center mb-4">
+            <img src="https://media.istockphoto.com/id/483627817/photo/showing-off-his-pearly-whites.jpg?s=612x612&w=0&k=20&c=gk6aVVGp52YFx1ZzPVQplGc7JL5zkrfxQTuLjIn2RU8=" alt="Customer 3" class="testimonial-image rounded-full mr-4">
+            <div>
+              <h3 class="text-lg font-bold">Michael Johnson</h3>
+              <p class="text-gray-600">Adventurous Traveler</p>
+            </div>
+          </div>
+          <p class="text-gray-700">"Wanderlust has completely changed the way I plan and approach my travels. The platform is a game-changer!"</p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Listings -->
-  <div class="container my-4">
-    <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2 gx-3"> <!-- Changed row-col-3 to row-cols-3 and removed row-cols-xs-1 -->
-      <% for (listing of listings) { %>
-        <div class="col popup"> <!-- Added .col to ensure grid layout works -->
-
-          <div class="card listing-card">
-            <% if (listing.image && listing.image.length > 0) { %>
-                  <img src="<%= listing.image[0].url %>" class="card-img-top" alt="listing_image" />
-            <% } %>           
-            <div class="card-body">
-              <h4 class="card-title">
-                <%= listing.title.length > 26 ? listing.title.substring(0, 25) + '....' : listing.title %>
-              </h4>    
-              <p class="mt-3">
-                <span class="price" data-base-price="<%= listing.price %>"><%= listing.price.toLocaleString("en-IN") %></span> / night 
-                <span class="gst-label">(excl. GST)</span>
-              </p>
-              <p class="card-text location"><i class="fa-solid fa-location-crosshairs"></i>&nbsp; <%= listing.location %>, <%= listing.country %></p>
-              <a href="/listing/<%= listing._id %>" class="btn btn-dark show_btn">Show in Detail</a>
-            </div>
-          </div>
-        </div> <!-- End of .col -->
-      <% } %>
-    </div>
-    
-  </div>
-
-  </div>
-
-<!-- FAQ SECTION -->
-<div class="faq-container container" id="faq">
-  <div class="faq-left">
-    <h2>Frequently Asked Questions</h2>
-    <p>Your travel-related queries, answered to ensure a smooth journey! 
-      <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f30f/512.gif" alt="🌏" width="28" height="28">
-      <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/2728/512.gif" alt="✨" width="28" height="28"></p>
-    <div class="contact-info">
-      <span><i class="fas fa-envelope"></i> Got any questions?</span>
-      <a href="mailto:support@wanderlust.com">support@wanderlust.com</a>
+  <div class="container mx-auto px-4 py-16">
+    <h2 class="text-3xl md:text-4xl font-bold mb-8">Explore Unforgettable Destinations</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+      <a href="/destination/bali" class="destination-card bg-white rounded-lg shadow-lg overflow-hidden">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiekN9kgQa6AUI2qpzi8EUSj0M4HeVbgTLbw&s" alt="Bali, Indonesia" class="w-full h-48 object-cover">
+        <div class="p-4">
+          <h3 class="text-xl font-bold mb-2">Bali, Indonesia</h3>
+          <p class="text-gray-700">Discover the beauty of Bali's beaches, temples, and lush landscapes.</p>
+        </div>
+      </a>
+      <a href="https://lp-cms-production.imgix.net/2024-06/iStock-166471469.jpg" class="destination-card bg-white rounded-lg shadow-lg overflow-hidden">
+        <img src="https://www.urlaubsguide.de/wp-content/uploads/2022/12/santorin-1250x488.jpg" alt="Santorini, Greece" class="w-full h-48 object-cover">
+        <div class="p-4">
+          <h3 class="text-xl font-bold mb-2">Santorini, Greece</h3>
+          <p class="text-gray-700">Explore the iconic white-washed buildings and stunning sunsets of Santorini.</p>
+        </div>
+      </a>
+      <a href="/destination/machu-picchu" class="destination-card bg-white rounded-lg shadow-lg overflow-hidden">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Machu_Picchu%2C_Peru.jpg" alt="Machu Picchu, Peru" class="w-full h-48 object-cover">
+        <div class="p-4">
+          <h3 class="text-xl font-bold mb-2">Machu Picchu, Peru</h3>
+          <p class="text-gray-700">Venture to the ancient Inca citadel and discover the wonders of Peru.</p>
+        </div>
+      </a>
+      <a href="/destination/revjavik" class="destination-card bg-white rounded-lg shadow-lg overflow-hidden">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBb_cSBVaS5_jcDDe1R8d8qcGxVj8YUyEbpw&s" alt="Reykjavik, Iceland" class="w-full h-48 object-cover">
+        <div class="p-4">
+          <h3 class="text-xl font-bold mb-2">Reykjavik, Iceland</h3>
+          <p class="text-gray-700">Explore the stunning natural beauty and vibrant culture of Iceland.</p>
+        </div>
+      </a>
     </div>
   </div>
 
-  <!-- RIGHT SIDE -->
-  <div class="faq-right" id="faq-list">
-    <!-- FAQs dynamically added -->
-    <div class="faq-item">
-      <h3>How can I find new travel destinations? <i class="fas fa-chevron-down"></i></h3>
-      <div class="faq-answer">
-        <p>Wanderlust provides an interactive map 🗺️ that lets you explore popular and hidden destinations around the world. You can also browse user-generated travel stories ✍️ for inspiration.</p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <h3>Can I contribute my own travel experiences? <i class="fas fa-chevron-down"></i></h3>
-      <div class="faq-answer">
-        <p>Yes! Create your own travel stories and share tips, photos, and experiences with the Wanderlust community. Your unique insights will help others discover new adventures! ✈️</p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <h3>How do I use the map to plan my trips? <i class="fas fa-chevron-down"></i></h3>
-      <div class="faq-answer">
-        <p>Our integrated map feature allows you to view nearby attractions, accommodations, and local experiences, making trip planning seamless. Just zoom in and start exploring! 🗺️</p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <h3>Is my personal information safe with Wanderlust? <i class="fas fa-chevron-down"></i></h3>
-      <div class="faq-answer">
-        <p>Absolutely. We prioritize the security and privacy of your data with industry-standard security protocols. Your information is safe with us. 🔐</p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <h3>How do I sign up for Wanderlust? <i class="fas fa-chevron-down"></i></h3>
-      <div class="faq-answer">
-        <p>Signing up is easy! Just visit the registration page, enter your details, and start your journey toward discovering and sharing amazing destinations. 🌟</p>
-      </div>
+  <div class="bg-red-500 text-white py-12">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Join the Wanderlust Community</h2>
+      <p class="text-lg mb-8">Connect with fellow travelers, plan your dream trips, and share your experiences.</p>
+      <a href="/register" class="bg-white text-red-500 font-medium py-3 px-6 rounded-lg transition-colors duration-300 hover:bg-gray-200">
+        Sign Up Now
+      </a>
     </div>
   </div>
-</div>
 
-<!-- GST CALCULATE -->
+  <footer class="bg-gray-900 text-white py-8">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-between items-center">
+        <div>
+          <a href="/" class="flex items-center">
+            <i class="fas fa-globe-americas text-red-500 mr-2"></i>
+            <span class="text-xl font-bold">Wanderlust</span>
+          </a>
+        </div>
+        <div>
+          <p>&copy; 2023 Wanderlust. All rights reserved.</p>
+        </div>
+        <div>
+          <a href="#" class="text-gray-400 hover:text-gray-300 transition-colors duration-300 mr-4">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-gray-300 transition-colors duration-300 mr-4">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-gray-300 transition-colors duration-300">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-<script>
-  //Change the gstRate accordingly
-const gstRate = 0.18;
-
-function toggleGST() {
-  const gstToggle = document.getElementById("gstToggle");
-  const priceElements = document.querySelectorAll(".price");
-  const gstLabels = document.querySelectorAll(".gst-label");
-
-  priceElements.forEach((priceElement, index) => {
-    const basePrice = parseFloat(priceElement.getAttribute("data-base-price"));
-    const totalPrice = basePrice * (1 + gstRate);
-
-    if (gstToggle.checked) {
-      // Show GST
-      priceElement.innerText = totalPrice.toLocaleString("en-IN", { style: "currency", currency: "INR" });
-      gstLabels[index].innerText = "(incl. GST)";
-      gstLabels[index].classList.add("red-text"); // Add red color
-    } else {
-      // without GST
-      priceElement.innerText = basePrice.toLocaleString("en-IN", { style: "currency", currency: "INR" });
-      gstLabels[index].innerText = "(excl. GST)";
-      gstLabels[index].classList.remove("red-text"); // Add red color
-    }
-  });
-}
-
-// Initialize with base prices
-document.addEventListener("DOMContentLoaded", toggleGST);
-</script>
-
-<script>
-  const filters = document.getElementById('filters');
-  const leftButton = document.querySelector('.left');
-  const rightButton = document.querySelector(".right");
-
-  function scrollLeft() {
-    filters.scrollBy({
-      left: -200,  // Scroll left by 200px
-      behavior: 'smooth'
-    });
-  }
-
-  function scrollRight() {
-    filters.scrollBy({
-      left: 200,  // Scroll right by 200px
-      behavior: 'smooth'
-    });
-  }
-
-leftButton.addEventListener('click',scrollLeft);
-rightButton.addEventListener('click',scrollRight);
-
-</script>
-
-<!-- FILLTERS -->
-<script>
-  document.querySelectorAll('.faq-item').forEach(item => {
-    item.addEventListener('click', () => {
+  <script>
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.addEventListener('click', () => {
         const faqAnswer = item.querySelector('.faq-answer');
-
-        // Toggle current FAQ item
         item.classList.toggle('open');
-
-        // If it's open, expand; otherwise, collapse
         if (item.classList.contains('open')) {
-            faqAnswer.style.maxHeight = faqAnswer.scrollHeight + "px";
+          faqAnswer.style.maxHeight = faqAnswer.scrollHeight + "px";
         } else {
-            faqAnswer.style.maxHeight = 0;
+          faqAnswer.style.maxHeight = 0;
         }
-
-        // Hide other FAQ answers
         document.querySelectorAll('.faq-item').forEach(otherItem => {
-            if (otherItem !== item && otherItem.classList.contains('open')) {
-                otherItem.classList.remove('open');
-                otherItem.querySelector('.faq-answer').style.maxHeight = 0;
-            }
+          if (otherItem !== item && otherItem.classList.contains('open')) {
+            otherItem.classList.remove('open');
+            otherItem.querySelector('.faq-answer').style.maxHeight = 0;
+          }
         });
-    });
-});
-</script>
-
-
-<!-- FILLTERS -->
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const toggleDescriptionLinks = document.querySelectorAll('.toggle-description');
-    
-    toggleDescriptionLinks.forEach(link => {
-      link.addEventListener('click', function () {
-        const cardBody = this.closest('.card-body');
-        const shortDescription = cardBody.querySelector('.short-description');
-        const fullDescription = cardBody.querySelector('.full-description');
-        
-        // Toggle between short and full descriptions
-        if (fullDescription.classList.contains('d-none')) {
-          fullDescription.classList.remove('d-none');
-          shortDescription.classList.add('d-none');
-          this.textContent = "Show less";
-        } else {
-          fullDescription.classList.add('d-none');
-          shortDescription.classList.remove('d-none');
-          this.textContent = "Show more";
-        }
       });
     });
-  });
-</script>
-
-
+  </script>
 </body>
-
-
-
+</html>
