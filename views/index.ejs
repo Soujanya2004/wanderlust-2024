@@ -148,6 +148,10 @@
                 <span class="price" data-base-price="<%= listing.price %>"><%= listing.price.toLocaleString("en-IN") %></span> / night 
                 <span class="gst-label">(excl. GST)</span>
               </p>
+              <p>Likes: <%= listing.likes %></p>
+              <form action="/listing/<%= listing._id %>/like" method="POST">
+                <button type="submit" class="btn btn-light">❤️ Like</button>
+              </form>
               <p class="card-text location"><i class="fa-solid fa-location-crosshairs"></i>&nbsp; <%= listing.location %>, <%= listing.country %></p>
               <a href="/listing/<%= listing._id %>" class="btn btn-dark show_btn">Show in Detail</a>
             </div>

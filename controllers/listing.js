@@ -259,4 +259,23 @@ module.exports.deletepost = async (req, res) => {
     res.redirect("/listing");
 };
 
+module.exports.likeListing = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const listing = await listing.findById(id);
+        if (!listing) {
+            req.flash('error', 'Listing not found');
+            return res.redirect('/listing');
+        }
+        listing.likes += 1; // Increment the likes
+        await listing.save();
+        req.flash('success', 'Listing liked successfully!');
+        return res.redirect(`/listing/${id}`);
+    } catch (err) {
+        console.error("Error liking listing:", err);
+        req.flash('error', 'An error occurred while liking the listing.');
+        return res.redirect(`/listing/${id}`);
+    }
+};
+
 

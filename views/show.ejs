@@ -269,6 +269,10 @@
                                     Owned by: <b>Unknown User</b>
                                 <% } %>
                             </p>
+                        <p>Likes: <%= list.likes %></p>
+                        <form action="/listing/<%= list._id %>/like" method="POST">
+                            <button type="submit" class="btn btn-light">❤️ Like</button>
+                        </form>
                     </div>
                     <div>
                         <% if (currUser && list.owner && currUser._id.equals(list.owner._id)) { %>

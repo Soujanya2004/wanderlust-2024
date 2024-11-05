@@ -49,7 +49,11 @@ const listingSchema = new Schema({
       type: [Number],
       required: true
     }
-  }
+  },
+  likes: {
+    type: Number,
+    default: 0, // Initialize likes to 0
+  },
 });
 
 listingSchema.post("findOneAndDelete", async (listing)=>{

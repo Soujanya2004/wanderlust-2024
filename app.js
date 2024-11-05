@@ -469,6 +469,9 @@ app.get("/listing/:id", asyncwrap(showPost));
 app.post("/listing/:id/review", isLoggedIn, asyncwrap(reviewPost));
 app.delete("/listing/:id/review/:reviewId", isLoggedIn, isAuthor, asyncwrap(deleteReview));
 
+// Like listing
+app.post('/listing/:id/like', isLoggedIn, asyncwrap(listingController.likeListing));
+
 // Catch-all for invalid routes
 app.use("*", (req, res) => {
   res.render("not_found.ejs");
