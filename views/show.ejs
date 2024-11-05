@@ -238,7 +238,14 @@
                         </p>
                         <p class="mt-2">
                             <% if (list.owner && list.owner.profilePicture && list.owner.profilePicture.purl) { %>
-                                <img src="<%= list.owner.profilePicture.purl %>" alt="User" class="owner-avatar">
+
+                                <!-- Set the low resolution for profile pic -->
+                                <%  
+                                    let normalURL = list.owner.profilePicture.purl;
+                                    let lowResURL =  normalURL.replace("/upload", "/upload/q_auto,e_blur:50,w_250,h_250");
+                                %>
+
+                                <img src="<%=lowResURL%>" alt="User" class="owner-avatar">
                             <% } else { %>
                                 <img src="/profile.png" alt="User" class="owner-avatar">
                             <% } %>
