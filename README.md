@@ -146,8 +146,13 @@ We welcome contributions to help improve **Wanderlust 2024**! 🚀 Here’s how 
        require('dotenv').config();
      }
      ```
+10. **Set Up Your Chatbase Account** ☁️
+    - Go to [Chatbase.co](https://www.chatbase.co/) and sign up for a free account. 🆓
+    - After logging in, Create your chatbot. 📊
+    - Copy your Scrtpt code snippet, You will need these for the Chat bot implementation in `boilerplate.ejs` file. 🔐
 
-Feel free to raise issues and contribute to the repository! 🎉💻
+
+## Feel free to raise issues and contribute to the repository! 🎉💻
 
  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="900">
  
