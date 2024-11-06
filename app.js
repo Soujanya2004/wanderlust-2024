@@ -137,7 +137,7 @@ app.get('/admin/users',isLoggedIn ,isAdmin, async (req, res) => {
 //route to delete users
 app.delete('/admin/user/:id',isLoggedIn, isAdmin, async (req, res) => {
   try {
-    console.log("Deleting user with ID:", req.params.id);
+    // console.log("Deleting user with ID:", req.params.id);
       await User.findByIdAndDelete(req.params.id);
       req.flash('success', 'User deleted!');
       res.redirect('/admin/users');
@@ -149,7 +149,7 @@ app.delete('/admin/user/:id',isLoggedIn, isAdmin, async (req, res) => {
 // Route to DELETE listings
 app.delete('/admin/listing/:id',isLoggedIn, isAdmin, async (req, res) => {
   try {
-    console.log("Deleting listing with ID:", req.params.id);
+    // console.log("Deleting listing with ID:", req.params.id);
       await listing.findByIdAndDelete(req.params.id);
       req.flash('success', 'Listing deleted!');
       res.redirect('/admin/dashboard');
@@ -477,7 +477,7 @@ app.use("*", (req, res) => {
 // Error handling middleware
 app.use((err, req, res, next) => {
   const { status = 500, msg = "Something went wrong" } = err;
-  console.log(err);
+  console.log("The error is --> ", err);
   if (res.headersSent) {
     return next(err); // Exit if headers already sent
   }

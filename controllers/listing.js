@@ -180,7 +180,7 @@ module.exports.showPost = async (req, res) => {
 
 module.exports.saveEditpost = async (req, res) => {
     const { id } = req.params;
-    console.log("saveditpost");
+    // console.log("saveditpost");
     try {
         if (!req.body.listing) {
             req.flash('error', ERROR_SEND_VALID_DATA);
@@ -203,7 +203,7 @@ module.exports.saveEditpost = async (req, res) => {
         let editList = await listing.findById(id);
 
 
-        console.log(req.body.deleteImages);
+        // console.log(req.body.deleteImages);
 
          // Handle image deletion
          if (req.body.deleteImages && req.body.deleteImages.length > 0) {
@@ -247,7 +247,7 @@ module.exports.saveEditpost = async (req, res) => {
 
 
 module.exports.deletepost = async (req, res) => {
-    console.log("Deleting listing with ID:", req.params.id);
+    // console.log("Deleting listing with ID:", req.params.id);
     const { id } = req.params;
     try {
         await listing.findByIdAndDelete(id); // Deconstructing parameters
