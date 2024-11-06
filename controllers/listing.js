@@ -210,6 +210,11 @@ module.exports.saveEditpost = async (req, res) => {
             // Filter out images not selected for deletion
             editList.image = editList.image.filter(img => !req.body.deleteImages.includes(img.filename));
 
+            // Destroyer for delete image from cloude storage.
+            for (const filename of req.body.deleteImages) {
+                await cloudinary.uploader.destroy(filename); // Delete from Cloudinary
+            }
+
         }
 
 
