@@ -228,6 +228,7 @@ module.exports.saveEditpost = async (req, res) => {
       // Update other fields
         editList.title = req.body.listing.title;
         editList.description = req.body.listing.description;
+        editList.genre = req.body.listing.genre;
         editList.price = req.body.listing.price;
         editList.location = location; // Pass new location
         editList.country = req.body.listing.country;
