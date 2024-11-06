@@ -752,7 +752,7 @@ display: none !important;
 .nav-profile{
 height: 1.8rem !important;
 margin-left: 0.6rem;
-border: 1px solid rgb(77, 77, 77);
+border: 2px solid #ff385c;
 border-radius: 50% !important;
 }
 .drop{
