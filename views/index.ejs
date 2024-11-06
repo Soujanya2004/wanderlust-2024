@@ -2,350 +2,233 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wanderlust - Embark on Your Dream Journey</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wanderlust - Embark on Your Dream Journey</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <style>
+    
+  .hero-section {
+    background-image: url('https://png.pngtree.com/background/20210709/original/pngtree-cartoon-tourism-red-warm-color-picture-image_925262.jpg');
+    
+    background-size: cover;
+    background-position: center;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+  }
+  .hero-section h1, .hero-section p {
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7); /* Added text shadow for better readability */
+  }
+  .highlight-button {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Subtle shadow for the button */
+  }
 
-        .hero-section {
-            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/hero-bg.jpg');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: white;
-            padding: 20px;
-        }
 
-        .hero-section h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .hero-section p {
-            font-size: 1.25rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            padding: 12px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: background-color 0.3s;
-            font-weight: 500;
-        }
-
-        .btn-primary {
-            background-color: red;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: #4f46e5;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 4rem 1rem;
-        }
-
-        .section-title {
-            font-size: 2rem;
-            font-weight: bold;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 4rem;
-        }
-
-        .feature-card {
-            background: white;
-            border-radius: 8px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .feature-icon {
-            width: 4rem;
-            height: 4rem;
-            background: #6366f1;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            margin-bottom: 1rem;
-        }
-
-        .testimonials {
-            background: #f3f4f6;
-            padding: 4rem 0;
-        }
-
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .testimonial-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .testimonial-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .testimonial-image {
-            width: 4rem;
-            height: 4rem;
-            border-radius: 50%;
-            margin-right: 1rem;
-            object-fit: cover;
-        }
-
-        .destinations-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .destination-card {
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .destination-card:hover {
-            transform: scale(1.05);
-        }
-
-        .destination-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .destination-content {
-            padding: 1rem;
-        }
-
-        .cta-section {
-            background: #6366f1;
-            color: white;
-            text-align: center;
-            padding: 3rem 1rem;
-        }
-
-        .cta-section h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .cta-section .btn {
-            background: white;
-            color: #6366f1;
-        }
-
-        .cta-section .btn:hover {
-            background: #f3f4f6;
-        }
-
-        @media (max-width: 768px) {
-            .hero-section h1 {
-                font-size: 2rem;
-            }
-
-            .hero-section p {
-                font-size: 1rem;
-            }
-
-            .section-title {
-                font-size: 1.75rem;
-            }
-
-            .features-grid,
-            .testimonial-grid,
-            .destinations-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    .feature-icon {
+      width: 4rem;
+      height: 4rem;
+    }
+    .testimonial-image {
+      width: 6rem;
+      height: 6rem;
+    }
+    .destination-card {
+      transition: transform 0.3s ease;
+    }
+    .destination-card:hover {
+      transform: scale(1.05);
+    }
+    .dark-mode{
+      .review{
+        background-color: #1D1D1D;
+        color:white;
+      }
+.wanderchoice{
+  color:white;
+}
+.feedback-container{
+    background-color: #2e2e2e;
+    box-shadow: 5px 10px 15px rgba(0, 0, 0, 0.712);
+} 
+#review-form input, 
+#review-form textarea{
+    background-color: #787878 !important;
+    border: 2px solid #c1bfbf !important;
+    color: white !important;
+}
+#review-form input:focus{
+    background-color: #787878 !important;
+    border: 2px solid #cdcdcd !important;
+}
+#review-form textarea:focus{
+    background-color: #787878 !important;
+    border: 2px solid #cdcdcd !important;
+}
+#review-form input::placeholder {
+    color: #dadada !important;
+}
+#review-form textarea::placeholder{
+    color: #dadada !important;
+}
+}
+  </style>
+  
 </head>
 <body>
-    <div class="hero-section">
-        <h1>Explore. Discover. Wander.</h1>
-        <p>Embark on your dream journey with Wanderlust.</p>
-        <a href="/explore" class="btn btn-primary">Start Exploring</a>
-    </div>
+  <% layout("/layouts/boilerplate") %>  
+  <div class="hero-section text-white">
+    <h1 class="text-4xl md:text-6xl font-bold mb-4">Explore. Discover. Wander.</h1>
+    <p class="text-xl md:text-2xl mb-8">Embark on your dream journey with Wanderlust.</p>
+    <a href="/signup" class="highlight-button bg-red-500 border border-outline hover:bg-red-600 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-300">
+      Start Exploring
+    </a>
+  </div>
+  
 
-    <div class="container">
-        <h2 class="section-title">Why Choose Wanderlust?</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-map-marker-alt"></i>
-                </div>
-                <h3>Discover the World</h3>
-                <p>Uncover hidden gems, explore vibrant destinations, and embark on unforgettable adventures.</p>
+  <div class="container mx-auto px-4 py-16">
+    <h2 class="text-3xl md:text-4xl font-bold mb-8 wanderchoice">Why Choose Wanderlust?</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <% 
+        const features = [
+          {
+            title: 'Discover the World',
+            iconClass: 'fas fa-map-marker-alt',
+            description: 'Uncover hidden gems, explore vibrant destinations, and embark on unforgettable adventures.'
+          },
+          {
+            title: 'Join the Community',
+            iconClass: 'fas fa-users',
+            description: 'Connect with fellow travelers, share your experiences, and be inspired by stories from around the globe.'
+          },
+          {
+            title: 'Plan Your Journey',
+            iconClass: 'fas fa-calendar-alt',
+            description: 'Effortlessly plan your dream vacation with our user-friendly tools and personalized recommendations.'
+          }
+        ];
+      %>
+  
+      <% features.forEach(feature => { %>
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <div class="flex items-center mb-4">
+            <div class="feature-icon bg-red-500 rounded-full flex items-center justify-center text-white mr-4">
+              <i class="<%= feature.iconClass %>"></i>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-users"></i>
-                </div>
-                <h3>Join the Community</h3>
-                <p>Connect with fellow travelers, share your experiences, and be inspired by stories from around the globe.</p>
+            <h3 class="text-xl font-bold"><%= feature.title %></h3>
+          </div>
+          <p class="text-gray-700"><%= feature.description %></p>
+        </div>
+      <% }); %>
+    </div>
+  </div>  
+
+  <div class="bg-gray-100 py-16 review">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-bold mb-8">What Our Travelers Say</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <% 
+          const testimonials = [
+            {
+              name: 'John Doe',
+              role: 'Wanderlust Enthusiast',
+              image: 'https://img.freepik.com/free-photo/headshot-handsome-bearded-man-smiling-standing-against-white-background_1258-26733.jpg?semt=ais_hybrid',
+              feedback: 'Wanderlust has transformed the way I plan and experience my travels. The platform is user-friendly and the community is amazing.'
+            },
+            {
+              name: 'Jane Smith',
+              role: 'Travel Influencer',
+              image: 'https://media.istockphoto.com/id/882495390/photo/happiness.jpg?s=612x612&w=0&k=20&c=SVUBI4k1eTLtc8rUcO4iWAgOo7SUcUdT8qOE7p3G9F8=',
+              feedback: 'I\'ve been using Wanderlust for years, and it\'s the best platform for discovering unique destinations and sharing my adventures with the world.'
+            },
+            {
+              name: 'Michael Johnson',
+              role: 'Adventurous Traveler',
+              image: 'https://media.istockphoto.com/id/483627817/photo/showing-off-his-pearly-whites.jpg?s=612x612&w=0&k=20&c=gk6aVVGp52YFx1ZzPVQplGc7JL5zkrfxQTuLjIn2RU8=',
+              feedback: 'Wanderlust has completely changed the way I plan and approach my travels. The platform is a game-changer!'
+            }
+          ];
+        %>
+  
+        <% testimonials.forEach(testimonial => { %>
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <div class="flex items-center mb-4">
+              <img src="<%= testimonial.image %>" alt="Customer" class="testimonial-image rounded-full mr-4">
+              <div>
+                <h3 class="text-lg font-bold text-black"><%= testimonial.name %></h3>
+                <p class="text-gray-600"><%= testimonial.role %></p>
+              </div>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-calendar-alt"></i>
-                </div>
-                <h3>Plan Your Journey</h3>
-                <p>Effortlessly plan your dream vacation with our user-friendly tools and personalized recommendations.</p>
-            </div>
-        </div>
+            <p class="text-gray-700"><%= testimonial.feedback %></p>
+          </div>
+        <% }); %>
+      </div>
     </div>
+  </div>
+  
 
-    <div class="testimonials">
-        <div class="container">
-            <h2 class="section-title">What Our Travelers Say</h2>
-            <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <img src="/images/customer1.jpg" alt="Customer 1" class="testimonial-image">
-                        <div>
-                            <h3>John Doe</h3>
-                            <p>Wanderlust Enthusiast</p>
-                        </div>
-                    </div>
-                    <p>"Wanderlust has transformed the way I plan and experience my travels. The platform is user-friendly and the community is amazing."</p>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <img src="/images/customer2.jpg" alt="Customer 2" class="testimonial-image">
-                        <div>
-                            <h3>Jane Smith</h3>
-                            <p>Travel Influencer</p>
-                        </div>
-                    </div>
-                    <p>"I've been using Wanderlust for years, and it's the best platform for discovering unique destinations and sharing my adventures with the world."</p>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <img src="/images/customer3.jpg" alt="Customer 3" class="testimonial-image">
-                        <div>
-                            <h3>Michael Johnson</h3>
-                            <p>Adventurous Traveler</p>
-                        </div>
-                    </div>
-                    <p>"Wanderlust has completely changed the way I plan and approach my travels. The platform is a game-changer!"</p>
-                </div>
-            </div>
-        </div>
+  <div class="container mx-auto px-4 py-16">
+    <h2 class="text-3xl md:text-4xl font-bold mb-8 wanderchoice">Explore Unforgettable Destinations</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+      <% 
+        const destinations = [
+          {
+            href: "/destination/bali",
+            imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiekN9kgQa6AUI2qpzi8EUSj0M4HeVbgTLbw&s",
+            imgAlt: "Bali, Indonesia",
+            title: "Bali, Indonesia",
+            description: "Discover the beauty of Bali's beaches, temples, and lush landscapes."
+          },
+          {
+            href: "#",
+            imgSrc: "https://www.urlaubsguide.de/wp-content/uploads/2022/12/santorin-1250x488.jpg",
+            imgAlt: "Santorini, Greece",
+            title: "Santorini, Greece",
+            description: "Explore the iconic white-washed buildings and stunning sunsets of Santorini."
+          },
+          {
+            href: "/destination/machu-picchu",
+            imgSrc: "https://upload.wikimedia.org/wikipedia/commons/e/eb/Machu_Picchu%2C_Peru.jpg",
+            imgAlt: "Machu Picchu, Peru",
+            title: "Machu Picchu, Peru",
+            description: "Venture to the ancient Inca citadel and discover the wonders of Peru."
+          },
+          {
+            href: "/destination/revjavik",
+            imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBb_cSBVaS5_jcDDe1R8d8qcGxVj8YUyEbpw&s",
+            imgAlt: "Reykjavik, Iceland",
+            title: "Reykjavik, Iceland",
+            description: "Explore the stunning natural beauty and vibrant culture of Iceland."
+          }
+        ];
+      %>
+  
+      <% destinations.forEach(destination => { %>
+        <a href="<%= destination.href %>" class="destination-card bg-white rounded-lg shadow-lg overflow-hidden">
+          <img src="<%= destination.imgSrc %>" alt="<%= destination.imgAlt %>" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="text-xl font-bold mb-2"><%= destination.title %></h3>
+            <p class="text-gray-700"><%= destination.description %></p>
+          </div>
+        </a>
+      <% }); %>
     </div>
+  </div>
+  
 
-    <div class="container">
-        <h2 class="section-title">Explore Unforgettable Destinations</h2>
-        <div class="destinations-grid">
-            <a href="/destination/bali" class="destination-card">
-                <img src="/images/destination1.jpg" alt="Bali, Indonesia" class="destination-image">
-                <div class="destination-content">
-                    <h3>Bali, Indonesia</h3>
-                    <p>Discover the beauty of Bali's beaches, temples, and lush landscapes.</p>
-                </div>
-            </a>
-            <a href="/destination/santorini" class="destination-card">
-                <img src="/images/destination2.jpg" alt="Santorini, Greece" class="destination-image">
-                <div class="destination-content">
-                    <h3>Santorini, Greece</h3>
-                    <p>Explore the iconic white-washed buildings and stunning sunsets of Santorini.</p>
-                </div>
-            </a>
-            <a href="/destination/machu-picchu" class="destination-card">
-                <img src="/images/destination3.jpg" alt="Machu Picchu, Peru" class="destination-image">
-                <div class="destination-content">
-                    <h3>Machu Picchu, Peru</h3>
-                    <p>Venture to the ancient Inca citadel and discover the wonders of Peru.</p>
-                </div>
-            </a>
-            <a href="/destination/reykjavik" class="destination-card">
-                <img src="/images/destination4.jpg" alt="Reykjavik, Iceland" class="destination-image">
-                <div class="destination-content">
-                    <h3>Reykjavik, Iceland</h3>
-                    <p>Explore the stunning natural beauty and vibrant culture of Iceland.</p>
-                </div>
-            </a>
-        </div>
+  <div class="bg-red-500 text-white py-12">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Join the Wanderlust Community</h2>
+      <p class="text-lg mb-8">Connect with fellow travelers, plan your dream trips, and share your experiences.</p>
+      <a href="/signup" class="bg-white text-red-500 font-medium py-3 px-6 rounded-lg transition-colors duration-300 hover:bg-gray-200">
+        Sign Up Now
+      </a>
     </div>
-
-    <div class="cta-section">
-        <div class="container">
-            <h2>Join the Wanderlust Community</h2>
-            <p>Connect with fellow travelers, plan your dream trips, and share your experiences.</p>
-            <a href="/register" class="btn">Sign Up Now</a>
-        </div>
-    </div>
-
-    <script>
-        // Add smooth scrolling to all links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Add intersection observer for fade-in animations
-        const observerOptions = {
-            root: null,
-            threshold: 0.1,
-            rootMargin: '0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe all cards and sections
-        document.querySelectorAll('.feature-card, .testimonial-card, .destination-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'all 0.6s ease-out';
-            observer.observe(el);
-        });
-    </script>
+  </div>
 </body>
 </html>
