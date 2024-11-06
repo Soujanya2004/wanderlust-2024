@@ -109,6 +109,11 @@ app.use((req, res, next) => {
 // ADMIN
 // ADMIN
 
+app.get('/listing', (req, res) => {
+  res.render('listing'); // Ensure you have a listing.ejs file in the views directory
+});
+
+
 
 app.get('/admin/dashboard',isLoggedIn ,isAdmin, async (req, res) => {
   try {

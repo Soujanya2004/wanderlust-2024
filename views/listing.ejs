@@ -1,0 +1,57 @@
+
+<% layout("/layouts/boilerplate") %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wanderlust - Your Travel Companion</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        .dark-mode {
+            background-color: #1a1a1a;
+            color: #f9f9f9;
+        }
+        .desc{
+            color:black;
+        }
+        .hotel-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 0.5rem; /* Rounded corners for the image */
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+  <section class="container mx-auto px-4 py-16">
+    <h2 class="text-3xl md:text-4xl font-bold mb-8">Explore Our Top Hotels</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <% 
+      const hotels = [
+          { name: "Hotel Sunshine", location: "Miami, FL", rating: "★★★★☆", price: "$120 per night", description: "A beautiful hotel with stunning beach views and modern amenities.", image: "https://picsum.photos/200" },
+          { name: "Mountain Retreat", location: "Aspen, CO", rating: "★★★★★", price: "$250 per night", description: "A cozy retreat in the mountains, perfect for winter sports enthusiasts.", image: "https://picsum.photos/200" },
+          { name: "City Center Hotel", location: "New York, NY", rating: "★★★★☆", price: "$180 per night", description: "Located in the heart of the city, close to major attractions.", image: "https://picsum.photos/200" },
+          { name: "Beachfront Paradise", location: "Bali, Indonesia", rating: "★★★★★", price: "$300 per night", description: "A luxurious hotel with direct access to a private beach.", image: "https://picsum.photos/200" },
+          { name: "Eco Lodge", location: "Costa Rica", rating: "★★★★☆", price: "$150 per night", description: "Experience nature with sustainable lodging options.", image: "https://picsum.photos/200" },
+          { name: "Luxury Suites", location: "Paris, France", rating: "★★★★★", price: "$400 per night", description: "Opulent suites with views of the Eiffel Tower.", image: "https://picsum.photos/200" },
+      ];
+
+      hotels.map(hotel => { 
+      %>
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <img src="<%= hotel.image %>" alt="<%= hotel.name %>" class="hotel-image">
+          <h3 class="text-xl font-semibold mt-4"><%= hotel.name %></h3>
+          <p class="text-gray-600">Location: <%= hotel.location %></p>
+          <p class="text-gray-600">Rating: <%= hotel.rating %></p>
+          <p class="text-gray-700">Price: <%= hotel.price %></p>
+          <p class="mt-4 desc"><%= hotel.description %></p>
+        </div>
+      <% }); %>
+    </div>
+  </section>
+
+</body>
+</html>
+
