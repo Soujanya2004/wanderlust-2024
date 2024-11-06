@@ -123,7 +123,7 @@
     height: 2.7rem !important;
     width: 2.7rem !important;
     border-radius: 50% !important;
-    border: 2px solid rgb(79, 79, 79);
+    border: 3px solid #ff385c;
     box-shadow: 2px 2px 5px #000000;
     margin-right: 0.5rem;
     transition: all 0.3s ease;
@@ -140,6 +140,15 @@
 }
 .text-secondary{
     color: #c6c6c6 !important;
+}
+.model-profile{
+    border: 3px solid #ff385c !important;
+}
+.n-review-profile{
+    border: 2px solid #ff385c;
+}
+.model-comment{
+    opacity: 0.7 !important;
 }
 /* Form Container - Floating Effect */
 .dark-mode{
@@ -163,7 +172,7 @@
         border: 1px solid #333;
     }
     .owner-avatar{
-    border: 2px solid rgb(255, 255, 255);
+    border: 3px solid #ff385c;
     box-shadow: 2px 2px 5px #000000;
     }
     .card-body p{
@@ -207,6 +216,10 @@
     }
     .listing-card h2{
         color: antiquewhite;
+    }
+    .review-popup-model{
+        background-color: #323232;
+        color: #fff !important;
     }
 }
 </style>
@@ -378,9 +391,9 @@
                                             <div class="heading">
                                                 <h4 class="card-title">
                                                     <% if (review.author && review.author.profilePicture && review.author.profilePicture.purl) { %>
-                                                        <img id="review_logo" src="<%=review.author.profilePicture.purl%>" alt="Reviewer" class="reviewer-profile">
+                                                        <img id="review_logo" src="<%=review.author.profilePicture.purl%>" alt="Reviewer" class="reviewer-profile n-review-profile">
                                                     <% } else { %>
-                                                        <img id="review_logo" src="/profile.png" alt="Reviewer" class="reviewer-profile">
+                                                        <img id="review_logo" src="/profile.png" alt="Reviewer" class="reviewer-profile n-review-profile">
                                                     <% } %>
                             
                                                     <% if (review.author) { %>
@@ -426,7 +439,7 @@
                                     <!-- Modal with Unique ID for Each Review -->
                                     <div class="modal fade" id="modal-<%= i %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalLabel-<%= i %>" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                                            <div class="modal-content">
+                                            <div class="modal-content  review-popup-model">
                                                 <div class="modal-header">
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
@@ -434,9 +447,9 @@
 
                                                     <div class="user-credential">
                                                         <% if (review.author && review.author.profilePicture && review.author.profilePicture.purl) { %>
-                                                            <img id="review_logo" src="<%=review.author.profilePicture.purl%>" alt="Reviewer" class="reviewer-profile">
+                                                            <img id="review_logo" src="<%=review.author.profilePicture.purl%>" alt="Reviewer" class="reviewer-profile model-profile">
                                                         <% } else { %>
-                                                            <img id="review_logo" src="/profile.png" alt="Reviewer" class="reviewer-profile">
+                                                            <img id="review_logo" src="/profile.png" alt="Reviewer" class="reviewer-profile model-profile">
                                                         <% } %>
                                 
                                                         <% if (review.author) { %>
@@ -460,7 +473,7 @@
 
                                                     <br>
                                                 
-                                                    <%= review.Comments %> <!-- Display the full comment here -->
+                                                    <span class="model-comment"><%= review.Comments %></span> <!-- Display the full comment here -->
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
