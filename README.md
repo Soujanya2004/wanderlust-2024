@@ -149,7 +149,7 @@ We welcome contributions to help improve **Wanderlust 2024**! 🚀 Here’s how 
 10. **Set Up Your Chatbase Account** ☁️
     - Go to [Chatbase.co](https://www.chatbase.co/) and sign up for a free account. 🆓
     - After logging in, Create your chatbot. 📊
-    - Copy your Scrtpt code snippet, You will need these for the Chat bot implementation in `boilerplate.ejs` file. 🔐
+    - Copy your Scrtpt code snippet, You will need theie for the Chat bot implementation in `boilerplate.ejs` file. 🔐
 
 
 ## Feel free to raise issues and contribute to the repository! 🎉💻
