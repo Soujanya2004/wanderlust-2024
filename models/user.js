@@ -16,7 +16,17 @@ const userSchema = new Schema({
     isAdmin: { // Add this field
         type: Boolean,
         default: false // Default is false for regular users
-    }
+    },
+     passwordresetToken: {
+        type: String,
+        default: null,
+    },
+    TokenExpires: {
+        type: String,
+        default: null,
+    },
+    passwordResetAt: Date,
+    passwordResetTokenExpires: Date,
 });
 
 userSchema.plugin(passportlocalmongoose);  
