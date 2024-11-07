@@ -29,6 +29,7 @@ const { deleteReview, reviewPost } = require("./controllers/reviews.js");
 const cors = require('cors');
 const { contactUsController } = require("./controllers/contactUs.js");
 const cloudinary = require('cloudinary').v2;
+const bcrypt = require("bcrypt");
 
 
 
@@ -344,8 +345,9 @@ app.post('/signup', asyncwrap(async (req, res, next) => {
   }
 
   try {
-    const newUser = new User({ username, email, password });
-    await User.register(newUser, password); 
+    let hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = new User({ username, email, password:hashedPassword });
+    await User.register(newUser, hashedPassword); 
     req.login(newUser, (err) => {
       if (err) {
         req.flash('error', 'Login failed.');

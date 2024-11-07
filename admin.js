@@ -21,17 +21,19 @@ async function createSingleAdminUser() {
             await User.deleteOne({ username: 'admin' }); // Delete the existing admin
             console.log("Existing admin user deleted.");
         }
-
+        
+        const password = 'password';
+        let hashedPassword = await bcrypt.hash(password, 10);
         // Create the new admin user
         const adminUser = new User({
             username: 'admin', // Admin username
             email: 'admin@example.com', // Admin email (make sure it's valid)
             isAdmin: true, // Set as admin
-            password: 'password'
+            password: hashedPassword
         });
 
         // Set the password
-        await User.register(adminUser, 'password'); // Register and hash the password
+        await User.register(adminUser, hashedPassword); // Register and hash the password
         console.log("New admin user created successfully!");
     } catch (error) {
         console.error("Error creating admin user:", error);
