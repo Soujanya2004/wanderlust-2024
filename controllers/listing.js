@@ -156,6 +156,7 @@ module.exports.search = async (req, res) => {
 
 
 module.exports.editpost = async (req, res) => {
+    const tags = ["Trending", "Surfing", "Amazing cities", "Beach", "Farms", "Lake", "Castles", "Rooms", "Forest", "Pool"];
     try {
         const { id } = req.params;
         const list = await listing.findById(id);
@@ -163,7 +164,7 @@ module.exports.editpost = async (req, res) => {
             req.flash('error', ERROR_LISTING_NOT_FOUND);
             return res.redirect('/listing');
         }
-        res.render("edit.ejs", { list });
+        res.render("edit.ejs", { list, tags });
     } catch (err) {
         console.error(err);
         req.flash("error", ERROR_LOAD_EDIT_PAGE);
@@ -264,6 +265,17 @@ module.exports.saveEditpost = async (req, res) => {
                 });
             });
         }
+        
+        // Update tags (parse as an array from a comma-separated string)
+        const tags = req.body.listing.tags;
+        let tagArray = [];
+        if (tags) {
+            if (Array.isArray(tags)) {
+                tagArray = tags.map(tag => tag.trim());
+            } else if (typeof tags === 'string') {
+                tagArray = tags.split(',').map(tag => tag.trim());
+            }
+        }
 
       // Update other fields
         editList.title = req.body.listing.title;
@@ -273,7 +285,9 @@ module.exports.saveEditpost = async (req, res) => {
         editList.location = location; // Pass new location
         editList.country = req.body.listing.country;
         editList.geometry = updatedGeometry; // Save the GeoJSON object in geometry
-
+        // tags
+        editList.tags = tagArray; // Save the updated tags
+        
         await editList.save();
 
         req.flash('success', SUCCESS_LISTING_UPDATED);

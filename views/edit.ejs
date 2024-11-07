@@ -122,6 +122,26 @@
                             <div class="valid-feedback">Looks good!</div>
                             <div class="invalid-feedback">Please enter a valid country!</div>
                         </div>
+                        <!-- Tags section -->
+                        <div class="mb-3 listing_form">
+                            <label for="tags" class="form-label"><b>Tags</b></label>
+                            <div>
+                                <% if (list.tags && list.tags.length>0) { %>
+                                    <% list.tags.forEach(tag => { %>
+                                        <span class="badge bg-primary"><%= tag %></span>
+                                    <% }); %>
+                                <% } else {%>
+                                    <p style="color: red;">No tags found.</p>
+                                <% } %>
+                            </div>
+                            <br>
+                            <% tags.forEach(tag => { %>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="listing[tags]" id="tag<%= tag %>" value="<%= tag %>">
+                                    <label class="form-check-label" for="tag<%= tag %>"><%= tag %></label>
+                                </div>
+                            <% }) %>
+                        </div>
 
                     </div>
 
