@@ -37,15 +37,3 @@ marker.getElement().addEventListener("mouseleave", () => {
   map.getCanvas().style.cursor = "";
   marker.togglePopup(); // Hide the popup when not hovering
 });
-
-// Create the button element
-const backButton = document.createElement('button');
-backButton.textContent = 'Back to Previous Page';
-
-// Add an event listener to the button
-backButton.addEventListener('click', function() {
-    window.history.back();
-});
-
-// Append the button to the body
-document.body.appendChild(backButton);

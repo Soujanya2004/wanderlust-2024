@@ -628,8 +628,8 @@ display: flex;
 align-items: center;
 justify-content: center;
 position: fixed;
-bottom: 1.3rem;
-right: 1.3rem;
+bottom: 5.3rem;
+right: 1.1rem;
 border-radius: 50%;
 cursor: pointer;
 animation: upDown 3s ease-in-out infinite;
@@ -644,7 +644,7 @@ background-color: #b52943;
 transform: translateY(0); /* Start at normal position */
 }
 50% {
-transform: translateY(-25px); /* Move up by 10px */
+transform: translateY(-15px); /* Move up by 10px */
 }
 100% {
 transform: translateY(0); /* Move back to original position */
@@ -752,7 +752,7 @@ display: none !important;
 .nav-profile{
 height: 1.8rem !important;
 margin-left: 0.6rem;
-border: 1px solid rgb(77, 77, 77);
+border: 2px solid #ff385c;
 border-radius: 50% !important;
 }
 .drop{

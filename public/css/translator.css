@@ -1,0 +1,68 @@
+.gt-selected{
+    background-color: #ff385c !important;
+    padding:  0 !important;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5) !important;
+    /* border: 1px solid #929292; */
+}
+.gt-current-lang {
+    background-color: #ff385c !important;
+    padding: 0 !important;
+    padding: 5px 10px !important;
+    display: flex;
+    float: left;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.gt-current-lang img{
+    height: 1rem !important;
+}
+.gt-current-lang .gt-lang-code{
+    color: #fff;
+    font-size: 1rem !important;
+    margin-right: 0.5rem;
+}
+.gt-current-lang .gt_float_switcher-arrow{
+    color: #fff !important;
+}
+.gt_options{
+    width: auto !important;
+    background-color:#a2a2a2af;
+    box-shadow: 0 5px 10px #000000bc;
+}
+.gt_options a {
+    font-size: 0.8rem !important;
+    color: #2e2e2e !important;
+}
+.gt_options a img{
+    height: 1rem !important;
+}
+.dark-mode{
+    /* .gt-current-lang, .gt_float_switcher-arrow, .gt_options a{
+        color: #000000 !important;
+    } */
+    .gt-selected{
+        background-color: rgb(255, 255, 255) !important;
+        box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.715) !important;
+    }
+    .gt-lang-code{
+        color: #000000 !important;
+    }
+    .gt-current-lang{
+        background-color: rgb(255, 255, 255) !important;
+        color: #000000 !important;
+    }
+    .gt_options{
+        background-color: #d0d0d0 !important;
+    }
+    .gt_options a{
+        color: #000000 !important;
+    }
+    .gt_options a:hover{
+        color: #d0d0d0 !important;
+    }
+    .gt_float_switcher-arrow{
+        color: #fff !important;
+    }
+
+}
