@@ -19,21 +19,43 @@ const {
 
 module.exports.index = async (req, res) => {
     try {
-        const listings = await listing.find();
-        // console.log("Listings fetched:", listings[0].image);
-        res.render("index.ejs", { listings });
+        const { tag } = req.query;
+        // console.log(tag);
+        let listings;
+
+        // Check if tag is present in query
+        if (tag) {
+            // Search for listings where the tags array contains the selected tag
+            listings = await listing.find({ tags: { $in: [tag] } });
+            
+            // If no listings are found for the tag, flash a message
+            if (listings.length === 0) {
+                req.flash('error', `No listings found for the tag "${tag}".`);
+            }
+            
+            // console.log(listings);
+        } else {
+            // If no tag is selected, return all listings
+            listings = await listing.find({});
+        }
+
+        // Render the listings page and pass the listings and tag data
+        res.render("index.ejs", { listings, tag });
+
     } catch (err) {
         console.error("Error fetching listings:", err);
-        req.flash("error", ERROR_FETCH_LISTINGS);
-        return res.redirect("/");
+        req.flash("error", "Error fetching listings");
+        return res.redirect("/");  // Redirect to the homepage on error
     }
 };
 
+
 //bug fixes
 module.exports.newpost = async (req, res) => {
+    const tags = ["Trending", "Surfing", "Amazing cities", "Beach", "Farms", "Lake", "Castles", "Rooms", "Forest", "Pool"];
     try {
         console.log("Rendering new listing form...");
-        res.render("new.ejs");
+        res.render("new.ejs", { tags });
     } catch (err) {
         console.error("Error loading new listing form:", err);
         req.flash("error", "Error loading form.");
@@ -71,15 +93,28 @@ module.exports.search = async (req, res) => {
             return res.status(404).send("Please provide valid listing data.");
         }
 
-        const { title, description, price, country, location } = req.body.listing;
+        // Destructure the properties from req.body.listing, including tags
+        const { title, description, price, country, location, tags } = req.body.listing;
 
+        // Ensure tags is an array (if it's a comma-separated string, split it)
+        let tagArray = [];
+        if (tags) {
+            if (Array.isArray(tags)) {
+                // If tags is already an array, use it directly
+                tagArray = tags.map(tag => tag.trim());
+            } else if (typeof tags === 'string') {
+                // If tags is a string, split it by commas
+                tagArray = tags.split(',').map(tag => tag.trim());
+            }
+        }
+        
         // Geocoding to get coordinates from location
         const geoData = await geocodingClient.forwardGeocode({
             query: location,
             limit: 1
         }).send();
 
-        // Create the new listing
+        // Create the new listing with tags
         const newListing = new listing({
             title,
             description,
@@ -88,24 +123,23 @@ module.exports.search = async (req, res) => {
             location,
             geometry: geoData.body.features[0].geometry,
             owner: req.user._id,
-            image: []  // Initialize as an empty array
+            image: [],  // Initialize as an empty array
+            tags: tagArray // Save the tags (either empty array or the parsed tags)
         });
 
-        // console.log('Files received:', req.files);
-
-        // Map uploaded files to image data
+        // Handle file uploads
         if (req.files) {
             req.files.forEach(file => {
                 newListing.image.push({
-                        url: file.path,
-                        filename: file.filename // Adjust based on where images are stored
+                    url: file.path,
+                    filename: file.filename // Adjust based on where images are stored
                 });
             });
         }
 
         // Save the listing to the database
         await newListing.save();
-        // console.log(newListing);
+        console.log(newListing);
 
         req.flash("success", "Listing successfully created!");
         return res.redirect("/listing");
@@ -116,6 +150,7 @@ module.exports.search = async (req, res) => {
         return res.redirect("/listing/new");
     }
 };
+
 
 
 
