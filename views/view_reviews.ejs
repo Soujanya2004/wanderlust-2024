@@ -162,6 +162,16 @@
             <p><strong>Description:</strong> <%= list.description %></p>
             <p><strong>Price:</strong> &#8377;<%= list.price %></p>
             <p><strong>Location:</strong> <%= list.location %>, <%= list.country %></p>
+            <!-- tags -->
+            <p>
+                <% if (list.tags && list.tags.length>0) { %>
+                  <% list.tags.forEach(tag => { %>
+                    <span class="badge bg-primary me-1"><%= tag %></span>
+                <% }) %>
+                <% } else{ %>
+                  <span class="badge bg-secondary me-1">No Tags</span>
+                <% } %>
+            </p>
             <!-- Centered Image Gallery with Bootstrap Columns -->
             <div class="image-gallery row col-10 offset-1">
                 <% list.image.forEach(image => { %>
