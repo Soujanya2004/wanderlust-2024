@@ -503,6 +503,38 @@ app.patch("/resetPassword/:token", async (req, res) => {
 
 });
 
+//update-password..
+
+app.get('/user/updatePass', isLoggedIn, (req, res) => {
+  res.render('update-password.ejs'); 
+});
+
+app.post('/user/updatePass', isLoggedIn, async (req, res) => {
+  const { currentPass, newPass } = req.body;
+
+  try {
+     
+      const user = await User.findById(req.user._id);
+     
+      const isMatch = await user.authenticate(currentPass);
+      if (!isMatch) {
+          req.flash('error', 'Current password is incorrect');
+          return res.redirect('/profile/update-password');
+      }
+     
+      await user.setPassword(newPass);
+      await user.save();
+
+      req.flash('success', 'Password updated successfully');
+      res.redirect('/profile');
+  } catch (err) {
+      console.error(err);
+      req.flash('error', 'Something went wrong. Please try again.');
+      res.redirect('/profile/update-password');
+  }
+});
+
+
 // Profile page
 app.get('/profile', isLoggedIn, asyncwrap(async (req, res) => {
   const user = await User.findById(req.user._id);
