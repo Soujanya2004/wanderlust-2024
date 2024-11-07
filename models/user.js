@@ -16,6 +16,10 @@ const userSchema = new Schema({
     isAdmin: { // Add this field
         type: Boolean,
         default: false // Default is false for regular users
+    },
+    password: {
+        type: String,
+        required: true
     }
 });
 

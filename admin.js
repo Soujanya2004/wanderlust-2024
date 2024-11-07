@@ -26,7 +26,8 @@ async function createSingleAdminUser() {
         const adminUser = new User({
             username: 'admin', // Admin username
             email: 'admin@example.com', // Admin email (make sure it's valid)
-            isAdmin: true // Set as admin
+            isAdmin: true, // Set as admin
+            password: 'password'
         });
 
         // Set the password

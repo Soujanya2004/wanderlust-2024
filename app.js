@@ -344,7 +344,7 @@ app.post('/signup', asyncwrap(async (req, res, next) => {
   }
 
   try {
-    const newUser = new User({ username, email });
+    const newUser = new User({ username, email, password });
     await User.register(newUser, password); 
     req.login(newUser, (err) => {
       if (err) {
