@@ -27,11 +27,12 @@
 }
 .gt_options{
     width: auto !important;
-    background-color:#ff385d8f;
+    background-color:#a2a2a2af;
+    box-shadow: 0 5px 10px #000000bc;
 }
 .gt_options a {
     font-size: 0.8rem !important;
-    color: #4b0000 !important;
+    color: #2e2e2e !important;
 }
 .gt_options a img{
     height: 1rem !important;
