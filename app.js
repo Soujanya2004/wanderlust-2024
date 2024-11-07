@@ -28,6 +28,8 @@ const {index, newpost, createpost, editpost, saveEditpost,search, deletepost, sh
 const { deleteReview, reviewPost } = require("./controllers/reviews.js");
 const cors = require('cors');
 const { contactUsController } = require("./controllers/contactUs.js");
+const cloudinary = require('cloudinary').v2;
+
 
 
 app.use(cors({
@@ -418,11 +420,14 @@ app.post('/profile/edit', isLoggedIn, upload.single("profileimage"), async (req,
     if (email) user.email = email;
 
     // Update profile picture only if a new file is uploaded
-    if(deleteProfile === "true"){
+    if(req.body.deleteProfile){
       user.profilePicture = {
         purl: null,
         pfilename: null
       }   
+      // Clodinary destroyer to delete that image from cloud storage space also. 
+      let filename = req.body.deleteProfile;
+      await cloudinary.uploader.destroy(filename);
     } 
     else if (req.file) {
       user.profilePicture = {
@@ -445,7 +450,11 @@ app.post('/profile/edit', isLoggedIn, upload.single("profileimage"), async (req,
     });
 
   } catch (err) {
-    console.error("Error updating profile:", err);
+    // Handeling special error for network delay or slow network.
+    if (err.name === 'TimeoutError') {
+      console.error("Cloudinary Timeout Error:", err);
+      req.flash("error", "Image not deleted due to network issue! Try again later!");
+    }
     req.flash("error", "Something went wrong! Maybe this username or email already exists!");
     return res.redirect('/profile/edit');
   }
