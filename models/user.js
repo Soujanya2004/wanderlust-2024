@@ -20,7 +20,18 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+     passwordresetToken: {
+        type: String,
+        default: null,
+    },
+    TokenExpires: {
+        type: String,
+        default: null,
+    },
+    passwordResetAt: Date,
+    passwordResetTokenExpires: Date,
+
 });
 
 userSchema.plugin(passportlocalmongoose);  

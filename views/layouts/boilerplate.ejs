@@ -6,6 +6,7 @@
     <link rel="icon" type="image/png" href="/icon.png" />
     <title>Wanderlust</title>
     <link rel="stylesheet" href="/css/preloader.css">
+    <link rel="stylesheet" href="/css/translator.css">
     <link rel="stylesheet" href="/css/styles.css"> 
     <link rel="stylesheet" href="/css/light_mode.css">
     <link rel="stylesheet" href="/css/dark_mode.css">
@@ -39,7 +40,11 @@
     <hr class="btw-foot">
     <%- include("../includes/footer.ejs") %>
 
-    
+    <!-- For translator -->
+    <div class="gtranslate_wrapper"></div>
+    <script>window.gtranslateSettings = {"default_language":"en","detect_browser_language":true,"wrapper_selector":".gtranslate_wrapper"}</script>
+    <script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
