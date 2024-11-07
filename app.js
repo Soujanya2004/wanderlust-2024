@@ -206,13 +206,15 @@ app.get('/admin/reviews/:id',isLoggedIn, isAdmin, async (req, res) => {
 
 // Render show edit form
 app.get('/admin/listing/edit/:id',isLoggedIn, isAdmin, async (req, res) => {
+  const tags = ["Trending", "Surfing", "Amazing cities", "Beach", "Farms", "Lake", "Castles", "Rooms", "Forest", "Pool"];
   try {
     // console.log(req.params.id);
     const list = await listing.findById(req.params.id);
+    // console.log(list);
     if (!list){
       return res.status(404).send("Listing not found");
     }
-    res.render('edit_list_admin', { list });
+    res.render('edit_list_admin', { list , tags});
   } catch (err) {
     console.error(err);
     res.status(500).send("Server error");
@@ -221,10 +223,9 @@ app.get('/admin/listing/edit/:id',isLoggedIn, isAdmin, async (req, res) => {
 
 
 //update listing admin
-
 app.put('/admin/listing/edit/:id',isLoggedIn, isAdmin, upload.array('listing[image]',10), async (req, res) => {
   const { id } = req.params;
-  const { title, description, price, location, country } = req.body.listing;
+  const { title, description, price, location, country, tags } = req.body.listing;
   
   try {
     if (!req.body.listing) {
@@ -241,6 +242,17 @@ app.put('/admin/listing/edit/:id',isLoggedIn, isAdmin, upload.array('listing[ima
     up_listing.price = price;
     up_listing.location = location;
     up_listing.country = country;
+
+    // Update tags - set to empty array if no tags are selected
+    let tagArray = [];
+      if (tags) {
+        if (Array.isArray(tags)) {
+          tagArray = tags.map(tag => tag.trim());
+        } else if (typeof tags === 'string') {
+            tagArray = tags.split(',').map(tag => tag.trim());
+        }
+      }
+    up_listing.tags = tagArray;
 
     // Check if new images are uploaded
     if (req.files && req.files.length > 0) {
