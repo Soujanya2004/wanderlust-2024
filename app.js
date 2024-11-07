@@ -2,7 +2,7 @@ if (process.env.NODE_ENV != "production") {
   require('dotenv').config();
 }
 
-const port = 8080;
+const port = 8000;
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -26,6 +26,9 @@ const {saveRedirectUrl}=require("./middlewares/middleware.js");
 const {isOwner,isAuthor}=require("./middlewares/middleware.js");
 const {index, newpost, createpost, editpost, saveEditpost,search, deletepost, showPost, signup}=require("./controllers/listing.js");
 const { deleteReview, reviewPost } = require("./controllers/reviews.js");
+const feedbackController = require('./controllers/feedback');
+
+// const { feedbackPost } = require("./controllers/feedback.js");
 const cors = require('cors');
 const { contactUsController } = require("./controllers/contactUs.js");
 
@@ -451,6 +454,8 @@ app.post('/profile/edit', isLoggedIn, upload.single("profileimage"), async (req,
   }
 });
 
+// Feedback
+app.post("/listing/feedback", isLoggedIn, asyncwrap(feedbackController.feedbackPost));
 
 // Listing controller
 const listingController = require('./controllers/listing.js');
@@ -464,6 +469,7 @@ app.get("/listing/:id/edit", isLoggedIn, isOwner, asyncwrap(editpost));
 app.put('/listing/:id', isLoggedIn, isOwner, upload.array('listing[image]', 10), asyncwrap(saveEditpost));
 app.delete("/listing/:id", isLoggedIn, isOwner, asyncwrap(deletepost));
 app.get("/listing/:id", asyncwrap(showPost));
+
 
 // Reviews
 app.post("/listing/:id/review", isLoggedIn, asyncwrap(reviewPost));
