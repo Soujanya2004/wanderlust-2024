@@ -1,6 +1,27 @@
 <% layout("/layouts/boilerplate") %>
     <br>
     <style>
+        .form_body{
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 7px 15px rgba(0, 0, 0, 0.5);
+            background-color: #ededed;
+        }
+        .filter-tag{
+            display: inline-flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        .indi-filter{
+            padding: 0.1rem 0 0.1rem 0.6rem;
+            background-color: #d3d3d3;
+            margin-left: 0.4rem;
+            border-radius: 3rem;
+            margin-bottom: 0.5rem;
+        }
+        .display-badge{
+            margin-bottom: 1rem;
+        }
     /* Form Container - Floating Effect */
     .dark-mode{
         .form_body {
@@ -11,6 +32,9 @@
         }
         h3 {
             color: #fff;
+        }
+        .indi-filter{
+            background-color: #555555;
         }
         .form_body label{
             color: #ffffff;
@@ -56,6 +80,9 @@
         .form-text{
             color: #aaaaaa7f !important;
         }
+        .delete-label{
+            color: #1b1b1b !important;
+        }
     
     }
 </style>
@@ -81,18 +108,18 @@
                     </div>
 
                     <div class="mb-3 edit_form">
+                        <div class="preview-container-edit">
                         <% list.image.forEach ((image, i) => { %>
-
-                            <div class="preview-item">
-                                <img src="<%= image.url %>" alt="listing_image" style="height: 8rem; width: auto; margin-right: 10px;" />
-                                <div class="delete-checkbox">
-                                    <input class="form-check-input" type="checkbox" id="image-<%=i%>" name="deleteImages[]" value="<%=image.filename %>">
-                                    <label for="image-<%=i%>" class="form-check-label delete-label">Delete</label>
+                                <div class="preview-item">
+                                    <img src="<%= image.url %>" alt="listing_image" class="preview-image"/>
+                                    <div class="delete-checkbox">
+                                        <input class="form-check-input" type="checkbox" id="image-<%=i%>" name="deleteImages[]" value="<%=image.filename %>">
+                                        <label for="image-<%=i%>" class="form-check-label delete-label">Delete</label>
+                                    </div>
                                 </div>
-                            </div>
-
                         <% }); %>
-                        <br><small class="form-text text-muted">Images preview that already uploaded.</small>
+                    </div>
+                    <small class="form-text text-muted">Images preview that already uploaded.</small>
                     </div>
 
                     <div class="mb-3 edit_form">
@@ -125,7 +152,7 @@
                         <!-- Tags section -->
                         <div class="mb-3 listing_form">
                             <label for="tags" class="form-label"><b>Tags</b></label>
-                            <div>
+                            <div class="display-badge">
                                 <% if (list.tags && list.tags.length>0) { %>
                                     <% list.tags.forEach(tag => { %>
                                         <span class="badge bg-primary"><%= tag %></span>
@@ -134,13 +161,17 @@
                                     <p style="color: red;">No tags found.</p>
                                 <% } %>
                             </div>
-                            <br>
+                            <!-- <br> -->
+                            <div class="filter-tag">
                             <% tags.forEach(tag => { %>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="listing[tags]" id="tag<%= tag %>" value="<%= tag %>">
-                                    <label class="form-check-label" for="tag<%= tag %>"><%= tag %></label>
-                                </div>
+                                <div class="indi-filter">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" name="listing[tags]" id="tag<%= tag %>" value="<%= tag %>">
+                                        <label class="form-check-label" for="tag<%= tag %>"><%= tag %></label>
+                                    </div>
+                                </div>                                
                             <% }) %>
+                            </div>
                         </div>
 
                     </div>
