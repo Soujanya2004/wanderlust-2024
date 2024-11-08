@@ -84,7 +84,9 @@
         <div class="col col-md-1">Country</div>
         <div class="col col-md-1">Reviews</div>
         <div class="col-2 col-md-2">Images</div>
-        <div class="col col-md-2">Actions</div>
+        <!-- tags -->
+         <div class="col col-md-1">Tags</div>
+        <div class="col col-md-1">Actions</div>
     </div>
             <% listings.forEach(list => { %> <!-- Use forEach to iterate over listings -->
               <div class="row border-bottom p-2 listing-row">
@@ -109,7 +111,17 @@
                         <img src="<%= image.url %>" alt="<%= image.filename %>" class="img-fluid rounded me-1" style="width: 50px; height: auto;">
                     <% }) %>
                 </div>
-                <div class="col-12 col-md-2  all_btns">
+                <!-- tags -->
+                 <div class="col-12 col-md-1">
+                    <% if (list.tags && list.tags.length>0) { %>
+                      <% list.tags.forEach(tag => { %>
+                        <span class="badge bg-primary me-1"><%= tag %></span>
+                    <% }) %>
+                    <% } else{ %>
+                      <span class="badge bg-secondary me-1">No Tags</span>
+                    <% } %>
+                </div>
+                <div class="col-12 col-md-1  all_btns">
                         <!-- Edit Form -->
                         <form action="/admin/listing/edit/<%= list._id %>" method="GET">
                             <button class="btn btn-outline-primary" type="submit">Edit</button>

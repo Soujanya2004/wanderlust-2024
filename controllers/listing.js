@@ -31,6 +31,7 @@ module.exports.index = async (req, res) => {
             // If no listings are found for the tag, flash a message
             if (listings.length === 0) {
                 req.flash('error', `No listings found for the tag "${tag}".`);
+                return res.redirect("/listing");
             }
             
             // console.log(listings);

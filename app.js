@@ -26,6 +26,9 @@ const {saveRedirectUrl}=require("./middlewares/middleware.js");
 const {isOwner,isAuthor}=require("./middlewares/middleware.js");
 const {index, newpost, createpost, editpost, saveEditpost,search, deletepost, showPost, signup}=require("./controllers/listing.js");
 const { deleteReview, reviewPost } = require("./controllers/reviews.js");
+const feedbackController = require('./controllers/feedback');
+
+// const { feedbackPost } = require("./controllers/feedback.js");
 const cors = require('cors');
 const { contactUsController } = require("./controllers/contactUs.js");
 const cloudinary = require('cloudinary').v2;
@@ -503,6 +506,38 @@ app.patch("/resetPassword/:token", async (req, res) => {
 
 });
 
+//update-password..
+
+app.get('/user/updatePass', isLoggedIn, (req, res) => {
+  res.render('update-password.ejs'); 
+});
+
+app.post('/user/updatePass', isLoggedIn, async (req, res) => {
+  const { currentPass, newPass } = req.body;
+
+  try {
+     
+      const user = await User.findById(req.user._id);
+     
+      const isMatch = await user.authenticate(currentPass);
+      if (!isMatch) {
+          req.flash('error', 'Current password is incorrect');
+          return res.redirect('/profile/update-password');
+      }
+     
+      await user.setPassword(newPass);
+      await user.save();
+
+      req.flash('success', 'Password updated successfully');
+      res.redirect('/profile');
+  } catch (err) {
+      console.error(err);
+      req.flash('error', 'Something went wrong. Please try again.');
+      res.redirect('/profile/update-password');
+  }
+});
+
+
 // Profile page
 app.get('/profile', isLoggedIn, asyncwrap(async (req, res) => {
   const user = await User.findById(req.user._id);
@@ -584,6 +619,8 @@ app.get("/listing/:id/edit", isLoggedIn, isOwner, asyncwrap(editpost));
 app.put('/listing/:id', isLoggedIn, isOwner, upload.array('listing[image]', 10), asyncwrap(saveEditpost));
 app.delete("/listing/:id", isLoggedIn, isOwner, asyncwrap(deletepost));
 app.get("/listing/:id", asyncwrap(showPost));
+// Feedback
+app.post("/feedback", isLoggedIn, asyncwrap(feedbackController.feedbackPost));
 
 // Reviews
 app.post("/listing/:id/review", isLoggedIn, asyncwrap(reviewPost));
