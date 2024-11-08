@@ -2,16 +2,6 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const Review=require("./reviews.js");
 
-// const imageSchema = new Schema({
-//     filename: {
-//         type: String,
-//         required: true
-//     },
-//     url: {
-//         type: String,
-//         required: true
-//     }
-// });
 const imageSchema = new Schema({
   filename: {
     type: String, 
@@ -49,7 +39,8 @@ const listingSchema = new Schema({
       type: [Number],
       required: true
     }
-  }
+  },
+  tags: [String]  // New tags field
 });
 
 listingSchema.post("findOneAndDelete", async (listing)=>{

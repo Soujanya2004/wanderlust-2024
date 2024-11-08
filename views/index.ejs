@@ -67,48 +67,30 @@
         <i class="fas fa-angle-double-left"></i>
       </button>
   
-    <div id="filters">
-      <div class="filter">
-        <div><i class="fa-solid fa-fire"></i></div>
-        <p>Trending</p>
+      <div id="filters">
+        
+      <!-- TAGS -->
+      <% const tags = [
+        { name: "Trending", icon: "fa-fire" },
+        { name: "Surfing", icon: "fa-water" },
+        { name: "Amazing cities", icon: "fa-city" },
+        { name: "Beach", icon: "fa-umbrella" },
+        { name: "Farms", icon: "fa-cow" },
+        { name: "Lake", icon: "fa-mountain" },
+        { name: "Castles", icon: "fa-fort-awesome" },
+        { name: "Rooms", icon: "fa-bed" },
+        { name: "Forest", icon: "fa-tree" },
+        { name: "Pool", icon: "fa-person-swimming" }
+      ]; %>
+        <% tags.forEach(tag => { %>
+          <div class="filter">
+            <a style="text-decoration: none;" href="/listing?tag=<%= encodeURIComponent(tag.name) %>" class="filter-link">
+              <div><i class="fa-solid <%= tag.icon %>"></i></div>
+              <p><%= tag.name %></p>
+            </a>
+          </div>
+        <% }) %>
       </div>
-      <div class="filter">
-        <div><i class="fa-solid fa-water"></i></div>
-        <p>Surfing</p>
-      </div>
-      <div class="filter">
-        <div><i class="fa-solid fa-city"></i></div>
-        <p>Amazing cities</p>
-      </div>
-      <div class="filter">
-        <div><i class="fa-solid fa-umbrella"></i></div>
-        <p>Beach</p>
-      </div>
-      <div class="filter">
-        <div><i class="fa-solid fa-cow"></i></div>
-        <p>Farms</p>
-      </div>
-      <div class="filter">
-        <div><i class="fa-solid fa-mountain"></i></div>
-        <p>Lake</p>
-      </div>
-      <div class="filter">
-        <div><i class="fa-solid fa-fort-awesome"></i></div>
-        <p>Castles</p>
-      </div>
-      <div class="filter">
-        <div><i class="fa-solid fa-bed"></i></div>
-        <p>Rooms</p>
-      </div>
-      <div class="filter">
-        <div><i class="fa-solid fa-tree"></i></div>
-        <p>Forest</p>
-      </div>
-      <div class="filter">
-        <div><i class="fa-solid fa-person-swimming"></i></div>
-        <p>Pool</p>
-      </div>
-    </div>
     <button class="scroll-btn right" onclick="rightScroll()">
       <i class="fas fa-angle-double-right"></i>
     </button>
@@ -149,7 +131,10 @@
                 <span class="gst-label">(excl. GST)</span>
               </p>
               <p class="card-text location"><i class="fa-solid fa-location-crosshairs"></i>&nbsp; <%= listing.location %>, <%= listing.country %></p>
-              <a href="/listing/<%= listing._id %>" class="btn btn-dark show_btn">Show in Detail</a>
+              <!-- ADDING TAGS -->
+              <a href="/listing/<%= listing._id %>" class="btn btn-dark show_btn">Show in Detail</a><% listing.tags.forEach(tag => { %>
+                <span class="badge bg-primary"><%= tag %></span>
+              <% }); %>
             </div>
           </div>
         </div> <!-- End of .col -->
