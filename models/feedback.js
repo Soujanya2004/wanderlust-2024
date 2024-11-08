@@ -14,7 +14,11 @@ const feedbackSchema = new Schema({
         type: String,
         required: true,
     },
-    createdAt: {
+    display: {
+        type: Boolean,
+        default: false,
+    },
+    submittedAt: {
         type: Date,
         default: Date.now(),
     },
