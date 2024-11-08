@@ -102,9 +102,9 @@ let submitFeedback = document.querySelector("#feedback");
 let closeForm = document.querySelector("#close-button");
 let form = document.querySelector("#review-form");
 
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
-})
+// form.addEventListener("submit", (event) => {
+//   event.preventDefault();
+// })
 
 submitFeedback.addEventListener("click", () => {
   feedbackContainer.classList.remove("fade-out");
