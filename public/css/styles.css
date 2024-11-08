@@ -770,6 +770,21 @@ width: 90%;
 .mobile-toggle{
 display: none !important;
 }
+.preview-container-edit{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.preview-container-edit .preview-item{
+  padding: 0.4rem;
+  background-color: #d3d3d3;
+  margin: 0 0.3rem 0.3rem 0.3rem;
+}
+.preview-container-edit .preview-image{
+  height: 7rem;
+  width: 9rem;
+}
 
 @media (max-width: 990px){
 .desktop-toggle{
