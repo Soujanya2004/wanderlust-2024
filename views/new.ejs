@@ -1,5 +1,50 @@
 <% layout("/layouts/boilerplate") %>
 <style>
+    .form_body {
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0 7px 15px rgba(0, 0, 0, 0.5); /* Initial shadow to lift form */
+    }
+    #previewContainer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px; /* Adjust spacing between images */
+        margin-bottom: 1rem; /* Spacing below the preview container */
+    }
+
+    .preview-image-container {
+        position: relative;
+        /* border: 2px solid #ddd; */
+        padding: 5px;
+        /* border-radius: 8px; */
+        overflow: hidden;
+        background-color: #d3d3d3; /* Background color for container */
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for effect */
+        width: 9rem; /* Container width */
+        height: 7rem; /* Container height */
+    }
+
+    .preview-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Maintain aspect ratio, cover container */
+        border-radius: 4px;
+    }
+    .filter-tag{
+        display: inline-flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .indi-filter{
+        padding: 0.1rem 0 0.1rem 0.6rem;
+        background-color: #d3d3d3;
+        margin-left: 0.4rem;
+        border-radius: 3rem;
+        margin-bottom: 0.5rem;
+    }
+
     /* Form Container - Floating Effect */
     .dark-mode{
         .form_body {
@@ -13,7 +58,12 @@
         h3{
             color: #ffffff;
         }
-
+        .indi-filter{
+            background-color: #555555;
+        }
+        .indi-filter label{
+            color: #ffffff !important;
+        }
         .form-label {
             color: #ffffff;
         }
@@ -109,12 +159,16 @@
                     <div class="mb-3 listing_form">
                         <label for="tags" class="form-label">Tags</label>
                         <br>
+                        <div class="filter-tag">
                         <% tags.forEach(tag => { %>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" name="listing[tags]" id="tag<%= tag %>" value="<%= tag %>">
-                                <label class="form-check-label" for="tag<%= tag %>"><%= tag %></label>
-                            </div>
+                            <div class="indi-filter">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="listing[tags]" id="tag<%= tag %>" value="<%= tag %>">
+                                    <label class="form-check-label" for="tag<%= tag %>"><%= tag %></label>
+                                </div>
+                            </div> 
                         <% }) %>
+                        </div>
                     </div>
                 <br>
                 <button class="btn btn-danger" name="saveButton" type="submit">ADD</button>
@@ -145,11 +199,16 @@
         previewContainer.innerHTML = ""; // Clear existing content
 
         fileList.forEach((file, index) => {
+            const imgContainer = document.createElement("div");
+            imgContainer.classList.add("preview-image-container"); // Add container class
+
             const img = document.createElement("img");
             img.src = URL.createObjectURL(file);
             img.alt = `Image ${index + 1}`;
-            img.style.width = "100px"; // Adjust as needed
-            previewContainer.appendChild(img);
+            img.classList.add("preview-img"); // Add image class for additional styling
+
+            imgContainer.appendChild(img);
+            previewContainer.appendChild(imgContainer);
         });
         }
 
