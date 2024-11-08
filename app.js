@@ -2,7 +2,7 @@ if (process.env.NODE_ENV != "production") {
   require('dotenv').config();
 }
 
-const port = 8000;
+const port = 8080;
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -454,8 +454,6 @@ app.post('/profile/edit', isLoggedIn, upload.single("profileimage"), async (req,
   }
 });
 
-// Feedback
-app.post("/listing/feedback", isLoggedIn, asyncwrap(feedbackController.feedbackPost));
 
 // Listing controller
 const listingController = require('./controllers/listing.js');
@@ -469,7 +467,8 @@ app.get("/listing/:id/edit", isLoggedIn, isOwner, asyncwrap(editpost));
 app.put('/listing/:id', isLoggedIn, isOwner, upload.array('listing[image]', 10), asyncwrap(saveEditpost));
 app.delete("/listing/:id", isLoggedIn, isOwner, asyncwrap(deletepost));
 app.get("/listing/:id", asyncwrap(showPost));
-
+// Feedback
+app.post("/feedback", isLoggedIn, asyncwrap(feedbackController.feedbackPost));
 
 // Reviews
 app.post("/listing/:id/review", isLoggedIn, asyncwrap(reviewPost));
