@@ -2,7 +2,7 @@
     <div class="container">
       <!-- Brand and explore link on the left -->
       <a class="navbar-brand" href="/listing"><i class="fa-solid fa-plane fa-rotate-by fa-2xl" style="--fa-rotate-angle: -39deg;"></i></a>
-      <a class="navbar-brand" href="/admin/dashboard"><i><b>Welcome To The Admin's Dashboard</b></i></a>
+      <a class="nav_wlc" href="/admin/dashboard"><i><b>Welcome To The Admin's Dashboard</b></i></a>
       
       <!-- dark mode toggle button for mobile -->
      <div class="toggle-container mobile-toggle">
@@ -65,7 +65,7 @@
   
         <!-- Search bar in the middle -->
         <div class="input-group search-box">
-          <form class="d-flex mx-3" action="/listing/search" method="post">
+          <form class="d-flex mx-3" id="search_frm" action="/listing/search" method="post">
             <input class="form-control me-2" type="search" name="query" placeholder="Search your Airbnb.." aria-label="Search" aria-describedby="button-addon2">
             <button class="btn btn-outline-danger search" type="submit" id="button-addon2"><i class="fas fa-search"></i></button>
           </form>
@@ -106,3 +106,48 @@
       </div>
     </div>
   </nav>
+  <style>
+    .nav_wlc{
+      color: #303030;
+      text-decoration: none !important;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .nav_wlc:hover{
+      color: #eb3333;
+      text-decoration: none!important;
+      cursor: pointer;
+    }
+
+    /* Adjustments for small screens */
+    @media (max-width: 768px) {
+        .nav_wlc {
+          max-width: 150px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        #search_frm  {
+            width: 100% !important;
+            /* margin-right: 100px !important; */
+            margin-left: 10px !important;
+        }
+      }
+
+
+    /* Dark Mode Styles */
+    .dark-mode {
+          .nav_wlc{
+            color: #eb3333;
+            text-decoration: none!important;
+            cursor: pointer;
+          }
+          .nav_wlc i b:hover{
+            color: #b61f1f;
+            transition: color 0.3s ease-in-out;
+            cursor: pointer;
+            box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.7);
+          }
+        }
+  </style>
