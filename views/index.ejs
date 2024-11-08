@@ -117,7 +117,7 @@
     <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2 gx-3"> <!-- Changed row-col-3 to row-cols-3 and removed row-cols-xs-1 -->
       <% for (listing of listings) { %>
         <div class="col popup"> <!-- Added .col to ensure grid layout works -->
-
+          <a href="/listing/<%= listing._id %>" style="text-decoration: none;">
           <div class="card listing-card">
             <% if (listing.image && listing.image.length > 0) { %>
                   <img src="<%= listing.image[0].url %>" class="card-img-top" alt="listing_image" />
@@ -137,6 +137,7 @@
               <% }); %>
             </div>
           </div>
+        </a>
         </div> <!-- End of .col -->
       <% } %>
     </div>
