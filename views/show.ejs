@@ -263,6 +263,19 @@
                         <p class="listing-location"><b>Country:</b>
                             <%=list.country%>
                         </p>
+                        <!-- tags -->
+                         <p>
+                            <% if (list.tags && list.tags.length>0) { %>
+                                <% list.tags.forEach(tag => { %>
+                                    <span class="badge bg-primary"><%= tag %></span>
+                                 <% }); %>
+                             <% } else {%>
+                                <i style="color: #b72a44;">
+                                     No tags found.
+                                </i>
+                            <% } %>
+                         </p>
+
                         <p class="mt-2">
                             <% if (list.owner && list.owner.profilePicture && list.owner.profilePicture.purl) { %>
 
