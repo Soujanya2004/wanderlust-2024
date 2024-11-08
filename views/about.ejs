@@ -1,158 +1,174 @@
 <% layout("/layouts/boilerplate") %>
 
-       
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
-        <style>
-            body {
-                font-family: 'Roboto', sans-serif;
-                margin: 0;
-                padding: 0;
-                background-color: #f8f9fa;
-                color: #333;
-                overflow-x: hidden;
-            }
-            .containerr {
-                width: 80%;
-                margin: 0 auto;
-                text-align: center;
-                padding: 50px 0;
-            }
-            .containerr h1 {
-                font-size: 36px;
-                font-weight: 700;
-                margin-bottom: 10px;
-                transition: color 0.3s ease;
-                position: relative;
-                animation: flyIn 1s ease-out;
-            }
-            .containerr p {
-                font-size: 18px;
-                color: #666;
-                margin-bottom: 50px;
-                transition: color 0.3s ease;
-                position: relative;
-                animation: flyIn 1.5s ease-out;
-            }
-            .row {
-                display: flex;
-                justify-content: space-between;
-                align-items: flex-start;
-            }
-            .column {
-                width: 45%;
-                text-align: left;
-                transition: transform 0.3s ease;
-                position: relative;
-                animation: flyIn 2s ease-out;
-            }
-            .column img {
-                width: 100%;
-                height: auto;
-                margin-bottom: 20px;
-                transition: transform 0.3s ease;
-            }
-            .column h2 {
-                font-size: 24px;
-                font-weight: 700;
-                margin-bottom: 10px;
-                transition: color 0.3s ease;
-                position: relative;
-                animation: flyIn 2.5s ease-out;
-            }
-            .column p {
-                font-size: 16px;
-                color: #666;
-                line-height: 1.6;
-                transition: color 0.3s ease;
-                position: relative;
-                animation: flyIn 3s ease-out;
-            }
-            .contact {
-                margin-top: 50px;
-                text-align: left;
-                transition: transform 0.3s ease;
-                position: relative;
-                animation: flyIn 3.5s ease-out;
-            }
-            .contact h2 {
-                font-size: 24px;
-                font-weight: 700;
-                margin-bottom: 10px;
-                transition: color 0.3s ease;
-                position: relative;
-                animation: flyIn 4s ease-out;
-            }
-            .contact p {
-                font-size: 16px;
-                color: #666;
-                line-height: 1.6;
-                transition: color 0.3s ease;
-                position: relative;
-                animation: flyIn 4.5s ease-out;
-            }
-
-            @keyframes flyIn {
-                0% {
-                    opacity: 0;
-                    transform: translateX(-100%);
-                }
-                100% {
-                    opacity: 1;
-                    transform: translateX(0);
-                }
-            }
-            .fa-phone{
-                transform: rotateY(200deg);
-            }
-
-            /* DARK MODE CSS */
-            .dark-mode{
-                .about{
-                    background-color: transparent;
-                    color: #e0e0e0;
-                }
-                h1, h2, h3, p {
-                    color: #c9c9c9;
-                }
-            }
-            .back-button {
-                padding: 10px 20px;
-                font-size: 16px;
-                background-color: #007bff;
-                color: white;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-            }
-    .back-button-container {
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+    }
+    
+    header {
+        color: #333;
+        padding: 40px 0;
         text-align: center;
-        margin-top: 20px;
+        color: #FE002F;
+    }
+    
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        letter-spacing: 1px;
+        text-transform: uppercase; 
+        font-weight: bold; 
+    }
+    
+    main {
+        max-width: 100%; 
+        margin: 20px auto;
+        padding: 30px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    section {
+        margin-bottom: 30px;
+    }
+    
+    h2 {
+        color:#FE002F; 
+        border-bottom: 2px solid #00CFFF;
+        padding-bottom: 10px;
+        font-size: 1.8rem;
+        position: relative; 
+    }
+    
+    h2::after {
+        content: ''; 
+        display: block;
+        width: 50px; 
+        height: 3px;
+        background-color: #00CFFF; 
+        margin-top: 5px; 
+    }
+    
+    .content-wrapper {
+        display: flex; 
+        align-items: center;
+        margin-bottom: 20px; 
+    }
+    
+    .content-wrapper img {
+        width: 50%; 
+        height: auto; 
+        border-radius: 12px;
+        transition: transform 0.3s ease;
+    }
+    
+    .content-wrapper img:hover {
+        transform: scale(1.05); 
+    }
+    
+    .text-content {
+        width: 50%; 
+        padding-left: 7px; 
+    }
+    .intro p,
+    .mission p,
+    .story p,
+    .join-us p {
+        margin-bottom: 15px;
+        font-size: 1.125rem;
+    }
+    
+   
+    .intro p,
+    .mission p,
+    .story p,
+    .join-us p {
+        color: #333; 
+        line-height: 1.8; 
+    }
+    
+   
+    .intro p,
+    .mission p,
+    .story p,
+    .join-us p {
+       text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+    
+    
+    .offerings ul,
+    .values ul {
+       list-style-type: none; 
+       padding-left: 0; 
+    }
+    
+    .offerings li,
+    .values li {
+       background-color: #e7f3ff;
+       border-left: 5px solid #007BFF;
+       padding: 10px; 
+       margin-bottom: 10px; 
+       transition: background-color 0.3s ease;
+       position: relative;
+    }
+   
+    .offerings li:hover,
+    .values li:hover {
+       background-color: #d1e7fd; 
+       box-shadow: inset 2px 2px 5px rgba(255,255,255,0.6), inset -5px -5px -10px rgba(0,0,0,0.1);
     }
 </style>
 
-    <body>
+<header>
+    <h1>About Us</h1>
+</header>
 
-        <div class="containerr about">
-            <h1>About Us</h1>
-            <p>Welcome to Wanderlust, your ultimate travel companion. We are passionate about exploring the world and helping you create unforgettable travel experiences.</p>
-            <div class="row">
-                <div class="column">
-                    <img alt="Skyscrapers with a cloudy sky background" src="https://th.bing.com/th/id/OIP.TYPryvWreYLzXYbqgXzYDwHaFH?w=290&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7" />
-                    <h2>Our Mission</h2>
-                    <p>At Wanderlust, our mission is to inspire and empower travelers to explore the world with confidence. We provide comprehensive travel guides, tips, and resources to help you plan your perfect trip. Whether you're seeking adventure, relaxation, or cultural immersion, we are here to make your travel dreams a reality.</p>
-                </div>
-                <div class="column">
-                    <img alt="Team of people working together in an office" src="https://th.bing.com/th/id/OIP.e2cRim0Wi3I2U2WEpt6kUAHaFF?w=352&h=197&c=7&r=0&o=5&dpr=1.3&pid=1.7" />
-                    <h2>Our Story</h2>
-                    <p>Founded by a group of avid travelers, Wanderlust was born out of a shared love for discovering new places and cultures. Our team has traveled to over 50 countries, and we bring our firsthand experiences and insights to you. We believe that travel has the power to transform lives, and we are dedicated to making travel accessible and enjoyable for everyone.</p>
-                <!-- <button onclick="goBack()" style="padding: 10px 20px; font-size: 16px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Back</button> -->
-                </div>
-                <div class="contact">
-                    <h2>Contact Us</h2>
-                    <p>If you have any questions, feedback, or need assistance with your travel plans, please don't hesitate to reach out to us. You can contact us via email at support@wanderlust.com or call us at (123) 456-7890. We look forward to hearing from you and helping you embark on your next adventure!</p>
-                </div>
+<main>
+    <section class="intro">
+        <div class="content-wrapper" style="text-align: justify;">
+            <img src="https://media.istockphoto.com/id/509553708/photo/tropical-modern-villa-exterior.jpg?s=612x612&w=0&k=20&c=rMmOmihiXHl6htuhYVzbfPdKAawYHFuNMhD32A0sWUg=" alt="Travel Experience">
+            <div class="text-content">
+                <p style="max-width: 37rem; margin-left: 2rem">Welcome to <strong style="color: rgb(255, 68, 0);">Wanderlust</strong>, where we believe in creating memorable travel experiences through unique accommodations. Our platform connects travelers with local hosts, offering a diverse range of properties that cater to every taste and budget.</p>
             </div>
         </div>
+    </section>
 
-</body>
+    <section class="mission">
+        <h2>Our Mission</h2>
+        <div class="content-wrapper" style="text-align: justify;">
+            <div class="text-content">
+                <p style="max-width: 37rem; margin-right: 2rem">At <strong style="color: rgb(255, 0, 0);">Wanderlust</strong>, our mission is to transform the way people travel by providing a peer-to-peer marketplace that allows guests to find authentic stays while enabling hosts to share their spaces with the world. We aim to foster community connections and promote local cultures through personalized travel experiences.</p>
+            </div>
+            <img src="https://t4.ftcdn.net/jpg/06/13/33/21/360_F_613332177_rdl36d2CnlqC1tqGQE3CizEJdu9G2Ltj.jpg" alt="Our Mission Image" style="margin-top: 2.5rem;">
+        </div>
+    </section>
+
+    <section class="values">
+        <h2>Our Values</h2>
+        <ul>
+            <li><strong>Trust:</strong> We strive to create a safe environment for both guests and hosts. Our verification processes and review systems ensure that every listing meets our quality standards.</li>
+            <li><strong>Transparency:</strong> We are committed to clear communication regarding fees, policies, and expectations, helping users make informed decisions.</li>
+            <li><strong>Sustainability:</strong> We support eco-friendly practices and encourage our community to be mindful of their environmental impact while traveling.</li>
+        </ul>
+    </section>
+
+    <section class="offerings">
+        <h2>What We Offer</h2>
+        <ul>
+            <li><strong>Diverse Listings:</strong> From cozy apartments in bustling cities to serene cabins in nature, our platform features a wide variety of properties to suit every traveler’s needs.</li>
+            <li><strong>User-Friendly Experience:</strong> We prioritize ease of use, allowing guests to search, book, and communicate with hosts effortlessly.</li>
+            <li><strong>Community Focus:</strong> We believe in the power of community. Our platform encourages hosts to share their local insights, helping guests discover hidden gems during their travels.</li>
+        </ul>
+    </section>
+
+    <section class="join-us">
+        <h2>Join Us</h2>
+        <p>Whether you’re looking for your next adventure or hoping to share your space with travelers from around the globe, <strong style="color: rgb(255, 68, 0);">Wanderlust</strong> is here to facilitate those connections. Join us today and become part of our growing community!</p>
+        <p>For any questions or feedback, feel free to reach out through our Contact Us page.
+        <p style="text-align: center; margin-top: 3rem; font-size: larger">Thank you for choosing <strong style="color: rgb(255, 68, 0);">Wanderlust</strong>—we can’t wait to help you create unforgettable memories!</p></p>    
+    </section>
+</main>
