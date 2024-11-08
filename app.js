@@ -440,10 +440,7 @@ app.post('/resetlink-password', async (req, res, next) => {
       text: message,
     }, next);
 
-    res.status(200).json({
-      status: 'success',
-      message: "Password reset link send to the user's email"
-    });
+    req.flash('success', "Password reset link send to the user's email");
   }
   catch (error) {
     console.error("Error sending email:", error); 
@@ -451,10 +448,8 @@ app.post('/resetlink-password', async (req, res, next) => {
     user.passwordResetTokenExpires = undefined;
     await user.save({ validateBeforeSave: false });
 
-    return res.status(500).json({
-      status: 'fail',
-      message: "There was an error sending the email, please try again."
-    });
+    req.flash('fail', "There was an error sending the email, please try again.");
+
   }
   
 });
