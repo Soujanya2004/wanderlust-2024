@@ -6,7 +6,6 @@ body{
   font-family: Arial, Helvetica, sans-serif !important;
   position: absolute;
   z-index: 10;
-  width: 100%;
 }
 .input-form{
   transform: translateX(-17rem) !important;
