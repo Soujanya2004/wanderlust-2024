@@ -27,9 +27,13 @@ body{
   font-family: "Lucida Console", Courier, monospace;
 }
 
-.nav-link{
-  font-size: 1.1rem !important;
+.nav-link {
+  font-size: 1.1rem !important; 
+  padding-left: 20px; 
+  padding-right: 20px; 
+  display: inline-block;
 }
+
 
 .main-menues .nav-link{
 margin: 0 0.3rem;
