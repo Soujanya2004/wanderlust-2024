@@ -18,7 +18,7 @@
     margin-bottom: 0 !important;
   }
   .card-body{
-    padding-bottom: 0.2 !important;
+    /* padding-bottom: 0.2 !important; */
     height: fit-content !important;
     /* max-height: auto; */
   }
@@ -51,10 +51,10 @@
     padding-right: 5px;
   }
   .red-text {
-    color: rgba(255, 0, 0, 0.407);
+    color: rgba(255, 0, 0, 0.519);
   }
   .normal-text{
-    color: #858585b3;
+    color: #858585d7;
   }
   #gstToggle{
     font-size: 1.2rem;
@@ -70,6 +70,20 @@
   }
   .likes{
     color: rgb(65, 65, 65);
+  }
+  .listcardbody{
+    padding-bottom: 0 !important;
+  }
+  .dark-mode{
+    .price{
+      color: #f3f3f3;
+    }
+    .nightt{
+      color: #c2c2c2;
+    }
+    .likes{
+      color: #d5d5d5;
+    }
   }
 </style>
 <body>
@@ -135,7 +149,7 @@
             <% if (listing.image && listing.image.length > 0) { %>
                   <img src="<%= listing.image[0].url %>" class="card-img-top" alt="listing_image" />
             <% } %>           
-            <div class="card-body">
+            <div class="card-body listcardbody">
               <h4 class="card-title list-title">
                 <%= listing.title.length > 26 ? listing.title.substring(0, 25) + '....' : listing.title %>
               </h4>    
@@ -144,12 +158,11 @@
                 <span class="nightt">/ night</span> 
                 <span class="gst-label">(excl. GST)</span>
               </p>
-              <p>❤️: <span class="likes"><%= listing.likes %></span></p>
-              <p class="card-text location"><i class="fa-solid fa-location-crosshairs"></i>&nbsp; <%= listing.location %>, <%= listing.country %></p>
-              <!-- ADDING TAGS -->
-              <a href="/listing/<%= listing._id %>" class="btn btn-dark show_btn">Show in Detail</a><% listing.tags.forEach(tag => { %>
-                <span class="badge bg-primary"><%= tag %></span>
-              <% }); %>
+              
+              <div class="card-text d-flex justify-content-between">
+                <p class="location"><i class="fa-solid fa-location-crosshairs"></i>&nbsp; <%= listing.location %>, <%= listing.country %></p>
+                <p><i class="fa-solid fa-heart" style="color: #ff385c;"></i> <span class="likes"><%= listing.likes %></span></p>
+              </div>
             </div>
           </div>
         </a>
