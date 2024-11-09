@@ -207,22 +207,30 @@
 
 <script>
   document.getElementById("year").textContent = new Date().getFullYear();
+  document.getElementById("year").textContent = new Date().getFullYear();
+
   // Visitor counter functionality
   function getVisitorCount() {
     return localStorage.getItem("visitorCount") || 0;
   }
 
-  function incrementVisitorCount() {
-    let count = parseInt(getVisitorCount()) + 1;
-    localStorage.setItem("visitorCount", count);
-    return count;
+  // Function to check if count has been incremented this session
+  function incrementVisitorCountOncePerSession() {
+    if (!sessionStorage.getItem("visitorCounted")) {
+      let count = parseInt(getVisitorCount()) + 1;
+      localStorage.setItem("visitorCount", count);
+      sessionStorage.setItem("visitorCounted", true); // Mark count incremented for this session
+      return count;
+    }
+    return getVisitorCount(); // Return current count without incrementing
   }
 
   function displayVisitorCount() {
     const counterElement = document.querySelector(".website-counter");
-    const count = incrementVisitorCount();
+    const count = incrementVisitorCountOncePerSession();
     counterElement.textContent = count;
   }
 
+  // Call the display function when the page loads
   document.addEventListener("DOMContentLoaded", displayVisitorCount);
 </script>
