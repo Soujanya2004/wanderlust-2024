@@ -151,7 +151,7 @@ app.post('/admin/feedbacks/:id/toggleDisplay', isLoggedIn, isAdmin, asyncwrap(di
 // Default route for '/' path
 app.get("/", asyncwrap(async (req, res) => {
   const listings = await listing.find();
-  res.render("index.ejs", { listings, isLoggedIn }); // Pass isLoggedIn to the view
+  res.render("index.ejs", { listings }); // Pass isLoggedIn to the view
 }));
 
 
