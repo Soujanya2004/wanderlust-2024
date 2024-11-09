@@ -15,11 +15,13 @@ async function fetchData() {
 }
 
 // Render stats
-function renderStats(repoStats, contributorsCount) {
+function renderStats(repoStats, contributors) {
   const statsGrid = document.getElementById('statsGrid');
+  const totalContributions = contributors.reduce((sum, contributor) => sum + contributor.contributions, 0);
+
   const stats = [
-      { label: 'Contributors', value: contributorsCount, icon: 'users' },
-      { label: 'Total Contributions', value: repoStats.contributors?.reduce((sum, contributor) => sum + contributor.contributions, 0) || 0, icon: 'git-commit' },
+      { label: 'Contributors', value: contributors.length, icon: 'users' },
+      { label: 'Total Contributions', value: totalContributions, icon: 'git-commit' },
       { label: 'GitHub Stars', value: repoStats.stargazers_count || 0, icon: 'star' },
       { label: 'Forks', value: repoStats.forks_count || 0, icon: 'git-branch' }
   ];
@@ -76,7 +78,7 @@ async function init() {
 
   const { contributors, repoStats } = await fetchData();
 
-  renderStats(repoStats, contributors.length);
+  renderStats(repoStats, contributors);
   renderContributors(contributors);
 
   loading.style.display = 'none';
@@ -106,4 +108,3 @@ function scrollToContribute() {
 
 // Initialize the page when the DOM is loaded
 document.addEventListener('DOMContentLoaded', init);
-
