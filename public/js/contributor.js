@@ -1,7 +1,7 @@
 // Fetch data from GitHub API
 async function fetchData() {
   try {
-      const contributorsResponse = await fetch('https://api.github.com/repos/Soujanya2004/wanderlust-2024/contributors');
+      const contributorsResponse = await fetch('https://api.github.com/repos/Soujanya2004/wanderlust-2024/contributors?per_page=100');
       const contributorsData = await contributorsResponse.json();
 
       const repoResponse = await fetch('https://api.github.com/repos/Soujanya2004/wanderlust-2024');
@@ -15,13 +15,16 @@ async function fetchData() {
 }
 
 // Render stats
-function renderStats(repoStats, contributorsCount) {
+function renderStats(repoStats, contributors) {
   const statsGrid = document.getElementById('statsGrid');
+  const totalContributions = contributors.reduce((sum, contributor) => sum + contributor.contributions, 0);
+
   const stats = [
-      { label: 'Contributors', value: contributorsCount, icon: 'users' },
-      { label: 'Total Contributions', value: repoStats.contributors?.reduce((sum, contributor) => sum + contributor.contributions, 0) || 0, icon: 'git-commit' },
+      { label: 'Contributors', value: repoStats.contributors_count || contributors.length, icon: 'users' },
+      { label: 'Total Contributions', value: totalContributions, icon: 'git-commit' },
       { label: 'GitHub Stars', value: repoStats.stargazers_count || 0, icon: 'star' },
-      { label: 'Forks', value: repoStats.forks_count || 0, icon: 'git-branch' }
+      { label: 'Forks', value: repoStats.forks_count || 0, icon: 'git-branch' },
+      { label: 'Current Watching', value: repoStats.subscribers_count || 0, icon: 'eye' } // Corrected to use subscribers_count
   ];
 
   statsGrid.innerHTML = stats.map(stat => `
@@ -61,7 +64,8 @@ function getIcon(name) {
       'star': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>',
       'git-branch': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="3" x2="6" y2="15"></line><circle cx="18" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><path d="M18 9a9 9 0 0 1-9 9"></path></svg>',
       'external-link': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21  9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>',
-      'github': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>'
+      'github': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>',
+      'eye': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"></path><circle cx="12" cy="12" r="3"></circle></svg>'
   };
   return icons[name] || '';
 }
@@ -76,7 +80,7 @@ async function init() {
 
   const { contributors, repoStats } = await fetchData();
 
-  renderStats(repoStats, contributors.length);
+  renderStats(repoStats, contributors);
   renderContributors(contributors);
 
   loading.style.display = 'none';
@@ -106,4 +110,3 @@ function scrollToContribute() {
 
 // Initialize the page when the DOM is loaded
 document.addEventListener('DOMContentLoaded', init);
-
