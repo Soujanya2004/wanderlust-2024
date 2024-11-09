@@ -641,7 +641,7 @@ transition: background-color 0.3s ease;
 z-index: 999 !important;
 }
 .goto-top:hover{
-background-color: #b52943;
+background-color: #FF5A5F ;
 }
 @keyframes upDown {
 0% {
@@ -924,7 +924,7 @@ font-size: 0.8rem !important;
   }
 
   .custom_nav li a:hover {
-    color: #ff385c !important;
+    color: #FF5A5F !important;
     background-color: rgba(255, 90, 95, 0.1) !important;
     transform: scale(1.05);
     border-radius:50px;
