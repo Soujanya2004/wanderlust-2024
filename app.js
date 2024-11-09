@@ -201,56 +201,49 @@ app.get('/contributors', asyncwrap(contributors));
     res.redirect(redirect); // Redirect to a route that will display the message
   });
 
+app.get('/forgot-password', (req, res) => {
+  res.render('forgot-password.ejs');
+});
 
+app.post('/resetlink-password', async (req, res, next) => { 
 
-  app.get('/forgot-password', (req, res) => {
-    res.render('forgot-password.ejs');
-  });
+  const user = await User.findOne({ email: req.body.email });
+
+  if (!user) {
+    req.flash('error', 'No user found with that email');
+    return res.redirect('/forgot-password');
+  }
   
-  app.post('/resetlink-password', async (req, res, next) => { 
-  
-    const user = await User.findOne({ email: req.body.email });
-  
-    if (!user) {
-      req.flash('error', 'No user found with that email');
-      return res.redirect('/forgot-password');
-    }
-  
-    const resetToken = crypto.randomBytes(32).toString('hex');
-  
-    user.passwordresetToken = crypto.createHash('sha256').update(resetToken).digest('hex');
-    user.passwordResetTokenExpires = Date.now() + 10 * 60 * 1000;
-  
+  const resetToken = crypto.randomBytes(32).toString('hex');
+
+  user.passwordresetToken = crypto.createHash('sha256').update(resetToken).digest('hex');
+  user.passwordResetTokenExpires = Date.now() + 10 * 60 * 1000;
+
+  await user.save({ validateBeforeSave: false });
+
+  const resetURL = `${req.protocol}://${req.get('host')}/resetPassword/${resetToken}`;
+
+  const message = `password Reset Link: ${resetURL}`;
+
+  try {
+    sendMail({
+      email: user.email,
+      subject: "password Resend Request",
+      text: message,
+    }, next);
+
+    req.flash('success', "Password reset link send to the user's email");
+  }
+  catch (error) {
+    console.error("Error sending email:", error); 
+    user.passwordresetToken = undefined;
+    user.passwordResetTokenExpires = undefined;
     await user.save({ validateBeforeSave: false });
-  
-    const resetURL = `${req.protocol}://${req.get('host')}/resetPassword/${resetToken}`;
-  
-    const message = `password Reset Link: ${resetURL}`;
-  
-    try {
-      sendMail({
-        email: user.email,
-        subject: "password Resend Request",
-        text: message,
-      }, next);
-  
-      res.status(200).json({
-        status: 'success',
-        message: "Password reset link send to the user's email"
-      });
-    }
-    catch (error) {
-      console.error("Error sending email:", error); 
-      user.passwordresetToken = undefined;
-      user.passwordResetTokenExpires = undefined;
-      await user.save({ validateBeforeSave: false });
-  
-      return res.status(500).json({
-        status: 'fail',
-        message: "There was an error sending the email, please try again."
-      });
-    }
-  
+
+    req.flash('fail', "There was an error sending the email, please try again.");
+
+  }
+
   });
   
   app.get('/resetPassword/:token', (req, res) => {
@@ -301,7 +294,6 @@ app.get('/contributors', asyncwrap(contributors));
   });
   
   //update-password..
-  
   app.get('/user/updatePass', isLoggedIn, (req, res) => {
     res.render('update-password.ejs'); 
   });
@@ -331,8 +323,9 @@ app.get('/contributors', asyncwrap(contributors));
     }
   });
 
+
 app.get("/signup", asyncwrap(signupRender))
-  
+
 app.post('/signup', asyncwrap(siggnedUp))
 
 app.get("/logout", (logout));
