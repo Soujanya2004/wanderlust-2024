@@ -1,0 +1,326 @@
+
+<% layout("/layouts/boilerplate") %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Listings</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            transition: background-color 0.3s ease;
+        }
+
+        body.dark-mode {
+            background-color: #1a1a1a;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            background: #3182ce;
+            color: white;
+            cursor: pointer;
+            z-index: 100;
+        }
+
+        .dark-mode .theme-toggle {
+            background: #4299e1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #2d3748;
+            margin-bottom: 50px;
+        }
+
+        .dark-mode .title {
+            color: #f7fafc;
+        }
+
+        .hotel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .hotel-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .dark-mode .hotel-card {
+            background: #2d3748;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .hotel-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .image-container {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .hotel-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .rating-badge {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 12px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .dark-mode .rating-badge {
+            background: rgba(45, 55, 72, 0.9);
+        }
+
+        .rating-badge span {
+            color: #718096;
+        }
+
+        .hotel-info {
+            padding: 20px;
+        }
+
+        .hotel-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 8px;
+        }
+
+        .dark-mode .hotel-name {
+            color: #f7fafc;
+        }
+
+        .location {
+            color: #718096;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .price {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #3182ce;
+        }
+
+        .dark-mode .price {
+            color: #4299e1;
+        }
+
+        .per-night {
+            color: #718096;
+            font-size: 0.9rem;
+        }
+
+        .bookmark-btn {
+            background: #ebf8ff;
+            padding: 8px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .dark-mode .bookmark-btn {
+            background: #2c5282;
+        }
+
+        .bookmark-btn:hover {
+            background: #bee3f8;
+        }
+
+        .dark-mode .bookmark-btn:hover {
+            background: #2b6cb0;
+        }
+
+        .bookmark-icon {
+            width: 20px;
+            height: 20px;
+            fill: #4299e1;
+        }
+
+        .dark-mode .bookmark-icon {
+            fill: #63b3ed;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 60px 15px;
+            }
+
+            .title {
+                font-size: 2rem;
+                margin-bottom: 30px;
+            }
+
+            .hotel-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+    
+    <div class="container">
+        <h1 class="title">Best Hotels</h1>
+        <div class="hotel-grid" id="hotelGrid"></div>
+    </div>
+
+    <script>
+        // Hotel data
+        const hotels = [
+            {
+                name: "The Hilton Hotel",
+                location: "Lisbon, Portugal",
+                price: 850,
+                rating: 4.9,
+                image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8aG90ZWx8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
+            },
+            {
+                name: "The Ritz Carlton",
+                location: "Paris, France",
+                price: 450,
+                rating: 4.8,
+                image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8aG90ZWx8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
+            },
+            {
+                name: "The Waldorf Astoria",
+                location: "New York, USA",
+                price: 1450,
+                rating: 5.0,
+                image: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8aG90ZWx8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
+            },
+            {
+                name: "Marina Bay Sands",
+                location: "Singapore",
+                price: 1200,
+                rating: 4.7,
+                image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8aG90ZWx8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
+            },
+            {
+                name: "The Langham",
+                location: "London, UK",
+                price: 990,
+                rating: 4.6,
+                image: "https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGhvdGVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60"
+            },
+            {
+                name: "Four Seasons Hotel",
+                location: "Tokyo, Japan",
+                price: 1100,
+                rating: 4.9,
+                image: "https://images.unsplash.com/photo-1455587734955-081b22074882?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fGhvdGVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60"
+            }
+        ];
+
+        // Function to create hotel cards
+        function createHotelCards() {
+            const hotelGrid = document.getElementById('hotelGrid');
+            
+            hotels.forEach(hotel => {
+                const card = document.createElement('div');
+                card.className = 'hotel-card';
+                
+                card.innerHTML = `
+                    <div class="image-container">
+                        <img src="${hotel.image}" alt="${hotel.name}" class="hotel-image">
+                        <div class="rating-badge">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                            <span>${hotel.rating}</span>
+                        </div>
+                    </div>
+                    <div class="hotel-info">
+                        <h2 class="hotel-name">${hotel.name}</h2>
+                        <p class="location">${hotel.location}</p>
+                        <div class="price-row">
+                            <div>
+                                <span class="price">$${hotel.price}</span>
+                                <span class="per-night">/night</span>
+                            </div>
+                            <button class="bookmark-btn">
+                                <svg class="bookmark-icon" viewBox="0 0 24 24">
+                                    <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                hotelGrid.appendChild(card);
+            });
+        }
+
+        // Theme toggle function
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode);
+        }
+
+        // Initialize theme from localStorage
+        function initializeTheme() {
+            const savedDarkMode = localStorage.getItem('darkMode') === 'true';
+            if (savedDarkMode) {
+                document.body.classList.add('dark-mode');
+            }
+        }
+
+        // Initialize the page
+        window.addEventListener('DOMContentLoaded', () => {
+            createHotelCards();
+            initializeTheme();
+        });
+    </script>
+</body>
+</html>
