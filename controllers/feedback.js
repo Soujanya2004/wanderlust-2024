@@ -35,3 +35,17 @@ module.exports.feedbackPost = async(req, res) => {
         return res.redirect("/listing");
     }
 }
+
+
+
+module.exports.renderFeedback = async(req, res) => {
+    try{
+        const feedbacks = await Feedback.find({ display: true });
+        res.render("displayFeedback.ejs", {feedbacks});
+    }
+    catch {
+        req.flash("error", "Error in fetching feedbacks!")
+        return res.redirect("/listing");
+    }
+    
+}
