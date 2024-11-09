@@ -894,7 +894,7 @@ font-size: 0.8rem !important;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
-    width: 69.5rem !important;
+    width: 83rem !important;
   }
   
   .custom_nav li a {
@@ -924,7 +924,15 @@ font-size: 0.8rem !important;
     transform: scale(1.05);
     border-radius:50px;
   }
-
+  .search-in{
+    transform: translateX(-29rem);
+  }
+  .search{
+    transform: translateX(-28.5rem);
+  }
+  .profile-div{
+    transform: translateX(-29rem);
+  }
   @media (min-width: 991px) and (max-width: 1005px) {
     .search-box {
       width: 40% !important;
