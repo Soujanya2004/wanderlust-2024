@@ -36,6 +36,208 @@
 </style>
 </head>
 <body class="light-mode">
+    
+<style>
+    .popup-container {
+      width: 850px;
+      max-width: 100%;
+      height: 540px;
+      display: flex;
+      position: fixed;
+      left: 25% !important;
+      top: 15% !important;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+      background: url('bg.png');
+      background-size: cover;
+      z-index: 21;
+    }
+    .close-icon {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 24px;
+      color: #b3b3b3;
+      cursor: pointer;
+      transition: transform 0.2s, color 0.2s;
+    }
+    .inner-container {
+      display: flex;
+      width: 100%;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .left-side {
+      flex: 1;
+      padding: 60px 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+    }
+    .left-side h2 {
+      margin-bottom: 30px;
+      color: #d4b7b8; /* Airbnb Red */
+      font-weight: 800;
+      font-size: 32px;
+    }
+    .left-side{
+        form {
+        display: flex;
+        flex-direction: column;
+      }
+      input {
+        margin-bottom: 20px;
+        padding: 14px;
+        background-color: inherit;
+        color: inherit;
+        border: none;
+        border-bottom: 2px solid #858585;
+        outline: none;
+        font-size: 16px;
+        color: #333;
+        border-radius: 5px;
+        transition: border-color 0.3s, background-color 0.3s, box-shadow 0.3s;
+      }
+      input::placeholder {
+        color: white;  /* Change placeholder text color to white */
+      }
+
+      input:focus {
+          border-bottom: 2px solid #FF5A5F;  /* Red border */
+          background-color: inherit;  /* Red background */
+          color: white;  /* White text to contrast with the red background */
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      input:focus::placeholder {
+          color: white;  /* Ensure placeholder text remains white even on focus */
+      }
+      .btn-danger {
+        font-weight: 700;
+        padding: 14px;
+        border-radius: 25px;
+        border: none;
+        transition: background-color 0.3s, transform 0.2s;
+        box-shadow: 0 4px 14px rgba(255, 90, 95, 0.4);
+      }
+
+      .btn-danger:hover {
+        transform: translateY(-2px);
+      }
+      .forgot-password {
+        margin-top: 15px;
+        text-align: right;
+      }
+
+      .forgot-password a {
+        color: #FF5A5F;
+        text-decoration: none;
+        font-size: 14px;
+        transition: color 0.2s;
+      }
+
+      .forgot-password a:hover {
+        color: #e04a50;
+        text-decoration: underline;
+      }
+      #togglePassword{
+        position: relative;
+        top: -15%;
+        left: 90%;
+      }
+    }
+    .right-side {
+      flex: 1;
+      background-color: inherit;
+      color: white;
+      padding: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      border-top-right-radius: 20px;
+      border-bottom-right-radius: 20px;
+    }
+    .right-side h1 {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .right-side p {
+      font-size: 16px;
+      line-height: 1.8;
+      max-width: 350px;
+      margin-bottom: 20px;
+    }
+
+    .right-side p, .right-side h1 {
+      text-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .sign-up-link {
+      color: white;
+      font-weight: 700;
+      text-decoration: underline;
+      transition: color 0.3s;
+    }
+
+    .sign-up-link:hover {
+      color: #e04a50;
+    }
+   /* Overlay with blur effect */
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        backdrop-filter: blur(8px);
+        z-index: 21;
+        display: none; /* Initially hidden */
+    }
+            
+</style>
+
+<!-- POPUP FORM -->
+<div class="overlay" id="overlay"></div>
+
+<div class="popup-container" id="popupContainer" style="display: none;">
+    <div class="close-icon" onclick="closePopup()">
+      <i class="fas fa-times"></i>
+    </div>
+    <div class="inner-container">
+      <div class="left-side">
+        <h2>Welcome Back</h2>
+        <form method="POST" action="/login" novalidate class="needs-validation">
+            <input type="text" name="username" placeholder="Username" class="form-control" required>
+            <div class="invalid-feedback">
+                Username not found
+            </div>
+            <input type="password" name="password" id="password" placeholder="Password" class="form-control" required>
+            <i id="togglePassword" class="passkey passwordToggler fa fa-eye"></i>
+            
+            <button type="submit" class="btn btn-danger">Sign In</button>
+            
+            <div class="forgot-password"><a href="/forgot-password" style="text-decoration: none; color: black;">Forgot Password?</a></div>
+            <div class="invalid-feedback">
+                Password not found
+            </div>
+        </form>
+      </div>
+      <div class="right-side">
+        <h1>Join the Wanderlust Adventure</h1>
+        <p>Experience the world’s most stunning places. Your next adventure is just a click away.</p>
+        <a href="/signup" class="sign-up-link">Sign Up Now</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- POPUP FORM -->
     <div id="preloader">
         <div class="loader">
         </div>
@@ -50,6 +252,7 @@
         <div class="goto-top">
             <i class="fa-solid fa-chevron-up"></i>
         </div>
+
         <%- body %>
     </div>
     <hr class="btw-foot">
@@ -57,6 +260,34 @@
 
     <!-- For translator -->
     <div class="gtranslate_wrapper"></div>
+    <script>
+        const isLoggedIn = <%= isLoggedIn %>;  // Server-side login status
+        console.log("Is user logged in?", isLoggedIn);
+    
+        // Function to show popup
+        function showPopup() {
+            const popupContainer = document.getElementById("popupContainer");
+            const overlay = document.getElementById("overlay");
+            popupContainer.style.display = "flex";  // Show popup container
+            overlay.style.display = "block"; // Show the overlay (blur effect)
+        }
+
+        // Function to close popup
+        function closePopup() {
+            const overlay = document.getElementById("overlay");
+            const popupContainer = document.getElementById("popupContainer");
+            overlay.style.display = "none"; // Hide the overlay
+            popupContainer.style.display = "none";  // Hide popup container
+        }
+    
+        // Show popup every 30 seconds if the user is not logged in
+        if (!isLoggedIn) {
+            setInterval(() => {
+                showPopup();
+            }, 30000); // 30000ms = 30 seconds
+        }
+    </script>
+
     <script>window.gtranslateSettings = {"default_language":"en","detect_browser_language":true,"wrapper_selector":".gtranslate_wrapper"}</script>
     <script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
 

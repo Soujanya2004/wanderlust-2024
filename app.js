@@ -103,6 +103,9 @@ app.use((req, res, next) => {
   res.locals.error = req.flash('error');
   res.locals.currUser = req.user || null;
 
+  res.locals.isLoggedIn = req.isAuthenticated() || false;
+  // console.log("Is Logged In:", res.locals.isLoggedIn); 
+  
   // Check if profile picture exists; if not, use a default URL
   if (req.user && req.user.profilePicture && req.user.profilePicture.purl) {
     let originalUrl = req.user.profilePicture.purl;
@@ -111,8 +114,6 @@ app.use((req, res, next) => {
   }
   next();
 });
-
-
 
 // ADMIN
 // ADMIN
@@ -148,12 +149,11 @@ app.post('/admin/feedbacks/:id/toggleDisplay', isLoggedIn, isAdmin, asyncwrap(di
 
 
 // Default route for '/' path
-app.get("/", asyncwrap(async (req,res) => {
+app.get("/", asyncwrap(async (req, res) => {
+  const listings = await listing.find();
+  res.render("index.ejs", { listings, isLoggedIn }); // Pass isLoggedIn to the view
+}));
 
-    const listings = await listing.find();
-    res.render("index.ejs", { listings });
-  
-})); 
 
 // Others page
 app.get("/contact", contactPage);
@@ -242,6 +242,7 @@ app.delete("/listing/:id/review/:reviewId", isLoggedIn, isAuthor, asyncwrap(dele
 app.use("*", (req, res) => {
   res.render("not_found.ejs");
 });
+
 
 // Error handling middleware
 app.use((err, req, res, next) => {
