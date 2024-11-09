@@ -2,6 +2,39 @@
 <br>
 <br>
 <style>
+    .form-background {
+        position: relative; 
+        overflow: hidden;
+        border-radius: 5px; 
+    }
+
+    .form-background::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('../public/bg-image.png'); 
+        background-size: cover;
+        background-position: center; 
+        filter: blur(7px); 
+        z-index: 0; 
+    }
+
+    .form_body {
+        position: relative; 
+        background-color: rgba(241, 241, 241, 0.6); 
+        border-radius: 5px; 
+        padding: 30px;
+        box-shadow: 0 7px 15px rgba(113, 113, 113, 0.626); 
+        z-index: 1; 
+    }
+    label{
+        font-size: large;
+        font-weight: bolder;
+    }
+/*
     .form_body {
             background-color: #f1f1f1;
             border-radius: 5px;
@@ -9,6 +42,7 @@
             box-shadow: 0 7px 15px rgba(113, 113, 113, 0.626);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+*/
     /* Form Container - Floating Effect */
     .dark-mode{
         .form_body {
@@ -60,8 +94,8 @@
 
     </style>
 <div class="row">
-    <div class="col-11 col-md-8 col-lg-4 mx-auto form_body">
-        <form method="POST" action="/signup" class="needs-validation" id="signupForm" novalidate>
+    <div class="col-11 col-md-8 col-lg-4 mx-auto form_body form-background">
+        <form method="POST" action="/signup" class="needs-validation form_body" id="signupForm" novalidate>
             <div class="mb-3 signup_form">
                 <label for="username" class="form-label">Username</label>
                 <input type="text" name="username" placeholder="Username" class="form-control" required>
