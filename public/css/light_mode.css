@@ -53,23 +53,23 @@
     
 
      .footer-left .brand h2{
-      color: #333;
+      color: #000000;
     }
 
      .footer-left .brand p {
-      color: #666;
+      color: #000000;
     }
     
      .footer-left .contact-info i {
-        color: #727272;
+        color: #000000;
       }
       
      .footer-left .contact-info p {
-    color: #666;
+    color: #000000;
     }
         
      .footer-left .contact-info p a {
-        color: #a2a2a2;
+        color: #000000;
     }
      .footer-middle h3,
         .footer-right h3 {
@@ -101,7 +101,7 @@
         color: #656565;
       }
       .copyright p {
-        color: #666;
+        color: #1f1f1f;
       }
       .card{
         background-color: #e5e5e53d;

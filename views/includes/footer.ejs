@@ -26,6 +26,31 @@
             color: #dadada !important;
         }
     }
+
+    #footer {
+        background-image:url('footer_bg3.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        padding:0 0;
+        /* Backdrop Filter for Blur Effect */
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+    }   
+    #contact-us {
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin: 20px 0;
+        color: #030303 !important; /* Dark color for text */
+    }
+
+.contact-icon {
+    color: #000000 !important; /* Warm coral color for icons */
+    font-size: 2rem;
+    margin-right: 10px;
+    transition: color 0.3s ease;
+}
 </style>
 
 <footer class="container" id="footer">
@@ -41,13 +66,13 @@
         </div>
         <div class="contact-info" id="cantact-us">
             <div class="email" style="display: flex; align-items: center;">
-                <i class="fas fa-envelope" style="position: relative; bottom: 10px;"></i>
+                <i class="fas fa-envelope contact-icon" style="position: relative; bottom: 10px;"></i>
                 <p>Need assistance with your booking or any inquiries?<br>
                     <a href="mailto:support@Wanderlust.com" class="mail">supportWanderlust@gmail.com</a>
                 </p>
             </div>
             <div class="phone" style="display: flex; align-items: center;">
-                <i class="fas fa-phone" style="position: relative; bottom: 10px;"></i>
+                <i class="fas fa-phone contact-icon" style="position: relative; bottom: 10px;"></i>
                 <p>Available 24/7<br><a href="tel:+919876543210" class="mobile">+91-0123456789</a></p>
             </div>
         </div>
@@ -77,8 +102,8 @@
         </div>
     </div>
     <div class="copyright">
-        <p>&copy; <span id="year"></span> Wanderlust Private Limited. All rights reserved.</p>
-    </div>
+        <p>© 2024 Wanderlust Private Limited. All rights reserved.</p>
+    </div>  
 
 
     <div class="feedback-popup">
