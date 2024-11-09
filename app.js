@@ -24,11 +24,11 @@ const User=require("./models/user.js");
 const { isLoggedIn, isAdmin } = require("./middlewares/middleware.js");
 const {saveRedirectUrl}=require("./middlewares/middleware.js");
 const {isOwner,isAuthor}=require("./middlewares/middleware.js");
-const {index, newpost, createpost, editpost, saveEditpost,search, deletepost, showPost, bookinfFt, signup, likeListing }=require("./controllers/listing.js");
-const { dashboard, showuser, deleteUser, deleteListing, viewIndividualListing, viewListingReview, adminListEditRender, adminSaveEditList, showFeedbacks, deleteFeedback, displayFeedback } = require("./controllers/admin.js")
+const {index, newpost, createpost, editpost, saveEditpost,search, deletepost, showPost, bookinfFt, signup, likeListing, topListings }=require("./controllers/listing.js");
+const { dashboard, showuser, deleteUser, deleteListing, viewIndividualListing, viewListingReview, adminListEditRender, adminSaveEditList, showFeedbacks, deleteFeedback, displayFeedback } = require("./controllers/admin.js");
 const { signupRender, siggnedUp, logout, forgotPassword, passwordResetLink, resetPasswordTokenGet, resetPasswordTokenPatch, updatePasswordGet, updatePasswordPost } = require("./controllers/user.js")
 const { viewProfile, profileGet, profilePost } = require("./controllers/profile.js");
-const { contactPage, aboutPage, termsPage, privacyPage, contributors } = require("./controllers/others.js")
+const { contactPage, aboutPage, termsPage, privacyPage, contributors } = require("./controllers/others.js");
 const { deleteReview, reviewPost } = require("./controllers/reviews.js");
 const feedbackController = require('./controllers/feedback');
 
@@ -222,6 +222,7 @@ app.put('/listing/:id', isLoggedIn, isOwner, upload.array('listing[image]', 10),
 app.delete("/listing/:id", isLoggedIn, isOwner, asyncwrap(deletepost));
 app.get("/listing/:id", asyncwrap(showPost));
 app.post('/listing/:id/like', isLoggedIn, asyncwrap(listingController.likeListing));    
+app.get('/top-listings', listingController.topListings);
 // Booking page
 app.get('/listing/:id/booking', bookinfFt);
 // Feedback
