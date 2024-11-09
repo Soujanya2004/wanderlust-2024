@@ -263,19 +263,6 @@
                         <p class="listing-location"><b>Country:</b>
                             <%=list.country%>
                         </p>
-                        <!-- tags -->
-                         <p>
-                            <% if (list.tags && list.tags.length>0) { %>
-                                <% list.tags.forEach(tag => { %>
-                                    <span class="badge bg-primary"><%= tag %></span>
-                                 <% }); %>
-                             <% } else {%>
-                                <i style="color: #b72a44;">
-                                     No tags found.
-                                </i>
-                            <% } %>
-                         </p>
-
                         <p class="mt-2">
                             <% if (list.owner && list.owner.profilePicture && list.owner.profilePicture.purl) { %>
 
@@ -297,6 +284,13 @@
                             </p>
                     </div>
                     <div>
+                        <form method="get" action="/listing/<%= list._id %>/booking" class="d-inline">
+                            <button class="btn btn-outline-danger">Book</button>
+                        </form>
+                        <form method="get" action="/listing" class="d-inline">
+                            <button class="btn btn-light">Back</button>
+                        </form>
+
                         <% if (currUser && list.owner && currUser._id.equals(list.owner._id)) { %>
                             <div class="buttons">
                                 <form method="get" action="/listing/<%= list._id %>/edit" class="d-inline">
@@ -306,16 +300,16 @@
                                 <form method="post" action="/listing/<%= list._id %>?_method=DELETE" class="d-inline">
                                     <button class="btn btn-secondary">Delete</button>
                                 </form>
-                                
-                                <form method="get" action="/listing" class="d-inline">
-                                    <button class="btn btn-light">Back</button>
-                                </form>
 
                             </div>
-                        <% } %>
+                        <% } %>  
                         
                     </div>
+
                 </div>
+
+
+
                 <!-- MAP -->
                 <div class="col-12 offset-1 mx-auto mb-5">
                     <h3 class="text-center" style="padding: 10px;">Where you will be</h3>

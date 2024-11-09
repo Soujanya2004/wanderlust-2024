@@ -1,0 +1,118 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+    /* Container Styling */
+    .container.booking {
+        margin: 2rem auto;
+        padding: 2rem;
+        background: inherit;
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        max-width: 700px;
+    }
+
+    .container.booking h1 {
+        font-family: rakkas;
+        font-size: 2.2rem;
+        color: #494e53;
+        text-align: center;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        border-bottom: 2px solid #e9ecef;
+        padding-bottom: 0.5rem;
+    }
+
+    .container.booking p {
+        font-size: 1.1rem;
+        color: #555;
+        line-height: 1.6;
+    }
+
+    /* Form Styling */
+    .booking-form {
+        margin-top: 2rem;
+    }
+
+    .booking-form label {
+        font-weight: 600;
+        color: #333;
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    .booking-form input,
+    .booking-form select {
+        width: 100%;
+        padding: 0.8rem;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        margin-bottom: 1rem;
+    }
+
+    .booking-form button {
+        width: 100%;
+        padding: 0.8rem;
+        border: none;
+        border-radius: 5px;
+        background-color: #ff5031;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .booking-form button:hover {
+        background-color: #e03112;
+    }
+
+    /* Dark Mode Styling */
+    .dark-mode {
+        .container.booking {
+            background-color: #1c1c1e;
+            color: #f5f5f7;
+            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .container.booking h1 {
+            color: #f0f0f5;
+            border-bottom: 2px solid #444;
+        }
+
+        .booking-form label {
+            color: #ffffff;
+        }
+
+        .booking-form input,
+        .booking-form select {
+            background-color: #333;
+            color: #ffffff;
+            border: 1px solid #555;
+        }
+
+        .booking-form button {
+            background-color: #ff5031;
+        }
+    }
+</style>
+
+<div class="container booking">
+    <h1>Book <%= list.title %></h1>
+    <p><strong>Description:</strong> <%= list.description %></p>
+    <p><strong>Price:</strong> &#8377;<%= list.price %></p>
+    <p><strong>Location:</strong> <%= list.location %>, <%= list.country %></p>
+
+    <!-- Booking Form -->
+     <!-- The Backend logic for the booking form is not written and needs to be written as it was not a part of my PR #206 -->
+    <form class="booking-form" action="/bookings/my-bookings/<%= list._id %>" method="POST">
+        <label for="bookingDate">Select Date:</label>
+        <input type="date" id="bookingDate" name="bookingDate" required>
+
+        <label for="guests">Number of Guests:</label>
+        <input type="number" id="guests" name="guests" min="1" max="10" required>
+
+        <label for="duration">Duration (in days):</label>
+        <input type="number" id="duration" name="duration" min="1" required>
+
+        <button type="submit">Confirm Booking</button>
+    </form>
+</div>
