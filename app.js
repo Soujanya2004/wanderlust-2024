@@ -31,7 +31,8 @@ const { viewProfile, profileGet, profilePost } = require("./controllers/profile.
 const { contactPage, aboutPage, termsPage, privacyPage, contributors } = require("./controllers/others.js");
 const { deleteReview, reviewPost } = require("./controllers/reviews.js");
 const feedbackController = require('./controllers/feedback');
-
+const confirmBooking = require("./controllers/booking.js");
+const confirmPayment = require("./controllers/booking.js");
 // const { feedbackPost } = require("./controllers/feedback.js");
 
 const cors = require('cors');
@@ -211,6 +212,7 @@ app.post('/profile/edit', isLoggedIn, upload.single("profileimage"), profilePost
 
 // Listing controller
 const listingController = require('./controllers/listing.js');
+const bookingController = require('./controllers/booking.js');
 // Create new listing form route
 app.get("/listing/new", isLoggedIn, asyncwrap(listingController.newpost));
 // Listing routes
@@ -225,6 +227,8 @@ app.post('/listing/:id/like', isLoggedIn, asyncwrap(listingController.likeListin
 app.get('/top-listings', listingController.topListings);
 // Booking page
 app.get('/listing/:id/booking', bookinfFt);
+app.post('/bookings/my-bookings/:id', bookingController.confirmBooking);
+app.post('/bookings/payment/confirm/:bookingId', bookingController.confirmPayment);
 // Feedback
 app.post("/feedback", isLoggedIn, asyncwrap(feedbackController.feedbackPost));
 
