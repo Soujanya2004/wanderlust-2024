@@ -226,6 +226,7 @@ app.get('/top-listings', listingController.topListings);
 // Booking page
 app.get('/listing/:id/booking', bookinfFt);
 // Feedback
+app.get("/feedback", isLoggedIn, asyncwrap(feedbackController.renderFeedback));
 app.post("/feedback", isLoggedIn, asyncwrap(feedbackController.feedbackPost));
 
 
