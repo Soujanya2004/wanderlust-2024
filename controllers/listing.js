@@ -153,7 +153,19 @@ module.exports.search = async (req, res) => {
 };
 
 
-
+module.exports.bookinfFt = async (req, res) => {
+    // Fetch the list from the database using the ID from the URL
+    const listingId = req.params.id;
+  
+    // Assuming you have a `Listing` model, fetch the list from the database
+      const list = await listing.findById(req.params.id);
+      if (!list){
+        return res.status(404).send("Listing not found");
+      }
+  
+        // Pass the list object to the EJS view
+        res.render('booking', { list: list });
+    };
 
 
 module.exports.editpost = async (req, res) => {
