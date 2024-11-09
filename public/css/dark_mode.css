@@ -226,4 +226,10 @@
             cursor: pointer;
             color: #adadad; /* Icon color */
           }
+          #preloader{
+            background-color: #272727 !important;
+          }
+          .loader::before{
+            background: rgba(0, 0, 0, 0.753) !important;
+          }
 }

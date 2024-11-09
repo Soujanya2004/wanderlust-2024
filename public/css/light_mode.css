@@ -180,4 +180,7 @@
           cursor: pointer;
           color: #666; /* Icon color */
         }
+        #preloader{
+          background-color: #ffffff !important;
+        }
 }
