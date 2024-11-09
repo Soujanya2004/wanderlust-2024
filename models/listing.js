@@ -40,6 +40,11 @@ const listingSchema = new Schema({
       required: true
     }
   },
+   likes: {
+    type: Number,
+    default: 0, 
+  },
+  likedBy: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   tags: [String]  // New tags field
 });
 

@@ -315,4 +315,32 @@ module.exports.deletepost = async (req, res) => {
     res.redirect("/listing");
 };
 
+module.exports.likeListing = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const foundListing = await listing.findById(id);
+        if (!foundListing) {
+            req.flash('error', 'Listing not found');
+            return res.redirect('/listing');
+        }
+        const userId = req.user._id; 
+        const hasLiked = foundListing.likedBy.includes(userId);
+
+        if (hasLiked) {
+            foundListing.likes -= 1;
+            foundListing.likedBy.pull(userId);
+        } else {
+            foundListing.likes += 1;
+            foundListing.likedBy.push(userId);
+        }
+
+        await foundListing.save();
+        req.flash('success', hasLiked ? 'Like removed!' : 'Listing liked successfully!');
+        return res.redirect(`/listing/${id}`);
+    } catch (err) {
+        console.error("Error liking/disliking listing:", err);
+        req.flash('error', 'An error occurred while liking/disliking the listing.');
+        return res.redirect(`/listing/${id}`);
+    }
+};
 

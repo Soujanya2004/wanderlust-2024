@@ -282,6 +282,16 @@
                                     Owned by: <b>Unknown User</b>
                                 <% } %>
                             </p>
+                            <p>Likes: <%= list.likes %></p>
+                            <form action="/listing/<%= list._id %>/like" method="POST">
+                                <button type="submit" class="btn btn-light">
+                                    <% if (list.likedBy && list.likedBy.includes(currUser._id)) { %>
+                                        ❤️ <!-- Filled heart for liked -->
+                                    <% } else { %>
+                                        🤍 <!-- Empty heart for not liked -->
+                                    <% } %>
+                                </button>
+                            </form>
                     </div>
                     <div>
                         <form method="get" action="/listing/<%= list._id %>/booking" class="d-inline">
