@@ -1,4 +1,5 @@
 const listing = require("../models/listing.js");
+const review = require("../models/reviews.js");
 const User=require("../models/user.js");
 const Feedback=require("../models/feedback.js");
 
@@ -93,6 +94,14 @@ module.exports.viewListingReview = async (req, res) => {
   }
   };
   
+  module.exports.deleteListingReview = (async (req,res) =>{
+    let {id,reviewId} =req.params;
+    await listing.findByIdAndUpdate(id,{$pull:{reviews:reviewId}}); //update the listing-reviews array where review id matched rid
+    await review.findByIdAndDelete(reviewId); //deconstructing parameters
+    req.flash("success", "Review Deleted!");
+    res.redirect(`/admin/reviews/${id}`);
+})
+
   
   // Render show edit form
 module.exports.adminListEditRender = async (req, res) => {
