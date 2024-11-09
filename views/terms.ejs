@@ -1,195 +1,516 @@
 <% layout("/layouts/boilerplate") %>
 
-    <style>
+<style>
+/* General Styling */
+html {
+    scroll-behavior: smooth;
+}
+
 .content-wrapper {
-        max-width: 1000px;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: #fff;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #ffffff;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    transition: background-color 0.3s, color 0.3s;
+    position: relative;
+}
+
+/* Styling for section headings */
+h3.page-title {
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+    margin: 30px 0;
+    color: #333;
+    transition: color 0.3s;
+    position: relative;
+}
+
+h3.page-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #0073e6;
+}
+
+/* Styling for section titles in TOC and sections */
+.toc-section-title, b {
+    font-size: 18px;
+    font-weight: bold;
+    color: #444;
+    transition: color 0.3s;
+}
+
+/* Styling for paragraphs with a custom class */
+p.text-content, li.text-item {
+    font-size: 17px;
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 10px;
+    transition: color 0.3s;
+    font-family: 'Arial', sans-serif;
+}
+
+ul.custom-list {
+    list-style-type: disc;
+    margin-left: 25px;
+}
+
+/* Styling for each section */
+section {
+    margin-bottom: 50px;
+    scroll-margin-top: 85px;
+}
+
+/* Table of contents styling */
+.table-of-contents {
+    margin-right: 30px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    transition: background-color 0.3s, border-color 0.3s;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table-of-contents ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.table-of-contents li {
+    padding: 6px 0;
+}
+
+/* Add a border around each item in the TOC */
+.table-of-contents li.section-item {
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    padding: 12px;
+    border-radius: 8px;
+    background-color: #f4f4f4;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.table-of-contents li.section-item:hover {
+    background-color: #e9e9e9;
+    border-color: #ccc;
+}
+
+/* Styling for links in the TOC */
+.table-of-contents a {
+    color: #0073e6;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s;
+    font-size: 16px;
+}
+
+.table-of-contents a:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+.table-of-contents li a.active {
+    font-weight: bold;
+    color: #0056b3;
+}
+
+/* Layout Styling */
+.terms-container {
+    display: flex;
+    gap: 30px;
+}
+
+.toc {
+    width: 20%;
+    padding: 25px;
+    position: sticky;
+    top: 20px;
+    background-color: #f1f1f1;
+    height: 100vh;
+    overflow-y: auto;
+    border-right: 1px solid #ddd;
+    border-radius: 10px;
+    transition: background-color 0.3s, border-color 0.3s;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.terms-content {
+    width: 80%;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark Mode */
+.dark-mode {
+    background-color: #2b2b2b;
+}
+
+.dark-mode .content-wrapper {
+    background-color: #333;
+    color: #dfdfdf;
+}
+
+.dark-mode h3.page-title, 
+.dark-mode b, 
+.dark-mode p, 
+.dark-mode li {
+    color: #dfdfdf;
+}
+
+.dark-mode .table-of-contents {
+    background-color: #444;
+    border-color: #555;
+    color:white;
+}
+
+.dark-mode .table-of-contents a {
+    color: #66b2ff;
+}
+
+.dark-mode .table-of-contents li a.active {
+    color: #3399ff;
+}
+
+.dark-mode .table-of-contents a:hover {
+    color: #3385cc;
+}
+
+/* Media Query for Responsive Layout */
+@media (max-width: 768px) {
+    .terms-container {
+        flex-direction: column;
+        gap: 20px;
     }
 
-    /* Styling for section headings (h3) */
-    h3 {
-        font-size: 28px;
-        font-weight: bold;
-        margin-top: 1rem;
-        color: #646464;
-        margin-bottom: 10px;
-        text-align: left;
+    .toc {
+        width: 100%;
+        order: 1;
+        border-right: none;
+        border-bottom: 1px solid #ddd;
     }
 
-    /* Styling for paragraphs and list items */
-    p, li {
-        font-size: 16px;
-        line-height: 1.6;
-        color: #333;
+    .terms-content {
+        width: 100%;
+        order: 2;
     }
+}
 
-    /* Styling for unordered lists */
-    ul {
-        list-style-type: disc;
-        margin-left: 20px;
-    }
 
-    /* Styling for each section */
-    section {
-        margin-bottom: 40px;
-    }
 
-    /* Center the page title */
-    h3.page-title {
-        text-align: center;
-        font-size: 32px;
-    }
 
-     /* DARKMODE CSS */
-     .dark-mode {
-        h3{
-            color: #dfdfdf;
-        }
-        b {
-            color: #f7f7f7;
-        } 
-        p , li {
-            color: #dfdfdf;
-        }
-   
-        .content-wrapper {
-            background-color: transparent;
-        }
 
-    } 
 </style>
+
 <body>
-    <h3 style="text-align: center;">Terms and Conditions</h3>
-
-    <div class="content-wrapper">
-        <section>
-            <b>1. Introduction</b>
-            <p>Welcome to Wanderlust! These Terms and Conditions ("Terms") govern your use of our platform. By accessing or using the Wanderlust website, mobile application, or services, you agree to these Terms. Please review them carefully.</p>
+    <h3 class="page-title">Terms and Conditions</h3>
+  
+    <div class="terms-container">
+      <!-- Table of Contents on the left -->
+      <div class="table-of-contents">
+        <h3>Table of Contents</h3>
+        <ul>
+          <li><a href="#introduction">1. Introduction</a></li>
+          <li><a href="#definitions">2. Definitions</a></li>
+          <li><a href="#account-registration">3. Account Registration</a></li>
+          <li><a href="#listing-and-modification">4. Listing and Modification</a></li>
+          <li><a href="#availability-and-pricing">5. Availability and Pricing</a></li>
+          <li><a href="#security">6. Security</a></li>
+          <li><a href="#booking-and-payment">7. Booking and Payment</a></li>
+          <li><a href="#property-cancellation-and-refunds">8. Property Cancellation and Refunds</a></li>
+          <li><a href="#host-responsibilities">9. Host Responsibilities</a></li>
+          <li><a href="#guest-responsibilities">10. Guest Responsibilities</a></li>
+          <li><a href="#service-fees">11. Service Fees</a></li>
+          <li><a href="#taxes">12. Taxes</a></li>
+          <li><a href="#prohibited-activities">13. Prohibited Activities</a></li>
+          <li><a href="#dispute-resolution">14. Dispute Resolution</a></li>
+          <li><a href="#indemnification">15. Indemnification</a></li>
+          <li><a href="#limitation-of-liability">16. Limitation of Liability</a></li>
+          <li><a href="#governing-law-and-jurisdiction">17. Governing Law and Jurisdiction</a></li>
+          <li><a href="#intellectual-property">18. Intellectual Property</a></li>
+          <li><a href="#privacy">19. Privacy</a></li>
+          <li><a href="#termination">20. Termination</a></li>
+          <li><a href="#amendments">21. Amendments</a></li>
+          <li><a href="#contact-us">22. Contact Us</a></li>
+        </ul>
+      </div>
+  
+      <!-- Terms and Conditions Content on the right -->
+      <div class="content-wrapper">
+        <section id="introduction">
+          <b>1. Introduction</b>
+          <p>
+            Welcome to Wanderlust! These Terms and Conditions ("Terms") govern your
+            use of our platform. By accessing or using the Wanderlust website,
+            mobile application, or services, you agree to these Terms. Please review
+            them carefully.
+          </p>
         </section>
-    
-        <section>
-            <b>2. Definitions</b>
-            <p>In these Terms:</p>
-            <ul>
-                <li><strong>"Platform"</strong> refers to Wanderlust’s website, mobile app, and associated services.</li>
-                <li><strong>"Host"</strong> refers to anyone who lists their property on Wanderlust.</li>
-                <li><strong>"Guest"</strong> refers to anyone who books a property through Wanderlust.</li>
-                <li><strong>"Property"</strong> refers to accommodations listed by Hosts on the platform.</li>
-            </ul>
-        </section>
-    
-        <section>
-            <b>3. Account Registration</b>
-            <p>To use certain features of the Platform, you must create an account. You agree to provide accurate, current, and complete information during registration and to update such information to keep it accurate. You are responsible for safeguarding your account credentials and for all activities conducted under your account.</p>
-        </section>
-    
-        <section>
-            <b>4. Listing and Modification</b>
-            <p>You agree to list your property on the Platform in a way that accurately reflects the property's location, amenities, and pricing. You are responsible for ensuring that your listing is up-to-date and remains accurate. Wanderlust may modify or remove your listing at any time, without prior notice, if the property is no longer available or is no longer suitable for rental.</p>
-        </section>
-    
-        <section>
-            <b>5. Availability and Pricing</b>
-            <p>Wanderlust provides a flexible booking system that allows Guests to book properties for a specified number of nights and a specified number of guests. Guests can book properties with a minimum of 1 night and a maximum of 7 nights. Pricing is determined by the Host and may vary based on factors such as property location, amenities, and guest preferences. Wanderlust may offer special discounts or promotions to Guests during peak seasons or during certain events.</p>
-        </section>
-    
-        <section>
-            <b>6. Security</b>
-            <p>Wanderlust takes all necessary measures to protect your account and property information. We use strong, unique encryption algorithms to protect your data. However, please be aware that no security system is foolproof, and we cannot guarantee that your account and property information will remain secure in the event of a breach.</p>
-        </section>
-    
-        <section>
-            <b>7. Booking and Payment</b>
-            <p>When Guests book a property, they are entering into a legal agreement with the Host. Wanderlust acts solely as an intermediary and is not responsible for the properties listed. Payment processing is handled by third-party providers, and service fees may apply. Bookings are confirmed upon receipt of payment.</p>
-        </section>
-    
-        <section>
-            <b>8. Property Cancellation and Refunds</b>
-            <p>Guests may cancel their bookings at any time, with or without notice, provided that the cancellation occurs within 24 hours of the booking. If a Guest cancels their booking, they will be charged a cancellation fee of 10% of the total booking price. Wanderlust will issue a full refund to the Guest within 72 hours of the cancellation. If a Guest cancels their booking after 24 hours, they will be charged a cancellation fee of 20% of the total booking price. Wanderlust will issue a partial refund to the Guest within 48 hours of the cancellation.</p>
-        </section>
-    
-        <section>
-            <b>9. Host Responsibilities</b>
-            <p>As a Host, you are responsible for ensuring that your property is as described in the listing, complies with local laws, and is safe for Guests. You are also responsible for addressing any issues that arise during a Guest's stay. All listings must be accurate, including pricing, availability, and amenities.</p>
-        </section>
-    
-        <section>
-            <b>10. Guest Responsibilities</b>
-            <p>As a Guest, you agree to follow the Host’s house rules, respect the property, and comply with all applicable laws during your stay. You will be held responsible for any damages to the property caused by you or your invitees.</p>
-        </section>
-    
-        <section>
-            <b>11. Service Fees</b>
-            <p>Wanderlust charges service fees to both Hosts and Guests for using the platform. These fees are non-refundable and are displayed at the time of booking or listing. Fees help maintain the platform and cover operational costs.</p>
-        </section>
-    
-        <section>
-            <b>12. Taxes</b>
-            <p>Hosts are responsible for determining and fulfilling their tax obligations related to the rental income generated from the platform. Wanderlust may provide tax documentation as required but is not responsible for withholding or remitting taxes on behalf of the Hosts.</p>
-        </section>
-    
-        <section>
-            <b>13. Prohibited Activities</b>
-            <p>Users agree not to:</p>
-            <ul>
-                <li>Violate any applicable laws or regulations.</li>
-                <li>Post false, misleading, or fraudulent information.</li>
-                <li>Interfere with the operation of the platform or engage in disruptive activities.</li>
-                <li>Discriminate against other users based on race, religion, nationality, disability, or any other protected category.</li>
-            </ul>
-        </section>
-    
-        <section>
-            <b>14. Dispute Resolution</b>
-            <p>In the event of a dispute between Guests and Hosts, Wanderlust may facilitate communication but is not responsible for resolving conflicts. We recommend that both parties attempt to resolve disputes amicably before pursuing further action. In cases where mediation is required, each party is responsible for its own legal costs.</p>
-        </section>
-    
-        <section>
-            <b>15. Indemnification</b>
-            <p>You agree to indemnify and hold Wanderlust, its affiliates, and its subsidiaries, officers, employees, agents, and contractors, harmless from any and all claims, losses, damages, liabilities, and expenses, including reasonable attorney's fees, arising out of or related to your use of the Platform, your violation of these Terms, or your violation of any third-party rights. You also agree to waive your right to sue in your state or federal court.</p>
-        </section>
-    
-        <section>
-            <b>16. Limitation of Liability</b>
-            <p>In no event shall Wanderlust, its affiliates, or its subsidiaries, officers, employees, agents, or contractors be liable for any damages, losses, or injuries, including, without limitation, any direct, indirect, punitive, special, incidental, or consequential damages, arising out of or related to the Platform, your use of the Platform, your violation of these Terms, or your violation of any third-party rights. This limitation of liability shall apply to the extent permitted by law, and you acknowledge that you have the right to seek injunctive relief in any court of competent jurisdiction.</p>
-        </section>
-    
-        <section>
-            <b>17. Governing Law and Jurisdiction</b>
-            <p>These Terms are governed by the laws of the State of California, without regard to its conflict of law provisions. You agree that any disputes arising out of or related to these Terms or your use of the Platform will be resolved in Santa Clara County, California, by a court of competent jurisdiction. If you reside outside of California, you consent to the jurisdiction and venue of the California Supreme Court.</p>
-        </section>
-    
-        <section>
-            <b>18. Intellectual Property</b>
-            <p>All content, including text, images, and software used on the platform, is the intellectual property of Wanderlust or its licensors. You may not copy, modify, or distribute any content from the platform without prior written consent from Wanderlust.</p>
-        </section>
-    
-        <section>
-            <b>19. Privacy</b>
-            <p>Your use of the Wanderlust platform is also governed by our Privacy Policy. We collect and process personal information in accordance with our Privacy Policy, which can be found.</p>
-        </section>
-    
-        <section>
-            <b>20. Termination</b>
-            <p>Wanderlust reserves the right to suspend or terminate your account at any time if you violate these Terms or engage in prohibited activities. Upon termination, you must cease all use of the platform and any outstanding payments remain due.</p>
-        </section>
-    
-        <section>
-            <b>21. Amendments</b>
-            <p>We reserve the right to modify these Terms at any time. Any changes will be effective immediately upon posting. You will be notified of significant changes, and your continued use of the platform signifies acceptance of the updated Terms.</p>
+  
+        <section id="definitions">
+          <b>2. Definitions</b>
+          <p>In these Terms:</p>
+          <ul>
+            <li>
+              <strong>"Platform"</strong> refers to Wanderlust’s website, mobile
+              app, and associated services.
+            </li>
+            <li>
+              <strong>"Host"</strong> refers to anyone who lists their property on
+              Wanderlust.
+            </li>
+            <li>
+              <strong>"Guest"</strong> refers to anyone who books a property through
+              Wanderlust.
+            </li>
+            <li>
+              <strong>"Property"</strong> refers to accommodations listed by Hosts
+              on the platform.
+            </li>
+          </ul>
         </section>
 
-        <section>
-            <b>22. Contact Us</b>
-            <p>If you have any questions about these Terms or require further information, please contact us at:</p>
-            <ul>
-                <li>Email: <b>support@wanderlust.com</b></li>
-                <li>Phone: <b>+123-456-7890</b></li>
-                <li>Address: <b>123 Wanderlust Avenue, Dream City, Wonderland, 12345</b></li>
-            </ul>
-        </section>
-    </div>
-   
+    <section id="account-registration">
+      <b>3. Account Registration</b>
+      <p>
+        To use certain features of the Platform, you must create an account. You
+        agree to provide accurate, current, and complete information during
+        registration and to update such information to keep it accurate. You are
+        responsible for safeguarding your account credentials and for all
+        activities conducted under your account.
+      </p>
+    </section>
+
+    <section id="listing-and-modification">
+      <b>4. Listing and Modification</b>
+      <p>
+        You agree to list your property on the Platform in a way that accurately
+        reflects the property's location, amenities, and pricing. You are
+        responsible for ensuring that your listing is up-to-date and remains
+        accurate. Wanderlust may modify or remove your listing at any time,
+        without prior notice, if the property is no longer available or is no
+        longer suitable for rental.
+      </p>
+    </section>
+
+    <section id="availability-and-pricing">
+      <b>5. Availability and Pricing</b>
+      <p>
+        Wanderlust provides a flexible booking system that allows Guests to book
+        properties for a specified number of nights and a specified number of
+        guests. Guests can book properties with a minimum of 1 night and a
+        maximum of 7 nights. Pricing is determined by the Host and may vary
+        based on factors such as property location, amenities, and guest
+        preferences. Wanderlust may offer special discounts or promotions to
+        Guests during peak seasons or during certain events.
+      </p>
+    </section>
+
+    <section id="security">
+      <b>6. Security</b>
+      <p>
+        Wanderlust takes all necessary measures to protect your account and
+        property information. We use strong, unique encryption algorithms to
+        protect your data. However, please be aware that no security system is
+        foolproof, and we cannot guarantee that your account and property
+        information will remain secure in the event of a breach.
+      </p>
+    </section>
+
+    <section id="booking-and-payment">
+      <b>7. Booking and Payment</b>
+      <p>
+        When Guests book a property, they are entering into a legal agreement
+        with the Host. Wanderlust acts solely as an intermediary and is not
+        responsible for the properties listed. Payment processing is handled by
+        third-party providers, and service fees may apply. Bookings are
+        confirmed upon receipt of payment.
+      </p>
+    </section>
+
+    <section id="property-cancellation-and-refunds">
+      <b>8. Property Cancellation and Refunds</b>
+      <p>
+        Guests may cancel their bookings at any time, with or without notice,
+        provided that the cancellation occurs within 24 hours of the booking. If
+        a Guest cancels their booking, they will be charged a cancellation fee
+        of 10% of the total booking price. Wanderlust will issue a full refund
+        to the Guest within 72 hours of the cancellation. If a Guest cancels
+        their booking after 24 hours, they will be charged a cancellation fee of
+        20% of the total booking price. Wanderlust will issue a partial refund
+        to the Guest within 48 hours of the cancellation.
+      </p>
+    </section>
+
+    <section id="host-responsibilities">
+      <b>9. Host Responsibilities</b>
+      <p>
+        As a Host, you are responsible for ensuring that your property is as
+        described in the listing, complies with local laws, and is safe for
+        Guests. You are also responsible for addressing any issues that arise
+        during a Guest's stay. All listings must be accurate, including pricing,
+        availability, and amenities.
+      </p>
+    </section>
+
+    <section id="guest-responsibilities">
+      <b>10. Guest Responsibilities</b>
+      <p>
+        As a Guest, you agree to follow the Host’s house rules, respect the
+        property, and comply with all applicable laws during your stay. You will
+        be held responsible for any damages to the property caused by you or
+        your invitees.
+      </p>
+    </section>
+
+    <section id="service-fees">
+      <b>11. Service Fees</b>
+      <p>
+        Wanderlust charges service fees to both Hosts and Guests for using the
+        platform. These fees are non-refundable and are displayed at the time of
+        booking or listing. Fees help maintain the platform and cover
+        operational costs.
+      </p>
+    </section>
+
+    <section id="taxes">
+      <b>12. Taxes</b>
+      <p>
+        Hosts are responsible for determining and fulfilling their tax
+        obligations related to the rental income generated from the platform.
+        Wanderlust may provide tax documentation as required but is not
+        responsible for withholding or remitting taxes on behalf of the Hosts.
+      </p>
+    </section>
+
+    <section id="prohibited-activities">
+      <b>13. Prohibited Activities</b>
+      <p>Users agree not to:</p>
+      <ul>
+        <li>Violate any applicable laws or regulations.</li>
+        <li>Post false, misleading, or fraudulent information.</li>
+        <li>
+          Interfere with the operation of the platform or engage in disruptive
+          activities.
+        </li>
+        <li>
+          Discriminate against other users based on race, religion, nationality,
+          disability, or any other protected category.
+        </li>
+      </ul>
+    </section>
+
+    <section id="dispute-resolution">
+      <b>14. Dispute Resolution</b>
+      <p>
+        In the event of a dispute between Guests and Hosts, Wanderlust may
+        facilitate communication but is not responsible for resolving conflicts.
+        We recommend that both parties attempt to resolve disputes amicably
+        before pursuing further action. In cases where mediation is required,
+        each party is responsible for its own legal costs.
+      </p>
+    </section>
+
+    <section id="indemnification">
+      <b>15. Indemnification</b>
+      <p>
+        You agree to indemnify and hold Wanderlust, its affiliates, and its
+        subsidiaries, officers, employees, agents, and contractors, harmless
+        from any and all claims, losses, damages, liabilities, and expenses,
+        including reasonable attorney's fees, arising out of or related to your
+        use of the Platform, your violation of these Terms, or your violation of
+        any third-party rights. You also agree to waive your right to sue in
+        your state or federal court.
+      </p>
+    </section>
+
+    <section id="limitation-of-liability">
+      <b>16. Limitation of Liability</b>
+      <p>
+        In no event shall Wanderlust, its affiliates, or its subsidiaries,
+        officers, employees, agents, or contractors be liable for any damages,
+        losses, or injuries, including, without limitation, any direct,
+        indirect, punitive, special, incidental, or consequential damages,
+        arising out of or related to the Platform, your use of the Platform,
+        your violation of these Terms, or your violation of any third-party
+        rights. This limitation of liability shall apply to the extent permitted
+        by law, and you acknowledge that you have the right to seek injunctive
+        relief in any court of competent jurisdiction.
+      </p>
+    </section>
+
+    <section id="governing-law-and-jurisdiction">
+      <b>17. Governing Law and Jurisdiction</b>
+      <p>
+        These Terms are governed by the laws of the State of California, without
+        regard to its conflict of law provisions. You agree that any disputes
+        arising out of or related to these Terms or your use of the Platform
+        will be resolved in Santa Clara County, California, by a court of
+        competent jurisdiction. If you reside outside of California, you consent
+        to the jurisdiction and venue of the California Supreme Court.
+      </p>
+    </section>
+
+    <section id="intellectual-property">
+      <b>18. Intellectual Property</b>
+      <p>
+        All content, including text, images, and software used on the platform,
+        is the intellectual property of Wanderlust or its licensors. You may not
+        copy, modify, or distribute any content from the platform without prior
+        written consent from Wanderlust.
+      </p>
+    </section>
+
+    <section id="privacy">
+      <b>19. Privacy</b>
+      <p>
+        Your use of the Wanderlust platform is also governed by our Privacy
+        Policy. We collect and process personal information in accordance with
+        our Privacy Policy, which can be found.
+      </p>
+    </section>
+
+    <section id="termination">
+      <b>20. Termination</b>
+      <p>
+        Wanderlust reserves the right to suspend or terminate your account at
+        any time if you violate these Terms or engage in prohibited activities.
+        Upon termination, you must cease all use of the platform and any
+        outstanding payments remain due.
+      </p>
+    </section>
+
+    <section id="amendments">
+      <b>21. Amendments</b>
+      <p>
+        We reserve the right to modify these Terms at any time. Any changes will
+        be effective immediately upon posting. You will be notified of
+        significant changes, and your continued use of the platform signifies
+        acceptance of the updated Terms.
+      </p>
+    </section>
+
+    <section id="contact-us">
+      <b>22. Contact Us</b>
+      <p>
+        If you have any questions about these Terms or require further
+        information, please contact us at:
+      </p>
+      <ul>
+        <li>Email: <b>support@wanderlust.com</b></li>
+        <li>Phone: <b>+123-456-7890</b></li>
+        <li>
+          Address: <b>123 Wanderlust Avenue, Dream City, Wonderland, 12345</b>
+        </li>
+      </ul>
+    </section>
+  </div>
 </body>

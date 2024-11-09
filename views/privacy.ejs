@@ -1,171 +1,334 @@
 <% layout("/layouts/boilerplate") %>
 
 <style>
-    /* Styling for the content wrapper */
-    .content-wrapper {
-        max-width: 1000px;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: #fff;
+  /* General Styling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .content-wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #ffffff;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    transition: background-color 0.3s, color 0.3s;
+    position: relative;
+  }
+
+  /* Styling for section headings */
+  h3.page-title {
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+    margin: 30px 0;
+    color: #333;
+    transition: color 0.3s;
+    position: relative;
+  }
+
+  h3.page-title::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #0073e6;
+  }
+
+  /* Styling for section titles in TOC and sections */
+  .toc-section-title,
+  b {
+    font-size: 18px;
+    font-weight: bold;
+    color: #444;
+    transition: color 0.3s;
+  }
+
+  /* Styling for paragraphs with a custom class */
+  p.text-content,
+  li.text-item {
+    font-size: 17px;
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 10px;
+    transition: color 0.3s;
+    font-family: "Arial", sans-serif;
+  }
+
+  ul.custom-list {
+    list-style-type: disc;
+    margin-left: 25px;
+  }
+
+  /* Styling for each section */
+  section {
+    margin-bottom: 50px;
+    scroll-margin-top: 85px;
+  }
+
+  /* Table of contents styling */
+  .table-of-contents {
+    margin-right: 30px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    transition: background-color 0.3s, border-color 0.3s;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .table-of-contents ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  .table-of-contents li {
+    padding: 6px 0;
+  }
+
+  /* Add a border around each item in the TOC */
+  .table-of-contents li.section-item {
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    padding: 12px;
+    border-radius: 8px;
+    background-color: #f4f4f4;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+
+  .table-of-contents li.section-item:hover {
+    background-color: #e9e9e9;
+    border-color: #ccc;
+  }
+
+  /* Styling for links in the TOC */
+  .table-of-contents a {
+    color: #0073e6;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s;
+    font-size: 16px;
+  }
+
+  .table-of-contents a:hover {
+    text-decoration: underline;
+    color: #0056b3;
+  }
+
+  .table-of-contents li a.active {
+    font-weight: bold;
+    color: #0056b3;
+  }
+
+  /* Layout Styling */
+  .terms-container {
+    display: flex;
+    gap: 30px;
+  }
+
+  .toc {
+    width: 20%;
+    padding: 25px;
+    position: sticky;
+    top: 20px;
+    background-color: #f1f1f1;
+    height: 100vh;
+    overflow-y: auto;
+    border-right: 1px solid #ddd;
+    border-radius: 10px;
+    transition: background-color 0.3s, border-color 0.3s;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .terms-content {
+    width: 80%;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Dark Mode */
+  .dark-mode {
+    background-color: #2b2b2b;
+  }
+
+  .dark-mode .content-wrapper {
+    background-color: #333;
+    color: #dfdfdf;
+  }
+
+  .dark-mode h3.page-title,
+  .dark-mode b,
+  .dark-mode p,
+  .dark-mode li {
+    color: #dfdfdf;
+  }
+
+  .dark-mode .table-of-contents {
+    background-color: #444;
+    border-color: #555;
+    color: white;
+  }
+
+  .dark-mode .table-of-contents a {
+    color: #66b2ff;
+  }
+
+  .dark-mode .table-of-contents li a.active {
+    color: #3399ff;
+  }
+
+  .dark-mode .table-of-contents a:hover {
+    color: #3385cc;
+  }
+
+  /* Media Query for Responsive Layout */
+  @media (max-width: 768px) {
+    .terms-container {
+      flex-direction: column;
+      gap: 20px;
     }
 
-    /* Styling for section headings (b) */
-    h3 {
-        font-size: 28px;
-        font-weight: bold;
-        margin-top: 1rem;
-        color: #646464;
-        margin-bottom: 10px;
-        text-align: left;
-    }
-    /* Styling for paragraphs and list items */
-    p, li {
-        font-size: 16px;
-        line-height: 1.6;
-        color: #333;
+    .toc {
+      width: 100%;
+      order: 1;
+      border-right: none;
+      border-bottom: 1px solid #ddd;
     }
 
-    /* Styling for unordered lists */
-    ul {
-        list-style-type: disc;
-        margin-left: 20px;
+    .terms-content {
+      width: 100%;
+      order: 2;
     }
-
-    /* Styling for each section */
-    section {
-        margin-bottom: 40px;
-    }
-
-    /* Center the page title */
-    b.page-title {
-        text-align: center;
-        font-size: 32px;
-    }
-
-    /* DARKMODE CSS */
-    .dark-mode {
-        h3{
-            color: #dfdfdf;
-        }
-        b {
-            color: #f7f7f7;
-        } 
-        p , li {
-            color: #dfdfdf;
-        }
-   
-        .content-wrapper {
-            background-color: transparent;
-        }
-
-    } 
+  }
 </style>
 
 <body>
-    <!-- Page Title -->
-    <h3 class="page-title" style="text-align: center;">Privacy Policy</h3>
+  <!-- Page Title -->
+  <h3 class="page-title" style="text-align: center">Privacy Policy</h3>
 
-    <!-- Main Content Wrapper -->
-    <div class="content-wrapper">
-
-        <!-- Section 1: Introduction -->
-        <section>
-            <b>1. Introduction</b>
-            <p>At Wanderlust, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and protect your personal information when you use our platform. By using Wanderlust, you consent to the practices described in this policy.</p>
-        </section>
-
-        <!-- Section 2: Information We Collect -->
-        <section>
-            <b>2. Information We Collect</b>
-            <p>We collect the following types of information to provide you with a better experience on Wanderlust:</p>
-            <ul>
-                <li><strong>Personal Information:</strong> This includes your name, email address, phone number, and payment information, which you provide when you create an account or make a booking.</li>
-                <li><strong>Non-Personal Information:</strong> This includes browser type, device information, IP address, and usage data collected through cookies and similar technologies.</li>
-                <li><strong>Booking Details:</strong> Information related to your bookings, including property preferences, travel dates, and special requests.</li>
-            </ul>
-        </section>
-
-        <!-- Section 3: How We Use Your Information -->
-        <section>
-            <b>3. How We Use Your Information</b>
-            <p>Wanderlust uses your personal information for the following purposes:</p>
-            <ul>
-                <li><strong>To provide services:</strong> We use your personal information to create your account, process bookings, and communicate with you about your reservations.</li>
-                <li><strong>To improve our platform:</strong> We analyze non-personal information to understand user behavior and improve our services.</li>
-                <li><strong>Marketing communications:</strong> With your consent, we may send you promotional emails or offers based on your preferences.</li>
-                <li><strong>To ensure security:</strong> We use your information to detect and prevent fraud or unauthorized access to the platform.</li>
-            </ul>
-        </section>
-
-        <!-- Section 4: Sharing Your Information -->
-        <section>
-            <b>4. Sharing Your Information</b>
-            <p>Wanderlust does not sell or rent your personal information to third parties. However, we may share your information in the following circumstances:</p>
-            <ul>
-                <li><strong>With Hosts:</strong> When you make a booking, we share relevant details with the Host to facilitate your stay (e.g., your name, contact information, and special requests).</li>
-                <li><strong>Service Providers:</strong> We may share your information with third-party service providers who help us operate the platform, such as payment processors, customer support, or email delivery services.</li>
-                <li><strong>Legal Requirements:</strong> We may disclose your information if required to do so by law or if we believe such disclosure is necessary to protect our rights, comply with legal processes, or prevent harm.</li>
-            </ul>
-        </section>
-
-        <!-- Section 5: Cookies and Tracking Technologies -->
-        <section>
-            <b>5. Cookies and Tracking Technologies</b>
-            <p>Wanderlust uses cookies and similar technologies to improve user experience and analyze site performance. Cookies are small data files stored on your device that help us remember your preferences and recognize you on future visits. You can manage your cookie preferences through your browser settings.</p>
-        </section>
-
-        <!-- Section 6: Data Security -->
-        <section>
-            <b>6. Data Security</b>
-            <p>We take the security of your personal information seriously and implement reasonable technical and organizational measures to protect it. However, no method of transmission over the internet or electronic storage is completely secure. While we strive to use commercially acceptable means to protect your personal information, we cannot guarantee its absolute security.</p>
-        </section>
-
-        <!-- Section 7: Your Rights -->
-        <section>
-            <b>7. Your Rights</b>
-            <p>You have certain rights regarding your personal information, including:</p>
-            <ul>
-                <li><strong>Access and Correction:</strong> You can access and update your personal information by logging into your account.</li>
-                <li><strong>Deletion:</strong> You may request the deletion of your personal data, subject to certain legal obligations we may have.</li>
-                <li><strong>Data Portability:</strong> You may request a copy of your data in a structured, machine-readable format.</li>
-                <li><strong>Withdrawal of Consent:</strong> If you have provided consent for marketing communications, you may withdraw it at any time by following the unsubscribe instructions in our emails.</li>
-            </ul>
-        </section>
-
-        <!-- Section 8: Data Retention -->
-        <section>
-            <b>8. Data Retention</b>
-            <p>We retain your personal information for as long as necessary to fulfill the purposes for which it was collected, or as required by law. Once your data is no longer needed, we securely delete or anonymize it.</p>
-        </section>
-
-        <!-- Section 9: International Data Transfers -->
-        <section>
-            <b>9. International Data Transfers</b>
-            <p>Wanderlust operates globally, and your information may be transferred to and processed in countries outside of your own. We take steps to ensure that your personal information is protected in accordance with this Privacy Policy and applicable laws when transferred internationally.</p>
-        </section>
-
-        <!-- Section 10: Children's Privacy -->
-        <section>
-            <b>10. Children's Privacy</b>
-            <p>Wanderlust is not intended for children under the age of 18, and we do not knowingly collect personal information from children. If you believe that a child has provided us with personal information, please contact us, and we will take steps to delete such information.</p>
-        </section>
-
-        <!-- Section 11: Changes to This Privacy Policy -->
-        <section>
-            <b>11. Changes to This Privacy Policy</b>
-            <p>We may update this Privacy Policy from time to time. When we make changes, we will post the updated policy on this page and update the "Last Updated" date at the top. Your continued use of Wanderlust after any changes constitutes your acceptance of the updated Privacy Policy.</p>
-        </section>
-
-        <!-- Section 12: Contact Us -->
-        <section>
-            <b>12. Contact Us</b>
-            <p>If you have any questions or concerns about this Privacy Policy or our data practices, please contact us at:</p>
-            <ul>
-                <li>Email: <b>support@wanderlust.com</b></li>
-                <li>Phone: <b>+123-456-7890</b></li>
-                <li>Address: <b>123 Wanderlust Avenue, Dream City, Wonderland, 12345</b></li>
-            </ul>
-        </section>
-
+  <div class="terms-container">
+    <!-- Table of Contents on the left -->
+    <div class="table-of-contents">
+      <h3>Table of Contents</h3>
+      <ul>
+        <li><a href="#intro">1. Introduction</a></li>
+        <li><a href="#info-collect">2. Information We Collect</a></li>
+        <li><a href="#how-use">3. How We Use Your Information</a></li>
+        <li><a href="#share-info">4. Sharing Your Information</a></li>
+        <li><a href="#cookies">5. Cookies and Tracking Technologies</a></li>
+        <li><a href="#security">6. Data Security</a></li>
+        <li><a href="#rights">7. Your Rights</a></li>
+        <li><a href="#retention">8. Data Retention</a></li>
+        <li><a href="#international">9. International Data Transfers</a></li>
+        <li><a href="#children">10. Children's Privacy</a></li>
+        <li><a href="#changes">11. Changes to This Privacy Policy</a></li>
+        <li><a href="#contact">12. Contact Us</a></li>
+    </ul>
     </div>
+
+  <!-- Main Content Wrapper -->
+  <div class="content-wrapper">
+    <!-- Section 1: Introduction -->
+    <section id="introduction">
+      <b>1. Introduction</b>
+      <p>
+        At Wanderlust, we are committed to protecting your privacy. This Privacy
+        Policy explains how we collect, use, disclose, and protect your personal
+        information when you use our platform. By using Wanderlust, you consent
+        to the practices described in this policy.
+      </p>
+    </section>
+
+    <!-- Section 2: Information We Collect -->
+    <section id="info-collect">
+        <b>2. Information We Collect</b>
+        <p>We collect the following types of information to provide you with a better experience on Wanderlust:</p>
+        <ul>
+            <li><strong>Personal Information:</strong> This includes your name, email address, phone number, and payment information, which you provide when you create an account or make a booking.</li>
+            <li><strong>Non-Personal Information:</strong> This includes browser type, device information, IP address, and usage data collected through cookies and similar technologies.</li>
+            <li><strong>Booking Details:</strong> Information related to your bookings, including property preferences, travel dates, and special requests.</li>
+        </ul>
+    </section>
+
+    <!-- Section 3: How We Use Your Information -->
+    <section id="how-use">
+        <b>3. How We Use Your Information</b>
+        <p>Wanderlust uses your personal information for the following purposes:</p>
+        <ul>
+            <li><strong>To provide services:</strong> We use your personal information to create your account, process bookings, and communicate with you about your reservations.</li>
+            <li><strong>To improve our platform:</strong> We analyze non-personal information to understand user behavior and improve our services.</li>
+            <li><strong>Marketing communications:</strong> With your consent, we may send you promotional emails or offers based on your preferences.</li>
+            <li><strong>To ensure security:</strong> We use your information to detect and prevent fraud or unauthorized access to the platform.</li>
+        </ul>
+    </section>
+
+    <!-- Section 4: Sharing Your Information -->
+    <section id="share-info">
+        <b>4. Sharing Your Information</b>
+        <p>Wanderlust does not sell or rent your personal information to third parties. However, we may share your information in the following circumstances:</p>
+        <ul>
+            <li><strong>With Hosts:</strong> When you make a booking, we share relevant details with the Host to facilitate your stay (e.g., your name, contact information, and special requests).</li>
+            <li><strong>Service Providers:</strong> We may share your information with third-party service providers who help us operate the platform, such as payment processors, customer support, or email delivery services.</li>
+            <li><strong>Legal Requirements:</strong> We may disclose your information if required to do so by law or if we believe such disclosure is necessary to protect our rights, comply with legal processes, or prevent harm.</li>
+        </ul>
+    </section>
+
+    <!-- Section 5: Cookies and Tracking Technologies -->
+    <section id="cookies">
+        <b>5. Cookies and Tracking Technologies</b>
+        <p>We use cookies and similar tracking technologies to enhance your experience on Wanderlust. Cookies are small data files stored on your device that help us recognize your preferences and activity. You can control cookies through your browser settings.</p>
+    </section>
+
+    <!-- Section 6: Data Security -->
+    <section id="security">
+        <b>6. Data Security</b>
+        <p>We implement robust security measures to protect your personal information. While we strive to use commercially acceptable means to protect your data, no method of transmission over the internet or electronic storage is 100% secure.</p>
+    </section>
+
+    <!-- Section 7: Your Rights -->
+    <section id="rights">
+        <b>7. Your Rights</b>
+        <p>You have the right to access, update, and delete your personal information at any time. If you wish to exercise any of these rights, please contact us using the information provided below.</p>
+    </section>
+
+    <!-- Section 8: Data Retention -->
+    <section id="retention">
+        <b>8. Data Retention</b>
+        <p>We retain your personal information only for as long as necessary to fulfill the purposes outlined in this Privacy Policy unless a longer retention period is required or permitted by law.</p>
+    </section>
+
+    <!-- Section 9: International Data Transfers -->
+    <section id="international">
+        <b>9. International Data Transfers</b>
+        <p>Your personal information may be transferred to and processed in countries outside your country of residence. We ensure that appropriate safeguards are in place to protect your information during international transfers.</p>
+    </section>
+
+    <!-- Section 10: Children's Privacy -->
+    <section id="children">
+        <b>10. Children's Privacy</b>
+        <p>Wanderlust does not knowingly collect personal information from children under the age of 13. If we learn that we have inadvertently collected such information, we will delete it as soon as possible.</p>
+    </section>
+
+    <!-- Section 11: Changes to This Privacy Policy -->
+    <section id="changes">
+        <b>11. Changes to This Privacy Policy</b>
+        <p>We reserve the right to update this Privacy Policy at any time. When we make changes, we will revise the "Last Updated" date at the top of this page. We encourage you to review this Privacy Policy periodically to stay informed about our practices.</p>
+    </section>
+
+    <!-- Section 12: Contact Us -->
+    <section id="contact">
+        <b>12. Contact Us</b>
+        <p>If you have any questions or concerns about this Privacy Policy or your personal information, please contact us at:</p>
+        <ul>
+            <li>Email: privacy@wanderlust.com</li>
+            <li>Phone: 123-456-7890</li>
+            <li>Address: 123 Wanderlust Lane, Travel City, TC 56789</li>
+        </ul>
+    </section>
+  </div>
 </body>
