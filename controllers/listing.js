@@ -1,4 +1,5 @@
 const listing = require("../models/listing.js");
+const Review = require('../models/reviews.js');
 const mbxgeocoding = require('@mapbox/mapbox-sdk/services/geocoding'); 
 const maptoken = process.env.MAP_TOKEN;
 const geocodingClient = mbxgeocoding({ accessToken: maptoken });
@@ -353,6 +354,26 @@ module.exports.likeListing = async (req, res) => {
         console.error("Error liking/disliking listing:", err);
         req.flash('error', 'An error occurred while liking/disliking the listing.');
         return res.redirect(`/listing/${id}`);
+    }
+};
+
+module.exports.topListings = async (req, res) => {
+    try {
+        // Fetch all listings
+        const listings = await listing.find().populate('reviews');
+
+        // Filter listings with an average rating of 4 or more
+        const topRatedListings = listings.filter(listing => {
+            if (listing.reviews.length === 0) return false; // Skip listings with no reviews
+            const avgRating = listing.reviews.reduce((sum, review) => sum + review.rating, 0) / listing.reviews.length;
+            return avgRating >= 4; // Include only those with avg rating >= 4
+        });
+
+        res.render("top_listing_page.ejs", { listings: topRatedListings });
+    } catch (err) {
+        console.error("Error fetching top listings:", err);
+        req.flash("error", "Could not load top listings.");
+        return res.redirect("/");
     }
 };
 
