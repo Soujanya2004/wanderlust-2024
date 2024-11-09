@@ -1,123 +1,228 @@
 <style>
-    .dark-mode{
+  .visitor-counter {
+    display: flex;
+    align-items: center;
+    background-color: #f8f8f8;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: "Poppins", sans-serif;
+    font-size: 1.1rem;
+    margin-top: 15px;
+  }
 
-        .feedback-container{
-            background-color: #2e2e2e;
-            box-shadow: 5px 10px 15px rgba(0, 0, 0, 0.712);
-        } 
-        #review-form input, 
-        #review-form textarea{
-            background-color: #787878 !important;
-            border: 2px solid #c1bfbf !important;
-            color: white !important;
-        }
-        #review-form input:focus{
-            background-color: #787878 !important;
-            border: 2px solid #cdcdcd !important;
-        }
-        #review-form textarea:focus{
-            background-color: #787878 !important;
-            border: 2px solid #cdcdcd !important;
-        }
-        #review-form input::placeholder {
-            color: #dadada !important;
-        }
-        #review-form textarea::placeholder{
-            color: #dadada !important;
-        }
+  .visitor-counter .icon {
+    margin-right: 8px;
+    font-size: 1.4rem;
+  }
+
+  .website-counter {
+    font-weight: bold;
+    color: #d6336c;
+  }
+
+  /* Dark Mode Styling */
+  .dark-mode .visitor-counter {
+    background-color: #3b3b3b;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    color: #e0e0e0;
+  }
+
+  .dark-mode .visitor-counter .icon {
+    color: #f0a0a0;
+  }
+
+  .dark-mode .website-counter {
+    color: #f9c2c2;
+  }
+
+  .dark-mode {
+    .feedback-container {
+      background-color: #2e2e2e;
+      box-shadow: 5px 10px 15px rgba(0, 0, 0, 0.712);
     }
+    #review-form input,
+    #review-form textarea {
+      background-color: #787878 !important;
+      border: 2px solid #c1bfbf !important;
+      color: white !important;
+    }
+    #review-form input:focus {
+      background-color: #787878 !important;
+      border: 2px solid #cdcdcd !important;
+    }
+    #review-form textarea:focus {
+      background-color: #787878 !important;
+      border: 2px solid #cdcdcd !important;
+    }
+    #review-form input::placeholder {
+      color: #dadada !important;
+    }
+    #review-form textarea::placeholder {
+      color: #dadada !important;
+    }
+  }
 </style>
 
 <footer class="container" id="footer">
-    <div class="footer-left">
-        <div class="brand">
-            <!-- <h2>Wanderlust</h2> -->
-            <div class="wrapper six">
-                <div>
-                    <h3 class="flicker">Wanderlust</h3>
-                </div>
-            </div>
-            <p>Where adventure meets comfort.</p>
+  <div class="footer-left">
+    <div class="brand">
+      <!-- <h2>Wanderlust</h2> -->
+      <div class="wrapper six">
+        <div>
+          <h3 class="flicker">Wanderlust</h3>
         </div>
-        <div class="contact-info" id="cantact-us">
-            <div class="email" style="display: flex; align-items: center;">
-                <i class="fas fa-envelope" style="position: relative; bottom: 10px;"></i>
-                <p>Need assistance with your booking or any inquiries?<br>
-                    <a href="mailto:support@Wanderlust.com" class="mail">supportWanderlust@gmail.com</a>
-                </p>
-            </div>
-            <div class="phone" style="display: flex; align-items: center;">
-                <i class="fas fa-phone" style="position: relative; bottom: 10px;"></i>
-                <p>Available 24/7<br><a href="tel:+919876543210" class="mobile">+91-0123456789</a></p>
-            </div>
-        </div>
+      </div>
+      <p>Where adventure meets comfort.</p>
     </div>
-    <div class="footer-middle">
-        <div class="company-links">
-            <h3>Company</h3>
-            <ul>
-                <li><a href="/about">About Us</a></li>
-                <li><a href="/privacy">Privacy Policy</a></li>
-                <li><a href="/terms">Terms & Conditions</a></li>
-            </ul>
-        </div>
+    <div class="contact-info" id="cantact-us">
+      <div class="email" style="display: flex; align-items: center">
+        <i class="fas fa-envelope" style="position: relative; bottom: 10px"></i>
+        <p>
+          Need assistance with your booking or any inquiries?<br />
+          <a href="mailto:support@Wanderlust.com" class="mail"
+            >supportWanderlust@gmail.com</a
+          >
+        </p>
+      </div>
+      <div class="phone" style="display: flex; align-items: center">
+        <i class="fas fa-phone" style="position: relative; bottom: 10px"></i>
+        <p>
+          Available 24/7<br /><a href="tel:+919876543210" class="mobile"
+            >+91-0123456789</a
+          >
+        </p>
+      </div>
     </div>
-    <div class="footer-right">
-        <h3>Connect with us</h3>
-        <div class="social-media">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-facebook"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-        </div>
-        <div class="feedback">
-            <button id="feedback">Give your Feedback</button>
-            <!-- <a href="<%= currUser ? '/listing/feedback' : '/login' %>">
+  </div>
+  <div class="footer-middle">
+    <div class="company-links">
+      <h3>Company</h3>
+      <ul>
+        <li><a href="/about">About Us</a></li>
+        <li><a href="/privacy">Privacy Policy</a></li>
+        <li><a href="/terms">Terms & Conditions</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-right">
+    <h3>Connect with us</h3>
+    <div class="social-media">
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+    </div>
+    <div class="feedback">
+      <button id="feedback">Give your Feedback</button>
+      <!-- <a href="<%= currUser ? '/listing/feedback' : '/login' %>">
                 <button id="feedback">Give your Feedback</button>
             </a> -->
-        </div>
+      <div class="visitor-counter">
+        <span class="icon">👁️</span>
+        <span id="visitorCount">Visitors Count: </span>
+        <span class="website-counter"> 0</span>
+      </div>
     </div>
-    <div class="copyright">
-        <p>&copy; <span id="year"></span> Wanderlust Private Limited. All rights reserved.</p>
-    </div>
+  </div>
+  <div class="copyright">
+    <p>
+      &copy; <span id="year"></span> Wanderlust Private Limited. All rights
+      reserved.
+    </p>
+  </div>
 
-
-    <div class="feedback-popup">
-        <div class="feedback-container">
-            <h2 data-aos="zoom-out-down" data-aos-duration="1200" data-aos-delay="200">Share Your Wanderlust Experience!</h2>
-            <form method="POST" action="/feedback" id="review-form" novalidate class="needs-validation">
-                <!-- <label for="rating" data-aos="zoom-out-down" data-aos-duration="1200" data-aos-delay="200">Your Rating:
+  <div class="feedback-popup">
+    <div class="feedback-container">
+      <h2
+        data-aos="zoom-out-down"
+        data-aos-duration="1200"
+        data-aos-delay="200"
+      >
+        Share Your Wanderlust Experience!
+      </h2>
+      <form
+        method="POST"
+        action="/feedback"
+        id="review-form"
+        novalidate
+        class="needs-validation"
+      >
+        <!-- <label for="rating" data-aos="zoom-out-down" data-aos-duration="1200" data-aos-delay="200">Your Rating:
                 </label> -->
-                <div class="star-rating" id="rating" aria-label="Rating" role="radiogroup" data-aos="zoom-out-down">
-                    <!-- <input type="radio" id="no-rate" class="input-no-rate" name="feedback[rating]" value="3" checked aria-label="No rating." /> -->
-                    <input type="radio" id="star5" name="feedback[rating]" value="5" />
-                    <label for="star5" title="5 stars">★</label>
-                    <input type="radio" id="star4" name="feedback[rating]" value="4" />
-                    <label for="star4" title="4 stars">★</label>
-                    <input type="radio" id="star3" name="feedback[rating]" value="3" />
-                    <label for="star3" title="3 stars">★</label>
-                    <input type="radio" id="star2" name="feedback[rating]" value="2" />
-                    <label for="star2" title="2 stars">★</label>
-                    <input type="radio" id="star1" name="feedback[rating]" value="1" />
-                    <label for="star1" title="1 star">★</label>
-                    <div class="invalid-feedback">Please add a title!</div>
-                </div>
-                    
-                <!-- <label for="user-name" data-aos="zoom-out-down" data-aos-duration="1200" data-aos-delay="200">Your Name:</label> -->
-                <input type="text" id="name" name="feedback[name]" class="feedback-name form-control" placeholder="Enter your name here.">
-
-                <!-- <label for="comment">Leave your comment: </label> -->
-                <textarea id="comment" name="feedback[comment]" class="feedback-comment form-control" placeholder="Enter your comment here...." required></textarea>
-
-                <div class="feed-buttons">
-                    <button id="close-button" class="close-button btn btn-secondary">Close</button>
-                    <button type="submit" class="submit-button btn btn-danger" data-aos="zoom-out-down">Submit</button>
-                </div>
-
-            </form>
+        <div
+          class="star-rating"
+          id="rating"
+          aria-label="Rating"
+          role="radiogroup"
+          data-aos="zoom-out-down"
+        >
+          <!-- <input type="radio" id="no-rate" class="input-no-rate" name="feedback[rating]" value="3" checked aria-label="No rating." /> -->
+          <input type="radio" id="star5" name="feedback[rating]" value="5" />
+          <label for="star5" title="5 stars">★</label>
+          <input type="radio" id="star4" name="feedback[rating]" value="4" />
+          <label for="star4" title="4 stars">★</label>
+          <input type="radio" id="star3" name="feedback[rating]" value="3" />
+          <label for="star3" title="3 stars">★</label>
+          <input type="radio" id="star2" name="feedback[rating]" value="2" />
+          <label for="star2" title="2 stars">★</label>
+          <input type="radio" id="star1" name="feedback[rating]" value="1" />
+          <label for="star1" title="1 star">★</label>
+          <div class="invalid-feedback">Please add a title!</div>
         </div>
+
+        <!-- <label for="user-name" data-aos="zoom-out-down" data-aos-duration="1200" data-aos-delay="200">Your Name:</label> -->
+        <input
+          type="text"
+          id="name"
+          name="feedback[name]"
+          class="feedback-name form-control"
+          placeholder="Enter your name here."
+        />
+
+        <!-- <label for="comment">Leave your comment: </label> -->
+        <textarea
+          id="comment"
+          name="feedback[comment]"
+          class="feedback-comment form-control"
+          placeholder="Enter your comment here...."
+          required
+        ></textarea>
+
+        <div class="feed-buttons">
+          <button id="close-button" class="close-button btn btn-secondary">
+            Close
+          </button>
+          <button
+            type="submit"
+            class="submit-button btn btn-danger"
+            data-aos="zoom-out-down"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
     </div>
+  </div>
 </footer>
 
 <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+  document.getElementById("year").textContent = new Date().getFullYear();
+  // Visitor counter functionality
+  function getVisitorCount() {
+    return localStorage.getItem("visitorCount") || 0;
+  }
+
+  function incrementVisitorCount() {
+    let count = parseInt(getVisitorCount()) + 1;
+    localStorage.setItem("visitorCount", count);
+    return count;
+  }
+
+  function displayVisitorCount() {
+    const counterElement = document.querySelector(".website-counter");
+    const count = incrementVisitorCount();
+    counterElement.textContent = count;
+  }
+
+  document.addEventListener("DOMContentLoaded", displayVisitorCount);
 </script>
