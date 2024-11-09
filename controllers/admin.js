@@ -189,3 +189,32 @@ module.exports.deleteFeedback = async (req, res) => {
       res.status(500).send('Error deleting user: ' + error.message);
   }
 };
+
+module.exports.displayFeedback = async(req, res) => {
+  try {
+    const feedback = await Feedback.findById(req.params.id);
+    if (!feedback) {
+        req.flash('error', 'Feedback not found.');
+        return res.redirect('/admin/feedbacks');
+    }
+    
+    // Toggle the display field
+    feedback.display = !feedback.display;
+    await feedback.save();
+    
+    // req.flash('success', `Feedback display set to ${feedback.display ? 'true' : 'false'}.`);
+
+    if(feedback.display){
+      req.flash('success', "This feedback displayed now in user end!");
+    }
+    else{
+      req.flash('success', "This feedback is hide now in user end!");
+    }
+
+    res.redirect('/admin/feedbacks');
+} catch (err) {
+    console.error(err);
+    req.flash('error', 'Could not toggle for display the feedback, try again latter!');
+    res.redirect('/admin/feedbacks');
+}
+}
