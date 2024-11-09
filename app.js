@@ -25,7 +25,7 @@ const { isLoggedIn, isAdmin } = require("./middlewares/middleware.js");
 const {saveRedirectUrl}=require("./middlewares/middleware.js");
 const {isOwner,isAuthor}=require("./middlewares/middleware.js");
 const {index, newpost, createpost, editpost, saveEditpost,search, deletepost, showPost, bookinfFt, signup, likeListing }=require("./controllers/listing.js");
-const { dashboard, showuser, deleteUser, deleteListing, viewIndividualListing, viewListingReview, adminListEditRender, adminSaveEditList, showFeedbacks, deleteFeedback } = require("./controllers/admin.js")
+const { dashboard, showuser, deleteUser, deleteListing, viewIndividualListing, viewListingReview, adminListEditRender, adminSaveEditList, showFeedbacks, deleteFeedback, displayFeedback } = require("./controllers/admin.js")
 const { signupRender, siggnedUp, logout, forgotPassword, passwordResetLink, resetPasswordTokenGet, resetPasswordTokenPatch, updatePasswordGet, updatePasswordPost } = require("./controllers/user.js")
 const { viewProfile, profileGet, profilePost } = require("./controllers/profile.js");
 const { contactPage, aboutPage, termsPage, privacyPage, contributors } = require("./controllers/others.js")
@@ -138,6 +138,9 @@ app.put('/admin/listing/edit/:id',isLoggedIn, isAdmin, upload.array('listing[ima
 app.get('/admin/feedbacks', isLoggedIn, isAdmin, asyncwrap(showFeedbacks));
 
 app.delete('/admin/feedbacks/:id',isLoggedIn, isAdmin, asyncwrap(deleteFeedback));
+
+app.post('/admin/feedbacks/:id/toggleDisplay', isLoggedIn, isAdmin, asyncwrap(displayFeedback));
+
 
 // ADMIN
 // ADMIN
