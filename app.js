@@ -25,7 +25,7 @@ const { isLoggedIn, isAdmin } = require("./middlewares/middleware.js");
 const {saveRedirectUrl}=require("./middlewares/middleware.js");
 const {isOwner,isAuthor}=require("./middlewares/middleware.js");
 const {index, newpost, createpost, editpost, saveEditpost,search, deletepost, showPost, bookinfFt, signup, likeListing, topListings }=require("./controllers/listing.js");
-const { dashboard, showuser, deleteUser, deleteListing, viewIndividualListing, viewListingReview, adminListEditRender, adminSaveEditList, showFeedbacks, deleteFeedback, displayFeedback } = require("./controllers/admin.js");
+const { dashboard, showuser, deleteUser, deleteListing, viewIndividualListing, viewListingReview, deleteListingReview, adminListEditRender, adminSaveEditList, showFeedbacks, deleteFeedback, displayFeedback } = require("./controllers/admin.js");
 const { signupRender, siggnedUp, logout, forgotPassword, passwordResetLink, resetPasswordTokenGet, resetPasswordTokenPatch, updatePasswordGet, updatePasswordPost } = require("./controllers/user.js")
 const { viewProfile, profileGet, profilePost } = require("./controllers/profile.js");
 const { contactPage, aboutPage, termsPage, privacyPage, contributors } = require("./controllers/others.js");
@@ -131,6 +131,7 @@ app.delete('/admin/listing/:id',isLoggedIn, isAdmin, asyncwrap(deleteListing));
 app.get('/admin/listing/:id',isLoggedIn, isAdmin,asyncwrap(viewIndividualListing));
 
 app.get('/admin/reviews/:id',isLoggedIn, isAdmin,asyncwrap(viewListingReview));
+app.delete('/admin/listing/:id/reviews/:reviewId',isLoggedIn, isAdmin, asyncwrap(deleteListingReview));
 
 app.get('/admin/listing/edit/:id',isLoggedIn, isAdmin, asyncwrap(adminListEditRender));
 
