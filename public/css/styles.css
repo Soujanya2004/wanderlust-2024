@@ -913,7 +913,7 @@ font-size: 0.8rem !important;
 
   #air_bnb:hover,.navbar-nav .hight-light:hover {
     color: white !important;
-    background-color: #fe002f !important;
+    background-color: #FF5A5F !important;
     box-shadow: 2px 2px 5px rgba(255, 56, 92, 0.3);
     transform: scale(1.01);
   }
