@@ -136,18 +136,7 @@ app.get('/listing/:id/booking', async (req, res) => {
       res.render('booking', { list: list });
   });
 
-//update listing admin
-
-app.put('/admin/listing/edit/:id',isLoggedIn, isAdmin, upload.array('listing[image]',10), async (req, res) => {
-  const { id } = req.params;
-  const { title, description, price, location, country, tags } = req.body.listing;
-  
-  try {
-    if (!req.body.listing) {
-      req.flash('error', ERROR_SEND_VALID_DATA);
-      return res.redirect(`/admin/listing/edit/${id}`);
-  }
-
+//ADMIN
 app.delete('/admin/user/:id',isLoggedIn, isAdmin, asyncwrap(deleteUser));
 
 app.delete('/admin/listing/:id',isLoggedIn, isAdmin, asyncwrap(deleteListing));
