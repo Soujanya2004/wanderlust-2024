@@ -25,6 +25,10 @@ const { isLoggedIn, isAdmin } = require("./middlewares/middleware.js");
 const {saveRedirectUrl}=require("./middlewares/middleware.js");
 const {isOwner,isAuthor}=require("./middlewares/middleware.js");
 const {index, newpost, createpost, editpost, saveEditpost,search, deletepost, showPost, signup}=require("./controllers/listing.js");
+const { dashboard, showuser, deleteUser, deleteListing, viewIndividualListing, viewListingReview, adminListEditRender, adminSaveEditList } = require("./controllers/admin.js")
+const { signupRender, siggnedUp, logout, forgotPassword, passwordResetLink, resetPasswordTokenGet, resetPasswordTokenPatch, updatePasswordGet, updatePasswordPost } = require("./controllers/user.js")
+const { viewProfile, profileGet, profilePost } = require("./controllers/profile.js");
+const { contactPage, aboutPage, termsPage, privacyPage, contributors } = require("./controllers/others.js")
 const { deleteReview, reviewPost } = require("./controllers/reviews.js");
 const feedbackController = require('./controllers/feedback');
 
@@ -32,9 +36,6 @@ const feedbackController = require('./controllers/feedback');
 
 const cors = require('cors');
 const { contactUsController } = require("./controllers/contactUs.js");
-const cloudinary = require('cloudinary').v2;
-const sendMail = require("./mail/template/forgotpassword.js");
-const crypto = require('crypto');
 
 app.use(cors({
   origin: 'http://your-frontend-domain.com',
@@ -115,113 +116,10 @@ app.use((req, res, next) => {
 // ADMIN
 // ADMIN
 
+app.get('/admin/dashboard',isLoggedIn ,isAdmin, asyncwrap(dashboard));
 
-app.get('/admin/dashboard',isLoggedIn ,isAdmin, async (req, res) => {
-  try {
-    const listings = await listing.find().populate('owner');;
-    // console.log(listings.owner);
-    res.render('adminDashboard', { listings });
-  } catch (error) {
-      console.error('Error fetching listings:', error);
-      res.status(500).send('Internal Server Error');
-  }
-});
+app.get('/admin/users',isLoggedIn ,isAdmin, asyncwrap(showuser));
 
-
-//manage users
-app.get('/admin/users',isLoggedIn ,isAdmin, async (req, res) => {
-  try {
-    const users = await User.find();
-    // console.log(users);
-    res.render('manageUser', { users });
-  } catch (error) {
-      console.error('Error fetching Users:', error);
-      res.status(500).send('Internal Server Error');
-  }
-});
-
-//route to delete users
-app.delete('/admin/user/:id',isLoggedIn, isAdmin, async (req, res) => {
-  try {
-    // console.log("Deleting user with ID:", req.params.id);
-      await User.findByIdAndDelete(req.params.id);
-      req.flash('success', 'User deleted!');
-      res.redirect('/admin/users');
-  } catch (error) {
-      res.status(500).send('Error deleting user: ' + error.message);
-  }
-});
-
-// Route to DELETE listings
-app.delete('/admin/listing/:id',isLoggedIn, isAdmin, async (req, res) => {
-  try {
-    // console.log("Deleting listing with ID:", req.params.id);
-      await listing.findByIdAndDelete(req.params.id);
-      req.flash('success', 'Listing deleted!');
-      res.redirect('/admin/dashboard');
-  } catch (error) {
-      res.status(500).send('Error deleting listing: ' + error.message);
-  }
-});
-
-
-// View manage listing from admin dashboard
-app.get('/admin/listing/:id',isLoggedIn, isAdmin, async (req, res) => {
-  try {
-    const {id}=req.params;
-    // console.log(id);
-    const list = await listing.findById(id);
-    // console.log(list);
-    if (!list) {
-        return res.status(404).send('Listing not found');
-    }
-    res.render('view_manage_listing.ejs', { list }); // Create a new view file called show.ejs or similar
-} catch (err) {
-    res.status(500).send(err.message);
-}
-});
-
-// View listing's reviews from admin dashboard
-app.get('/admin/reviews/:id',isLoggedIn, isAdmin, async (req, res) => {
-  try {
-    const {id}=req.params;
-    // console.log(id);
-    const list = await listing.findById(id).populate({
-      path: 'reviews',
-      populate: {
-          path: 'author'
-      }
-  })
-  .populate('owner');
-
-    // console.log(list.reviews[0].author.username);
-
-    if (!list) {
-        return res.status(404).send('Listing not found');
-    }
-    res.render('view_reviews.ejs', { list }); // Create a new view file called show.ejs or similar
-} catch (err) {
-    res.status(500).send(err.message);
-}
-});
-
-
-// Render show edit form
-app.get('/admin/listing/edit/:id',isLoggedIn, isAdmin, async (req, res) => {
-  const tags = ["Trending", "Surfing", "Amazing cities", "Beach", "Farms", "Lake", "Castles", "Rooms", "Forest", "Pool"];
-  try {
-    // console.log(req.params.id);
-    const list = await listing.findById(req.params.id);
-    // console.log(list);
-    if (!list){
-      return res.status(404).send("Listing not found");
-    }
-    res.render('edit_list_admin', { list , tags});
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("Server error");
-  }
-});
 
 // Booking page
 app.get('/listing/:id/booking', async (req, res) => {
@@ -250,47 +148,18 @@ app.put('/admin/listing/edit/:id',isLoggedIn, isAdmin, upload.array('listing[ima
       return res.redirect(`/admin/listing/edit/${id}`);
   }
 
-    // Find the listing by ID
-    const up_listing = await listing.findById(id);
+app.delete('/admin/user/:id',isLoggedIn, isAdmin, asyncwrap(deleteUser));
 
-    // Update the fields
-    up_listing.title = title;
-    up_listing.description = description;
-    up_listing.price = price;
-    up_listing.location = location;
-    up_listing.country = country;
+app.delete('/admin/listing/:id',isLoggedIn, isAdmin, asyncwrap(deleteListing));
 
-    // Update tags - set to empty array if no tags are selected
-    let tagArray = [];
-      if (tags) {
-        if (Array.isArray(tags)) {
-          tagArray = tags.map(tag => tag.trim());
-        } else if (typeof tags === 'string') {
-            tagArray = tags.split(',').map(tag => tag.trim());
-        }
-      }
-    up_listing.tags = tagArray;
 
-    // Check if new images are uploaded
-    if (req.files && req.files.length > 0) {
-      // If new images are provided, replace the old ones (you may adjust this to add instead of replace)
-      up_listing.image = req.files.map(file => ({
-        url: file.path,
-        filename: file.filename
-      }));
-    }
+app.get('/admin/listing/:id',isLoggedIn, isAdmin,asyncwrap(viewIndividualListing));
 
-    // Save the updated listing
-    await up_listing.save();
+app.get('/admin/reviews/:id',isLoggedIn, isAdmin,asyncwrap(viewListingReview));
 
-    // Redirect to the admin dashboard or listing page after the update
-    res.redirect(`/admin/dashboard`);
-  } catch (error) {
-    console.error("Error updating listing:", error);
-    res.status(500).send("Error updating listing.");
-  }
-});
+app.get('/admin/listing/edit/:id',isLoggedIn, isAdmin, asyncwrap(adminListEditRender));
 
+app.put('/admin/listing/edit/:id',isLoggedIn, isAdmin, upload.array('listing[image]',10), asyncwrap(adminSaveEditList));
 // ADMIN
 // ADMIN
 
@@ -303,125 +172,35 @@ app.get("/", asyncwrap(async (req,res) => {
   
 })); 
 
-app.get("/contact",  (req, res) => {
-	try {
-		res.render("contact");
-	} catch (err) {
-		console.error(err);
-		res.status(500).send("Internal Server Error");
-	}
-}); 
-
+// Others page
+app.get("/contact", contactPage);
 app.post("/contact", asyncwrap(contactUsController));
+app.get('/about',asyncwrap (aboutPage));
+app.get('/terms', asyncwrap(termsPage));
+app.get('/privacy', asyncwrap(privacyPage));
+app.get('/contributors', asyncwrap(contributors));
 
-//About us page
-app.get('/about',asyncwrap ( async (req, res) => {
-  try {
-    res.render('about');
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Internal Server Error');
-  }
-}));
-
-// Terms and conditions page
-app.get('/terms', asyncwrap(async (req, res) => {
-  try {
-    res.render('terms');
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Internal Server Error');
-  }
-}));
-
-// Privacy policy page
-app.get('/privacy', asyncwrap(async (req, res) => {
-  try {
-    res.render('privacy');
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Internal Server Error');
-  }
-}));
-
-// CONTRIBUTORS
-app.get('/contributors', asyncwrap(async (req, res) => {
-  try {
-    res.render("contributors.ejs");
-  } catch (err) {
-    console.error("Error fetching contributors:", err);
-    req.flash("error", err);
-    return res.redirect("/listing");
-  }
-}));
-
-// API
-// Signup
-app.get("/signup", asyncwrap(async (req, res) => {
-  res.render("signup.ejs");
-}));
-
-app.post('/signup', asyncwrap(async (req, res, next) => {
-  const { username, email, password, cnfPassword } = req.body;
-
-  if (!username || !password || !cnfPassword ) {
-    req.flash('error', 'All the fields are required');
-    return res.redirect('/signup'); // Return to ensure single response
-  }
-
-  if(password !== cnfPassword){
-    req.flash('error', 'Both password value should be same!');
-    return res.redirect('/signup');
-  }
-
-  try {
-    const newUser = new User({ username, email });
-    await User.register(newUser, password); 
-    req.login(newUser, (err) => {
-      if (err) {
-        req.flash('error', 'Login failed.');
-        return res.redirect('/signup'); // Return here to prevent further execution
-      }
-      req.flash('success', 'Welcome! Account created successfully.');
-      return res.redirect('/listing'); // Return here for single response
-    });
-  } catch (err) {
-    req.flash('error', err.message);
-    return res.redirect('/signup'); // Return to ensure single response
-  }
-}));
-
-// Login Route: Ensure return after authentication
-app.route("/login")
-.get( asyncwrap ((req,res) =>{
-  res.render("login.ejs");
-}))
-.post(
-  saveRedirectUrl,
-  passport.authenticate("local", {
-  failureRedirect: "/login",
-  failureFlash: true
-}), (req, res) => {
-  req.flash("success", "Welcome back to wanderlust!");
-  //admin login
-  if(req.user.isAdmin) {
-    req.flash("success","Welcome back to wanderlust! You are an admin.");
-    res.redirect("/admin/dashboard");
-  }
-  let redirect=res.locals.redirectUrl||"/listing";  
-  res.redirect(redirect); // Redirect to a route that will display the message
-});
-  
- 
-  app.get("/logout", (req, res, next) => {
-    req.logout((err) => {
-      if (err) {
-        return next(err); // Passes error to next middleware if logout fails
-      }
-      req.flash("success", "You logged out successfully!");
-      return res.redirect("/listing"); // Return to ensure single response
-    });
+  // Login Route: Ensure return after authentication
+  app.route("/login")
+  .get( asyncwrap ((req,res) =>{
+    res.render("login.ejs");
+  }))
+  .post(
+    saveRedirectUrl,
+    passport.authenticate("local", {
+    failureRedirect: "/login",
+    failureFlash: true
+  }), (req, res) => {
+    req.flash("success", "Welcome back to wanderlust!");
+    //admin login
+    if(req.user.isAdmin) {
+      req.flash("success","Welcome back to wanderlust! You are an admin.");
+      res.redirect("/admin/dashboard");
+    }
+    let redirect=res.locals.redirectUrl||"/listing";  
+    res.redirect(redirect); // Redirect to a route that will display the message
   });
+
 
 
   app.get('/forgot-password', (req, res) => {
@@ -552,75 +331,30 @@ app.route("/login")
     }
   });
 
+app.get("/signup", asyncwrap(signupRender))
+  
+app.post('/signup', asyncwrap(siggnedUp))
 
-// Profile page
-app.get('/profile', isLoggedIn, asyncwrap(async (req, res) => {
-  const user = await User.findById(req.user._id);
-  res.render('profile', { user });
-}));
+app.get("/logout", (logout));
 
-app.get("/profile/edit", isLoggedIn, async (req, res) => {
-  try {
-    const user = await User.findById(req.user._id);
-    res.render('editprofile', { user });
-  } catch (err) {
-    console.error("Error loading profile edit form:", err);
-    res.status(500).send("Error loading profile edit form.");
-  }
-});
+app.get('/forgot-password', forgotPassword);
 
-app.post('/profile/edit', isLoggedIn, upload.single("profileimage"), async (req, res) => {
-  try {
-    const { username, email, deleteProfile } = req.body;
+app.post('/resetlink-password', passwordResetLink);
 
-    // Find the user by ID
-    const user = await User.findById(req.user._id);
 
-    // Update fields only if they are provided in the request
-    if (username) user.username = username;
-    if (email) user.email = email;
+app.get('/resetPassword/:token', resetPasswordTokenGet);
 
-    // Update profile picture only if a new file is uploaded
-    if(req.body.deleteProfile){
-      user.profilePicture = {
-        purl: null,
-        pfilename: null
-      }   
-      // Clodinary destroyer to delete that image from cloud storage space also. 
-      let filename = req.body.deleteProfile;
-      await cloudinary.uploader.destroy(filename);
-    } 
-    else if (req.file) {
-      user.profilePicture = {
-        purl: req.file.path,
-        pfilename: req.file.filename
-      };
-    }
+app.patch("/resetPassword/:token", resetPasswordTokenPatch);
 
-    // Save the updated user document
-    await user.save();
+app.get('/user/updatePass', isLoggedIn, updatePasswordGet);
 
-    // Stay logged in after change profile details.
-    req.login(user, (err) => {
-      if (err) {
-        req.flash('error', 'Login failed.');
-        return res.redirect('/login'); // Return here to prevent further execution
-      }
-      req.flash("success", "Profile updated successfully!");
-      return res.redirect('/profile'); // Redirect after successful update
-    });
+app.post('/user/updatePass', isLoggedIn, updatePasswordPost);
 
-  } catch (err) {
-    // Handeling special error for network delay or slow network.
-    if (err.name === 'TimeoutError') {
-      console.error("Cloudinary Timeout Error:", err);
-      req.flash("error", "Image not deleted due to network issue! Try again later!");
-    }
-    req.flash("error", "Something went wrong! Maybe this username or email already exists!");
-    return res.redirect('/profile/edit');
-  }
-});
 
+// Profile
+app.get('/profile', isLoggedIn, asyncwrap(viewProfile));
+app.get("/profile/edit", isLoggedIn, profileGet);
+app.post('/profile/edit', isLoggedIn, upload.single("profileimage"), profilePost);
 
 // Listing controller
 const listingController = require('./controllers/listing.js');
