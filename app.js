@@ -24,7 +24,7 @@ const User=require("./models/user.js");
 const { isLoggedIn, isAdmin } = require("./middlewares/middleware.js");
 const {saveRedirectUrl}=require("./middlewares/middleware.js");
 const {isOwner,isAuthor}=require("./middlewares/middleware.js");
-const {index, newpost, createpost, editpost, saveEditpost,search, deletepost, showPost, signup}=require("./controllers/listing.js");
+const {index, newpost, createpost, editpost, saveEditpost,search, deletepost, showPost, signup, likeListing }=require("./controllers/listing.js");
 const { dashboard, showuser, deleteUser, deleteListing, viewIndividualListing, viewListingReview, adminListEditRender, adminSaveEditList } = require("./controllers/admin.js")
 const { signupRender, siggnedUp, logout, forgotPassword, passwordResetLink, resetPasswordTokenGet, resetPasswordTokenPatch, updatePasswordGet, updatePasswordPost } = require("./controllers/user.js")
 const { viewProfile, profileGet, profilePost } = require("./controllers/profile.js");
@@ -368,6 +368,7 @@ app.get("/listing/:id/edit", isLoggedIn, isOwner, asyncwrap(editpost));
 app.put('/listing/:id', isLoggedIn, isOwner, upload.array('listing[image]', 10), asyncwrap(saveEditpost));
 app.delete("/listing/:id", isLoggedIn, isOwner, asyncwrap(deletepost));
 app.get("/listing/:id", asyncwrap(showPost));
+app.post('/listing/:id/like', isLoggedIn, asyncwrap(listingController.likeListing));    
 
 // Feedback
 app.post("/feedback", isLoggedIn, asyncwrap(feedbackController.feedbackPost));
