@@ -163,14 +163,14 @@
                         <% tags.forEach(tag => { %>
                             <div class="indi-filter">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="listing[tags]" id="tag<%= tag %>" value="<%= tag %>">
+                                    <input class="form-check-input tag-checkbox" type="checkbox" name="listing[tags]" id="tag<%= tag %>" value="<%= tag %>">
                                     <label class="form-check-label" for="tag<%= tag %>"><%= tag %></label>
                                 </div>
-                            </div> 
+                            </div>
                         <% }) %>
                         </div>
+                        <small class="form-text tag-alert">Maximum 3 tags are allowed!</small>
                     </div>
-                <br>
                 <button class="btn btn-danger" name="saveButton" type="submit">ADD</button>
                 <br><br>
             </form>
