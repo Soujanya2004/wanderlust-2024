@@ -1,5 +1,6 @@
 const listing = require("../models/listing.js");
 const User=require("../models/user.js");
+const Feedback=require("../models/feedback.js");
 
 
 
@@ -162,3 +163,29 @@ module.exports.adminListEditRender = async (req, res) => {
     }
   };
   
+  // Route for show all the feedback
+  module.exports.showFeedbacks = async (req, res) => {
+    try {
+      const feedbacks = await Feedback.find();
+      // console.log(users);
+      res.render('manageFeedback', { feedbacks });
+    } catch (error) {
+        console.error('Error fetching Users:', error);
+        res.status(500).send('Internal Server Error');
+    }
+  };
+
+
+//route to delete feedback
+module.exports.deleteFeedback = async (req, res) => {
+  try {
+    // console.log("Deleting user with ID:", req.params.id);
+      await Feedback.findByIdAndDelete(req.params.id);
+      req.flash('success', 'Feedback deleted successfully!');
+      res.redirect('/admin/feedbacks');
+  } catch (error) {
+      req.flash('error', 'ERROR in delete feedback operation! Try again latter.');
+      res.redirect('/admin/feedbacks');
+      res.status(500).send('Error deleting user: ' + error.message);
+  }
+};
