@@ -25,6 +25,7 @@
   .hero-section h1, .hero-section p {
     text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7); /* Added text shadow for better readability */
   }
+
   .highlight-button {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Subtle shadow for the button */
   }
@@ -44,8 +45,6 @@
     .destination-card:hover {
       transform: scale(1.05);
     }
-  </style>
-  
 </head>
 <body>
   <div class="hero-section text-white">
@@ -128,7 +127,7 @@
     </div>
   </div>
 
-<<<<<<< Updated upstream
+
   <!-- Listings -->
   <div class="container my-4">
     <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2 gx-3"> <!-- Changed row-col-3 to row-cols-3 and removed row-cols-xs-1 -->
@@ -140,14 +139,15 @@
                   <img src="<%= listing.image[0].url %>" class="card-img-top" alt="listing_image" />
             <% } %>           
             <div class="card-body">
-              <h4 class="card-title">
+              <h4 class="card-title list-title">
                 <%= listing.title.length > 26 ? listing.title.substring(0, 25) + '....' : listing.title %>
               </h4>    
-              <p class="mt-3">
-                <span class="price" data-base-price="<%= listing.price %>"><%= listing.price.toLocaleString("en-IN") %></span> / night 
+              <p class="mt-3 pppp">
+                <span class="price" data-base-price="<%= listing.price %>"><%= listing.price.toLocaleString("en-IN") %></span> 
+                <span class="nightt">/ night</span> 
                 <span class="gst-label">(excl. GST)</span>
               </p>
-              <p>❤️: <%= listing.likes %></p>
+              <p>❤️: <span class="likes"><%= listing.likes %></span></p>
               <p class="card-text location"><i class="fa-solid fa-location-crosshairs"></i>&nbsp; <%= listing.location %>, <%= listing.country %></p>
               <!-- ADDING TAGS -->
               <a href="/listing/<%= listing._id %>" class="btn btn-dark show_btn">Show in Detail</a><% listing.tags.forEach(tag => { %>
@@ -174,7 +174,7 @@
     <div class="contact-info">
       <span><i class="fas fa-envelope"></i> Got any questions?</span>
       <a href="mailto:support@wanderlust.com">support@wanderlust.com</a>
-=======
+
   <div class="container mx-auto px-4 py-16">
     <h2 class="text-3xl md:text-4xl font-bold mb-8">Explore Unforgettable Destinations</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
@@ -206,7 +206,7 @@
           <p class="text-gray-700">Explore the stunning natural beauty and vibrant culture of Iceland.</p>
         </div>
       </a>
->>>>>>> Stashed changes
+
     </div>
   </div>
 
@@ -220,7 +220,50 @@
     </div>
   </div>
 
-  
+    if (gstToggle.checked) {
+      // Show GST
+      priceElement.innerText = totalPrice.toLocaleString("en-IN", { style: "currency", currency: "INR" });
+      gstLabels[index].innerText = "(incl. GST)";
+      gstLabels[index].classList.remove("normal-text"); // Add red color
+      gstLabels[index].classList.add("red-text"); // Add red color
+    } else {
+      // without GST
+      priceElement.innerText = basePrice.toLocaleString("en-IN", { style: "currency", currency: "INR" });
+      gstLabels[index].innerText = "(excl. GST)";
+      gstLabels[index].classList.remove("red-text"); // Add red color
+      gstLabels[index].classList.add("normal-text"); // Add red color
+    }
+  });
+}
+
+// Initialize with base prices
+document.addEventListener("DOMContentLoaded", toggleGST);
+</script>
+
+<script>
+  const filters = document.getElementById('filters');
+  const leftButton = document.querySelector('.left');
+  const rightButton = document.querySelector(".right");
+
+  function scrollLeft() {
+    filters.scrollBy({
+      left: -200,  // Scroll left by 200px
+      behavior: 'smooth'
+    });
+  }
+
+  function scrollRight() {
+    filters.scrollBy({
+      left: 200,  // Scroll right by 200px
+      behavior: 'smooth'
+    });
+  }
+
+leftButton.addEventListener('click',scrollLeft);
+rightButton.addEventListener('click',scrollRight);
+
+</script>
+
 
   <script>
     document.querySelectorAll('.faq-item').forEach(item => {

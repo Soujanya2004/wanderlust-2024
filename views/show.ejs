@@ -408,7 +408,11 @@
                                             <div class="heading">
                                                 <h4 class="card-title">
                                                     <% if (review.author && review.author.profilePicture && review.author.profilePicture.purl) { %>
-                                                        <img id="review_logo" src="<%=review.author.profilePicture.purl%>" alt="Reviewer" class="reviewer-profile n-review-profile">
+                                                        <% 
+                                                            let normalReviewerProfile = review.author.profilePicture.purl;
+                                                            let lowResReviewerProfile = normalReviewerProfile.replace("/upload", "/upload/q_auto,e_blur:50,w_250,h_250");
+                                                        %>
+                                                        <img id="review_logo" src="<%=lowResReviewerProfile%>" alt="Reviewer" class="reviewer-profile n-review-profile">
                                                     <% } else { %>
                                                         <img id="review_logo" src="/profile.png" alt="Reviewer" class="reviewer-profile n-review-profile">
                                                     <% } %>
