@@ -147,3 +147,29 @@ const tagAlert = document.querySelector('.tag-alert');
             }
         });
     });
+
+
+// Set limi of 4 max file upload
+// Maximum number of files allowed
+const maxFiles = 4;
+    
+// Get input and error message elements
+const listingImageInput = document.getElementById('fileInput');
+const fileError = document.getElementById('fileError');
+
+// Listen for changes on the file input
+listingImageInput.addEventListener('change', function() {
+    // Check the number of files selected
+    if (this.files.length > maxFiles) {
+        // Display error message
+        fileError.classList.remove("nomal-error");
+        fileError.classList.add("alert-error");
+        
+        // Clear the input field to reset file selection
+        this.value = '';
+    } else {
+        // Clear error message if file count is within the limit
+        fileError.classList.remove("alert-error");
+        fileError.classList.add("nomal-error");
+    }
+});

@@ -961,3 +961,14 @@ font-size: 0.8rem !important;
       text-wrap: nowrap;
     }
   }
+#fileError{
+
+}
+
+.nomal-error{
+  color: inherit !important;
+}
+
+.alert-error{
+  color: #ff002f !important;
+}

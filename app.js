@@ -228,7 +228,7 @@ const bookingController = require('./controllers/booking.js');
 app.get("/listing/new", isLoggedIn, asyncwrap(listingController.newpost));
 // Listing routes
 app.get("/listing", asyncwrap(index));
-app.post("/listing", upload.array('listing[image]', 10), isLoggedIn, asyncwrap(createpost));
+app.post("/listing", upload.array('listing[image]', 4), isLoggedIn, asyncwrap(createpost));
 app.post("/listing/search", asyncwrap(search));
 app.get("/listing/:id/edit", isLoggedIn, isOwner, asyncwrap(editpost));
 app.put('/listing/:id', isLoggedIn, isOwner, upload.array('listing[image]', 10), asyncwrap(saveEditpost));

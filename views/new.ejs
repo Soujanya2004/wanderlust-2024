@@ -123,7 +123,7 @@
                     <label for="images" class="form-label">Upload Images</label>
                     <input type="file" name="listing[image]" class="form-control" id="fileInput" multiple required>
                     <div class="invalid-feedback">Please upload at least one image!</div>
-                    <small class="form-text text-muted">You can upload multiple images.</small>
+                    <small class="form-text text-muted">You can upload multiple <images id="fileError" class="">(Maximum 4)</images></small>
                     <div class="valid-feedback">Looks good!</div>
                 </div>
             
@@ -179,18 +179,25 @@
 
     <!-- JS for image preview -->
     <script>
+        const filesMax = 4; // Maximum allowed files
         const fileInput = document.getElementById("fileInput");
         const fileList = []; // Array to hold selected files
 
         fileInput.addEventListener("change", function (event) {
         const files = Array.from(event.target.files);
-        
-        // Add new files to the fileList
-        fileList.push(...files);
+        if (files.length + fileList.length > filesMax) {
+            fileList.length = 0; // Clear the file list array
+            displayPreview(); // Clear the preview display
+        }
+        else{
+            // Add new files to the fileList
+            fileList.push(...files);
 
-        // Display preview and update the file input to include all selected files
-        displayPreview();
-        updateFileInput();
+            // Display preview and update the file input to include all selected files
+            displayPreview();
+            updateFileInput();
+        }
+        
         });
 
         function displayPreview() {
