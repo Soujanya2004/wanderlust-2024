@@ -176,23 +176,6 @@ listingImageInput.addEventListener('change', function() {
 
 
 
-// // Set the descriptiopn limit
-// const description = document.querySelector("#list-description");
-// const desError = document.querySelector("#des-error");
-// description.addEventListener("change", function(){
-//   if(description.value.length >= 1000){
-//     desError.classList.remove("nomal-error");
-//     desError.classList.add("alert-error");
-//     description.value = "";
-//   }
-//   else{
-//     desError.classList.remove("alert-error");
-//     desError.classList.add("nomal-error");
-//   }
-// })
-
-
-
 // Set the description limit
 const description = document.querySelector("#list-description");
 const desError = document.querySelector("#des-error");
