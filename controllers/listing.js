@@ -98,6 +98,12 @@ module.exports.search = async (req, res) => {
         // Destructure the properties from req.body.listing, including tags
         const { title, description, price, country, location, tags } = req.body.listing;
 
+        //Description limit
+        if(description.length > 1000){
+            req.flash("error", "Maximum 1000 charecters allowed!");
+            return res.redirect("/listing/new");
+        }
+
         // Ensure tags is an array (if it's a comma-separated string, split it)
         let tagArray = [];
         if (tags) {
