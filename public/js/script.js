@@ -173,3 +173,26 @@ listingImageInput.addEventListener('change', function() {
         fileError.classList.add("nomal-error");
     }
 });
+
+
+
+// Set the description limit
+const description = document.querySelector("#list-description");
+const desError = document.querySelector("#des-error");
+const maxChars = 1000;
+
+description.addEventListener("input", function() {
+    const currentLength = description.value.length;
+
+    if (currentLength > maxChars) {
+        // Limit the description to the maximum allowed characters
+        description.value = description.value.substring(0, maxChars);
+        desError.textContent = "You have reached the 1000-character limit!";
+        desError.classList.add("alert-error");
+        desError.classList.remove("normal-error");
+    } else {
+        desError.textContent = `Maximum ${maxChars} characters!`;
+        desError.classList.remove("alert-error");
+        desError.classList.add("normal-error");
+    }
+});
