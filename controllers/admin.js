@@ -2,6 +2,9 @@ const listing = require("../models/listing.js");
 const review = require("../models/reviews.js");
 const User=require("../models/user.js");
 const Feedback=require("../models/feedback.js");
+const mbxgeocoding = require('@mapbox/mapbox-sdk/services/geocoding'); 
+const maptoken = process.env.MAP_TOKEN;
+const geocodingClient = mbxgeocoding({ accessToken: maptoken });
 
 
 
@@ -121,56 +124,71 @@ module.exports.adminListEditRender = async (req, res) => {
   };
   
   
-  //update listing admin
- module.exports.adminSaveEditList = async (req, res) => {
-    const { id } = req.params;
-    const { title, description, price, location, country, tags } = req.body.listing;
-    
-    try {
-      if (!req.body.listing) {
-        req.flash('error', ERROR_SEND_VALID_DATA);
-        return res.redirect(`/admin/listing/edit/${id}`);
-    }
+// update listing admin
+module.exports.adminSaveEditList = async (req, res) => {
+  const { id } = req.params;
+  const { title, description, price, location, country, tags } = req.body.listing;
   
+  try {
+      if (!req.body.listing) {
+          req.flash('error', ERROR_SEND_VALID_DATA);
+          return res.redirect(`/admin/listing/edit/${id}`);
+      }
+
       // Find the listing by ID
       const up_listing = await listing.findById(id);
-  
+
+      // Use the updated location from req.body.listing
+      const updatedLocation = location;
+
+      // Forward geocoding using Mapbox SDK
+      const geoData = await geocodingClient.forwardGeocode({
+          query: updatedLocation,
+          limit: 1
+      }).send();
+
+      // Extract updated geometry
+      const updatedGeometry = geoData.body.features[0].geometry;
+
       // Update the fields
       up_listing.title = title;
       up_listing.description = description;
       up_listing.price = price;
-      up_listing.location = location;
+      up_listing.location = updatedLocation;
       up_listing.country = country;
-  
+      up_listing.geometry = updatedGeometry;
+
       // Update tags - set to empty array if no tags are selected
       let tagArray = [];
-        if (tags) {
+      if (tags) {
           if (Array.isArray(tags)) {
-            tagArray = tags.map(tag => tag.trim());
+              tagArray = tags.map(tag => tag.trim());
           } else if (typeof tags === 'string') {
               tagArray = tags.split(',').map(tag => tag.trim());
           }
-        }
+      }
       up_listing.tags = tagArray;
-  
+
       // Check if new images are uploaded
       if (req.files && req.files.length > 0) {
-        // If new images are provided, replace the old ones (you may adjust this to add instead of replace)
-        up_listing.image = req.files.map(file => ({
-          url: file.path,
-          filename: file.filename
-        }));
+          // If new images are provided, replace the old ones
+          up_listing.image = req.files.map(file => ({
+              url: file.path,
+              filename: file.filename
+          }));
       }  
+
       // Save the updated listing
       await up_listing.save();
-  
+
       // Redirect to the admin dashboard or listing page after the update
       res.redirect(`/admin/dashboard`);
-    } catch (error) {
+  } catch (error) {
       console.error("Error updating listing:", error);
       res.status(500).send("Error updating listing.");
-    }
-  };
+  }
+};
+
   
   // Route for show all the feedback
   module.exports.showFeedbacks = async (req, res) => {

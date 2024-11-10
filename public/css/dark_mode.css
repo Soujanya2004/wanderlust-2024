@@ -142,13 +142,13 @@
         color: #ffffff;
     }
     .footer-left .contact-info i {
-        color: #a4a4a4;
+        color: #f3f3f3;
     }
     footer a {
-        color: #878787;
+        color: #ffffff;
     }
     footer a:hover {
-        color: #b5b5b5;
+        color: #ffffff;
     }
     .btw-foot{
         color: #a4a4a4;
@@ -168,6 +168,9 @@
         transition: color 0.3s ease-in-out;
     }
 
+    .contact-icon {
+        color: #c22121 !important;
+    }
     .footer-right h3{
         color: #f7f7f7;
     }

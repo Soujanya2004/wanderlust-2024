@@ -26,10 +26,110 @@
       background-color: #fafafa;
       border: 1px solid #ced4da;
   }
+     .search-bar button:hover {
+        background-color: #db5168f1;
+    }
+    
+     .navbar-nav .nav-link:hover {
+        color: rgb(255, 87, 34);
+    }
+    
 
-  .search-bar button:hover {
-      background-color: #db5168f1;
-  }
+    /* Explore link hover effect */
+     #explore:hover {
+        color:rgb(255, 87, 34);
+        transition: color 0.3s ease;
+    }
+
+    
+      @media (max-width: 991px) {
+        .navbar-collapse {
+            background-color: white;
+            transition: background-color 0.3s ease;
+            position: relative;
+            top: 2rem;
+            width: 100%;
+        }
+        .search-bar input {
+            margin-left:3.5rem;
+          }
+    }
+    
+
+     .footer-left .brand h2{
+      color: #000000;
+    }
+
+     .footer-left .brand p {
+      color: #000000;
+    }
+    
+     .footer-left .contact-info i {
+        color: #000000;
+      }
+      
+     .footer-left .contact-info p {
+    color: #000000;
+    }
+        
+     .footer-left .contact-info p a {
+        color: #000000;
+    }
+     .footer-middle h3,
+        .footer-right h3 {
+        color: #333;
+    }
+     .footer-middle ul li a,
+        .footer-right ul li a {
+        color: #666;
+        }
+        
+    .footer-middle ul li a,
+    .footer-right ul li a {
+    color: #666;
+    }
+
+    .footer-middle ul li a:hover,
+    .footer-right ul li a:hover {
+    color: #333;
+    }
+    
+    .footer-right h3 {
+        color: #333;
+    }
+    
+    .footer-right .social-media a {
+        color: #474747;
+    }
+    .footer-right .social-media a:hover {
+        color: #656565;
+      }
+      .copyright p {
+        color: #1f1f1f;
+      }
+      .card{
+        background-color: #e5e5e53d;
+        box-shadow: 0 8px 10px #b1b1b19e;
+      }
+      .card-img-overlay:hover{
+        background-color: rgb(255, 255, 255);
+    }     
+    .card-text{
+        color: black;
+    }
+
+    /* FAQ SECTION */
+    .faq-left {
+        background-color: #ffffff;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      }
+      
+    .faq-left h2 {
+        color: #333;
+    }
+    .faq-left p {
+        color: #666;
+      }
 
   .navbar-nav .nav-link:hover {
       color: #ff385c;
