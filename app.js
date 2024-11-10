@@ -112,6 +112,16 @@ app.use((req, res, next) => {
     let modifiedProfilePic = originalUrl.replace("/upload", "/upload/q_auto,e_blur:50,w_250,h_250");
     res.locals.profilePic = modifiedProfilePic;
   }
+
+  // List of routes that are publicly accessible
+  const publicRoutes = ["/login", "/signup", "/forgot-password", "/", "/about", "/contact", "/terms", "/privacy", "/listing", "/feedback", "/admin" ,"/admin/dashboard"];
+
+  // Redirect non-logged-in users trying to access private routes
+  if (!req.isAuthenticated() && !publicRoutes.includes(req.path)) {
+    req.flash("error", "Please sign in to continue.");
+    return res.redirect("/listing");
+  }
+
   next();
 });
 
