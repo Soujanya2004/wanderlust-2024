@@ -109,6 +109,12 @@ module.exports.search = async (req, res) => {
                 tagArray = tags.split(',').map(tag => tag.trim());
             }
         }
+
+        // Allowed to add only 3 tage maximum!
+        if(tagArray.length > 3){
+            req.flash("error", "Maximum 3 tags are allowed!");
+            return res.redirect("/listing/new");
+        }
         
         // Geocoding to get coordinates from location
         const geoData = await geocodingClient.forwardGeocode({
@@ -289,6 +295,12 @@ module.exports.saveEditpost = async (req, res) => {
             } else if (typeof tags === 'string') {
                 tagArray = tags.split(',').map(tag => tag.trim());
             }
+        }
+
+        // Allowed to add only 3 tage maximum!
+        if(tagArray.length > 3){
+            req.flash("error", "Maximum 3 tags are allowed!");
+            return res.redirect(`/listing/${id}/edit`);
         }
 
       // Update other fields

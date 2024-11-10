@@ -122,3 +122,28 @@ closeForm.addEventListener("click", (event) => {
   }, 200)
 })
 
+
+
+// Set limit of three to add tags for list
+const checkboxes = document.querySelectorAll('.tag-checkbox');
+const tagAlert = document.querySelector('.tag-alert');
+    const maxAllowed = 3;
+
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            // Count the number of checked boxes
+            const checkedCount = document.querySelectorAll('.tag-checkbox:checked').length;
+
+            if (checkedCount > maxAllowed) {
+                // Uncheck the current checkbox if the limit is reached
+                checkbox.checked = false;
+                // alert(`You can select up to ${maxAllowed} tags only.`);
+                tagAlert.classList.remove("normal-tag-alert");
+                tagAlert.classList.add("red-tag-alert");
+            } else {
+                // Hide the alert message if under the limit
+                tagAlert.classList.remove("red-tag-alert");
+                tagAlert.classList.add("normal-tag-alert");
+            }
+        });
+    });
