@@ -88,7 +88,16 @@
     margin-right: 0.5rem;
     transition: transform 0.3s ease;
 }
+.review-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 0.7rem;
+}
 
+@media (max-width: 768px) {
+    .review-card {
+        margin-bottom: 20px; /* Adjust spacing for smaller screens */
+    }
+}
 #review_logo:hover{
     transform: scale(1.2);
     cursor: pointer;
@@ -401,123 +410,60 @@
 
                 <!-- All Reviews -->
                 <!-- SHow Reviews -->
-                <hr>
-                    <div class="container">
-                        
-                        <% if (list.reviews.length == 0) { %>
-                            <h6>⭐ No review posted yet for this property.</h6>
-                        <% } %>
-                        <% if (list.reviews.length > 0) { %>
-                        <h4>🌟 All Reviews</h4>
-                        <div class="row mt-4">
-                            <% for (let i = 0; i < list.reviews.length; i++) { %>
-                                <% let review = list.reviews[i]; %>
-                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-3">
-                                    <div class="card review-card h-100 ms-0">
-                                        <div class="card-body d-flex flex-column">
-                                            <div class="heading">
-                                                <h4 class="card-title">
-                                                    <% if (review.author && review.author.profilePicture && review.author.profilePicture.purl) { %>
-                                                        <% 
-                                                            let normalReviewerProfile = review.author.profilePicture.purl;
-                                                            let lowResReviewerProfile = normalReviewerProfile.replace("/upload", "/upload/q_auto,e_blur:50,w_250,h_250");
-                                                        %>
-                                                        <img id="review_logo" src="<%=lowResReviewerProfile%>" alt="Reviewer" class="reviewer-profile n-review-profile">
-                                                    <% } else { %>
-                                                        <img id="review_logo" src="/profile.png" alt="Reviewer" class="reviewer-profile n-review-profile">
-                                                    <% } %>
-                            
-                                                    <% if (review.author) { %>
-                                                        <%= review.author.username %> <span style="font-size: 9px; opacity: 0.7;">owner</span>
-                                                    <% } else { %>
-                                                        <span style="font-size: 9px; opacity: 0.7;">Unknown author</span>
-                                                    <% } %>
-                                                </h4>
-                            
-                                                <div>
-                                                    <% if (currUser && review.author && currUser._id.equals(review.author._id)) { %>
-                                                        <form method="post" action="/listing/<%= list._id %>/review/<%= review._id %>?_method=DELETE">
-                                                            <button id="trash" type="submit"><i class="fa-solid trash fa-trash-can"></i></button>
-                                                        </form>
-                                                    <% } %>
-                                                </div>
-                                            </div>
-                            
-                                            <p class="card-text mt-2">
-                                                <% for (let j = 1; j <= 5; j++) { %>
-                                                    <% if (j <= review.rating) { %>
-                                                        <i class="fa-solid fa-star star"></i>
-                                                    <% } else { %>
-                                                        <i class="fa-regular fa-star star"></i>
-                                                    <% } %>
-                                                <% } %>
-                                            </p>
-                            
-                                            <p class="flex-grow-1">
-                                                <%= review.Comments.length > 150 ? review.Comments.substring(0, 150) + '... ' : review.Comments %>
-                                                <% if (review.Comments.length > 150) { %>
-                                                    <a class="text-primary" data-bs-toggle="modal" data-bs-target="#modal-<%= i %>" style="cursor: pointer;">Read more</a>
-                                                <% } %>
-                                            </p>
-                            
-                                            <small class="text-muted" style="font-size: 10px;">
-                                                <i class='bx bx-error-circle'></i> Verified by Wanderlust
-                                            </small>
-                                        </div>
-                                    </div>
-                            
-                                    
-                                    <!-- Modal with Unique ID for Each Review -->
-                                    <div class="modal fade" id="modal-<%= i %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalLabel-<%= i %>" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                                            <div class="modal-content  review-popup-model">
-                                                <div class="modal-header">
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-
-                                                    <div class="user-credential">
-                                                        <% if (review.author && review.author.profilePicture && review.author.profilePicture.purl) { %>
-                                                            <img id="review_logo" src="<%=review.author.profilePicture.purl%>" alt="Reviewer" class="reviewer-profile model-profile">
-                                                        <% } else { %>
-                                                            <img id="review_logo" src="/profile.png" alt="Reviewer" class="reviewer-profile model-profile">
-                                                        <% } %>
-                                
-                                                        <% if (review.author) { %>
-                                                           <span class="u-name"><%= review.author.username %></span> <span style="font-size: 10px; opacity: 0.7;">owner</span>
-                                                        <% } else { %>
-                                                            <span style="font-size: 10px; opacity: 0.7;">Unknown author</span>
-                                                        <% } %>
-                                                    </div>
-                                                    
-
-
-                                                    <div class="model-star">
-                                                        <% for (let j = 1; j <= 5; j++) { %>
-                                                            <% if (j <= review.rating) { %>
-                                                                <i class="fa-solid fa-star star"></i>
-                                                            <% } else { %>
-                                                                <i class="fa-regular fa-star star"></i>
-                                                            <% } %>
-                                                        <% } %>
-                                                    </div>
-
-                                                    <br>
-                                                
-                                                    <span class="model-comment"><%= review.Comments %></span> <!-- Display the full comment here -->
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            <% } %>
-                            
+              <!-- All Reviews -->
+<hr>
+<div class="container">
+    <% if (list.reviews.length == 0) { %>
+        <h6>⭐ No review posted yet for this property.</h6>
+    <% } %>
+    <% if (list.reviews.length > 0) { %>
+        <h4>🌟 All Reviews</h4>
+        <div class="row mt-4">
+            <% for (let i = 0; i < list.reviews.length; i++) { %>
+                <% let review = list.reviews[i]; %>
+                <div class="col-12 col-sm-6 col-md-4 mb-3"> <!-- Adjusted column size for responsiveness -->
+                    <div class="card review-card h-100 ms-0">
+                        <div class="card-body d-flex flex-column">
+                            <div class="heading">
+                                <h4 class="card-title">
+                                    <% if (review.author && review.author.profilePicture && review.author.profilePicture.purl) { %>
+                                        <% let normalReviewerProfile = review.author.profilePicture.purl; %>
+                                        <img id="review_logo" src="<%=normalReviewerProfile%>" alt="Reviewer" class="reviewer-profile n-review-profile">
+                                    <% } else { %>
+                                        <img id="review_logo" src="/profile.png" alt="Reviewer" class="reviewer-profile n-review-profile">
+                                    <% } %>
+                                    <% if (review.author) { %>
+                                        <%= review.author.username %> <span style="font-size: 9px; opacity: 0.7;">owner</span>
+                                    <% } else { %>
+                                        <span style="font-size: 9px; opacity: 0.7;">Unknown author</span>
+                                    <% } %>
+                                </h4>
+                            </div>
+                            <p class="card-text mt-2">
+                                <% for (let j = 1; j <= 5; j++) { %>
+                                    <% if (j <= review.rating) { %>
+                                        <i class="fa-solid fa-star star"></i>
+                                    <% } else { %>
+                                        <i class="fa-regular fa-star star"></i>
+                                    <% } %>
+                                <% } %>
+                            </p>
+                            <p class="flex-grow-1">
+                                <%= review.Comments.length > 150 ? review.Comments.substring(0, 150) + '... ' : review.Comments %>
+                                <% if (review.Comments.length > 150) { %>
+                                    <a class="text-primary" data-bs-toggle="modal" data-bs-target="#modal-<%= i %>" style="cursor: pointer;">Read more</a>
+                                <% } %>
+                            </p>
+                            <small class="text-muted" style="font-size: 10px;">
+                                <i class='bx bx-error-circle'></i> Verified by Wanderlust
+                            </small>
                         </div>
                     </div>
-                <% } %>
+                </div> <!-- End of review card -->
+            <% } %> <!-- End of reviews loop -->
+        </div> <!-- End of row -->
+    <% } %> <!-- End of reviews check -->
+</div> <!-- End of container -->
                 
                 </div>
             </div>
