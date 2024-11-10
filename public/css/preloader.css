@@ -35,7 +35,7 @@
     bottom: 0;
     position: absolute;
     border-radius: 50% 50% 0;
-    border: 32px solid #ff385c;
+    border: 32px solid #FF5A5F;
     transform: rotate(45deg) translate(0, 0);
     box-sizing: border-box;
     animation: animMarker 0.4s ease-in-out infinite alternate;
@@ -102,10 +102,10 @@
       spinner-fade 1.2s linear infinite;
   }
   .load:before {
-    border-top-color: #ff0000;
+    border-top-color: #FF5A5F;
   }
   .load:after {
-    border-top-color: #ff385c;
+    border-top-color: #FF5A5F;
     animation-delay: 0.4s;
   }
 

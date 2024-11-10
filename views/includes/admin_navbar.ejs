@@ -1,72 +1,3 @@
-<style>
-  .nav_wlc{
-    color: #eb3333;
-    text-decoration: none !important;
-    cursor: pointer;
-    white-space: nowrap;
-    font-family: cursive !important;
-    font-size: 1.2rem;
-  }
-
-  .nav_wlc:hover{
-    color: #bc2121;
-    text-decoration: none!important;
-    cursor: pointer;
-  }
-  .main-menues{
-    background-color: white !important;
-    padding:5px;
-    border: 1px solid #999999b2;
-    border-radius: 50px;
-    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.1);
-    display: flex;
-    align-items: center;
-    width: 39rem !important;
-    margin-left: 0 !important;
-    justify-content: space-between !important;
-    margin-left: 1rem !important;
-  }
-  .main-menues .h-effect{
-    border-radius: 50px;
-  }
-  .main-menues .h-effect:hover{
-    background-color: #ffd5d5ac;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-    border: 1px solid #ff5f5f2c;
-  }
-
-  /* Adjustments for small screens */
-  @media (max-width: 768px) {
-      .nav_wlc {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        font-size: 1rem;
-      }
-
-      #search_frm  {
-          width: 100% !important;
-          /* margin-right: 100px !important; */
-          margin-left: 10px !important;
-      }
-    }
-
-
-  /* Dark Mode Styles */
-  .dark-mode {
-        .nav_wlc{
-          color: #eb3333;
-          text-decoration: none!important;
-          cursor: pointer;
-        }
-        .nav_wlc i b:hover{
-          color: #b61f1f;
-          transition: color 0.3s ease-in-out;
-          cursor: pointer;
-          box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.7);
-        }
-      }
-</style>
-
 <nav class="navbar navbar-expand-lg sticky-top">
     <div class="container">
       <!-- Brand and explore link on the left -->
@@ -174,3 +105,49 @@
       </div>
     </div>
   </nav>
+  
+  <style>
+    .nav_wlc{
+      color: #303030;
+      text-decoration: none !important;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .nav_wlc:hover{
+      color: #FF5A5F;
+      text-decoration: none!important;
+      cursor: pointer;
+    }
+
+    /* Adjustments for small screens */
+    @media (max-width: 768px) {
+        .nav_wlc {
+          max-width: 150px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        #search_frm  {
+            width: 100% !important;
+            /* margin-right: 100px !important; */
+            margin-left: 10px !important;
+        }
+      }
+
+
+    /* Dark Mode Styles */
+    .dark-mode {
+          .nav_wlc{
+            color: #ff385c;
+            text-decoration: none!important;
+            cursor: pointer;
+          }
+          .nav_wlc i b:hover{
+            color: #FF5A5F;
+            transition: color 0.3s ease-in-out;
+            cursor: pointer;
+            box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.7);
+          }
+        }
+  </style>
