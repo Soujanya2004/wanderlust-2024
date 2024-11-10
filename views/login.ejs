@@ -2,7 +2,17 @@
 <br>
 <br>
 <style>
-    
+      .login-con{
+        display: flex;
+        margin-top: 2rem;
+        margin-left: 2rem;
+    }
+    .bg-login{
+        width: 29rem;
+        height: 27rem;
+        transform: translateX(10rem);
+        filter: blur(1px);
+    }
     .form_body{
         background-color: #f1f1f1;
         border-radius: 8px;
@@ -62,7 +72,10 @@
 
 
 <div class="row">
-    <!-- <div class="col-4 mx-auto form_body"> -->
+<div class="login-con">
+     <div>
+        <img class="bg-login" src="https://private-user-images.githubusercontent.com/157210374/384426294-160a7444-aaf7-49c2-850f-2667eeb2e6f9.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzEyMzU1NDUsIm5iZiI6MTczMTIzNTI0NSwicGF0aCI6Ii8xNTcyMTAzNzQvMzg0NDI2Mjk0LTE2MGE3NDQ0LWFhZjctNDljMi04NTBmLTI2NjdlZWIyZTZmOS5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQxMTEwJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MTExMFQxMDQwNDVaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT03MDFhMjg2ZDczZWU5NGY0YjEwOTlhN2E0ZTllM2NjOTQ4OTM5NDRmODkxYjczMzI4ODYyMTE3OGE1YzRhYjYwJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.0uq_3K9lvlAxVF18Wzhw7EOR8G4BBUJ97eWW495LMEw" alt="image">
+    </div>
     <div class="col-11 col-md-8 col-lg-4 mx-auto form_body">
         <form method="POST" action="/login" novalidate class="needs-validation">
             <div class="mb-3 login_form">
@@ -99,4 +112,5 @@
         </form>
         
     </div>
+</div>
 </div>
