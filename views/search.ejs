@@ -23,7 +23,7 @@
     }
 
     .card-body {
-      padding-bottom: 0.2 !important;
+      padding-bottom: 0 !important;
       height: fit-content !important;
       /* max-height: auto; */
     }
@@ -56,6 +56,9 @@
       margin-top: 4rem;
       margin-bottom: 2.5rem;
     }
+    .card-title{
+      color: #ff385c;
+    }
   </style>
   <div class="tax-container">
     <!-- GST toggler -->
@@ -73,7 +76,7 @@
     <!-- Changed row-col-3 to row-cols-3 and removed row-cols-xs-1 -->
     <% for (listing of results) { %>
       <div class="col popup"> <!-- Added .col to ensure grid layout works -->
-
+        <a href="/listing/<%= listing._id %>" style="text-decoration: none;">
         <div class="card listing-card">
           <img src="<%= listing.image[0].url %>" class="card-img-top" alt="listing_image" />
           <div class="card-body">
@@ -86,12 +89,13 @@
               </span> / night
               <span class="gst-label">(excl. GST)</span>
             </p>
-            <p class="card-text location"><i class="fa-solid fa-location-crosshairs"></i>&nbsp; <%= listing.location %>,
-                <%= listing.country %>
-            </p>
-            <a href="/listing/<%= listing._id %>" class="btn btn-dark show_btn">Show in Detail</a>
+            <div class="card-text d-flex justify-content-between">
+              <p class="location"><i class="fa-solid fa-location-crosshairs"></i>&nbsp; <%= listing.location %>, <%= listing.country %></p>
+              <p><i class="fa-solid fa-heart" style="color: #ff385c;"></i> <span class="likes"><%= listing.likes %></span></p>
+            </div>
           </div>
         </div>
+        </a>
       </div> <!-- End of .col -->
       <% } %>
   </div>
