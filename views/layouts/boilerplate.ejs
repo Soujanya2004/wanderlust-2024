@@ -33,6 +33,71 @@
         scrollbar-width: thin;
         scrollbar-color: red; 
     }
+
+    /* cookies */
+    #cookieConsent {
+        position: fixed;
+        bottom: 0;
+        left: 15%;
+        width: 70%;
+        background-color: #222; /* Darker background for a sleek look */
+        color: #f1f1f1;
+        text-align: center;
+        padding: 20px;
+        font-family: 'Arial', sans-serif;
+        font-size: 14px;
+        box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
+        z-index: 1000;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    #cookieConsent .cookie-content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        align-items: center;
+    }
+
+    #cookieConsent a {
+        color: #00bfff; /* Bright link color */
+        text-decoration: underline;
+        transition: color 0.3s;
+    }
+
+    #cookieConsent a:hover {
+        color: #0099cc; /* Slightly darker on hover */
+    }
+
+    #cookieConsent button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px; /* Rounded corners */
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+    #acceptCookies {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    #acceptCookies:hover {
+        background-color: #45a049; /* Darker green on hover */
+        transform: translateY(-2px); /* Subtle lift effect */
+    }
+
+    #rejectCookies {
+        background-color: #f44336;
+        color: white;
+    }
+
+    #rejectCookies:hover {
+        background-color: #e53935; /* Darker red on hover */
+        transform: translateY(-2px); /* Subtle lift effect */
+    }
+
 </style>
 </head>
 <body class="light-mode">
@@ -255,6 +320,17 @@
 
         <%- body %>
     </div>
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookieConsent" style="display: none;">
+        <div class="cookie-content">
+            <p>We use cookies to improve your experience. By continuing to use our site, you accept our cookie policy.</p>
+            <button id="acceptCookies">Accept</button>
+            <button id="rejectCookies">Reject</button>
+        </div>
+    </div>
+
+
     <hr class="btw-foot">
     <%- include("../includes/footer.ejs") %>
 
@@ -308,6 +384,28 @@
         chatbotId="OA0P4IQBsLk2GllJrcNxh"
         domain="www.chatbase.co"
         defer>
+    </script>
+    <!-- cookies -->
+    <script>
+        // Check if cookie consent has already been given
+        window.addEventListener('load', function() {
+            const consent = localStorage.getItem('cookieConsent');
+            if (!consent) {
+                document.getElementById('cookieConsent').style.display = 'block';
+            }
+        });
+
+        // Event listeners for buttons
+        document.getElementById('acceptCookies').onclick = function() {
+            localStorage.setItem('cookieConsent', 'accepted');
+            document.getElementById('cookieConsent').style.display = 'none';
+        };
+
+        document.getElementById('rejectCookies').onclick = function() {
+            localStorage.setItem('cookieConsent', 'rejected');
+            document.getElementById('cookieConsent').style.display = 'none';
+            // Optional: Clear non-essential cookies if necessary
+        };
     </script>
 </body>
 </html>
