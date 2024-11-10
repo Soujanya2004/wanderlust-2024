@@ -25,7 +25,7 @@ const { isLoggedIn, isAdmin } = require("./middlewares/middleware.js");
 const {saveRedirectUrl}=require("./middlewares/middleware.js");
 const {isOwner,isAuthor}=require("./middlewares/middleware.js");
 const {index, newpost, createpost, editpost, saveEditpost,search, deletepost, showPost, bookinfFt, signup, likeListing, topListings }=require("./controllers/listing.js");
-const { dashboard, showuser, deleteUser, deleteListing, viewIndividualListing, viewListingReview, adminListEditRender, adminSaveEditList, showFeedbacks, deleteFeedback, displayFeedback } = require("./controllers/admin.js");
+const { dashboard, showuser, deleteUser, deleteListing, viewIndividualListing, viewListingReview, deleteListingReview, adminListEditRender, adminSaveEditList, showFeedbacks, deleteFeedback, displayFeedback } = require("./controllers/admin.js");
 const { signupRender, siggnedUp, logout, forgotPassword, passwordResetLink, resetPasswordTokenGet, resetPasswordTokenPatch, updatePasswordGet, updatePasswordPost } = require("./controllers/user.js")
 const { viewProfile, profileGet, profilePost } = require("./controllers/profile.js");
 const { contactPage, aboutPage, termsPage, privacyPage, contributors } = require("./controllers/others.js");
@@ -104,15 +104,29 @@ app.use((req, res, next) => {
   res.locals.error = req.flash('error');
   res.locals.currUser = req.user || null;
 
+  res.locals.isLoggedIn = req.isAuthenticated() || false;
+  // console.log("Is Logged In:", res.locals.isLoggedIn); 
+  
   // Check if profile picture exists; if not, use a default URL
   if (req.user && req.user.profilePicture && req.user.profilePicture.purl) {
     let originalUrl = req.user.profilePicture.purl;
     let modifiedProfilePic = originalUrl.replace("/upload", "/upload/q_auto,e_blur:50,w_250,h_250");
     res.locals.profilePic = modifiedProfilePic;
   }
+
+  // List of routes that are publicly accessible
+  const publicRoutes = ["/login", "/signup", "/forgot-password", "/", "/about", "/contact", "/terms", "/privacy", "/listing", "/feedback", "/admin" ,"/admin/dashboard"];
+
+  // Redirect non-logged-in users trying to access private routes
+  if (!req.isAuthenticated() && !publicRoutes.includes(req.path)) {
+    req.flash("error", "Please sign in to continue.");
+    return res.redirect("/listing");
+  }
+
   next();
 });
 
+  
 // BOLOGS
 
 app.delete('/blogs/:id', async (req, res) => {
@@ -172,7 +186,6 @@ app.post('/blogs', isLoggedIn, upload.single('blog[image]'), asyncwrap(async (re
 }));
 // BOLOGS
 
-
 // ADMIN
 // ADMIN
 
@@ -190,6 +203,7 @@ app.delete('/admin/listing/:id',isLoggedIn, isAdmin, asyncwrap(deleteListing));
 app.get('/admin/listing/:id',isLoggedIn, isAdmin,asyncwrap(viewIndividualListing));
 
 app.get('/admin/reviews/:id',isLoggedIn, isAdmin,asyncwrap(viewListingReview));
+app.delete('/admin/listing/:id/reviews/:reviewId',isLoggedIn, isAdmin, asyncwrap(deleteListingReview));
 
 app.get('/admin/listing/edit/:id',isLoggedIn, isAdmin, asyncwrap(adminListEditRender));
 
@@ -207,12 +221,11 @@ app.post('/admin/feedbacks/:id/toggleDisplay', isLoggedIn, isAdmin, asyncwrap(di
 
 
 // Default route for '/' path
-app.get("/", asyncwrap(async (req,res) => {
+app.get("/", asyncwrap(async (req, res) => {
+  const listings = await listing.find();
+  res.render("index.ejs", { listings }); // Pass isLoggedIn to the view
+}));
 
-    const listings = await listing.find();
-    res.render("index.ejs", { listings });
-  
-})); 
 
 // Others page
 app.get("/contact", contactPage);
@@ -276,10 +289,10 @@ const bookingController = require('./controllers/booking.js');
 app.get("/listing/new", isLoggedIn, asyncwrap(listingController.newpost));
 // Listing routes
 app.get("/listing", asyncwrap(index));
-app.post("/listing", upload.array('listing[image]', 10), isLoggedIn, asyncwrap(createpost));
+app.post("/listing", upload.array('listing[image]', 4), isLoggedIn, asyncwrap(createpost));
 app.post("/listing/search", asyncwrap(search));
 app.get("/listing/:id/edit", isLoggedIn, isOwner, asyncwrap(editpost));
-app.put('/listing/:id', isLoggedIn, isOwner, upload.array('listing[image]', 10), asyncwrap(saveEditpost));
+app.put('/listing/:id', isLoggedIn, isOwner, upload.array('listing[image]', 4), asyncwrap(saveEditpost));
 app.delete("/listing/:id", isLoggedIn, isOwner, asyncwrap(deletepost));
 app.get("/listing/:id", asyncwrap(showPost));
 app.post('/listing/:id/like', isLoggedIn, asyncwrap(listingController.likeListing));    
@@ -301,6 +314,7 @@ app.delete("/listing/:id/review/:reviewId", isLoggedIn, isAuthor, asyncwrap(dele
 app.use("*", (req, res) => {
   res.render("not_found.ejs");
 });
+
 
 // Error handling middleware
 app.use((err, req, res, next) => {

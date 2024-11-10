@@ -8,29 +8,31 @@
   }
   
   .contact-header {
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     font-weight: bold;
     color: rgb(74, 74, 74);
-    margin-bottom: 1rem;
+    margin-bottom: .5rem;
   }
 
   .contact-description {
     color: rgb(153, 153, 153);
-    margin-bottom: 3rem;
-    font-size: 1.2rem;
+    margin-bottom: .5rem;
+    font-size: 1rem;
   }
 
   .contact-form {
-    padding: 4rem;
+    background: url('cantact.jpg');
+    opacity: 0.8;
+    padding: 1rem;
     border-radius: 0.5rem;
-    background-color: #f8f9fa;
-    box-shadow: 0 8px 16px rgba(33, 33, 33, 0.1);
+    background-color: #ffffff;
+    box-shadow: 0 8px 10px rgba(33, 33, 33, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
   .contact-form:hover {
     transform: translateY(-10px);
-    box-shadow: 0 10px 30px rgba(33, 33, 33, 0.2);
+    box-shadow: 0 10px 20px rgba(33, 33, 33, 0.2);
   }
 
   /* Responsive Design */
@@ -48,47 +50,28 @@
     border-color: red;
   }
 
-  .btn-submit {
+  .btn-danger {
     background-color: red;
     color: #ffffff;
     font-weight: bold;
     transition: all 0.3s;
-    padding: 12px 20px;
+    padding: 8px 12px;
     border-radius: 0.5rem;
   }
-
-  .btn-submit:hover {
-    background-color: #ffca2c;
-    transform: scale(1.05);
-  }
-
-  .contact-icon {
-    font-size: 1.5rem;
-    color: #ffc107;
-  }
-
-  /* Section Styling */
-  .section {
-    padding-bottom: 100px;
-  }
-
   .dark-mode {
     .contact-header {
-      color: #cacaca;
+      color: #ffffff;
     }
     .contact-form {
-      background-color: #343a40;
+      background-color: transparent;
       box-shadow: 0 10px 16px #000;
     }
-    .form-label {
-      color: #f3f3f3;
-    }
     .form-input .form-control {
-      background-color: #454545;
+      background-color: transparent;
       color: #ffffff;
     }
     .form-input .form-control::placeholder {
-      color: #cacaca;
+      color: #ffffff;
     }
   }
 
@@ -96,44 +79,40 @@
     margin-bottom: 1.5rem;
   }
 
-  .form-input label {
-    font-weight: 600;
-    color: #495057;
-    margin-bottom: 0.5rem;
-  }
-
-  .form-input input,
-  .form-input textarea {
-    background-color: #ffffff;
-    border-radius: 0.5rem;
-    padding: 0.75rem;
-    border: 1px solid #dee2e6;
-    font-size: 1rem;
-    color: #495057;
-    transition: border-color 0.3s ease;
-  }
-
-  .form-input input:focus,
-  .form-input textarea:focus {
-    border-color: red;
-    outline: none;
-  }
-
   /* Add a nice card effect to the form */
   .contact-form {
+    padding: 35px;
     border-radius: 10px;
     background-color: #ffffff;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   }
 
   /* Placeholder Styling */
-  .form-control::placeholder {
-    color: #b0b0b0;
+  .form-input .form-control::placeholder {
+    color: #ffffff;
   }
 
   /* Add some additional padding */
   .contact-container {
     padding: 4rem 0;
+  }
+
+  .form-input input,
+  .form-input textarea {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #ffffff;
+    padding: 0.75rem;
+    font-size: 1rem;
+    color: #ffffff;
+    transition: border-color 0.3s ease;
+  }
+  .form-input input:focus,
+  .form-input textarea:focus {
+    background-color: transparent; /* Makes background transparent on focus */
+    color: #ffffff; /* Keeps the text color visible */
+    border-bottom-color: red; /* Changes the bottom border color on focus */
+    outline: none; /* Removes the default outline */
   }
 </style>
 
@@ -154,10 +133,11 @@
           <!-- Contact Form -->
           <div class="col-12 col-lg-8 mx-auto main-content">
             <form class="contact-form" method="POST" action="/contact">
+              <h2 class="mb-2" style="text-align: center; font-family: rakkas; color: aliceblue; font-weight: bold;">Git In Toutch</h2>
               <!-- Name Fields -->
-              <div class="row mb-4 inputs">
+              <div class="row mb-2 inputs">
                 <div class="col form-input">
-                  <label for="firstname" class="form-label">First Name</label>
+                  <!-- <label for="firstname" class="form-label">First Name</label> -->
                   <input
                     type="text"
                     class="form-control form-control-sm"
@@ -167,7 +147,7 @@
                   />
                 </div>
                 <div class="col form-input">
-                  <label for="lastName" class="form-label">Last Name</label>
+                  <!-- <label for="lastName" class="form-label">Last Name</label> -->
                   <input
                     type="text"
                     class="form-control form-control-sm"
@@ -177,33 +157,35 @@
                 </div>
               </div>
 
-              <!-- Email -->
-              <div class="mb-4 form-input">
-                <label for="email" class="form-label">Email Address</label>
-                <input
-                  type="email"
-                  class="form-control form-control-sm"
-                  name="email"
-                  placeholder="Enter email address"
-                  required
-                />
-              </div>
-
-              <!-- Subject -->
-              <div class="mb-4 form-input">
-                <label for="subject" class="form-label">Subject</label>
-                <input
-                  type="text"
-                  class="form-control form-control-sm"
-                  name="subject"
-                  placeholder="Enter your subject"
-                  required
-                />
+              <!-- Email sub -->
+              <div class="row mb-2 inputs">
+                <!-- Subject -->
+                <div class="col mb-2 form-input">
+                  <!-- <label for="subject" class="form-label">Subject</label> -->
+                  <input
+                    type="text"
+                    class="form-control form-control-sm"
+                    name="subject"
+                    placeholder="Enter your subject"
+                    required
+                  />
+                </div>
+                <!-- email -->
+                <div class="col mb-2 form-input">
+                  <!-- <label for="email" class="form-label">Email Address</label> -->
+                  <input
+                    type="email"
+                    class="form-control form-control-sm"
+                    name="email"
+                    placeholder="Enter email address"
+                    required
+                  />
+                </div>
               </div>
 
               <!-- Message -->
-              <div class="mb-4 form-input">
-                <label for="message" class="form-label">Message</label>
+              <div class="mb-2 form-input">
+                <!-- <label for="message" class="form-label">Message</label> -->
                 <textarea
                   class="form-control form-control-sm"
                   name="message"
@@ -214,7 +196,7 @@
               </div>
 
               <!-- Submit Button -->
-              <button type="submit" name="saveButton" class="btn btn-submit w-100">
+              <button type="submit" class="btn btn-danger btn-submit w-100" name="saveButton">
                 Send Message
               </button>
             </form>

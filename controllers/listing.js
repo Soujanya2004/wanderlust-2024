@@ -98,6 +98,12 @@ module.exports.search = async (req, res) => {
         // Destructure the properties from req.body.listing, including tags
         const { title, description, price, country, location, tags } = req.body.listing;
 
+        //Description limit
+        if(description.length > 1000){
+            req.flash("error", "Maximum 1000 charecters allowed!");
+            return res.redirect("/listing/new");
+        }
+
         // Ensure tags is an array (if it's a comma-separated string, split it)
         let tagArray = [];
         if (tags) {
@@ -108,6 +114,12 @@ module.exports.search = async (req, res) => {
                 // If tags is a string, split it by commas
                 tagArray = tags.split(',').map(tag => tag.trim());
             }
+        }
+
+        // Allowed to add only 3 tage maximum!
+        if(tagArray.length > 3){
+            req.flash("error", "Maximum 3 tags are allowed!");
+            return res.redirect("/listing/new");
         }
         
         // Geocoding to get coordinates from location
@@ -289,6 +301,12 @@ module.exports.saveEditpost = async (req, res) => {
             } else if (typeof tags === 'string') {
                 tagArray = tags.split(',').map(tag => tag.trim());
             }
+        }
+
+        // Allowed to add only 3 tage maximum!
+        if(tagArray.length > 3){
+            req.flash("error", "Maximum 3 tags are allowed!");
+            return res.redirect(`/listing/${id}/edit`);
         }
 
       // Update other fields

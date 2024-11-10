@@ -1,33 +1,141 @@
-<% layout("/layouts/boilerplate") %>
-<h1>Top Listings</h1>
 
-<div class="container my-4">
-    <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2 gx-3">
-        <% for (listing of listings) { %>
-            <div class="col popup">
-                <a href="/listing/<%= listing._id %>" style="text-decoration: none;">
-                    <div class="card listing-card">
-                        <% if (listing.image && listing.image.length > 0) { %>
-                            <img src="<%= listing.image[0].url %>" class="card-img-top" alt="listing_image" />
-                        <% } else { %>
-                            <img src="default-image-url.jpg" class="card-img-top" alt="No image available" /> <!-- Fallback image -->
-                        <% } %>
-                        <div class="card-body">
-                            <h4 class="card-title" style="color:black">
-                                <%= listing.title.length > 26 ? listing.title.substring(0, 25) + '....' : listing.title %>
-                            </h4>
-                            <p class="mt-3">
-                                <span class="price" data-base-price="<%= listing.price %>"><%= listing.price.toLocaleString("en-IN") %></span> / night
-                                <span class="gst-label">(excl. GST)</span>
-                            </p>
-                            <p>❤️: <%= listing.likes %></p>
-                            <p class="card-text location"><i class="fa-solid fa-location-crosshairs"></i>&nbsp; 
-                                <%= listing.location %>, <%= listing.country %></p>
-                            <a href="/listing/<%= listing._id %>" class="btn btn-dark show_btn">Show in Detail</a>
-                        </div>
-                    </div>
-                </a>
-            </div> <!-- End of .col -->
-        <% } %>
-    </div> <!-- End of row -->
-</div> <!-- End of container -->
+
+
+<%- layout("/layouts/boilerplate") -%>
+  <style>
+    .listing-card {
+      min-height: fit-content !important;
+      /* padding-bottom: 1rem !important; */
+    }
+
+    .popup {
+      transition: transform 0.3s ease;
+    }
+
+    .popup:hover {
+      /* transform: translateY(-0.2rem); */
+      transform: scale(1.01) translateY(-0.1rem);
+    }
+
+    .card-img-top {
+      height: 20rem !important;
+    }
+
+    .show_btn {
+      margin-bottom: 0 !important;
+    }
+
+    .card-body {
+      padding-bottom: 0 !important;
+      height: fit-content !important;
+      /* max-height: auto; */
+    }
+
+    .tax-toggler-container {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .tax-toggler {
+      box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.2);
+      width: 200px;
+      position: relative;
+      right: 1rem;
+      padding: 8px 14px;
+      border-radius: 8px;
+      z-index: 10;
+    }
+
+    .tax-toggler label {
+      font-size: 11px;
+      margin-left: 5px;
+      cursor: pointer;
+    }
+
+    .red-text {
+      color: rgba(255, 0, 0, 0.607);
+    }
+    .tax-container{
+      margin-top: 2rem;
+      margin-bottom: 2.5rem;
+    }
+    .card-title{
+      color: #ff385c;
+    }
+    .dark-mode{
+        .head-top{
+            color: #fff;
+        }
+    }
+  </style>
+      <h2 class="text-center mt-5 head-top">Top Properties</h2>
+  <div class="tax-container">
+    <!-- GST toggler -->
+    <div class="tax-toggler-container">
+      <div class="tax-toggler">
+        <div class="form-check-reverse form-switch">
+          <input type="checkbox" role="switch" class="form-check-input" id="gstToggle" onclick="toggleGST()">
+          <label for="gstToggle" class="form-check-label">Display total after taxes</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2 gx-3">
+    <!-- Changed row-col-3 to row-cols-3 and removed row-cols-xs-1 -->
+    <% for (listing of listings) { %>
+      <div class="col popup"> <!-- Added .col to ensure grid layout works -->
+        <a href="/listing/<%= listing._id %>" style="text-decoration: none;">
+        <div class="card listing-card">
+          <img src="<%= listing.image[0].url %>" class="card-img-top" alt="listing_image" />
+          <div class="card-body">
+            <h4 class="card-title">
+              <%= listing.title.length> 26 ? listing.title.substring(0, 25) + '....' : listing.title %>
+            </h4>
+            <p class="mt-3">
+              <span class="price" data-base-price="<%= listing.price %>">
+                <%= listing.price.toLocaleString("en-IN") %>
+              </span> / night
+              <span class="gst-label">(excl. GST)</span>
+            </p>
+            <div class="card-text d-flex justify-content-between">
+              <p class="location"><i class="fa-solid fa-location-crosshairs"></i>&nbsp; <%= listing.location %>, <%= listing.country %></p>
+              <p><i class="fa-solid fa-heart" style="color: #ff385c;"></i> <span class="likes"><%= listing.likes %></span></p>
+            </div>
+          </div>
+        </div>
+        </a>
+      </div> <!-- End of .col -->
+      <% } %>
+  </div>
+
+  <script>
+    //Change the gstRate accordingly
+    const gstRate = 0.18;
+
+    function toggleGST() {
+      const gstToggle = document.getElementById("gstToggle");
+      const priceElements = document.querySelectorAll(".price");
+      const gstLabels = document.querySelectorAll(".gst-label");
+
+      priceElements.forEach((priceElement, index) => {
+        const basePrice = parseFloat(priceElement.getAttribute("data-base-price"));
+        const totalPrice = basePrice * (1 + gstRate);
+
+        if (gstToggle.checked) {
+          // Show GST
+          priceElement.innerText = totalPrice.toLocaleString("en-IN", { style: "currency", currency: "INR" });
+          gstLabels[index].innerText = "(incl. GST)";
+          gstLabels[index].classList.add("red-text"); // Add red color
+        } else {
+          // without GST
+          priceElement.innerText = basePrice.toLocaleString("en-IN", { style: "currency", currency: "INR" });
+          gstLabels[index].innerText = "(excl. GST)";
+          gstLabels[index].classList.remove("red-text"); // Add red color
+        }
+      });
+    }
+
+    // Initialize with base prices
+    document.addEventListener("DOMContentLoaded", toggleGST);
+  </script>

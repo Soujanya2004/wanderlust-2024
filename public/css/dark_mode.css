@@ -3,14 +3,14 @@
     .navbar{
         background-image: linear-gradient(#000000, #1d1d1d);
     }
-     .fa-plane:hover {
-        color: #e12d4b;
+    .fa-plane:hover {
+        color: #FF5A5F;
         transform: scale(1.1);
         text-shadow: 0 6px 14px rgba(255, 255, 255, 0.5);
     }
     
-     .navbar-brand, .nav-link {
-      color:  rgb(255, 87, 34);
+    .navbar-brand, .nav-link {
+        color: #FF5A5F;
     }
     .drop-button:hover{
         box-shadow: 0 5px 3px rgba(212, 212, 212, 0.303);
@@ -19,7 +19,6 @@
         background-color: #343a40;
         color: #ffffff;
         box-shadow: 0 5px 3px rgba(212, 212, 212, 0.351);
-
     }
     .desk-drop .dropdown-divider{
         color: #ffffff;
@@ -43,7 +42,7 @@
     }
 
     .nav-link:hover {
-        color: #e12d4b;
+        color: #FF5A5F;
     }
 
     @media (max-width: 991px) {
@@ -56,7 +55,7 @@
         }
         .search-bar input {
             margin-left:3.5rem;
-          }
+        }
     }
 
     /* SLIDING BAR css */
@@ -132,10 +131,7 @@
         text-shadow: 0 6px 14px rgba(255, 255, 255, 0.5);
         transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
         box-shadow: 0 6px 14px rgba(255, 255, 255, 0.5);
-        transition: transform 0.3s ease-in-out, color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        box-shadow: 0 6px 14px rgba(255, 255, 255, 0.5);
     }
-    
 
     /* Footer sectionn */
     footer {
@@ -146,13 +142,13 @@
         color: #ffffff;
     }
     .footer-left .contact-info i {
-        color: #a4a4a4;
+        color: #f3f3f3;
     }
     footer a {
-        color: #878787;
+        color: #ffffff;
     }
     footer a:hover {
-        color: #b5b5b5;
+        color: #ffffff;
     }
     .btw-foot{
         color: #a4a4a4;
@@ -172,6 +168,9 @@
         transition: color 0.3s ease-in-out;
     }
 
+    .contact-icon {
+        color: #c22121 !important;
+    }
     .footer-right h3{
         color: #f7f7f7;
     }
@@ -187,49 +186,48 @@
 
     .faq-left .contact-info span i {
         color: #cacaca;
-      }
-      .tax-toggler{
+    }
+    .tax-toggler{
         background-color: #363636;
-      }
-      .tax-toggler label{
+    }
+    .tax-toggler label{
         color: #fff;
-      }
+    }
 
-    
-      /* SLIDING BAR */
-      .filter {
+    /* SLIDING BAR */
+    .filter {
         background-color: #363636;
         color: #ffffff;
-        }
-        .filter i {
-            color: #ffffff;
-        }
-        .filter p {
-            color: #ffffff;
-        }
-        .scroll-btn i{
-            color: #ffffff;
-            text-shadow: .5px 0px 1px rgb(179, 179, 179);
-        }
-        .scroll-btn i:hover{
-            text-shadow: .5px 0px 1px rgb(179, 179, 179);
-        }
-        .password-box {
-            position: relative;
-            width: 100%; /* Adjust width as needed */
-        }
-        #togglePassword {
-            position: absolute;
-            right: 10px; /* Position from the right */
-            top: 50%; /* Center vertically */
-            transform: translateY(-50%); /* Adjust vertical alignment */
-            cursor: pointer;
-            color: #adadad; /* Icon color */
-          }
-          #preloader{
-            background-color: #272727 !important;
-          }
-          .loader::before{
-            background: rgba(0, 0, 0, 0.753) !important;
-          }
+    }
+    .filter i {
+        color: #ffffff;
+    }
+    .filter p {
+        color: #ffffff;
+    }
+    .scroll-btn i{
+        color: #ffffff;
+        text-shadow: .5px 0px 1px rgb(179, 179, 179);
+    }
+    .scroll-btn i:hover{
+        text-shadow: .5px 0px 1px rgb(179, 179, 179);
+    }
+    .password-box {
+        position: relative;
+        width: 100%; /* Adjust width as needed */
+    }
+    #togglePassword {
+        position: absolute;
+        right: 10px; /* Position from the right */
+        top: 50%; /* Center vertically */
+        transform: translateY(-50%); /* Adjust vertical alignment */
+        cursor: pointer;
+        color: #adadad; /* Icon color */
+    }
+    #preloader{
+        background-color: #272727 !important;
+    }
+    .loader::before{
+        background: rgba(0, 0, 0, 0.753) !important;
+    }
 }

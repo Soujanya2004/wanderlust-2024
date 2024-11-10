@@ -1,27 +1,31 @@
-.light-mode{
-     .navbar{
-        background-image: linear-gradient(#e8ecf5, #ffffff);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-    /* Darker Hover Effect for the Plane Icon */
-     .fa-plane:hover {
-        color: #e12d4b;
-        transform: scale(1.1);
-        text-shadow: 0 6px 14px rgba(0, 0, 0, 0.5);
-    }
-    
+.light-mode {
+  .navbar {
+      background-image: linear-gradient(#e8ecf5, #ffffff);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Darker Hover Effect for the Plane Icon */
+  .fa-plane:hover {
+      color: #ff385c;
+      transform: scale(1.1);
+      text-shadow: 0 6px 14px rgba(0, 0, 0, 0.5);
+  }
 
-     #explore:hover {
-        cursor: pointer;
-        color: rgb(255, 87, 34);
-        transition: color 0.3s ease;
-    }
+  #explore {
+      cursor: pointer;
+      color: #ff385c;
+      transition: color 0.3s ease;
+  }
 
-     .search-bar input{
+  /* Updated hover color for the explore link */
+  #explore:hover {
+      color: #FF5A5F;
+  }
+
+  .search-bar input {
       background-color: #fafafa;
       border: 1px solid #ced4da;
-    }
-
+  }
      .search-bar button:hover {
         background-color: #db5168f1;
     }
@@ -53,23 +57,23 @@
     
 
      .footer-left .brand h2{
-      color: #333;
+      color: #000000;
     }
 
      .footer-left .brand p {
-      color: #666;
+      color: #000000;
     }
     
      .footer-left .contact-info i {
-        color: #727272;
+        color: #000000;
       }
       
      .footer-left .contact-info p {
-    color: #666;
+    color: #000000;
     }
         
      .footer-left .contact-info p a {
-        color: #a2a2a2;
+        color: #000000;
     }
      .footer-middle h3,
         .footer-right h3 {
@@ -101,7 +105,7 @@
         color: #656565;
       }
       .copyright p {
-        color: #666;
+        color: #1f1f1f;
       }
       .card{
         background-color: #e5e5e53d;
@@ -127,60 +131,174 @@
         color: #666;
       }
 
-    .faq-left .contact-info span {
-        color: #333;
-      }
+  .navbar-nav .nav-link:hover {
+      color: #ff385c;
+  }
 
-      .faq-left .contact-info span i {
-        color: #474747;
-      }
+  /* Explore link hover effect */
+  #explore:hover {
+      color: #FF5A5F;
+      transition: color 0.3s ease;
+  }
 
-      /* RIGHT SECTION */
-    .faq-right {
-        background-color: #ffffff;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    }
-    .faq-item {
-        border-top: 1px solid rgba(0, 0, 0, 0.2);
-        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-        background-color: #f6f6f6;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-      }
-      .faq-item h3 {
-        color: #333;
-      }
-      .faq-item .faq-answer p {
-        color: #666;
-      }
-
-
-      /* SLIDING BAR */
-      .filter {
-        background-color: #fff;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-        .filter i {
-            color: #555;
-        }
-        .filter p {
-            color: #333;
-        }
-        .scroll-btn i:hover{
-            text-shadow: .5px 0px 1px black;
-        }
-        .password-box {
+  @media (max-width: 991px) {
+      .navbar-collapse {
+          background-color: white;
+          transition: background-color 0.3s ease;
           position: relative;
-          width: 100%; /* Adjust width as needed */
-        }
-          #togglePassword {
-          position: absolute;
-          right: 10px; /* Position from the right */
-          top: 50%; /* Center vertically */
-          transform: translateY(-50%); /* Adjust vertical alignment */
-          cursor: pointer;
-          color: #666; /* Icon color */
-        }
-        #preloader{
-          background-color: #ffffff !important;
-        }
+          top: 2rem;
+          width: 100%;
+      }
+      .search-bar input {
+          margin-left: 3.5rem;
+      }
+  }
+
+  .footer-left .brand h2 {
+      color: #333;
+  }
+
+  .footer-left .brand p {
+      color: #666;
+  }
+
+  .footer-left .contact-info i {
+      color: #727272;
+  }
+
+  .footer-left .contact-info p {
+      color: #666;
+  }
+
+  .footer-left .contact-info p a {
+      color: #a2a2a2;
+  }
+
+  .footer-middle h3,
+  .footer-right h3 {
+      color: #333;
+  }
+
+  .footer-middle ul li a,
+  .footer-right ul li a {
+      color: #666;
+  }
+
+  .footer-middle ul li a,
+  .footer-right ul li a {
+      color: #666;
+  }
+
+  .footer-middle ul li a:hover,
+  .footer-right ul li a:hover {
+      color: #333;
+  }
+
+  .footer-right h3 {
+      color: #333;
+  }
+
+  .footer-right .social-media a {
+      color: #474747;
+  }
+
+  .footer-right .social-media a:hover {
+      color: #656565;
+  }
+
+  .copyright p {
+      color: #666;
+  }
+
+  .card {
+      background-color: #e5e5e53d;
+      box-shadow: 0 8px 10px #b1b1b19e;
+  }
+
+  .card-img-overlay:hover {
+      background-color: rgb(255, 255, 255);
+  }
+
+  .card-text {
+      color: black;
+  }
+
+  /* FAQ SECTION */
+  .faq-left {
+      background-color: #ffffff;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .faq-left h2 {
+      color: #333;
+  }
+
+  .faq-left p {
+      color: #666;
+  }
+
+  .faq-left .contact-info span {
+      color: #333;
+  }
+
+  .faq-left .contact-info span i {
+      color: #474747;
+  }
+
+  /* RIGHT SECTION */
+  .faq-right {
+      background-color: #ffffff;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .faq-item {
+      border-top: 1px solid rgba(0, 0, 0, 0.2);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+      background-color: #f6f6f6;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .faq-item h3 {
+      color: #333;
+  }
+
+  .faq-item .faq-answer p {
+      color: #666;
+  }
+
+  /* SLIDING BAR */
+  .filter {
+      background-color: #fff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .filter i {
+      color: #555;
+  }
+
+  .filter p {
+      color: #333;
+  }
+
+  .scroll-btn i:hover {
+      text-shadow: .5px 0px 1px black;
+  }
+
+  .password-box {
+      position: relative;
+      width: 100%;
+  }
+
+  #togglePassword {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #666;
+  }
+
+  #preloader {
+      background-color: #ffffff !important;
+  }
 }

@@ -200,7 +200,7 @@
                                         <td><b><%= review.rating %></b></td>
                                         <td class="review-author"><%= review.author.username %></td>
                                         <td>
-                                            <form action="/admin/reviews/<%= review._id %>" method="POST" class="delete-form">
+                                            <form action="/admin/listing/<%= list._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST" onsubmit="return confirm('Are you sure you want to delete this listing Review?');" class="delete-form">
                                                 <button type="submit" class="btn btn-outline-danger">Delete</button>
                                             </form>
                                         </td>
