@@ -23,8 +23,12 @@ module.exports.reviewPost = async (req, res) => {
             return res.redirect(`/listing/${id}`);
         }
 
-        // Proceed with adding the new review
+        // Set the limit of 700 charecter maximum for comment
         const newReview = new review(req.body.review);
+        if(newReview.Comments.length > 700){
+            req.flash('error', 'Maximum 700 charecters are allowed for review!');
+            return res.redirect(`/listing/${id}`);
+        }
         newReview.author = req.user._id;
         list.reviews.push(newReview);
 
