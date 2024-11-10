@@ -958,18 +958,25 @@ font-size: 0.8rem !important;
     transition: all 0.3s ease-in-out;
   }
 
-  #air_bnb{
+   #air_bnb{
     background-color: #FF5A5F !important;
     color: white !important;
     border-radius: 50px;
     transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
   }
 
-  #air_bnb:hover, .hight-light:hover {
+  #air_bnb:hover,.navbar-nav .hight-light:hover {
     color: white !important;
     background-color: #FF5A5F !important;
     box-shadow: 2px 2px 5px rgba(255, 56, 92, 0.3);
     transform: scale(1.01);
+  }
+
+  .custom_nav li a:hover {
+    color: #ff385c !important;
+    background-color: rgba(255, 90, 95, 0.1);
+    transform: scale(1.05);
+    border-radius:50px;
   }
 
   .custom_nav li a:hover {
@@ -1003,3 +1010,14 @@ font-size: 0.8rem !important;
       text-wrap: nowrap;
     }
   }
+#fileError{
+
+}
+
+.nomal-error{
+  color: inherit !important;
+}
+
+.alert-error{
+  color: #ff002f !important;
+}

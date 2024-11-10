@@ -115,7 +115,8 @@
                 <div class="mb-3 listing_form">
                     <label for="description" class="form-label">Description</label>
                     <br>
-                    <textarea name="listing[description]" class="form-control" cols="30" rows="5" placeholder="Enter description....." required></textarea>
+                    <textarea name="listing[description]" id="list-description" class="form-control" cols="30" rows="5" placeholder="Enter description....." required></textarea>
+                    <small class="" id="des-error"></small>
                     <div class="invalid-feedback">Please add a description!</div>
                     <div class="valid-feedback">Looks good!</div>
                 </div>
@@ -123,7 +124,7 @@
                     <label for="images" class="form-label">Upload Images</label>
                     <input type="file" name="listing[image]" class="form-control" id="fileInput" multiple required>
                     <div class="invalid-feedback">Please upload at least one image!</div>
-                    <small class="form-text text-muted">You can upload multiple images.</small>
+                    <small class="form-text text-muted">You can upload multiple <images id="fileError" class="">(Maximum 4)</images></small>
                     <div class="valid-feedback">Looks good!</div>
                 </div>
             
@@ -163,14 +164,14 @@
                         <% tags.forEach(tag => { %>
                             <div class="indi-filter">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="listing[tags]" id="tag<%= tag %>" value="<%= tag %>">
+                                    <input class="form-check-input tag-checkbox" type="checkbox" name="listing[tags]" id="tag<%= tag %>" value="<%= tag %>">
                                     <label class="form-check-label" for="tag<%= tag %>"><%= tag %></label>
                                 </div>
-                            </div> 
+                            </div>
                         <% }) %>
                         </div>
+                        <small class="form-text tag-alert">Maximum 3 tags are allowed!</small>
                     </div>
-                <br>
                 <button class="btn btn-danger" name="saveButton" type="submit">ADD</button>
                 <br><br>
             </form>
@@ -179,18 +180,25 @@
 
     <!-- JS for image preview -->
     <script>
+        const filesMax = 4; // Maximum allowed files
         const fileInput = document.getElementById("fileInput");
         const fileList = []; // Array to hold selected files
 
         fileInput.addEventListener("change", function (event) {
         const files = Array.from(event.target.files);
-        
-        // Add new files to the fileList
-        fileList.push(...files);
+        if (files.length + fileList.length > filesMax) {
+            fileList.length = 0; // Clear the file list array
+            displayPreview(); // Clear the preview display
+        }
+        else{
+            // Add new files to the fileList
+            fileList.push(...files);
 
-        // Display preview and update the file input to include all selected files
-        displayPreview();
-        updateFileInput();
+            // Display preview and update the file input to include all selected files
+            displayPreview();
+            updateFileInput();
+        }
+        
         });
 
         function displayPreview() {
