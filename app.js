@@ -231,7 +231,7 @@ app.get("/listing", asyncwrap(index));
 app.post("/listing", upload.array('listing[image]', 4), isLoggedIn, asyncwrap(createpost));
 app.post("/listing/search", asyncwrap(search));
 app.get("/listing/:id/edit", isLoggedIn, isOwner, asyncwrap(editpost));
-app.put('/listing/:id', isLoggedIn, isOwner, upload.array('listing[image]', 10), asyncwrap(saveEditpost));
+app.put('/listing/:id', isLoggedIn, isOwner, upload.array('listing[image]', 4), asyncwrap(saveEditpost));
 app.delete("/listing/:id", isLoggedIn, isOwner, asyncwrap(deletepost));
 app.get("/listing/:id", asyncwrap(showPost));
 app.post('/listing/:id/like', isLoggedIn, asyncwrap(listingController.likeListing));    
