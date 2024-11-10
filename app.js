@@ -34,6 +34,7 @@ const feedbackController = require('./controllers/feedback');
 const confirmBooking = require("./controllers/booking.js");
 const confirmPayment = require("./controllers/booking.js");
 // const { feedbackPost } = require("./controllers/feedback.js");
+const Blog = require("./models/blog.js");
 
 const cors = require('cors');
 const { contactUsController } = require("./controllers/contactUs.js");
@@ -124,6 +125,66 @@ app.use((req, res, next) => {
 
   next();
 });
+
+  
+// BOLOGS
+
+app.delete('/blogs/:id', async (req, res) => {
+  try {
+      const blogId = req.params.id;
+      await Blog.findByIdAndDelete(blogId);  // await the deletion
+      res.redirect('/blogs');  // Redirect to the blog list page after deletion
+  } catch (err) {
+      console.error("Error deleting blog:", err);
+      res.redirect('/error');  // Redirect to an error page or handle the error accordingly
+  }
+});
+
+
+
+
+app.get('/blogs', isLoggedIn, asyncwrap(async (req, res) => {
+  const blogs = await Blog.find({}).populate('blogOwner');
+
+  // console.log(blogs);
+  // Log the blog owner for each blog post
+  // blogs.forEach(blog => {
+  //     console.log(blog.blogOwner.username); // Logs each blog owner's details
+  // });
+
+  res.render('blog.ejs', { blogs });
+}));
+
+
+// Route to create a new blog
+app.post('/blogs', isLoggedIn, upload.single('blog[image]'), asyncwrap(async (req, res) => {
+  try {
+      if (!req.body.blog) {
+          req.flash("error", "Please provide valid blog details.");
+          return res.status(404).send("Please provide valid blog details.");
+      }
+
+      const { title, content, location } = req.body.blog;
+
+      // Create a new blog post
+      const newBlog = new Blog({
+          title,
+          content,
+          location,
+          blogOwner: req.user._id, // Assuming req.user holds the logged-in user's data
+          images: req.file ? [{ imgUrl: req.file.path, imgFilename: req.file.filename }] : []
+      });
+
+      await newBlog.save(); // Save the new blog post in the database
+
+      req.flash("success", "Blog post successfully created!");
+      res.redirect('/blogs');
+  } catch (err) {
+      console.log(err);
+      res.status(500).send("Error creating blog post");
+  }
+}));
+// BOLOGS
 
 // ADMIN
 // ADMIN
