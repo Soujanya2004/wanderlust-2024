@@ -131,3 +131,14 @@
         top: 48%;
     }
 }
+
+
+/* Styling class for tag limitation alert */
+  
+.red-tag-alert{
+  color: #ff0000 !important;
+}
+.normal-tag-alert{
+  color: #555555 !important;
+}
+

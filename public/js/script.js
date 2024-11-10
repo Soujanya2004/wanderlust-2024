@@ -122,3 +122,77 @@ closeForm.addEventListener("click", (event) => {
   }, 200)
 })
 
+
+
+// Set limit of three to add tags for list
+const checkboxes = document.querySelectorAll('.tag-checkbox');
+const tagAlert = document.querySelector('.tag-alert');
+    const maxAllowed = 3;
+
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            // Count the number of checked boxes
+            const checkedCount = document.querySelectorAll('.tag-checkbox:checked').length;
+
+            if (checkedCount > maxAllowed) {
+                // Uncheck the current checkbox if the limit is reached
+                checkbox.checked = false;
+                // alert(`You can select up to ${maxAllowed} tags only.`);
+                tagAlert.classList.remove("normal-tag-alert");
+                tagAlert.classList.add("red-tag-alert");
+            } else {
+                // Hide the alert message if under the limit
+                tagAlert.classList.remove("red-tag-alert");
+                tagAlert.classList.add("normal-tag-alert");
+            }
+        });
+    });
+
+
+// Set limi of 4 max file upload
+// Maximum number of files allowed
+const maxFiles = 4;
+    
+// Get input and error message elements
+const listingImageInput = document.getElementById('fileInput');
+const fileError = document.getElementById('fileError');
+
+// Listen for changes on the file input
+listingImageInput.addEventListener('change', function() {
+    // Check the number of files selected
+    if (this.files.length > maxFiles) {
+        // Display error message
+        fileError.classList.remove("nomal-error");
+        fileError.classList.add("alert-error");
+        
+        // Clear the input field to reset file selection
+        this.value = '';
+    } else {
+        // Clear error message if file count is within the limit
+        fileError.classList.remove("alert-error");
+        fileError.classList.add("nomal-error");
+    }
+});
+
+
+
+// Set the description limit
+const description = document.querySelector("#list-description");
+const desError = document.querySelector("#des-error");
+const maxChars = 1000;
+
+description.addEventListener("input", function() {
+    const currentLength = description.value.length;
+
+    if (currentLength > maxChars) {
+        // Limit the description to the maximum allowed characters
+        description.value = description.value.substring(0, maxChars);
+        desError.textContent = "You have reached the 1000-character limit!";
+        desError.classList.add("alert-error");
+        desError.classList.remove("normal-error");
+    } else {
+        desError.textContent = `Maximum ${maxChars} characters!`;
+        desError.classList.remove("alert-error");
+        desError.classList.add("normal-error");
+    }
+});
