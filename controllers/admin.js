@@ -167,6 +167,11 @@ module.exports.adminSaveEditList = async (req, res) => {
               tagArray = tags.split(',').map(tag => tag.trim());
           }
       }
+      // Allowed to add only 3 tage maximum!
+      if(tagArray.length > 3){
+        req.flash("error", "Maximum 3 tags are allowed!");
+        return res.redirect(`/admin/listing/edit/${id}`);
+    }
       up_listing.tags = tagArray;
 
       // Check if new images are uploaded
