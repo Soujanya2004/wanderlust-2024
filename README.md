@@ -17,15 +17,6 @@ Live Link: https://wanderlust-2024-tkqf.onrender.com/listing
 
  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="900">
 
-# Screenshots 📷
-![Image 1](https://github.com/user-attachments/assets/45446cfd-4e9d-4270-acbe-a7e0409f1b54)
-
-![Image 2](https://github.com/user-attachments/assets/6a9809f2-9f48-4c99-a7de-5cd795c70699)
-
-
-
-
- <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="900">
 
 ## 📈 GitHub Repository Stats
 | 🌟 **Stars** | 🍴 **Forks** | 🐛 **Issues** | 🔔 **Open PRs** | 🔕 **Closed PRs** | 🛠️ **Languages** | ✅ **Contributors** |
