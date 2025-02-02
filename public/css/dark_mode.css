@@ -6,6 +6,7 @@
     .fa-plane:hover {
         color: #FF5A5F;
         transform: scale(1.1);
+        transform: sacle(1.2);
         text-shadow: 0 6px 14px rgba(255, 255, 255, 0.5);
     }
     
