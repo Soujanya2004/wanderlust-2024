@@ -246,10 +246,10 @@ app.get('/contributors', asyncwrap(contributors));
     failureRedirect: "/login",
     failureFlash: true
   }), (req, res) => {
-    req.flash("success", "Welcome back to wanderlust!");
+    req.flash("success", "Welcome back to AEROVIA!");
     //admin login
     if(req.user.isAdmin) {
-      req.flash("success","Welcome back to wanderlust! You are an admin.");
+      req.flash("success","Welcome back to AEROVIA! You are an admin.");
       res.redirect("/admin/dashboard");
     }
     let redirect=res.locals.redirectUrl||"/listing";  
