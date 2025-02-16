@@ -1,8 +1,8 @@
-# 🌍 Wanderlust-2024
+# 🌍 AEROVIA
 
 <img src="https://github.com/user-attachments/assets/e8059385-3570-49ab-a20b-127ad6b83ada" height=200  width=300 alt="WL"/>
 
-Wanderlust is a comprehensive travel platform designed for adventurers and explorers who want to discover and share extraordinary places around the world. Built with the powerful MERN (MongoDB, Express, React, and Node.js) stack, Wanderlust offers a seamless and secure user experience for both casual travelers and serious wanderers.
+AEROVIA is a comprehensive travel platform designed for adventurers and explorers who want to discover and share extraordinary places around the world. Built with the powerful MERN (MongoDB, Express, React, and Node.js) stack, AEROVIA offers a seamless and secure user experience for both casual travelers and serious wanderers.
 
 Our platform allows users to:✨
 
@@ -11,7 +11,7 @@ Our platform allows users to:✨
 * Review and Rate Experiences: Share your thoughts on destinations you've visited or learn from the experiences of others through our review system.<br>
 * Secure Authentication: Enjoy a safe browsing and sharing environment with user authentication handled by Passport.<br>
 * Interactive Maps: Visualize locations effortlessly with Mapbox integration, making it easier to plan your next getaway.<br>
-Wanderlust is all about making travel planning fun, efficient, and collaborative. Whether you’re adding a hidden gem or exploring a bustling city, our platform connects you to a global community of travelers. ✈️✨<br>
+AEROVIA is all about making travel planning fun, efficient, and collaborative. Whether you’re adding a hidden gem or exploring a bustling city, our platform connects you to a global community of travelers. ✈️✨<br>
 
 Live Link: https://wanderlust-2024-tkqf.onrender.com/listing
 
@@ -28,17 +28,17 @@ Live Link: https://wanderlust-2024-tkqf.onrender.com/listing
 - [🛠️ How to Set Up the Project Locally](#️-how-to-set-up-the-project-locally)
 - [📬 Contact](#-contact)
 - [👀 Our Valuable Contributors](#-our-valuable-contributors-)
-- [❤️ Made with Love by Soujanya C](#-made-with-love-by-soujanya-c)
+- [❤️ Project owner - Soujanya C](#-made-with-love-by-soujanya-c)
 
 
  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="900">
  
 ## 🤝 How to Contribute
 
-We welcome contributions to help improve **Wanderlust 2024**! 🚀 Here’s how you can get involved:
+We welcome contributions to help improve **AEROVIA**! 🚀 Here’s how you can get involved:
 
 1. **Fork the Repository** 🍴
-   - Navigate to the [Wanderlust 2024 GitHub page](https://github.com/Soujanya2004/Wanderlust-2024). 🌐
+   - Navigate to the [AEROVIA GitHub page](https://github.com/Soujanya2004/Wanderlust-2024). 🌐
    - Click on the Fork button in the top-right corner of the page to create a copy of the repository in your GitHub account. ➕
 
 2. **Clone Your Forked Repository** 🔄
@@ -163,7 +163,7 @@ We welcome contributions to help improve **Wanderlust 2024**! 🚀 Here’s how 
   <img src="https://github.com/user-attachments/assets/35934e5d-4bf8-4add-908c-3ce47c9b1536" height="200" width="300" alt="Wanderlust Logo"/>
 </div>
 
-We're excited to have you on board! Whether you're a seasoned developer or just starting out, your skills and ideas can make a significant impact on **Wanderlust 2024**. Here’s how you can get involved:
+We're excited to have you on board! Whether you're a seasoned developer or just starting out, your skills and ideas can make a significant impact on **AEROVIA**. Here’s how you can get involved:
 
 - **Share Your Ideas** 💡: Have a feature in mind? Let us know!
 - **Fix Bugs** 🐛: Help us improve the project by identifying and fixing issues.
