@@ -173,16 +173,6 @@ Every contribution, big or small, is valued and appreciated. Together, we can cr
 
  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="900">
 
-
-
-## 👀 Our Valuable Contributors 💖✨
-
-<div align="center">
-  <a href="https://github.com/Soujanya2004/wanderlust-2024/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=Soujanya2004/wanderlust-2024&max=200" />
-  </a>
-</div>
-
 ## 📬 Contact
 
 For questions or feedback, feel free to reach out via GitHub issues or contact the project maintainers. ✉️
